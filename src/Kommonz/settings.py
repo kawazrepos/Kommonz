@@ -2,6 +2,9 @@
 # Django settings for Kommonz project.
 
 # Load pre local_settings
+import os
+import sys
+
 try:
     from local_site import *
 except ImportError:
@@ -64,7 +67,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(ROOT, 'statics/media'),
+MEDIA_ROOT = os.path.join(ROOT, 'static/media'),
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -104,7 +107,7 @@ STATICFILES_FINDERS = (
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'mfw.template.loaders.flavour.Loader',
+#    'mfw.template.loaders.flavour.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
     'django.template.loaders.eggs.Loader',
@@ -112,14 +115,15 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
-    'mfw.middleware.session.SessionMiddleware',
-    'mfw.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', 
+#    'mfw.middleware.session.SessionMiddleware',
+#    'mfw.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'mfw.middleware.device.DeviceDetectionMiddleware',
-    'mfw.middleware.emoji.DeviceEmojiTranslationMiddleware',
-    'mfw.middleware.flavour.DeviceFlavourDetectionMiddleware',
-    'pagination.middleware.PaginationMiddleware',
+#    'mfw.middleware.device.DeviceDetectionMiddleware',
+#    'mfw.middleware.emoji.DeviceEmojiTranslationMiddleware',
+#    'mfw.middleware.flavour.DeviceFlavourDetectionMiddleware',
+#    'pagination.middleware.PaginationMiddleware',
     'qwert.middleware.threadlocals.ThreadLocalsMiddleware',
     'qwert.middleware.http.Http403Middleware',
     'qwert.middleware.exception.UserBasedExceptionMiddleware',
@@ -131,8 +135,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
-    "mfw.core.context_processors.device",
-    "mfw.core.context_processors.flavour",
+#    "mfw.core.context_processors.device",
+#    "mfw.core.context_processors.flavour",
 )
 
 ROOT_URLCONF = 'Kommonz.urls'
@@ -157,7 +161,7 @@ INSTALLED_APPS = (
     'pagination',                   # Useful paginatin library
     # Github libraries
     'qwert',                        # Useful snippet collection library
-    'mfw',                          # Django mobile framework library
+#    'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
 )
 
