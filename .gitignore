@@ -12,6 +12,9 @@ master
 # Python
 *.pyc
 *.pyo
+*.egg-info
+/build
+/sdist
 
 # Aptana
 .project
