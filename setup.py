@@ -58,7 +58,7 @@ setup(
         'dateutils',
         'docutils',
         'pyyaml',
-        'django',
+        'django>=1.3',
         'django-compress',
         'django-reversetag',
         'django-pagination',
@@ -67,4 +67,3 @@ setup(
         'django-object-permission',
     ],
 )
-
