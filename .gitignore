@@ -17,6 +17,7 @@ master
 /sdist
 
 # Aptana
+.settings
 .project
 .pydevproject
 
