@@ -3,10 +3,22 @@
 *.merge-right*
 *.mine
 *.prej
-*.pyc
-*.pyo
 *.working
 .svn
 _svn
 svn-commit*.tmp
 master
+
+# Python
+*.pyc
+*.pyo
+
+# Aptana
+.project
+.pydevproject
+
+# Django
+*.db
+local_settings.py
+local_site.py
+/static/collected/*
