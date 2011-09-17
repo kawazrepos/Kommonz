@@ -28,7 +28,7 @@ The list below may be expired. See ``install_requires`` values of ``setup.py``
 
 How to run
 ====================
-Enter the following command on Terminal and visit http://localhost:5000/
+Enter the following command on Terminal and visit http://localhost:5000/::
 
     src/Kommonz/manage.py syncdb
     src/Kommonz/manage.py runserver 5000
