@@ -1,20 +1,16 @@
 How to Install
 ============================
-See https://github.com/kommonz/kommonz/wiki/How-to-install-kommonz-for-development for instruction
 
-Required python packages
-----------------------------------
-The list below may be expired. See ``install_requires`` values of ``setup.py``
+Mac OS X
+----------------
+::
+    
+    curl https://raw.github.com/gist/1224448/74d3fa70bb7a8ca3c7a87624c52b23c1b1248e52/kommonz.sh | bash
 
--   setuptools
--   setuptools-git
--   dateutils
--   docutils
--   pyyaml
--   django>=1.3
--   django-compress
--   django-reversetag
--   django-pagination
--   django-mfw
--   django-qwert
--   django-object-permission
+Ubuntu (Debian)
+------------------------------
+::
+    
+    wget -q -O - https://raw.github.com/gist/1224448/74d3fa70bb7a8ca3c7a87624c52b23c1b1248e52/kommonz.sh | bash
+
+See `Wiki <https://github.com/kawazrepos/Kommonz/wiki/Kommonzのインストール>`_ for detail.
