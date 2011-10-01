@@ -36,6 +36,7 @@ class Material(models.Manager):
     objects     = MaterialManager()
     
     class Meta:
+        abstract            = True
         ordering            = ('-created_at',)
         verbose_name        = _('Material')
         verbose_name_plural = _('Materials')
