@@ -84,6 +84,6 @@ class CreativeCommons(object):
     share_alike   = models.BooleanField(_('Share Alike'), default=False)
     material      = models.OneToOneField(Material, verbose_name=_('Creative Commons'), related_name='commons')
     
-    class Meta(License.Meta):
+    class Meta(object):
         verbose_name        = _('CreaticeCommons')
         verbose_name_plural = verbose_name
