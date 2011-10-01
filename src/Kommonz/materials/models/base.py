@@ -33,7 +33,7 @@ class Material(models.Manager):
     ip          = models.IPAddressField(_('IP Address'), editable=False)
     license     = models.ForeignKey('License', verbose_name=_('License'))
     
-    object      = MaterialManager()
+    objects     = MaterialManager()
     
     class Meta:
         ordering            = ('-created_at',)
@@ -74,7 +74,7 @@ class License(models.Model):
         verbose_name        = _('License')
         verbose_name_plural = _('Licenses') 
 
-class CreativeCommons(License):
+class CreativeCommons(object):
     u"""
         CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
     """
@@ -82,7 +82,7 @@ class CreativeCommons(License):
     noncommerical = models.BooleanField(_('Noncommerical'), default=False)
     no_derivative = models.BooleanField(_('No Derivative Works'), default=False)
     share_alike   = models.BooleanField(_('Share Alike'), default=False)
-    lisence       = models.OneToOneField(Material, verbose_name=_('Creative Commons'), related_name='commons')
+    material      = models.OneToOneField(Material, verbose_name=_('Creative Commons'), related_name='commons')
     
     class Meta(License.Meta):
         verbose_name        = _('CreaticeCommons')
