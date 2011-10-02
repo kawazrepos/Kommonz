@@ -162,6 +162,8 @@ INSTALLED_APPS = (
     'qwert',                        # Useful snippet collection library
     'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
+    # Kommonz
+    'Kommonz.materials'
 )
 
 AUTHENTICATION_BACKENDS = (
