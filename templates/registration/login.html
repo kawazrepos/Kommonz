@@ -7,13 +7,13 @@
     <a href="{% reverse 'socialauth_begin' 'twitter' %}">Twitterでログイン</a>
   </li>
   <li>
-    <a href="{% reverse 'socialauth_begin' 'google' %}">Googleでログイン</a>
+    <a href="{% reverse 'socialauth_begin' 'google-oauth2' %}">Googleでログイン</a>
   </li>
   <li>
-   <a href="{% reverse 'socialauth_begin' 'hatena'">はてなでログイン</a>
+   <a href="{% reverse 'socialauth_begin' 'hatena' %}">はてなでログイン</a>
   </li>
   <li>
-  <a href="{% reverse 'socialauth_begin' 'dropboc' %}">Dropboxでログイン</a>
+  <a href="{% reverse 'socialauth_begin' 'dropbox' %}">Dropboxでログイン</a>
   </li>
 </ul>
 {% endblock %}

@@ -182,27 +182,32 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.github.GithubBackend',
     'social_auth.backends.contrib.dropbox.DropboxBackend',
     'social_auth.backends.OpenIDBackend',
-    'registrations.backends.hatena.HatenaBackend',
+    'registration.backends.hatena.HatenaBackend',
     'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 
-SOCIAL_AUTH_IMPORT_BACKENDS = (
-                               'registrations.backends',
-)
-
+#
 # SocialAuth Setting
+#
 SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'hatena', 'dropbox',)
 
-LOGIN_ERROR_URL    = '/login-error/'
-LOGIN_REDIRECT_URL  = "/"
-LOGIN_URL = "/registration/login/"
-LOGOUT_URL = "/registration/logout/"
+from django.utils.functional import lazy
+from django.core.urlresolvers import reverse
+lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
+LOGIN_ERROR_URL     = lazy_reverse('registration_error')
+LOGIN_REDIRECT_URL  = "/"
+LOGIN_URL           = lazy_reverse('registration_lotin')
+LOGOUT_URL          = lazy_reverse('registration_logout')
+
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = '/new-users-redirect-url/'
 SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
-SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
-SOCIAL_AUTH_ERROR_KEY = 'social_errors'
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
+SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
+
+SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Hatena OpenID support
+This is a custom backend for django-social-auth. This adds support for Hatena oauth service.
+An application must be registered first on hatena and the settings HATENA_CONSUMER_KEY
+and HATENA_CONSUMER_SECRET must be defined in your settings.py.
+
 ref : http://developer.hatena.ne.jp/ja/documents/auth/apis/oauth/consumer
 """
 __author__ = 'giginet'

@@ -15,14 +15,14 @@
   <ul>
     <li>設定</li>
     <li>アカウント管理</li>
-    <li>ログアウト</li>
+    <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
     {% if user.is_staff %}
     <li>神ページ</li>
     {% endif %}
   </ul>
   {% else %}
     <ul>
-      <li><a href="{% reverse 'registrations-index' %}">ログイン</li>
+      <li><a href="{% reverse 'registration_index' %}">ログイン</li>
     </ul>
   {% endif %}
   </section>
