@@ -182,12 +182,17 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.foursquare.FoursquareBackend',
     'social_auth.backends.contrib.github.GithubBackend',
     'social_auth.backends.OpenIDBackend',
+    'registrations.backends.hatena.HatenaBackend',
     'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 
+SOCIAL_AUTH_IMPORT_BACKENDS = (
+                               'registrations.backends',
+)
+
 # SocialAuth Setting
-SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2',)
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'hatena',)
 
 LOGIN_ERROR_URL    = '/login-error/'
 LOGIN_REDIRECT_URL  = "/"
