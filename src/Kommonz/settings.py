@@ -136,7 +136,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "mfw.core.context_processors.device",
     "mfw.core.context_processors.flavour",
-    'social_auth.context_processors.social_auth_by_type_backends',
 )
 
 ROOT_URLCONF = 'Kommonz.urls'
@@ -181,6 +180,7 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.orkut.OrkutBackend',
     'social_auth.backends.contrib.foursquare.FoursquareBackend',
     'social_auth.backends.contrib.github.GithubBackend',
+    'social_auth.backends.contrib.dropbox.DropboxBackend',
     'social_auth.backends.OpenIDBackend',
     'registrations.backends.hatena.HatenaBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -192,7 +192,7 @@ SOCIAL_AUTH_IMPORT_BACKENDS = (
 )
 
 # SocialAuth Setting
-SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'hatena',)
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'hatena', 'dropbox',)
 
 LOGIN_ERROR_URL    = '/login-error/'
 LOGIN_REDIRECT_URL  = "/"

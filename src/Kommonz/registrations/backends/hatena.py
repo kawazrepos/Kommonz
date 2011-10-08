@@ -8,32 +8,36 @@ __version__ = '1.0.0'
 __date__ = '2011/10/08'
 import logging
 logger = logging.getLogger(__name__)
+logging.basicConfig()
 
 from django.utils import simplejson
-from social_auth.backends import ConsumerBasedOAuth, OAuthBackend, USERNAME
+from social_auth.backends import ConsumerBasedOAuth, OAuthBackend, USERNAME, Token
+from oauth2 import Request as OAuthRequest, SignatureMethod_HMAC_SHA1
 
 # Hatena configuration
-HATENA_SERVER = 'hatena.com'
+HATENA_SERVER = 'www.hatena.com'
 HATENA_REQUEST_TOKEN_URL = 'https://%s/oauth/initiate' % HATENA_SERVER
 HATENA_ACCESS_TOKEN_URL = 'https://%s/oauth/token' % HATENA_SERVER
-HATENA_AUTHORIZATION_URL = 'https:///www.hatena.ne.jp/oauth/authorize'
+HATENA_AUTHORIZATION_URL = 'https://www.hatena.ne.jp/oauth/authorize'
 HATENA_CHECK_AUTH = 'http://n.hatena.com/applications/my.json'
-
 
 class HatenaBackend(OAuthBackend):
     """Hatena OAuth authentication backend"""
     name = 'hatena'
-    EXTRA_DATA = [('id', 'id')]
 
     def get_user_details(self, response):
         """Return user details from Hatena account"""
+        print "get_user_details"
         return {USERNAME: response['url_name'],
                 'email': '',  # not supplied
                 'fullname': response['display_name'],
                 'first_name': '',
                 'last_name': ''
         }
-
+        
+    def get_user_id(self, details, response):
+        "OAuth providers return an unique user id in response"""
+        return response['url_name']
 
 class HatenaAuth(ConsumerBasedOAuth):
     """Hatena OAuth authentication mechanism"""
@@ -42,8 +46,12 @@ class HatenaAuth(ConsumerBasedOAuth):
     ACCESS_TOKEN_URL = HATENA_ACCESS_TOKEN_URL
     SERVER_URL = HATENA_SERVER
     AUTH_BACKEND = HatenaBackend
+    SCOPE_SEPARATOR = ','
     SETTINGS_KEY_NAME = 'HATENA_CONSUMER_KEY'
     SETTINGS_SECRET_NAME = 'HATENA_CONSUMER_SECRET'
+    
+    def get_scope(self):
+        return ('read_public',)
 
     def user_data(self, access_token):
         """Return user data provided"""
@@ -53,8 +61,34 @@ class HatenaAuth(ConsumerBasedOAuth):
             return simplejson.loads(json)
         except ValueError:
             return None
+        
+    def oauth_request(self, token, url, extra_params=None):
+        scope = {'scope' : self.SCOPE_SEPARATOR.join(self.get_scope())}
+        if not extra_params:
+            extra_params = {}
+        extra_params.update(scope)
+        return super(HatenaAuth, self).oauth_request(token, url, extra_params)
+        
+    def access_token_request(self, token, url, extra_params=None):
+        """Generate Access token request, setups callback url"""
+        params = {}
+        if extra_params:
+            params.update(extra_params)
 
-
+        if 'oauth_verifier' in self.data:
+            params['oauth_verifier'] = self.data['oauth_verifier']
+        request = OAuthRequest.from_consumer_and_token(self.consumer,
+                                                       token=token,
+                                                       http_url=url,
+                                                       parameters=params)
+        request.sign_request(SignatureMethod_HMAC_SHA1(), self.consumer, token)
+        return request
+    
+    def access_token(self, token):
+        """Return request for access token value"""
+        request = self.access_token_request(token, self.ACCESS_TOKEN_URL)
+        return Token.from_string(self.fetch_response(request))
+    
 # Backend definition
 BACKENDS = {
     'hatena': HatenaAuth,
