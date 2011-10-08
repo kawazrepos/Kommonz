@@ -6,6 +6,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/doc/',       include('django.contrib.admindocs.urls')),
     url(r'^admin/',           include(admin.site.urls)),
-    url(r'^authentications/', include('Kommonz.authentications.urls'))
+    url(r'^registrations/',   include('Kommonz.registrations.urls'))
     
 )

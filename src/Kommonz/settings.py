@@ -136,6 +136,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "mfw.core.context_processors.device",
     "mfw.core.context_processors.flavour",
+    'social_auth.context_processors.social_auth_by_type_backends',
 )
 
 ROOT_URLCONF = 'Kommonz.urls'
@@ -168,14 +169,25 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
     'qwert.backends.auth.EmailAuthBackend',
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'social_auth.backends.yahoo.YahooBackend',
+    'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
+    'social_auth.backends.contrib.orkut.OrkutBackend',
+    'social_auth.backends.contrib.foursquare.FoursquareBackend',
+    'social_auth.backends.contrib.github.GithubBackend',
+    'social_auth.backends.OpenIDBackend',
     'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 
 # SocialAuth Setting
-SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter',)
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2',)
 
 LOGIN_ERROR_URL    = '/login-error/'
 LOGIN_REDIRECT_URL  = "/"
