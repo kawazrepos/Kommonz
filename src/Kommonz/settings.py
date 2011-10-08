@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     # Third-party libraries
+    'social_auth',
     'compress',                     # JavaScript/CSS compress library
     'reversetag',                   # Useful templatetag library
     'pagination',                   # Useful paginatin library
@@ -167,13 +168,24 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
     'qwert.backends.auth.EmailAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
+
+# SocialAuth Setting
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter',)
+
+LOGIN_ERROR_URL    = '/login-error/'
 LOGIN_REDIRECT_URL  = "/"
 LOGIN_URL = "/registration/login/"
 LOGOUT_URL = "/registration/logout/"
+
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
+SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
