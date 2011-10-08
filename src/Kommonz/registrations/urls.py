@@ -5,9 +5,9 @@ __date__ = '2011/10/08'
 
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
-    url(r'^', include('social_auth.urls')),
-    url(r'^login$',   auth_views.login),
-    url(r'^logout/$', auth_views.logout, name='auth_logout'),
+    url(r'^auth', include('social_auth.urls')),
+    url(r'^$',        TemplateView.as_view(template_name='registrations/index.html'), name='auth_index')
 )

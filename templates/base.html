@@ -1,0 +1,42 @@
+{% load reversetag %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kommonz - {% block title %}{% endblock %}</title>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  <header>
+  <section>
+  {% if user.is_authenticated %}
+  ようこそ{{ user.username }}さん
+  <ul>
+    <li>設定</li>
+    <li>アカウント管理</li>
+    <li>ログアウト</li>
+    {% if user.is_staff %}
+    <li>神ページ</li>
+    {% endif %}
+  </ul>
+  {% else %}
+    <ul>
+      <li><a href="{% reverse 'registrations-index' %}">ログイン</li>
+    </ul>
+  {% endif %}
+  </section>
+  <nav id="breadclumbs">
+    <ul>
+      {% block breadclumbs %}
+      {% endblock %}
+    </ul>
+  </nav>
+  </header>
+  <section id="content">
+    {% block content %}
+    {% endblock %}
+  </section>
+  <footer></footer>
+</body>
+</html>

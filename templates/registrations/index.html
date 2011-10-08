@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load reversetag %}
+{% block content %}
+<h2>ログインページ</h2>
+<ul>
+  <li>
+    <a href="{% reverse 'socialauth_begin' 'twitter' %}">Twitterでログイン</a>
+  </li>
+  <li>
+    <a href="{% reverse 'socialauth_begin' 'google' %}">Googleでログイン</a>
+  </li>
+  <li>
+   <a href="{% reverse 'socialauth_begin' 'hatena'">はてなでログイン</a>
+  </li>
+  <li>
+  <a href="{% reverse 'socialauth_begin' 'dropboc' %}">Dropboxでログイン</a>
+  </li>
+</ul>
+{% endblock %}
