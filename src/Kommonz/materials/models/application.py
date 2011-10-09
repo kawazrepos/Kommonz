@@ -26,9 +26,10 @@ class Platform(models.Model):
     
     label                   = models.CharField(_('Platform Name'), max_length=64)
     version                 = models.CharField(_('Platform Version'), max_length=64)
-    application             = models.ManyToManyField(Application, verbose_name=_('Application'), related_name='platforms')
+    application             = models.ForeignKey(Application, verbose_name=_('Application'), related_name='platforms')
     
     class Meta:
         app_label           = 'materials'
+        ordering            = ('label', 'version',)
         verbose_name        = _('Platform')
         verbose_name_plural = _('Platforms')

@@ -157,8 +157,9 @@ class Category(models.Model):
     """
         Model for Category of materials.
     """
-    label  = models.CharField(_('Label'), max_length=32)
-    parent = models.ForeignKey('self', verbose_name=_('Parent Category'), null=True, blank=True, related_name='children')
+    label   = models.CharField(_('Label'), max_length=32)
+    parent  = models.ForeignKey('self', verbose_name=_('Parent Category'), null=True, blank=True, related_name='children')
+    material = models.ManyToManyField(Material, verbose_name=(_('Materials')), editable=False)
 
     class Meta:
         app_label           = 'materials'
