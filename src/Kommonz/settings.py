@@ -155,7 +155,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     # Third-party libraries
-    'social_auth',
+    'django_nose',                  # UnitTest using nose library
+    'social_auth',                  # login with oAuth/OpenID library
     'compress',                     # JavaScript/CSS compress library
     'reversetag',                   # Useful templatetag library
     'pagination',                   # Useful paginatin library
@@ -211,6 +212,12 @@ SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
 SOCIAL_AUTH_USER_MODEL = CUSTOM_USER_MODEL
+
+#
+# Testing configuration via nose.
+#
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['-v', '-d']
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
