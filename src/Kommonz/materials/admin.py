@@ -4,7 +4,7 @@
 #    created by giginet on 2011/10/02
 #
 from django.contrib import admin
-from models import Material, Kero, License, CreativeCommons
+from models.base import Material, Kero, License, CreativeCommons
 
 class MaterialAdmin(admin.ModelAdmin):
     date_hierarchy  = 'created_at'

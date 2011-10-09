@@ -15,12 +15,12 @@ class MaterialManager(models.Manager):
             return Material
         cls_name = type[0].upper() + type[1:] #convert from 'type' to 'Type'
         try:
-            module = __import__('.'.join(('models', type)), globals(), locals(), ['Code'])
+            module = __import__('.'.join(('models', type)), globals(), locals(), [cls_name])
             return getattr(module, cls_name)
         except:
             return Material
     
     def create_material(self, data):
-        """Create Material or it's subclasses model object from mimetype."""
+        """Create Material or it's subclass model objects from mimetype."""
         cls = self._get_file_class(data['file'].name)
         return cls.objects.create(data)

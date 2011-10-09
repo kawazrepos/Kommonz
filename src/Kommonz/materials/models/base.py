@@ -11,6 +11,7 @@ from django.utils.translation import ugettext as _
 from Kommonz.imagefield.fields import ImageField
 from Kommonz.users.models import KommonzUser
 from Kommonz.materials.managers import MaterialManager
+from Kommonz.ccfield.models import CreativeCommonsField
 
 class Material(models.Model):
     u"""
@@ -126,9 +127,7 @@ class CreativeCommons(models.Model):
         CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
     """
 
-    noncommerical = models.BooleanField(_('Noncommerical'), default=False)
-    no_derivative = models.BooleanField(_('No Derivative Works'), default=False)
-    share_alike   = models.BooleanField(_('Share Alike'), default=False)
+    commons       = CreativeCommonsField(_('Creative Commons'))
     material      = models.OneToOneField('Material', verbose_name=_('Creative Commons'), parent_link=True)
     
     class Meta:
@@ -140,7 +139,7 @@ class CreativeCommons(models.Model):
         return self._get_commons_description()
     
     def _get_commons_description(self):
-        nc, nd, sa = self.noncommerical, self.no_derivative, self.share_alike
+        nc, nd, sa = self.commons.noncommerical, self.commons.no_derivative, self.commons.share_alike
         if not nd:
             return 'CC BY' if not nc else 'CC BY-NC'
         elif not nd and sa:
@@ -149,7 +148,7 @@ class CreativeCommons(models.Model):
             return 'CC BY-ND' if not nc else 'CC BY-NC-ND'
         
     def clean(self):
-        if self.no_derivative and self.share_alike:
+        if self.commons.no_derivative and self.commons.share_alike:
             raise ValidationError(_('''can not set 'Share Alike' and 'Not Derivative Works' together.'''))
         return super(CreativeCommons, self).clean()
     
