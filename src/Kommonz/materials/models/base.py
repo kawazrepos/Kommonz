@@ -152,3 +152,18 @@ class CreativeCommons(models.Model):
         if self.no_derivative and self.share_alike:
             raise ValidationError(_('''can not set 'Share Alike' and 'Not Derivative Works' together.'''))
         return super(CreativeCommons, self).clean()
+    
+class Category(models.Model):
+    """
+        Model for Category of materials.
+    """
+    label  = models.CharField(_('Label'), max_length=32)
+    parent = models.ForeignKey('self', verbose_name=_('Parent Category'), null=True, blank=True, related_name='children')
+
+    class Meta:
+        app_label           = 'materials'
+        verbose_name        = _('Category')
+        verbose_name_plural = _('Categories')
+        
+    def __unicode__(self):
+        return self.label

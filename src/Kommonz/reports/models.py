@@ -36,3 +36,6 @@ class Reason(models.Model):
     class Meta:
         verbose_name        = _('Reason')
         verbose_name_plural = _('Reasons')
+        
+    def __unicode__(self):
+        return self.label
