@@ -65,5 +65,6 @@ setup(
         'django-mfw',
         'django-qwert',
         'django-object-permission',
+        'django-social-auth',
     ],
 )
