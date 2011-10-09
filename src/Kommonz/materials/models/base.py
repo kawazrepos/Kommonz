@@ -3,13 +3,14 @@
 #    Kommonz.materials.models.base
 #    created by giginet on 2011/10/02
 #
+import os
+import mimetypes
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 from Kommonz.materials.managers import MaterialManager
 from Kommonz.imagefield.fields import ImageField
 from Kommonz.users.models import KommonzUser
-import os
 
 class Material(models.Model):
     u"""
@@ -62,6 +63,22 @@ class Material(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ""
+    
+    def mimetype(self):
+        try:
+            mimetypes.init()
+            type = mimetypes.guess_type(self.file.name)[0]
+        except:
+            type = None
+        return type
+    
+    def encoding(self):
+        try:
+            mimetypes.init()
+            encoding = mimetypes.guess_type(self.file.name)[1]
+        except:
+            encoding = None
+        return encoding
 
 class Kero(models.Model):
     u"""
