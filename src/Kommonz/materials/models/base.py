@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 from Kommonz.materials.managers import MaterialManager
+from Kommonz.imagefield.fields import ImageField
+import os
 
 class Material(models.Model):
     u"""
@@ -15,10 +17,19 @@ class Material(models.Model):
     """
     
     def _get_file_path(self, filename):
-        return filename
+        path = u'storage/materials/%d/' % self.pk
+        return os.path.join(path, filename)
     
     def _get_thumbnail_path(self, filename):
-        return filename
+        path = u'storage/materials/%d/thumbnails/' % self.pk
+        return os.path.join(path, filename)
+    
+    THUMBNAIL_SIZE_PATTERNS = {
+        'huge':     (288, 288, False),
+        'large':    (96, 96, False),
+        'middle':   (48, 48, False),
+        'small':    (24, 24, False),
+    }
     
     # required
     label       = models.CharField(_('Label'), max_length=128)
@@ -27,7 +38,7 @@ class Material(models.Model):
     license     = models.ForeignKey(_('License'), verbose_name=_('License'))
     
     # not required 
-    thumbnail   = models.ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path)
+    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS)
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
