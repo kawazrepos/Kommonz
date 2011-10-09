@@ -7,10 +7,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-import os
-
-class MaterialManager(models.Manager):
-    pass
+from Kommonz.materials.managers import MaterialManager
 
 class Material(models.Model):
     u"""
@@ -20,10 +17,17 @@ class Material(models.Model):
     def _get_file_path(self, filename):
         return filename
     
+    def _get_thumbnail_path(self, filename):
+        return filename
+    
     # required
     label       = models.CharField(_('Label'), max_length=128)
     description = models.TextField(_('Description'))
     file        = models.FileField(_('File'), upload_to=_get_file_path)
+    license     = models.ForeignKey(_('License'), verbose_name=_('License'))
+    
+    # not required 
+    thumbnail   = models.ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path)
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
@@ -32,7 +36,6 @@ class Material(models.Model):
     pv          = models.PositiveIntegerField(_('Page View'), default=0, editable=False)
     download    = models.PositiveIntegerField(_('Download Count'), default=0, editable=False)
     ip          = models.IPAddressField(_('IP Address'), editable=False)
-    license     = models.ForeignKey('License', verbose_name=_('License'))
     
     objects     = MaterialManager()
     
@@ -75,6 +78,7 @@ class License(models.Model):
     
     label        = models.CharField(_('Label'), max_length=32)
     description  = models.TextField(_('Description'))
+
 
     class Meta:
         verbose_name        = _('License')
