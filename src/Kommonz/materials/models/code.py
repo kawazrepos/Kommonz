@@ -8,8 +8,17 @@ from django.utils.translation import ugettext as _
 from base import Material
 
 class Code(Material):
-    language = models.CharField(_('Syntax'), max_length='32')
+    """
+        Model for Source Code material.
+    """
+    
+    language                = models.CharField(_('Syntax'), max_length='32')
+    
+    class Meta:
+        app_label           = 'materials'
+        verbose_name        = _('Code')
+        verbose_name_plural = _('Codes')
     
     def _guess_language(self):
-        '''guess a programming language from the filename'''
+        """guess a programming language from the filename"""
         # has not implemented
