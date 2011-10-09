@@ -164,6 +164,7 @@ INSTALLED_APPS = (
     'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
     # Kommonz
+    'Kommonz.users',
     'Kommonz.materials'
 )
 
@@ -183,9 +184,11 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.dropbox.DropboxBackend',
     'social_auth.backends.OpenIDBackend',
     'registration.backends.hatena.HatenaBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    'Kommonz.users.backends.KommonzUserModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
+
+CUSTOM_USER_MODEL = 'Kommonz.users.models.KommonzUser'
 
 #
 # SocialAuth Setting
@@ -207,7 +210,7 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
-
+SOCIAL_AUTH_USER_MODEL = 'users.KommonzUser'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
