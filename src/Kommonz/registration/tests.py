@@ -6,10 +6,3 @@ Replace this with more appropriate tests for your application.
 """
 from django.test.client import Client
 from nose.tools import *
-
-class SimpleTest(object):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        eq_(1 + 1, 2)

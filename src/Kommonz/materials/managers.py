@@ -8,11 +8,18 @@ from Kommonz.materials.utils.filetypes import guess
 
 class MaterialManager(models.Manager):
     def _get_file_class(self, filename):
-        '''return suitable class for file'''
+        '''Return suitable class for file'''
+        from models.base import Material
         type = guess(filename)
-        #convert from 'type' to 'Type'
-        cls_name = type[0].upper() + type[1:]
-        return __import__('models', globals(), locals(), [cls_name])
+        if not type or type is 'unknown':
+            return Material
+        cls_name = type[0].upper() + type[1:] #convert from 'type' to 'Type'
+        try:
+            print "aaa"
+            module = __import__('.'.join(('models', type)), globals(), locals(), ['Code'])
+            return getattr(module, cls_name)
+        except:
+            return Material
     
     def create_material(self, data):
         '''Create Material or it's subclasses model object from mimetype.'''

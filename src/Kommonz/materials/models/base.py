@@ -8,9 +8,9 @@ import mimetypes
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from Kommonz.materials.managers import MaterialManager
 from Kommonz.imagefield.fields import ImageField
 from Kommonz.users.models import KommonzUser
+from Kommonz.materials.managers import MaterialManager
 
 class Material(models.Model):
     u"""
@@ -58,7 +58,7 @@ class Material(models.Model):
         verbose_name_plural = _('Materials')
         
     def __unicode__(self):
-        return self.label    
+        return '%s(%s)' % (self.label, self.file.name)  
     
     @models.permalink
     def get_absolute_url(self):
@@ -79,6 +79,9 @@ class Material(models.Model):
         except:
             encoding = None
         return encoding
+    
+    def extention(self):
+        return os.path.splitext(self.file.name)[1]
 
 class Kero(models.Model):
     u"""

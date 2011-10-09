@@ -2,6 +2,7 @@
 #
 # Author:        alisue
 # Date:            2010/11/28
+# Modifier:      giginet
 #
 import mimetypes
 
@@ -40,7 +41,9 @@ TEXT = (
     'application/rdf+xml',
     'application/rss+xml',
     'application/x-latex',
-    'application/x-tex',
+    'application/x-tex',    
+)
+CODE = (
     'application/xhtml+xml',
     'text/css',
     'text/html',
@@ -50,6 +53,7 @@ TEXT = (
     'text/x-scalar',
     'text/x-cpp',
     'text/x-csharp',
+    'text/css',
     'text/x-ruby',
     'text/x-perl',
     'text/x-python',
@@ -69,6 +73,7 @@ TYPES = (
     ('text',        TEXT),
     ('archive',     ARCHIVE),
     ('application', APPLICATION),
+    ('code',        CODE)
 )
 def guess(filename):
     mimetypes.init()
@@ -83,3 +88,4 @@ def guess(filename):
         if type in types:
             return label
     return 'unknown'
+
