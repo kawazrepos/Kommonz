@@ -38,3 +38,8 @@ class KommonzUser(User):
     
     def __unicode__(self):
         return '%s(%s)' % (self.nickname, self.username)
+    
+    class Meta:
+        ordering            = ('username',)
+        verbose_name        = _('Kommonz User')
+        verbose_name_plural = _('Kommonz Users')
