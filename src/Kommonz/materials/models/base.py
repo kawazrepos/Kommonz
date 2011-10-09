@@ -51,6 +51,7 @@ class Material(models.Model):
     objects     = MaterialManager()
     
     class Meta:
+        app_label           = 'materials'
         ordering            = ('-created_at',)
         verbose_name        = _('Material')
         verbose_name_plural = _('Materials')
@@ -76,6 +77,7 @@ class Kero(models.Model):
     materials   = models.ManyToManyField('Material', related_name='keros', verbose_name=_('materials'))
     
     class Meta:
+        app_label           = 'materials'
         verbose_name        = _('KERO')
         verbose_name_plural = verbose_name
         
@@ -92,6 +94,7 @@ class License(models.Model):
 
 
     class Meta:
+        app_label           = 'materials'
         verbose_name        = _('License')
         verbose_name_plural = _('Licenses')
         
@@ -109,6 +112,7 @@ class CreativeCommons(models.Model):
     material      = models.OneToOneField('Material', verbose_name=_('Creative Commons'), parent_link=True)
     
     class Meta:
+        app_label           = 'materials'
         verbose_name        = _('Creative Commons')
         verbose_name_plural = verbose_name
         

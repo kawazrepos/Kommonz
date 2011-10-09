@@ -188,7 +188,7 @@ AUTHENTICATION_BACKENDS = (
     'object_permission.backends.ObjectPermBackend',
 )
 
-CUSTOM_USER_MODEL = 'Kommonz.users.models.KommonzUser'
+CUSTOM_USER_MODEL = 'users.KommonzUser'
 
 #
 # SocialAuth Setting
@@ -210,7 +210,7 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
-SOCIAL_AUTH_USER_MODEL = 'users.KommonzUser'
+SOCIAL_AUTH_USER_MODEL = CUSTOM_USER_MODEL
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
