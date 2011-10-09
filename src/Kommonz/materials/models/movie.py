@@ -12,7 +12,7 @@ class Movie(Material):
         Model for Movie material.
     """
     
-    play_time               = models.PositiveSmallIntegerField(_('Play Time'))
+    play_time = models.PositiveSmallIntegerField(_('Play Time'))
     
     class Meta:
         app_label           = 'materials'

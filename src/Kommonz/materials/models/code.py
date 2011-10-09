@@ -12,7 +12,7 @@ class Code(Material):
         Model for Source Code material.
     """
     
-    language                = models.CharField(_('Syntax'), max_length='32')
+    language = models.CharField(_('Syntax'), max_length='32')
     
     class Meta:
         app_label           = 'materials'

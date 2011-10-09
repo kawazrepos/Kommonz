@@ -12,7 +12,7 @@ class Application(Material):
         Model for Application material.
     """
     
-    version                 = models.CharField(_('Application Version'), max_length=64)
+    version = models.CharField(_('Application Version'), max_length=64)
     
     class Meta:
         app_label           = 'materials'

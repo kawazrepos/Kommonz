@@ -166,7 +166,8 @@ INSTALLED_APPS = (
     'object_permission',            # Object permission library
     # Kommonz
     'Kommonz.users',
-    'Kommonz.materials'
+    'Kommonz.materials',
+    'Kommonz.reports'
 )
 
 AUTHENTICATION_BACKENDS = (
