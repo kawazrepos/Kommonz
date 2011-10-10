@@ -26,3 +26,6 @@ master
 local_settings.py
 local_site.py
 /static/collected/*
+
+# Kommonz
+/static/storage/
