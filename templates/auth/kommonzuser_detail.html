@@ -1,0 +1,20 @@
+{% extends "../base.html" %}
+{% load reversetag %}
+
+{% block title %}{{ object.username }}{% endblock %}
+{% block breadclumbs %}Kommonz > Material > User:{{ object.username }}{% endblock %}
+
+{% block content%}
+<section id="detail_main">
+    <h1>{{ object.nickname }}</h1>
+    <p><img src="{{ object.icon }}"></p>
+    <p>UserName：{{ object.username }}</p>
+    <p>プロフィール：{{ object.remarks }}</p><!-- it will replace with another markup field. -->
+    <p>性別：{{ object.sex }}</p>
+    <p>誕生日：{{ object.birthday }}</p>
+    <p>地域：{{ object.place }}</p>
+    <p>ウェブサイト：{{ object.url }}</p>
+    <p>メール：{{ object.email }}</p>
+    <p>最終ログイン：{{ object.last_login }}</p>
+</section>
+{% endblock %}

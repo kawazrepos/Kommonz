@@ -2,14 +2,16 @@ from django.conf.urls.defaults import patterns, include, url
 
 from django.contrib import admin
 from django.views.generic import TemplateView
+from auth.views import UserDetailView
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/doc/',       include('django.contrib.admindocs.urls'),         name='admin_doc'),
-    url(r'^admin/',           include(admin.site.urls),                         name='admin'),
-    url(r'^registration/',    include('Kommonz.registration.urls')),
-    url(r'^materials/',       include('Kommonz.materials.urls')),
-    url(r'^$',                TemplateView.as_view(template_name='index.html'), name='index')
+    url(r'^admin/doc/',           include('django.contrib.admindocs.urls'),         name='admin_doc'),
+    url(r'^admin/',               include(admin.site.urls),                         name='admin'),
+    url(r'^registration/',        include('Kommonz.registration.urls')),
+    url(r'^materials/',           include('Kommonz.materials.urls')),
+    url(r'^users/(?P<pk>\d+)/',   UserDetailView.as_view(), name="user_detail"),
+    url(r'^$',                    TemplateView.as_view(template_name='index.html'), name='index')
 )
 
 from django.conf import settings
@@ -23,5 +25,4 @@ if settings.DEBUG:
         (r'^javascript/(?P<path>.*)$',  'serve', {'document_root': document_root('../../static/javascript')}),
         (r'^image/(?P<path>.*)$',       'serve', {'document_root': document_root('../../static/image')}),
         (r'^storage/(?P<path>.*)$',     'serve', {'document_root': document_root('../../static/storage')}),
-        (r'^component/(?P<path>.*)$',   'serve', {'document_root': document_root('../../static/component')}),
     )

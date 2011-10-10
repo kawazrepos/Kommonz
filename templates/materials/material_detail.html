@@ -1,6 +1,9 @@
 {% extends "../base.html" %}
 {% load reversetag %}
 
+{% block title %}{{ object.label }}{% endblock %}
+{% block breadclumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
+
 {% block content%}
 <section id="detail_main">
     <h1>{{ object.label }}</h1>
