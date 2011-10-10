@@ -13,6 +13,7 @@ from Kommonz.imagefield.fields import ImageField
 from Kommonz.auth.models import KommonzUser
 from Kommonz.materials.managers import MaterialManager
 from Kommonz.ccfield.models import CreativeCommonsField
+from django.db.models.fields import CharField
 
 class Material(models.Model):
     u"""
