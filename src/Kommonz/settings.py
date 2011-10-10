@@ -165,7 +165,7 @@ INSTALLED_APPS = (
     'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
     # Kommonz
-    'Kommonz.users',
+    'Kommonz.auth',
     'Kommonz.materials',
     'Kommonz.reports'
 )
@@ -183,14 +183,14 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.orkut.OrkutBackend',
     'social_auth.backends.contrib.foursquare.FoursquareBackend',
     'social_auth.backends.contrib.github.GithubBackend',
-    'social_auth.backends.contrib.dropbox.DropboxBackend',
+#    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
     'registration.backends.hatena.HatenaBackend',
-    'Kommonz.users.backends.KommonzUserModelBackend',
+    'Kommonz.auth.backends.KommonzUserModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 
-CUSTOM_USER_MODEL = 'users.KommonzUser'
+CUSTOM_USER_MODEL = 'auth.KommonzUser'
 
 #
 # SocialAuth Setting

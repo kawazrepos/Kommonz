@@ -6,7 +6,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from Kommonz.users.models import KommonzUser
+from Kommonz.auth.models import KommonzUser
 
 class KommonzUserAdmin(UserAdmin):
     fieldsets = (

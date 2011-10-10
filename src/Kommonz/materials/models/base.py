@@ -8,8 +8,9 @@ import mimetypes
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
+from qwert.middleware.threadlocals import request
 from Kommonz.imagefield.fields import ImageField
-from Kommonz.users.models import KommonzUser
+from Kommonz.auth.models import KommonzUser
 from Kommonz.materials.managers import MaterialManager
 from Kommonz.ccfield.models import CreativeCommonsField
 
@@ -19,11 +20,11 @@ class Material(models.Model):
     """
     
     def _get_file_path(self, filename):
-        path = u'storage/materials/%d/' % self.pk
+        path = u'storage/materials/%d/' % self.author.username
         return os.path.join(path, filename)
     
     def _get_thumbnail_path(self, filename):
-        path = u'storage/materials/%d/thumbnails/' % self.pk
+        path = u'storage/materials/%d/thumbnails/' % self.author.username
         return os.path.join(path, filename)
     
     THUMBNAIL_SIZE_PATTERNS = {
@@ -40,7 +41,7 @@ class Material(models.Model):
     license     = models.ForeignKey(_('License'), verbose_name=_('License'))
     
     # not required 
-    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS)
+    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
@@ -59,7 +60,16 @@ class Material(models.Model):
         verbose_name_plural = _('Materials')
         
     def __unicode__(self):
-        return '%s(%s)' % (self.label, self.file.name)  
+        return '%s(%s)' % (self.label, self.file.name)
+    
+    def clean(self):
+        if request().user.is_authenticated():
+            print type(request().user)
+            self.author = request().user
+        else:
+            self.author = KommonzUser.objects.get(pk=1)
+        return super(Material, self).clean()
+            
     
     @models.permalink
     def get_absolute_url(self):
