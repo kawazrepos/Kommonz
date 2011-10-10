@@ -6,7 +6,6 @@ from django.conf import settings
 from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import get_model
-
 #
 # The default authentication backend returns default User Model.(django.contrib.auth.models.User)
 # So, replace 'django.contrib.auth.backends.ModelBackend' with this backend.

@@ -8,7 +8,7 @@ import mimetypes
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from qwert.middleware.threadlocals import request
+from qwert.middleware.threadlocals import request as get_request
 from Kommonz.imagefield.fields import ImageField
 from Kommonz.auth.models import KommonzUser
 from Kommonz.materials.managers import MaterialManager
@@ -20,11 +20,11 @@ class Material(models.Model):
     """
     
     def _get_file_path(self, filename):
-        path = u'storage/materials/%d/' % self.author.username
+        path = u'storage/materials/%s/' % self.author.username
         return os.path.join(path, filename)
     
     def _get_thumbnail_path(self, filename):
-        path = u'storage/materials/%d/thumbnails/' % self.author.username
+        path = u'storage/materials/%s/thumbnails/' % self.author.username
         return os.path.join(path, filename)
     
     THUMBNAIL_SIZE_PATTERNS = {
@@ -63,15 +63,15 @@ class Material(models.Model):
         return '%s(%s)' % (self.label, self.file.name)
     
     def clean(self):
-        if request().user.is_authenticated():
-            print type(request().user)
-            self.author = request().user
+        request = get_request()
+        if request.user.is_authenticated():
+            self.author = request.user
+            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
         else:
             self.author = KommonzUser.objects.get(pk=1)
         return super(Material, self).clean()
             
-    
-    @models.permalink
+    #@models.permalink
     def get_absolute_url(self):
         return ""
     

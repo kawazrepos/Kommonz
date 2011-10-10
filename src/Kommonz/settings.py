@@ -67,12 +67,12 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(ROOT, 'static/media'),
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), '../../static')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'media'
+MEDIA_URL = ''
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -186,7 +186,7 @@ AUTHENTICATION_BACKENDS = (
 #    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
     'registration.backends.hatena.HatenaBackend',
-    'Kommonz.auth.backends.KommonzUserModelBackend',
+    'auth.backends.KommonzUserModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 

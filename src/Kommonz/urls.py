@@ -8,5 +8,20 @@ urlpatterns = patterns('',
     url(r'^admin/doc/',       include('django.contrib.admindocs.urls'),         name='admin_doc'),
     url(r'^admin/',           include(admin.site.urls),                         name='admin'),
     url(r'^registration/',    include('Kommonz.registration.urls')),
+    url(r'^materials/',       include('Kommonz.materials.urls')),
     url(r'^$',                TemplateView.as_view(template_name='index.html'), name='index')
 )
+
+from django.conf import settings
+if settings.DEBUG:
+    import os.path
+    document_root = lambda x: os.path.join(os.path.dirname(__file__), x)
+    urlpatterns += patterns('django.views.static',
+        (r'^favicon.ico$',              'serve', {'document_root': document_root('../../static'), 'path': 'favicon.ico'}),
+        (r'^apple-touch-icon.png$',     'serve', {'document_root': document_root('../../static'), 'path': 'apple-touch-icon.png'}),
+        (r'^css/(?P<path>.*)$',         'serve', {'document_root': document_root('../../static/css')}),
+        (r'^javascript/(?P<path>.*)$',  'serve', {'document_root': document_root('../../static/javascript')}),
+        (r'^image/(?P<path>.*)$',       'serve', {'document_root': document_root('../../static/image')}),
+        (r'^storage/(?P<path>.*)$',     'serve', {'document_root': document_root('../../static/storage')}),
+        (r'^component/(?P<path>.*)$',   'serve', {'document_root': document_root('../../static/component')}),
+    )
