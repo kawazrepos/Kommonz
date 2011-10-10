@@ -58,6 +58,7 @@ setup(
         'dateutils',
         'docutils',
         'pyyaml',
+        'nose',
         'django>=1.3',
         'django-compress',
         'django-reversetag',
@@ -66,5 +67,6 @@ setup(
         'django-qwert',
         'django-object-permission',
         'django-social-auth',
+        'django-nose',
     ],
 )
