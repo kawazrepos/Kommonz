@@ -39,7 +39,6 @@ class CreativeCommonsField(models.Field):
     def formfield(self, **kwargs):
         defaults = {'form_class': fields.CreativeCommonsField, 'query_field_id': self.query_field_id}
         defaults.update(kwargs)
-        print defaults
         return super(CreativeCommonsField, self).formfield(**defaults)
     
     def contribute_to_class(self, cls, name):

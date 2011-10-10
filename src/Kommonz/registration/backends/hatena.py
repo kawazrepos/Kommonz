@@ -31,7 +31,6 @@ class HatenaBackend(OAuthBackend):
 
     def get_user_details(self, response):
         """Return user details from Hatena account"""
-        print "get_user_details"
         return {USERNAME: response['url_name'],
                 'email': '',  # not supplied
                 'fullname': response['display_name'],
