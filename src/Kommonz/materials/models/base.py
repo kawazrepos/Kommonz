@@ -9,11 +9,10 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 from qwert.middleware.threadlocals import request as get_request
-from Kommonz.imagefield.fields import ImageField
-from Kommonz.auth.models import KommonzUser
-from Kommonz.materials.managers import MaterialManager
-from Kommonz.ccfield.models import CreativeCommonsField
-from django.db.models.fields import CharField
+from imagefield.fields import ImageField
+from auth.models import KommonzUser
+from materials.managers import MaterialManager
+from ccfield.models import CreativeCommonsField
 
 class Material(models.Model):
     u"""
