@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, UserManager
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.utils.translation import ugettext as _
 from imagefield.fields import ImageField
 import os
@@ -46,7 +46,7 @@ class KommonzUser(User):
         verbose_name_plural = _('Kommonz Users')
         
     def __eq__(self, obj):
-        return issubclass(obj.__class__, User) and hasattr(obj, 'username') and getattr(self, 'username') == getattr(obj, 'username')
+        return issubclass(obj.__class__, User) and getattr(self, 'username') == getattr(obj, 'username')
         
 def create_kommonz_user(sender, instance, created, **kwargs):
     if created and isinstance(instance, User) and not isinstance(instance, KommonzUser):
@@ -56,4 +56,14 @@ def create_kommonz_user(sender, instance, created, **kwargs):
             extended_user = KommonzUser(user_ptr_id=instance.pk)
             extended_user.__dict__.update(instance.__dict__)
             extended_user.save()
+            
+def delete_kommonz_user(sender, instance, **kwargs):
+    if isinstance(instance, User) and not isinstance(instance, KommonzUser):
+        try:
+            user = KommonzUser.objects.get(username=instance.username)
+            user.delete()
+        except:
+            pass # fail silently.
+        
 post_save.connect(create_kommonz_user, sender=User)
+pre_delete.connect(delete_kommonz_user, sender=User)

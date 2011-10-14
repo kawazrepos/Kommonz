@@ -1,10 +1,3 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from nose.tools import *
@@ -35,11 +28,30 @@ class TestAuthentication(object):
         User.objects.create_user(username='kagamin', email='kagamin@gmail.com')
         ok_(KommonzUser.objects.get(username='kagamin'))
         
+class TestKommonzUserEquals(object):
+    
+    def setup(self):
+        from django.contrib.auth.models import User
+        try:
+            self.user = User.objects.create_user(username='miku', email='mikkumiku@gmail.com')
+            self.kommonz_user = KommonzUser.objects.get(username='miku')
+            self.user2 = User.objects.create_user(username='rin', email='tokachi@gmail.com')
+            self.kommonz_user2 = KommonzUser.objects.get(username='rin')
+        except:
+            self.user = User.objects.get(username='miku')
+            self.kommonz_user = KommonzUser.objects.get(username='miku')
+            self.user2 = User.objects.get(username='rin')
+            self.kommonz_user2 = KommonzUser.objects.get(username='rin')
+
     def test_user_equals(self):
         """
             Tests __eq__ works well.
         """
-        from django.contrib.auth.models import User
-        user = User.objects.create_user(username='miku', email='mikkumiku@gmail.com')
-        kommonz_user = KommonzUser.objects.get(username='miku')
-        ok_(user == kommonz_user)
+        ok_(self.user == self.kommonz_user)
+        
+    def test_user_equals_different(self):
+        """
+            Tests __eq__ works well between different Objects.
+        """
+        ok_(not (self.user == self.user2))
+        
