@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User, UserManager
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
-from Kommonz.imagefield.fields import ImageField
+from imagefield.fields import ImageField
 import os
 
 class KommonzUser(User):
@@ -43,3 +44,16 @@ class KommonzUser(User):
         ordering            = ('username',)
         verbose_name        = _('Kommonz User')
         verbose_name_plural = _('Kommonz Users')
+        
+    def __eq__(self, obj):
+        return issubclass(obj.__class__, User) and hasattr(obj, 'username') and getattr(self, 'username') == getattr(obj, 'username')
+        
+def create_kommonz_user(sender, instance, created, **kwargs):
+    if created and isinstance(instance, User) and not isinstance(instance, KommonzUser):
+        try:
+            user = KommonzUser.objects.get(username=instance.username)
+        except:
+            extended_user = KommonzUser(user_ptr_id=instance.pk)
+            extended_user.__dict__.update(instance.__dict__)
+            extended_user.save()
+post_save.connect(create_kommonz_user, sender=User)
