@@ -2,9 +2,8 @@
 __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/09'
-
 from django.db import models
-from Kommonz.materials.utils.filetypes import guess
+from utils.filetypes import guess
 
 class MaterialManager(models.Manager):
     def _get_file_class(self, filename):
