@@ -167,6 +167,7 @@ INSTALLED_APPS = (
     # Kommonz
     'Kommonz.auth',
     'Kommonz.materials',
+    'Kommonz.massages',
     'Kommonz.reports'
 )
 

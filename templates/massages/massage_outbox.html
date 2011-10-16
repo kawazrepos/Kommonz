@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}送信箱{% endblock %}
+
+{% block content %}
+{% if outbox_object_list %}
+    {% for object in outbox_object_list %}
+         <p><a href="{{ object.get_absolute_url }}">{{ object.subject }}</a></p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
