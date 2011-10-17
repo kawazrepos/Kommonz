@@ -12,3 +12,4 @@ class MassageListView(ListView):
         context['inbox_object_list'] = inbox_object_list
         context['outbox_object_list'] = outbox_object_list
         return context
+
