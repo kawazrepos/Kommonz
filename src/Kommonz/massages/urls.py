@@ -1,14 +1,14 @@
 from django.conf.urls.defaults import patterns, url
 from django.contrib.auth.decorators import login_required
-from Kommonz.massages.views import MassageCreateView, MassageListView, \
-     MassageDetailView
+from django.views.generic.detail import DetailView
+from massages.views import MassageListView
+from massages.models import Massage
 
-# temporary implemented as massages only can create or see by logined users
+
 urlpatterns = patterns('',
-    url(r'^create$',        login_required(MassageCreateView.as_view()), name='massages_massage_create'),
     url(r'^inbox$',         login_required(MassageListView.as_view(template_name="massages/massage_inbox.html")),
         name='massages_massage_inbox'),
     url(r'^outbox$',        login_required(MassageListView.as_view(template_name="massages/massage_outbox.html")),
         name='massages_massage_outbox'),
-    url(r'^(?P<pk>\d+)/$',  login_required(MassageDetailView.as_view()), name="massages_massage_detail"),
+    url(r'^(?P<pk>\d+)/$',  login_required(DetailView.as_view(model=Massage)), name="massages_massage_detail"),
 )

@@ -5,7 +5,7 @@
 {% block content %}
 {% if inbox_object_list %}
     {% for object in inbox_object_list %}
-         <p><a href="{{ object.get_absolute_url }}">{{ object.subject }}</a></p>
+         <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
     {% endfor %}
 {% endif %}
 {% endblock %}
