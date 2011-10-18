@@ -1,4 +1,5 @@
 from django.views.generic.list import ListView
+from object_permission.decorators import permission_required
 from massages.models import Massage
 
 
@@ -13,3 +14,7 @@ class MassageListView(ListView):
         context['outbox_object_list'] = outbox_object_list
         return context
 
+    @permission_required('Kommonz.view_massage', Massage)
+    def get(self, request, *args, **kwargs):
+        return ListView.get(self, request, *args, **kwargs)
+    

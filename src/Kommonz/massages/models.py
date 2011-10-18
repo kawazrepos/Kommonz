@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from qwert.middleware.threadlocals import request as get_request
+from object_permission.mediators import ObjectPermissionMediator as Mediator
 from auth.models import KommonzUser
 
 
@@ -37,4 +38,11 @@ class Massage(models.Model):
             # if guest sender allowed, erase this statement and set self.user_from as guestuser
             raise ValidationError(_('''can not send massage without authenticate'''))
         return super(Massage, self).clean()
-    
+
+    def modify_object_permission(self, mediator, created):
+        mediator.viewer(self, self.user_to)
+        mediator.editor(self, self.user_from)
+        mediator.reject(self, None)
+        mediator.reject(self, 'anonymous')
+        
+        
