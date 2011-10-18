@@ -23,7 +23,12 @@ class MassageDetailView(DetailView):
     
     @method_decorator(permission_required('massages.view_massage', Massage))
     def dispatch(self, request, *args, **kwargs):
+        massage = Massage.objects.get(pk=kwargs['pk'])
+        if not massage.read:
+            massage.read = True
+            massage.save()
         return DetailView.dispatch(self, request, *args, **kwargs)
+
 
 
 class MassageCreateView(CreateView):
