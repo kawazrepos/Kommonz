@@ -1,6 +1,9 @@
+from django.utils.decorators import method_decorator
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
-from object_permission.decorators import permission_required
 from massages.models import Massage
+from object_permission.decorators import permission_required
 
 
 class MassageListView(ListView):
@@ -14,7 +17,14 @@ class MassageListView(ListView):
         context['outbox_object_list'] = outbox_object_list
         return context
 
-    @permission_required('Kommonz.view_massage', Massage)
-    def get(self, request, *args, **kwargs):
-        return ListView.get(self, request, *args, **kwargs)
+
+class MassageDetailView(DetailView):
+    model = Massage
     
+    @method_decorator(permission_required('massages.view_massage', Massage))
+    def dispatch(self, request, *args, **kwargs):
+        return DetailView.dispatch(self, request, *args, **kwargs)
+
+
+class MassageCreateView(CreateView):
+    model = Massage

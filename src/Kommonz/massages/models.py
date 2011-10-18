@@ -2,7 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from qwert.middleware.threadlocals import request as get_request
-from object_permission.mediators import ObjectPermissionMediator as Mediator
 from auth.models import KommonzUser
 
 
@@ -44,5 +43,4 @@ class Massage(models.Model):
         mediator.editor(self, self.user_from)
         mediator.reject(self, None)
         mediator.reject(self, 'anonymous')
-        
         
