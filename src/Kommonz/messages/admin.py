@@ -1,9 +1,9 @@
 from django.contrib import admin
-from massages.models import Massage
+from messages.models import Message
 
 
-class MassageAdmin(admin.ModelAdmin):
+class MessageAdmin(admin.ModelAdmin):
     date_hierarchy  = 'created_at'
     list_display    = ('__unicode__', 'user_from', 'user_to', 'read', 'created_at',)
     
-admin.site.register(Massage, MassageAdmin)
+admin.site.register(Message, MessageAdmin)
