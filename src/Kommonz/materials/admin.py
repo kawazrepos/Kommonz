@@ -17,8 +17,8 @@ from models.movie import Movie
 
 class MaterialAdmin(admin.ModelAdmin):
     date_hierarchy  = 'created_at'
-    list_display    = ('__unicode__', 'author', 'license', 'created_at', 'ip', 'pv',)
-    list_filter     = ('author', 'license',)
+    list_display    = ('__unicode__', 'author', 'created_at', 'ip', 'pv',)
+    list_filter     = ('author',)
     search_fields   = ('label', 'description',)
 admin.site.register(Material, MaterialAdmin)
 

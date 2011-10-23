@@ -204,7 +204,7 @@ lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
 LOGIN_ERROR_URL     = lazy_reverse('registration_error')
 LOGIN_REDIRECT_URL  = "/"
-LOGIN_URL           = lazy_reverse('registration_lotin')
+LOGIN_URL           = lazy_reverse('registration_index')
 LOGOUT_URL          = lazy_reverse('registration_logout')
 
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = '/new-users-redirect-url/'
