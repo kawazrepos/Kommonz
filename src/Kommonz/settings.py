@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     'Kommonz.auth',
     'Kommonz.materials',
     'Kommonz.messages',
+    'Kommonz.notifications',
     'Kommonz.reports'
 )
 

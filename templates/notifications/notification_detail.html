@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}通知詳細 - {{ object.label }}{% endblock %}
+{% block breadcrumbs %}Kommonz > Notifications{% endblock %}
+
+{% block content%}
+<section id="detail_main">
+    <h1>{{ object.label }}</h1>
+    <p>通知日時：{{ object.created_at }}</p>
+    <p>本文：</p>
+    <p>{{ object.body }}</p>
+</section>
+{% endblock %}
