@@ -7,6 +7,7 @@ from django.conf import settings
 
 from models.base import Material
 from forms import MaterialForm
+from api.mappers import MaterialMapper
 
 class MaterialDetailView(DetailView):
     model = Material
@@ -27,11 +28,10 @@ class MaterialCreateView(CreateView):
    
     def form_valid(self, form):
         self.object = form.save()
-        f = self.request.FILES.get('file')
         
-        data = [{'label': f.name, 'url': settings.MEDIA_URL + "pictures/" + f.name, 'thumbnail_url': settings.MEDIA_URL + "pictures/" + f.name, 'delete_url': '', 'delete_type': "DELETE"}]
+        mapper = MaterialMapper(self.object)
         
-        response = JSONResponse(data, {}, response_mimetype(self.request))
+        response = JSONResponse(mapper.as_dict(), {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
@@ -46,7 +46,6 @@ class MaterialCreateView(CreateView):
 
 class JSONResponse(HttpResponse):
     """JSON response class."""
-    def __init__(self,obj='',json_opts={}, mimetype="application/json", *args, **kwargs):
-        content = simplejson.dumps(obj,**json_opts)
-        print content
-        super(JSONResponse,self).__init__(content, mimetype, *args, **kwargs)
+    def __init__(self, obj='', json_opts={}, mimetype="application/json", *args, **kwargs):
+        content = simplejson.dumps(obj, **json_opts)
+        super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)

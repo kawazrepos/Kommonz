@@ -7,8 +7,8 @@ from bpmappers.djangomodel import ModelMapper
 from models import KommonzUser
 
 class KommonzUserMapper(ModelMapper):
-    permalink = NonKeyField()
-    def filter_permalink(self):
+    url = NonKeyField()
+    def filter_url(self):
         return self.data.get_absolute_url()
     
     class Meta:

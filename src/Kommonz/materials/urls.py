@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, url, include
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.functional import lazy
@@ -13,6 +13,7 @@ __date__ = '2011/10/10'
 lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
 urlpatterns = patterns('',
-    url(r'^(?P<pk>\d+)/$',  MaterialDetailView.as_view(),                 name="materials_material_detail"),
-    url(r'^create$',        MaterialCreateView.as_view(),                 name='materials_material_create'),
+    url(r'^api/',             include('Kommonz.materials.api.urls')),
+    url(r'^(?P<pk>\d+)/$',    MaterialDetailView.as_view(),                 name="materials_material_detail"),
+    url(r'^create/?$',        MaterialCreateView.as_view(),                 name='materials_material_create'),
 )
