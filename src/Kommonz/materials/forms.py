@@ -10,3 +10,8 @@ class MaterialForm(forms.ModelForm):
     class Meta:
         model  = Material
         fields = ('file', )
+
+class MaterialExtendForm(forms.ModelForm):
+    
+    class Meta:
+        excludes = 'file'

@@ -5,6 +5,7 @@
 # Modifier:      giginet
 #
 import mimetypes
+from Kommonz.materials.models.base import Material
 
 IMAGE = (
     'image/bmp',
@@ -88,4 +89,16 @@ def guess(filename):
         if type in types:
             return label
     return 'unknown'
+
+def get_file_class(filename):
+    """Return suitable class for file"""
+    type = guess(filename)
+    if not type or type == 'unknown':
+        return Material
+    cls_name = type[0].upper() + type[1:] #convert from 'type' to 'Type'
+    try:
+        module = __import__('.'.join(('Kommonz', 'materials', 'models', type)), globals(), locals(), [cls_name])
+        return getattr(module, cls_name)
+    except:
+        return Material
 

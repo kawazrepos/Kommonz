@@ -15,7 +15,6 @@ from imagefield.fields import ImageField
 from auth.models import KommonzUser
 from ccfield.models import CreativeCommonsField
 from materials.managers import MaterialManager
-from ..utils.filetypes import guess
 
 class Material(models.Model):
     u"""
@@ -102,20 +101,9 @@ class Material(models.Model):
     def extention(self):
         return os.path.splitext(self.file.name)[1]
     
-    def _get_file_class(self, filename):
-        """Return suitable class for file"""
-        type = guess(filename)
-        if not type or type == 'unknown':
-            return Material
-        cls_name = type[0].upper() + type[1:] #convert from 'type' to 'Type'
-        try:
-            module = __import__('.'.join(('Kommonz', 'materials', 'models', type)), globals(), locals(), [cls_name])
-            return getattr(module, cls_name)
-        except:
-            return Material
-    
     def save(self, *args, **kwargs):
-        cls = self._get_file_class(self.file.name)
+        from ..utils.filetypes import get_file_class
+        cls = get_file_class(self.file.name)
         if not isinstance(self, cls):
             extended = cls(pk=self.pk)
             extended.__dict__.update(self.__dict__)

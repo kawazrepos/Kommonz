@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
@@ -6,8 +6,9 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from models.base import Material
-from forms import MaterialForm
+from forms import MaterialForm, MaterialExtendForm
 from api.mappers import MaterialMapper
+
 
 class MaterialDetailView(DetailView):
     model = Material
@@ -43,6 +44,30 @@ class MaterialCreateView(CreateView):
 
     def post(self, request, *args, **kwargs):
         return super(MaterialCreateView, self).post(request, *args, **kwargs)
+
+class MaterialExtendFormView(UpdateView):
+    template_name = 'materials/material_extend_form.html'
+    queryset      = Material.objects.all()
+    
+    def get(self, request, *args, **kwargs):
+        from utils.filetypes import get_file_class
+        pk = kwargs.get('pk')
+        instance = Material.objects.get(pk=pk)
+        self.model = get_file_class(instance.file.name)
+        return super(MaterialExtendFormView, self).get(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        from utils.filetypes import get_file_class
+        pk = kwargs.get('pk')
+        instance = Material.objects.get(pk=pk)
+        self.model = get_file_class(instance.file.name)
+        return super(MaterialExtendFormView, self).get(request, *args, **kwargs)
+    
+    def get_form_class(self):
+        # ref http://www.agmweb.ca/blog/andy/2249/
+        meta = type('Meta', (), { "model" : self.model, "exclude" : 'file', }) # create Meta class(ref Expert Python Programming p119)
+        modelform_class = type('modelform', (MaterialExtendForm,), {"Meta": meta}) # create new class extend MaterialExtendForm
+        return modelform_class
 
 class JSONResponse(HttpResponse):
     """JSON response class."""
