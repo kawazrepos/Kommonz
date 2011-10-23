@@ -55,3 +55,12 @@ class TestKommonzUserEquals(object):
         """
         ok_(not (self.user == self.user2))
         
+class TestKommonzUserMapper(object):
+    def test_user_mapper(self):
+        from mappers import KommonzUserMapper
+        user = KommonzUser.objects.create_user(username='kawaz', email='kawaz@gmail.com')
+        user.nickname = 'Kawaz Inonaka'
+        user.save()
+        mapper = KommonzUserMapper(user)
+        dict = mapper.as_dict()
+        eq_(dict['nickname'], 'Kawaz Inonaka')
