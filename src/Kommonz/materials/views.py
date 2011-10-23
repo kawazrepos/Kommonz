@@ -31,7 +31,7 @@ class MaterialCreateView(CreateView):
         
         mapper = MaterialMapper(self.object)
         
-        response = JSONResponse(mapper.as_dict(), {}, response_mimetype(self.request))
+        response = JSONResponse([mapper.as_dict(),], {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 

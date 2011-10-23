@@ -71,11 +71,16 @@ class Material(models.Model):
             self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
         else:
             self.author = KommonzUser.objects.get(pk=1)
+        if not self.label:
+            self.label = self.file.name
         return super(Material, self).clean()
             
-    #@models.permalink
+    @models.permalink
     def get_absolute_url(self):
-        return ""
+        return ('materials_material_detail', (), {'pk': self.pk})
+    
+    def get_thumbnail_url(self):
+        return self.file.path
     
     def mimetype(self):
         try:
