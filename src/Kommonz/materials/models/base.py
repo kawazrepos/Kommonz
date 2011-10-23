@@ -19,10 +19,19 @@ from materials.managers import MaterialManager
 class MaterialFile(models.Model):
     
     def _get_file_path(self, filename):
-        path = u'storage/materials/%s/' % self.author.username
+        request = get_request()
+        path = u'storage/materials/%s/' % request.user.username
         return os.path.join(path, filename)
     
     file        = models.FileField(_('File'), upload_to=_get_file_path)
+    
+    class Meta:
+        app_label         = 'materials'
+        
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('materials_material_create', )
 
 class Material(models.Model):
     u"""

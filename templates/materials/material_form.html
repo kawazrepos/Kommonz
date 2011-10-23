@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load upload_tags %}
 
 {% block head %}
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/uploader/style.css" type="text/css">
 <link media="all" rel="stylesheet" href="{{ MEDIA_URL }}css/uploader/jquery.fileupload-ui.css" type="text/css" />
-<script src="{{ MEDIA_URL }}javascript/uploader/jquery.tmpl.min.js" type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}javascript/jquery.tmpl.min.js" type="text/javascript"></script>
 <script src="{{ MEDIA_URL }}javascript/uploader/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="{{ MEDIA_URL }}javascript/uploader/jquery.fileupload.js" type="text/javascript"></script>
 <script src="{{ MEDIA_URL }}javascript/uploader/jquery.fileupload-ui.js" type="text/javascript"></script>
@@ -32,6 +33,7 @@
         <div class="fileupload-progressbar"></div>
     </div>
 </div>
+{% upload_js %}
 
 </div>
 {% endblock %}

@@ -14,5 +14,5 @@ lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
 urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$',  MaterialDetailView.as_view(),                 name="materials_material_detail"),
-    url(r'^create$',        login_required(MaterialCreateView.as_view()), name='materials_material_create'),
+    url(r'^create$',        MaterialCreateView.as_view(),                 name='materials_material_create'),
 )
