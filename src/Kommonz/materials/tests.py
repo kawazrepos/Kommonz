@@ -13,9 +13,17 @@ class TestMaterial(object):
         """
             Tests get suitable type from sourcecode.
         """
-        from Kommonz.materials.models.code import Code
+        from materials.models.code import Code
         cls = Material.objects._get_file_class('file.py')
         eq_(cls, Code)
+
+    def test_suitable_model_image(self):
+        """
+            Tests get suitable type from image.
+        """
+        from materials.models.image import Image
+        cls = Material.objects._get_file_class('file.jpg')
+        eq_(cls, Image)
         
     def test_suitable_model_others(self):
         """

@@ -20,7 +20,7 @@ class MaterialMapper(ModelMapper):
         return self.data.get_absolute_url()
     
     def filter_thumbnail_url(self):
-        return self.get_thumbnail_url()
+        return self.data.get_thumbnail_url()
     
     def filter_delete_url(self):
         return reverse('materials_api', args=[self.data.pk])

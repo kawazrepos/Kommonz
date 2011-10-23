@@ -19,7 +19,8 @@ class MaterialManager(models.Manager):
         except:
             return Material
     
-    def create_material(self, data):
+    def create(self, **kwargs):
         """Create Material or it's subclass model objects from mimetype."""
-        cls = self._get_file_class(data['file'].name)
-        return cls.objects.create(data)
+        cls = self._get_file_class(kwargs.get('label', ''))
+        print cls
+        return cls.objects.create(**kwargs)
