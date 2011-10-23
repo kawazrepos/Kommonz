@@ -16,27 +16,15 @@ from auth.models import KommonzUser
 from ccfield.models import CreativeCommonsField
 from materials.managers import MaterialManager
 
-class MaterialFile(models.Model):
+class Material(models.Model):
+    u"""
+        abstract model of whole materials.
+    """
     
     def _get_file_path(self, filename):
         request = get_request()
         path = u'storage/materials/%s/' % request.user.username
         return os.path.join(path, filename)
-    
-    file        = models.FileField(_('File'), upload_to=_get_file_path)
-    
-    class Meta:
-        app_label         = 'materials'
-        
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('materials_material_create', )
-
-class Material(models.Model):
-    u"""
-        abstract model of whole materials.
-    """
     
     def _get_thumbnail_path(self, filename):
         path = u'storage/materials/%s/thumbnails/' % self.author.username
@@ -52,7 +40,7 @@ class Material(models.Model):
     # required
     label       = models.CharField(_('Label'), max_length=128, blank=False, null=True)
     description = models.TextField(_('Description'), blank=False, null=True)
-    file        = models.OneToOneField(MaterialFile, verbose_name=_('File'))
+    file        = models.FileField(_('File'), upload_to=_get_file_path)
     
     # not required 
     thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)

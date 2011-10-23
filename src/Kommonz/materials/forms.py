@@ -4,9 +4,9 @@
 # created by giginet on 2011/10/14
 #
 from django import forms
-from models.base import MaterialFile
+from models.base import Material
 
 class MaterialForm(forms.ModelForm):
     class Meta:
-        model  = MaterialFile
+        model  = Material
         fields = ('file', )
