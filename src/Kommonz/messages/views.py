@@ -1,6 +1,6 @@
 from auth.models import KommonzUser
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
+from django.template.context import Context
+from django.template.loader import get_template, get_template_from_string
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
@@ -34,7 +34,6 @@ class MessageDetailView(DetailView):
         return DetailView.dispatch(self, request, *args, **kwargs)
 
 
-
 class MessageCreateView(CreateView):
     model = Message
     form_class = MessageCreateForm
@@ -52,5 +51,18 @@ class MessageCreateView(CreateView):
             message.save()
         
         return CreateView.get(self, request, *args, **dict)
-    
+
+
+def create_template_message(user_to, template_filename):
+    template_path = "messages/template_messages/" + template_filename
+    template = get_template(template_path)
+    if template:
+        create_object_dict = {'user_from' : KommonzUser.objects.get(pk=1),
+                              'user_to' : user_to}
+        context = Context(create_object_dict.copy())
+        label_loader = get_template_from_string('{% extends "' + template_path + '" %}{% block label %}{% endblock %}')
+        body_loader = get_template_from_string('{% extends "' + template_path + '" %}{% block body %}{% endblock %}')
+        create_object_dict.update({'label' : label_loader.render(context), 'body' : body_loader.render(context)})
+        message = Message.objects.create(**create_object_dict)
+        message.save()
 
