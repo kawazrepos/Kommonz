@@ -11,6 +11,7 @@ from django.utils.translation import ugettext as _
 
 from qwert.middleware.threadlocals import request as get_request
 from imagefield.fields import ImageField
+from object_permission.mediators import ObjectPermissionMediator as Mediator
 
 from auth.models import KommonzUser
 from ccfield.models import CreativeCommonsField
@@ -117,6 +118,11 @@ class Material(models.Model):
             extended.__dict__.update(self.__dict__)
             extended.save()
         return super(Material, self).save(*args, **kwargs)
+    
+    def modify_object_permission(self, mediator, created):
+        mediator.manager(self, self.author)
+        # ToDo collaborators
+        # map(lambda user: mediator.editor(self, user), self.collaborators)
 
 class Kero(models.Model):
     u"""

@@ -6,6 +6,8 @@ from django.utils import simplejson
 from django.utils.decorators import method_decorator
 from django import forms
 
+from object_permission.decorators import permission_required
+
 from models.base import Material
 from forms import MaterialForm
 from api.mappers import MaterialMapper
@@ -73,7 +75,7 @@ class MaterialUpdateView(UpdateView):
         modelform_class = type('modelform', (forms.ModelForm,), {"Meta": meta}) # create new class extended MaterialUpdateForm
         return modelform_class
     
-    @method_decorator(login_required)
+    @method_decorator(permission_required('materials.change_material', Material))
     def dispatch(self, *args, **kwargs):
         return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 
