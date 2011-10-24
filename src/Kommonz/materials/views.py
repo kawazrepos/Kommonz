@@ -56,7 +56,7 @@ def set_model(func):
     return _decorator
 
 class MaterialUpdateView(UpdateView):
-    template_name = 'materials/material_extend_form.html'
+    template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
     
     @set_model
@@ -80,6 +80,7 @@ class MaterialUpdateView(UpdateView):
         return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 
 class MaterialInlineUpdateView(MaterialUpdateView):
+    template_name = 'materials/material_inline_form.html'
     FORM_META_ARGS = {
                       'exclude' : 'file'
     }
