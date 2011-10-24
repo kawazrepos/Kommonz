@@ -1,4 +1,5 @@
 from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -84,6 +85,11 @@ class MaterialInlineUpdateView(MaterialUpdateView):
     FORM_META_ARGS = {
                       'exclude' : 'file'
     }
+    
+    @method_decorator(csrf_exempt)    
+    @method_decorator(permission_required('materials.change_material', Material))
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 
 class JSONResponse(HttpResponse):
     """JSON response class."""

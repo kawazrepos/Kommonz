@@ -5,9 +5,23 @@
     $uploader.fileupload({
       done: function(event, response) {
         return $(response.result).each(function() {
-          var data;
+          var $tr, data, form_url, table;
           data = this;
-          return console.log(this);
+          console.log(this);
+          form_url = data['form_url'];
+          table = $uploader.find('table.files');
+          $tr = $('<tr>').addClass('material-info-form');
+          return $tr.load(form_url, function(data) {
+            table.append($tr);
+            $tr.toggle(false).toggle('normal');
+            return $tr.find('input[type=submit]').click(function() {
+              console.log($tr.find('form').serialize());
+              $.post(form_url, $tr.find('form').serialize(), function(data) {
+                return console.log(data);
+              });
+              return false;
+            });
+          });
         });
       }
     });
