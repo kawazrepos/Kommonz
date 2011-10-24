@@ -1,9 +1,14 @@
 $(function(){
   'use strict';
-  $('#material-uploader').fileupload();
+  $('#material-uploader').fileupload({
+    onComplete : function(event, files, index, xhr, handler){
+      var data = handler.response;
+      console.log(data);
+    }
+  });
   // Load existing files:
   $.getJSON($('#material-uploader form').prop('action'), function (files) {
-    console.log('hoge');
+    console.log(files);
     var fu = $('#material-uploader').data('fileupload');
     console.log(fu);
     fu._adjustMaxNumberOfFiles(-files.length);
@@ -19,9 +24,7 @@ $(function(){
   // to prevent aborting current uploads:
   $('#material-uploader .files a:not([target^=_blank])').live('click', function (e) {
     e.preventDefault();
-    $('<iframe style="display:none;"></iframe>')
-    .prop('src', this.href)
-    .appendTo('body');
+    $('iframe').css('display', 'none').prop('src', this.href).appendTo('body');
   });
 
 });

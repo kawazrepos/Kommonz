@@ -20,6 +20,7 @@
   {% if user.is_authenticated %}
   ようこそ{{ user.username }}さん
   <ul>
+    <li><a href="{% reverse 'materials_material_create' %}">アップロード</a></li>
     <li>設定</li>
     <li>アカウント管理</li>
     <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
