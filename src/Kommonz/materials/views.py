@@ -1,10 +1,13 @@
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.utils import simplejson
+from django.utils.decorators import method_decorator
+from django import forms
 
 from models.base import Material
-from forms import MaterialForm, MaterialExtendForm
+from forms import MaterialForm
 from api.mappers import MaterialMapper
 
 
@@ -37,11 +40,9 @@ class MaterialCreateView(CreateView):
     def get_form_class(self):
         return MaterialForm
 
-    def get(self, request, *args, **kwargs):
-        return super(MaterialCreateView, self).get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return super(MaterialCreateView, self).post(request, *args, **kwargs)
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialCreateView, self).dispatch(*args, **kwargs)
 
 def set_model(func):
     def _decorator(self, request, *args, **kwargs):
@@ -52,23 +53,34 @@ def set_model(func):
         return res
     return _decorator
 
-class MaterialExtendFormView(UpdateView):
+class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_extend_form.html'
     queryset      = Material.objects.all()
     
     @set_model
     def get(self, request, *args, **kwargs):
-        return super(MaterialExtendFormView, self).get(request, *args, **kwargs)
+        return super(MaterialUpdateView, self).get(request, *args, **kwargs)
     
     @set_model
     def post(self, request, *args, **kwargs):
-        return super(MaterialExtendFormView, self).post(request, *args, **kwargs)
+        return super(MaterialUpdateView, self).post(request, *args, **kwargs)
     
     def get_form_class(self):
         # ref http://www.agmweb.ca/blog/andy/2249/
-        meta = type('Meta', (), { "model" : self.model, "exclude" : 'file', }) # create Meta class(ref Expert Python Programming p119)
-        modelform_class = type('modelform', (MaterialExtendForm,), {"Meta": meta}) # create new class extended MaterialExtendForm
+        args = getattr(self, 'FORM_META_ARGS', {})
+        args.update({'model' : self.model})
+        meta = type('Meta', (), args) # create Meta class(ref Expert Python Programming p119)
+        modelform_class = type('modelform', (forms.ModelForm,), {"Meta": meta}) # create new class extended MaterialUpdateForm
         return modelform_class
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
+
+class MaterialInlineUpdateView(MaterialUpdateView):
+    FORM_META_ARGS = {
+                      'exclude' : 'file'
+    }
 
 class JSONResponse(HttpResponse):
     """JSON response class."""
