@@ -1,4 +1,5 @@
 # ref : http://www.essentialcode.com/2009/01/26/splitting-django-models-into-separate-files/
+# if you want to add a new model in materials.models package, you must define Model.Meta.app_label = 'materials'.
 import os
 import re
 import types

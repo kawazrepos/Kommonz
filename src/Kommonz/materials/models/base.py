@@ -8,11 +8,14 @@ import mimetypes
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
+
 from qwert.middleware.threadlocals import request as get_request
 from imagefield.fields import ImageField
+from object_permission.mediators import ObjectPermissionMediator as Mediator
+
 from auth.models import KommonzUser
-from materials.managers import MaterialManager
 from ccfield.models import CreativeCommonsField
+from materials.managers import MaterialManager
 
 class Material(models.Model):
     u"""
@@ -20,7 +23,8 @@ class Material(models.Model):
     """
     
     def _get_file_path(self, filename):
-        path = u'storage/materials/%s/' % self.author.username
+        request = get_request()
+        path = u'storage/materials/%s/' % request.user.username
         return os.path.join(path, filename)
     
     def _get_thumbnail_path(self, filename):
@@ -35,10 +39,9 @@ class Material(models.Model):
     }
     
     # required
-    label       = models.CharField(_('Label'), max_length=128)
-    description = models.TextField(_('Description'))
+    label       = models.CharField(_('Label'), max_length=128, blank=False, null=True)
+    description = models.TextField(_('Description'), blank=False, null=True)
     file        = models.FileField(_('File'), upload_to=_get_file_path)
-    license     = models.ForeignKey(_('License'), verbose_name=_('License'))
     
     # not required 
     thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
@@ -69,12 +72,18 @@ class Material(models.Model):
             self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
         else:
             self.author = KommonzUser.objects.get(pk=1)
+        if not self.label:
+            self.label = self.file.name
         return super(Material, self).clean()
             
-    #@models.permalink
+    @models.permalink
     def get_absolute_url(self):
-        return ""
+        return ('materials_material_detail', (), {'pk': self.pk})
     
+    def get_thumbnail_url(self):
+        return self.file.path
+    
+    @property
     def mimetype(self):
         try:
             mimetypes.init()
@@ -83,6 +92,12 @@ class Material(models.Model):
             type = None
         return type
     
+    @property
+    def filetype_model(self):
+        from ..utils.filetypes import get_file_model
+        return get_file_model(self.file.name)
+    
+    @property
     def encoding(self):
         try:
             mimetypes.init()
@@ -91,8 +106,23 @@ class Material(models.Model):
             encoding = None
         return encoding
     
+    @property
     def extention(self):
         return os.path.splitext(self.file.name)[1]
+    
+    def save(self, *args, **kwargs):
+        from ..utils.filetypes import get_file_model
+        cls = get_file_model(self.file.name)
+        if not isinstance(self, cls):
+            extended = cls(pk=self.pk)
+            extended.__dict__.update(self.__dict__)
+            extended.save()
+        return super(Material, self).save(*args, **kwargs)
+    
+    def modify_object_permission(self, mediator, created):
+        mediator.manager(self, self.author)
+        # ToDo collaborators
+        # map(lambda user: mediator.editor(self, user), self.collaborators)
 
 class Kero(models.Model):
     u"""

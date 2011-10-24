@@ -5,8 +5,6 @@
 #
 from django import forms
 from models.base import Material
-import django
-django.forms.HiddenInput
 
 class MaterialForm(forms.ModelForm):
     class Meta:

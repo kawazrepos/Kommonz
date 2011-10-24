@@ -1,0 +1,2872 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <title>TypeError at /materials/create</title>
+  <style type="text/css">
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font:small sans-serif; }
+    body>div { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; }
+    h2 { margin-bottom:.8em; }
+    h2 span { font-size:80%; color:#666; font-weight:normal; }
+    h3 { margin:1em 0 .5em 0; }
+    h4 { margin:0 0 .5em 0; font-weight: normal; }
+    code, pre { font-size: 100%; }
+    table { border:1px solid #ccc; border-collapse: collapse; width:100%; background:white; }
+    tbody td, tbody th { vertical-align:top; padding:2px 3px; }
+    thead th { padding:1px 6px 1px 3px; background:#fefefe; text-align:left; font-weight:normal; font-size:11px; border:1px solid #ddd; }
+    tbody th { width:12em; text-align:right; color:#666; padding-right:.5em; }
+    table.vars { margin:5px 0 2px 40px; }
+    table.vars td, table.req td { font-family:monospace; }
+    table td.code { width:100%; }
+    table td.code pre { overflow:hidden; }
+    table.source th { color:#666; }
+    table.source td { font-family:monospace; white-space:pre; border-bottom:1px solid #eee; }
+    ul.traceback { list-style-type:none; }
+    ul.traceback li.frame { padding-bottom:1em; }
+    div.context { padding:10px 0; overflow:hidden; }
+    div.context ol { padding-left:30px; margin:0 10px; list-style-position: inside; }
+    div.context ol li { font-family:monospace; white-space:pre; color:#666; cursor:pointer; }
+    div.context ol li pre { display:inline; }
+    div.context ol.context-line li { color:black; background-color:#ccc; }
+    div.context ol.context-line li span { position:absolute; right:32px; }
+    div.commands { margin-left: 40px; }
+    div.commands a { color:black; text-decoration:none; }
+    #summary { background: #ffc; }
+    #summary h2 { font-weight: normal; color: #666; }
+    #explanation { background:#eee; }
+    #template, #template-not-exist { background:#f6f6f6; }
+    #template-not-exist ul { margin: 0 0 0 20px; }
+    #unicode-hint { background:#eee; }
+    #traceback { background:#eee; }
+    #requestinfo { background:#f6f6f6; padding-left:120px; }
+    #summary table { border:none; background:transparent; }
+    #requestinfo h2, #requestinfo h3 { position:relative; margin-left:-100px; }
+    #requestinfo h3 { margin-bottom:-1em; }
+    .error { background: #ffc; }
+    .specific { color:#cc3300; font-weight:bold; }
+    h2 span.commands { font-size:.7em;}
+    span.commands a:link {color:#5E5694;}
+    pre.exception_value { font-family: sans-serif; color: #666; font-size: 1.5em; margin: 10px 0 10px 0; }
+  </style>
+  
+  <script type="text/javascript">
+  //<!--
+    function getElementsByClassName(oElm, strTagName, strClassName){
+        // Written by Jonathan Snook, http://www.snook.ca/jon; Add-ons by Robert Nyman, http://www.robertnyman.com
+        var arrElements = (strTagName == "*" && document.all)? document.all :
+        oElm.getElementsByTagName(strTagName);
+        var arrReturnElements = new Array();
+        strClassName = strClassName.replace(/\-/g, "\-");
+        var oRegExp = new RegExp("(^|\s)" + strClassName + "(\s|$)");
+        var oElement;
+        for(var i=0; i<arrElements.length; i++){
+            oElement = arrElements[i];
+            if(oRegExp.test(oElement.className)){
+                arrReturnElements.push(oElement);
+            }
+        }
+        return (arrReturnElements)
+    }
+    function hideAll(elems) {
+      for (var e = 0; e < elems.length; e++) {
+        elems[e].style.display = 'none';
+      }
+    }
+    window.onload = function() {
+      hideAll(getElementsByClassName(document, 'table', 'vars'));
+      hideAll(getElementsByClassName(document, 'ol', 'pre-context'));
+      hideAll(getElementsByClassName(document, 'ol', 'post-context'));
+      hideAll(getElementsByClassName(document, 'div', 'pastebin'));
+    }
+    function toggle() {
+      for (var i = 0; i < arguments.length; i++) {
+        var e = document.getElementById(arguments[i]);
+        if (e) {
+          e.style.display = e.style.display == 'none' ? 'block' : 'none';
+        }
+      }
+      return false;
+    }
+    function varToggle(link, id) {
+      toggle('v' + id);
+      var s = link.getElementsByTagName('span')[0];
+      var uarr = String.fromCharCode(0x25b6);
+      var darr = String.fromCharCode(0x25bc);
+      s.innerHTML = s.innerHTML == uarr ? darr : uarr;
+      return false;
+    }
+    function switchPastebinFriendly(link) {
+      s1 = "Switch to copy-and-paste view";
+      s2 = "Switch back to interactive view";
+      link.innerHTML = link.innerHTML == s1 ? s2 : s1;
+      toggle('browserTraceback', 'pastebinTraceback');
+      return false;
+    }
+    //-->
+  </script>
+  
+</head>
+<body>
+<div id="summary">
+  <h1>TypeError at /materials/create</h1>
+  <pre class="exception_value">unhashable type: &#39;dict&#39;</pre>
+  <table class="meta">
+
+    <tr>
+      <th>Request Method:</th>
+      <td>POST</td>
+    </tr>
+    <tr>
+      <th>Request URL:</th>
+      <td>http://localhost:5000/materials/create</td>
+    </tr>
+
+    <tr>
+      <th>Django Version:</th>
+      <td>1.3.1</td>
+    </tr>
+
+    <tr>
+      <th>Exception Type:</th>
+      <td>TypeError</td>
+    </tr>
+
+
+    <tr>
+      <th>Exception Value:</th>
+      <td><pre>unhashable type: &#39;dict&#39;</pre></td>
+    </tr>
+
+
+    <tr>
+      <th>Exception Location:</th>
+      <td>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/utils/functional.py in wrapper, line 122</td>
+    </tr>
+
+    <tr>
+      <th>Python Executable:</th>
+      <td>/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python</td>
+    </tr>
+    <tr>
+      <th>Python Version:</th>
+      <td>2.7.2</td>
+    </tr>
+    <tr>
+      <th>Python Path:</th>
+      <td><pre>[&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/site-packages/setuptools-0.6c11-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/site-packages/pip-1.0.2-py2.7.egg&#39;,
+ &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_pagination-1.0.7-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_compress-1.0.1-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/PyYAML-3.10-py2.7-macosx-10.7-x86_64.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/docutils-0.8.1-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/DateUtils-0.5.1-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/setuptools_git-0.4.2-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/Markdown-2.0.3-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/pytz-2011h-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/python_dateutil-2.0-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_social_auth-0.5.13-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_object_permission-0.1rc4-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_qwert-0.1rc2-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_mfw-0.1rc2-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/python_openid-2.2.5-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/oauth2-1.5.170-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/akismet-0.2.0-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/uamd-0.1rc3-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/e4u-0.2rc1-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/httplib2-0.7.1-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/IPy-0.75-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/python_memcached-1.47-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_markupfield-1.0.2-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_haystack-1.1.0-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/MySQL_python-1.2.3-py2.7-macosx-10.7-x86_64.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/South-0.7.3-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/Whoosh-1.1.1-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/pysolr-2.1.0_beta-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/gdata-2.0.14-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_universaltag-0.1rc2-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django_hierarchical-0.1.3-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python27.zip&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/plat-darwin&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/plat-mac&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/plat-mac/lib-scriptpackages&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/lib-tk&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/lib-old&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/lib-dynload&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/plat-darwin&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/lib-tk&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/plat-mac&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/plat-mac/lib-scriptpackages&#39;,
+ &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/site-packages&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/pip-1.0.2-py2.7.egg&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/ropevim-0.3_rc-py2.7.egg&#39;,
+ &#39;/Users/giginet/Documents/aptana3/Kawaz&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/Kawaz-0.31415rc4-py2.7.egg&#39;,
+ &#39;/Users/giginet/Documents/aptana3/Kawaz/src/django-piston&#39;,
+ &#39;/Users/giginet/.local/lib/python2.7/site-packages&#39;,
+ &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/PIL&#39;,
+ &#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../../src/libs&#39;,
+ &#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../src/libs&#39;]</pre></td>
+    </tr>
+    <tr>
+      <th>Server time:</th>
+      <td>日, 23 10月 2011 16:33:50 +0900</td>
+    </tr>
+  </table>
+</div>
+
+
+
+
+<div id="traceback">
+  <h2>Traceback <span class="commands"><a href="#" onclick="return switchPastebinFriendly(this);">Switch to copy-and-paste view</a></span></h2>
+  
+  <div id="browserTraceback">
+    <ul class="traceback">
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/core/handlers/base.py</code> in <code>get_response</code>
+
+          
+            <div class="context" id="c4463927448">
+              
+                <ol start="104" class="pre-context" id="pre4463927448"><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                    for middleware_method in self._view_middleware:</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        response = middleware_method(request, callback, callback_args, callback_kwargs)</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        if response:</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                            break</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre></pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                if response is None:</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                    try:</pre></li></ol>
+              
+              <ol start="111" class="context-line"><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        response = callback(request, *callback_args, **callback_kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='112' class="post-context" id="post4463927448"><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                    except Exception, e:</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        # If the view raised an exception, run it through exception</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        # middleware, and if the exception middleware returns a</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        # response, use that. Otherwise, reraise the exception.</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                        for middleware_method in self._exception_middleware:</pre></li><li onclick="toggle('pre4463927448', 'post4463927448')"><pre>                            response = middleware_method(request, e)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463927448')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463927448">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>exceptions</td>
+                    <td class="code"><pre>&lt;module &#39;django.core.exceptions&#39; from &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/core/exceptions.pyc&#39;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>e</td>
+                    <td class="code"><pre>TypeError(&quot;unhashable type: &#39;dict&#39;&quot;,)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>callback_args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>receivers</td>
+                    <td class="code"><pre>[(&lt;function _rollback_on_exception at 0x1093ada28&gt;, None)]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>middleware_method</td>
+                    <td class="code"><pre>&lt;bound method Http403Middleware.process_exception of &lt;qwert.middleware.http.Http403Middleware object at 0x109a7c890&gt;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.core.handlers.wsgi.WSGIHandler object at 0x109980410&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>settings</td>
+                    <td class="code"><pre>&lt;django.conf.LazySettings object at 0x108fbef50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&lt;WSGIRequest
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;csrfmiddlewaretoken&#39;: [u&#39;52363d891975139ffb2de889ee823004&#39;]}&gt;,
+COOKIES:{&#39;__utma&#39;: &#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;,
+ &#39;__utmz&#39;: &#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;,
+ &#39;csrftoken&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;sessionid&#39;: &#39;a8676719b80c23bd71f4b99915291c5f&#39;},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Qqi80K/Render&#39;,
+ &#39;CLICOLOR&#39;: &#39;1&#39;,
+ &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;43540&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;DISPLAY&#39;: &#39;/tmp/launch-ojqS6M/org.x:0&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;Kommonz.settings&#39;,
+ &#39;EDITOR&#39;: &#39;/usr/local/bin/vim&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/giginet&#39;,
+ &#39;HTTP_ACCEPT&#39;: &#39;application/json, text/javascript, */*; q=0.01&#39;,
+ &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;gzip, deflate&#39;,
+ &#39;HTTP_ACCEPT_LANGUAGE&#39;: &#39;ja-jp&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_COOKIE&#39;: &#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;,
+ &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_ORIGIN&#39;: &#39;http://localhost:5000&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://localhost:5000/materials/create&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;,
+ &#39;HTTP_X_REQUESTED_WITH&#39;: &#39;XMLHttpRequest&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t0p0&#39;,
+ &#39;LANG&#39;: &#39;ja_JP.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;giginet&#39;,
+ &#39;LSCOLORS&#39;: &#39;exfxcxdxbxegedabagacad&#39;,
+ &#39;LS_COLORS&#39;: &#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;,
+ &#39;MACOSX_DEPLOYMENT_TARGET&#39;: &#39;10.7&#39;,
+ &#39;MANPATH&#39;: &#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;,
+ &#39;OLDPWD&#39;: &#39;/Users/giginet&#39;,
+ &#39;PATH&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/materials/create&#39;,
+ &#39;PS1&#39;: &#39;(Kommonz)%m%# &#39;,
+ &#39;PWD&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SECURITYSESSIONID&#39;: &#39;186a5&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHELL&#39;: &#39;/bin/zsh&#39;,
+ &#39;SHLVL&#39;: &#39;3&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-QpJ1zf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;screen&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;,
+ &#39;TMUX&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;,
+ &#39;TMUX_PANE&#39;: &#39;%1&#39;,
+ &#39;TZ&#39;: &#39;Asia/Tokyo&#39;,
+ &#39;USER&#39;: &#39;giginet&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;,
+ &#39;WORKON_HOME&#39;: &#39;/Users/giginet/.virtualenvs&#39;,
+ &#39;_&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:1:14&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class &#39;django.core.servers.basehttp.FileWrapper&#39;&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10acc4850&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>callback</td>
+                    <td class="code"><pre>&lt;function MaterialCreateView at 0x10a627488&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>resolver</td>
+                    <td class="code"><pre>&lt;RegexURLResolver Kommonz.urls (None:None) ^/&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>urlresolvers</td>
+                    <td class="code"><pre>&lt;module &#39;django.core.urlresolvers&#39; from &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/core/urlresolvers.pyc&#39;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>callback_kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>response</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>urlconf</td>
+                    <td class="code"><pre>&#39;Kommonz.urls&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/base.py</code> in <code>view</code>
+
+          
+            <div class="context" id="c4463927808">
+              
+                <ol start="40" class="pre-context" id="pre4463927808"><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>                                % (key, cls.__name__))</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>            if not hasattr(cls, key):</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>                raise TypeError(u&quot;%s() received an invalid keyword %r&quot; % (</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>                    cls.__name__, key))</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre></pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>        def view(request, *args, **kwargs):</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>            self = cls(**initkwargs)</pre></li></ol>
+              
+              <ol start="47" class="context-line"><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>            return self.dispatch(request, *args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='48' class="post-context" id="post4463927808"><li onclick="toggle('pre4463927808', 'post4463927808')"><pre></pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>        # take name and docstring from class</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>        update_wrapper(view, cls, updated=())</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre></pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>        # and possible attributes set by decorators</pre></li><li onclick="toggle('pre4463927808', 'post4463927808')"><pre>        # like csrf_exempt from dispatch</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463927808')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463927808">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>initkwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&lt;WSGIRequest
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;csrfmiddlewaretoken&#39;: [u&#39;52363d891975139ffb2de889ee823004&#39;]}&gt;,
+COOKIES:{&#39;__utma&#39;: &#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;,
+ &#39;__utmz&#39;: &#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;,
+ &#39;csrftoken&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;sessionid&#39;: &#39;a8676719b80c23bd71f4b99915291c5f&#39;},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Qqi80K/Render&#39;,
+ &#39;CLICOLOR&#39;: &#39;1&#39;,
+ &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;43540&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;DISPLAY&#39;: &#39;/tmp/launch-ojqS6M/org.x:0&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;Kommonz.settings&#39;,
+ &#39;EDITOR&#39;: &#39;/usr/local/bin/vim&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/giginet&#39;,
+ &#39;HTTP_ACCEPT&#39;: &#39;application/json, text/javascript, */*; q=0.01&#39;,
+ &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;gzip, deflate&#39;,
+ &#39;HTTP_ACCEPT_LANGUAGE&#39;: &#39;ja-jp&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_COOKIE&#39;: &#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;,
+ &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_ORIGIN&#39;: &#39;http://localhost:5000&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://localhost:5000/materials/create&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;,
+ &#39;HTTP_X_REQUESTED_WITH&#39;: &#39;XMLHttpRequest&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t0p0&#39;,
+ &#39;LANG&#39;: &#39;ja_JP.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;giginet&#39;,
+ &#39;LSCOLORS&#39;: &#39;exfxcxdxbxegedabagacad&#39;,
+ &#39;LS_COLORS&#39;: &#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;,
+ &#39;MACOSX_DEPLOYMENT_TARGET&#39;: &#39;10.7&#39;,
+ &#39;MANPATH&#39;: &#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;,
+ &#39;OLDPWD&#39;: &#39;/Users/giginet&#39;,
+ &#39;PATH&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/materials/create&#39;,
+ &#39;PS1&#39;: &#39;(Kommonz)%m%# &#39;,
+ &#39;PWD&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SECURITYSESSIONID&#39;: &#39;186a5&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHELL&#39;: &#39;/bin/zsh&#39;,
+ &#39;SHLVL&#39;: &#39;3&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-QpJ1zf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;screen&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;,
+ &#39;TMUX&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;,
+ &#39;TMUX_PANE&#39;: &#39;%1&#39;,
+ &#39;TZ&#39;: &#39;Asia/Tokyo&#39;,
+ &#39;USER&#39;: &#39;giginet&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;,
+ &#39;WORKON_HOME&#39;: &#39;/Users/giginet/.virtualenvs&#39;,
+ &#39;_&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:1:14&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class &#39;django.core.servers.basehttp.FileWrapper&#39;&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10acc4850&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>cls</td>
+                    <td class="code"><pre>&lt;class &#39;Kommonz.materials.views.MaterialCreateView&#39;&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/base.py</code> in <code>dispatch</code>
+
+          
+            <div class="context" id="c4463928744">
+              
+                <ol start="61" class="pre-context" id="pre4463928744"><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        if request.method.lower() in self.http_method_names:</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        else:</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>            handler = self.http_method_not_allowed</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        self.request = request</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        self.args = args</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        self.kwargs = kwargs</pre></li></ol>
+              
+              <ol start="68" class="context-line"><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        return handler(request, *args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='69' class="post-context" id="post4463928744"><li onclick="toggle('pre4463928744', 'post4463928744')"><pre></pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>    def http_method_not_allowed(self, request, *args, **kwargs):</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        allowed_methods = [m for m in self.http_method_names if hasattr(self, m)]</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>        logger.warning(&#39;Method Not Allowed (%s): %s&#39; % (request.method, request.path),</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>            extra={</pre></li><li onclick="toggle('pre4463928744', 'post4463928744')"><pre>                &#39;status_code&#39;: 405,</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463928744')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463928744">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>handler</td>
+                    <td class="code"><pre>&lt;bound method MaterialCreateView.post of &lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&lt;WSGIRequest
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;csrfmiddlewaretoken&#39;: [u&#39;52363d891975139ffb2de889ee823004&#39;]}&gt;,
+COOKIES:{&#39;__utma&#39;: &#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;,
+ &#39;__utmz&#39;: &#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;,
+ &#39;csrftoken&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;sessionid&#39;: &#39;a8676719b80c23bd71f4b99915291c5f&#39;},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Qqi80K/Render&#39;,
+ &#39;CLICOLOR&#39;: &#39;1&#39;,
+ &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;43540&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;DISPLAY&#39;: &#39;/tmp/launch-ojqS6M/org.x:0&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;Kommonz.settings&#39;,
+ &#39;EDITOR&#39;: &#39;/usr/local/bin/vim&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/giginet&#39;,
+ &#39;HTTP_ACCEPT&#39;: &#39;application/json, text/javascript, */*; q=0.01&#39;,
+ &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;gzip, deflate&#39;,
+ &#39;HTTP_ACCEPT_LANGUAGE&#39;: &#39;ja-jp&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_COOKIE&#39;: &#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;,
+ &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_ORIGIN&#39;: &#39;http://localhost:5000&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://localhost:5000/materials/create&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;,
+ &#39;HTTP_X_REQUESTED_WITH&#39;: &#39;XMLHttpRequest&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t0p0&#39;,
+ &#39;LANG&#39;: &#39;ja_JP.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;giginet&#39;,
+ &#39;LSCOLORS&#39;: &#39;exfxcxdxbxegedabagacad&#39;,
+ &#39;LS_COLORS&#39;: &#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;,
+ &#39;MACOSX_DEPLOYMENT_TARGET&#39;: &#39;10.7&#39;,
+ &#39;MANPATH&#39;: &#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;,
+ &#39;OLDPWD&#39;: &#39;/Users/giginet&#39;,
+ &#39;PATH&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/materials/create&#39;,
+ &#39;PS1&#39;: &#39;(Kommonz)%m%# &#39;,
+ &#39;PWD&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SECURITYSESSIONID&#39;: &#39;186a5&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHELL&#39;: &#39;/bin/zsh&#39;,
+ &#39;SHLVL&#39;: &#39;3&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-QpJ1zf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;screen&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;,
+ &#39;TMUX&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;,
+ &#39;TMUX_PANE&#39;: &#39;%1&#39;,
+ &#39;TZ&#39;: &#39;Asia/Tokyo&#39;,
+ &#39;USER&#39;: &#39;giginet&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;,
+ &#39;WORKON_HOME&#39;: &#39;/Users/giginet/.virtualenvs&#39;,
+ &#39;_&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:1:14&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class &#39;django.core.servers.basehttp.FileWrapper&#39;&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10acc4850&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/materials/views.py</code> in <code>post</code>
+
+          
+            <div class="context" id="c4463928168">
+              
+                <ol start="38" class="pre-context" id="pre4463928168"><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>    def get_form_class(self):</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>        return MaterialForm</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre></pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>    def get(self, request, *args, **kwargs):</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>        return super(MaterialCreateView, self).get(request, *args, **kwargs)</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre></pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>    def post(self, request, *args, **kwargs):</pre></li></ol>
+              
+              <ol start="45" class="context-line"><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>        return super(MaterialCreateView, self).post(request, *args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='46' class="post-context" id="post4463928168"><li onclick="toggle('pre4463928168', 'post4463928168')"><pre></pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>class JSONResponse(HttpResponse):</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>    &quot;&quot;&quot;JSON response class.&quot;&quot;&quot;</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>    def __init__(self, obj=&#39;&#39;, json_opts={}, mimetype=&quot;application/json&quot;, *args, **kwargs):</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>        content = simplejson.dumps(obj, **json_opts)</pre></li><li onclick="toggle('pre4463928168', 'post4463928168')"><pre>        super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463928168')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463928168">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&lt;WSGIRequest
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;csrfmiddlewaretoken&#39;: [u&#39;52363d891975139ffb2de889ee823004&#39;]}&gt;,
+COOKIES:{&#39;__utma&#39;: &#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;,
+ &#39;__utmz&#39;: &#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;,
+ &#39;csrftoken&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;sessionid&#39;: &#39;a8676719b80c23bd71f4b99915291c5f&#39;},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Qqi80K/Render&#39;,
+ &#39;CLICOLOR&#39;: &#39;1&#39;,
+ &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;43540&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;DISPLAY&#39;: &#39;/tmp/launch-ojqS6M/org.x:0&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;Kommonz.settings&#39;,
+ &#39;EDITOR&#39;: &#39;/usr/local/bin/vim&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/giginet&#39;,
+ &#39;HTTP_ACCEPT&#39;: &#39;application/json, text/javascript, */*; q=0.01&#39;,
+ &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;gzip, deflate&#39;,
+ &#39;HTTP_ACCEPT_LANGUAGE&#39;: &#39;ja-jp&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_COOKIE&#39;: &#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;,
+ &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_ORIGIN&#39;: &#39;http://localhost:5000&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://localhost:5000/materials/create&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;,
+ &#39;HTTP_X_REQUESTED_WITH&#39;: &#39;XMLHttpRequest&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t0p0&#39;,
+ &#39;LANG&#39;: &#39;ja_JP.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;giginet&#39;,
+ &#39;LSCOLORS&#39;: &#39;exfxcxdxbxegedabagacad&#39;,
+ &#39;LS_COLORS&#39;: &#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;,
+ &#39;MACOSX_DEPLOYMENT_TARGET&#39;: &#39;10.7&#39;,
+ &#39;MANPATH&#39;: &#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;,
+ &#39;OLDPWD&#39;: &#39;/Users/giginet&#39;,
+ &#39;PATH&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/materials/create&#39;,
+ &#39;PS1&#39;: &#39;(Kommonz)%m%# &#39;,
+ &#39;PWD&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SECURITYSESSIONID&#39;: &#39;186a5&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHELL&#39;: &#39;/bin/zsh&#39;,
+ &#39;SHLVL&#39;: &#39;3&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-QpJ1zf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;screen&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;,
+ &#39;TMUX&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;,
+ &#39;TMUX_PANE&#39;: &#39;%1&#39;,
+ &#39;TZ&#39;: &#39;Asia/Tokyo&#39;,
+ &#39;USER&#39;: &#39;giginet&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;,
+ &#39;WORKON_HOME&#39;: &#39;/Users/giginet/.virtualenvs&#39;,
+ &#39;_&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:1:14&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class &#39;django.core.servers.basehttp.FileWrapper&#39;&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10acc4850&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/edit.py</code> in <code>post</code>
+
+          
+            <div class="context" id="c4463927952">
+              
+                <ol start="165" class="pre-context" id="pre4463927952"><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>    def get(self, request, *args, **kwargs):</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>        self.object = None</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>        return super(BaseCreateView, self).get(request, *args, **kwargs)</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre></pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>    def post(self, request, *args, **kwargs):</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>        self.object = None</pre></li></ol>
+              
+              <ol start="172" class="context-line"><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>        return super(BaseCreateView, self).post(request, *args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='173' class="post-context" id="post4463927952"><li onclick="toggle('pre4463927952', 'post4463927952')"><pre></pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre></pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>class CreateView(SingleObjectTemplateResponseMixin, BaseCreateView):</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>    View for creating an new object instance,</pre></li><li onclick="toggle('pre4463927952', 'post4463927952')"><pre>    with a response rendered by template.</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463927952')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463927952">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&lt;WSGIRequest
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;csrfmiddlewaretoken&#39;: [u&#39;52363d891975139ffb2de889ee823004&#39;]}&gt;,
+COOKIES:{&#39;__utma&#39;: &#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;,
+ &#39;__utmz&#39;: &#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;,
+ &#39;csrftoken&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;sessionid&#39;: &#39;a8676719b80c23bd71f4b99915291c5f&#39;},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Qqi80K/Render&#39;,
+ &#39;CLICOLOR&#39;: &#39;1&#39;,
+ &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;43540&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;DISPLAY&#39;: &#39;/tmp/launch-ojqS6M/org.x:0&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;Kommonz.settings&#39;,
+ &#39;EDITOR&#39;: &#39;/usr/local/bin/vim&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/giginet&#39;,
+ &#39;HTTP_ACCEPT&#39;: &#39;application/json, text/javascript, */*; q=0.01&#39;,
+ &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;gzip, deflate&#39;,
+ &#39;HTTP_ACCEPT_LANGUAGE&#39;: &#39;ja-jp&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_COOKIE&#39;: &#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;,
+ &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_ORIGIN&#39;: &#39;http://localhost:5000&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://localhost:5000/materials/create&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;,
+ &#39;HTTP_X_REQUESTED_WITH&#39;: &#39;XMLHttpRequest&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t0p0&#39;,
+ &#39;LANG&#39;: &#39;ja_JP.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;giginet&#39;,
+ &#39;LSCOLORS&#39;: &#39;exfxcxdxbxegedabagacad&#39;,
+ &#39;LS_COLORS&#39;: &#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;,
+ &#39;MACOSX_DEPLOYMENT_TARGET&#39;: &#39;10.7&#39;,
+ &#39;MANPATH&#39;: &#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;,
+ &#39;OLDPWD&#39;: &#39;/Users/giginet&#39;,
+ &#39;PATH&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/materials/create&#39;,
+ &#39;PS1&#39;: &#39;(Kommonz)%m%# &#39;,
+ &#39;PWD&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SECURITYSESSIONID&#39;: &#39;186a5&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHELL&#39;: &#39;/bin/zsh&#39;,
+ &#39;SHLVL&#39;: &#39;3&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-QpJ1zf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;screen&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;,
+ &#39;TMUX&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;,
+ &#39;TMUX_PANE&#39;: &#39;%1&#39;,
+ &#39;TZ&#39;: &#39;Asia/Tokyo&#39;,
+ &#39;USER&#39;: &#39;giginet&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;,
+ &#39;WORKON_HOME&#39;: &#39;/Users/giginet/.virtualenvs&#39;,
+ &#39;_&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:1:14&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class &#39;django.core.servers.basehttp.FileWrapper&#39;&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10acc4850&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/edit.py</code> in <code>post</code>
+
+          
+            <div class="context" id="c4463928816">
+              
+                <ol start="131" class="pre-context" id="pre4463928816"><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>        form = self.get_form(form_class)</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>        return self.render_to_response(self.get_context_data(form=form))</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre></pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>    def post(self, request, *args, **kwargs):</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>        form_class = self.get_form_class()</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>        form = self.get_form(form_class)</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>        if form.is_valid():</pre></li></ol>
+              
+              <ol start="138" class="context-line"><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>            return self.form_valid(form)</pre> <span>...</span></li></ol>
+              
+                <ol start='139' class="post-context" id="post4463928816"><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>        else:</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>            return self.form_invalid(form)</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre></pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>    # PUT is a valid HTTP verb for creating (with a known URL) or editing an</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>    # object, note that browsers only support POST for now.</pre></li><li onclick="toggle('pre4463928816', 'post4463928816')"><pre>    def put(self, *args, **kwargs):</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463928816')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463928816">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>form</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.forms.MaterialForm object at 0x10a10ca90&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&lt;WSGIRequest
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;csrfmiddlewaretoken&#39;: [u&#39;52363d891975139ffb2de889ee823004&#39;]}&gt;,
+COOKIES:{&#39;__utma&#39;: &#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;,
+ &#39;__utmz&#39;: &#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;,
+ &#39;csrftoken&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;sessionid&#39;: &#39;a8676719b80c23bd71f4b99915291c5f&#39;},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Qqi80K/Render&#39;,
+ &#39;CLICOLOR&#39;: &#39;1&#39;,
+ &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;43540&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;52363d891975139ffb2de889ee823004&#39;,
+ &#39;DISPLAY&#39;: &#39;/tmp/launch-ojqS6M/org.x:0&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;Kommonz.settings&#39;,
+ &#39;EDITOR&#39;: &#39;/usr/local/bin/vim&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/giginet&#39;,
+ &#39;HTTP_ACCEPT&#39;: &#39;application/json, text/javascript, */*; q=0.01&#39;,
+ &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;gzip, deflate&#39;,
+ &#39;HTTP_ACCEPT_LANGUAGE&#39;: &#39;ja-jp&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_COOKIE&#39;: &#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;,
+ &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_ORIGIN&#39;: &#39;http://localhost:5000&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://localhost:5000/materials/create&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;,
+ &#39;HTTP_X_REQUESTED_WITH&#39;: &#39;XMLHttpRequest&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t0p0&#39;,
+ &#39;LANG&#39;: &#39;ja_JP.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;giginet&#39;,
+ &#39;LSCOLORS&#39;: &#39;exfxcxdxbxegedabagacad&#39;,
+ &#39;LS_COLORS&#39;: &#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;,
+ &#39;MACOSX_DEPLOYMENT_TARGET&#39;: &#39;10.7&#39;,
+ &#39;MANPATH&#39;: &#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;,
+ &#39;OLDPWD&#39;: &#39;/Users/giginet&#39;,
+ &#39;PATH&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/materials/create&#39;,
+ &#39;PS1&#39;: &#39;(Kommonz)%m%# &#39;,
+ &#39;PWD&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SECURITYSESSIONID&#39;: &#39;186a5&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHELL&#39;: &#39;/bin/zsh&#39;,
+ &#39;SHLVL&#39;: &#39;3&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-QpJ1zf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;screen&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;,
+ &#39;TMUX&#39;: &#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;,
+ &#39;TMUX_PANE&#39;: &#39;%1&#39;,
+ &#39;TZ&#39;: &#39;Asia/Tokyo&#39;,
+ &#39;USER&#39;: &#39;giginet&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;,
+ &#39;WORKON_HOME&#39;: &#39;/Users/giginet/.virtualenvs&#39;,
+ &#39;_&#39;: &#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:1:14&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class &#39;django.core.servers.basehttp.FileWrapper&#39;&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10acc4850&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>form_class</td>
+                    <td class="code"><pre>&lt;class &#39;Kommonz.materials.forms.MaterialForm&#39;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/materials/views.py</code> in <code>form_valid</code>
+
+          
+            <div class="context" id="c4463927664">
+              
+                <ol start="27" class="pre-context" id="pre4463927664"><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>    template_name = &#39;materials/material_form.html&#39;</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>   </pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>    def form_valid(self, form):</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        self.object = form.save()</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        </pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        mapper = MaterialMapper(self.object)</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        </pre></li></ol>
+              
+              <ol start="34" class="context-line"><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        response = JSONResponse(mapper.as_dict(), {}, response_mimetype(self.request))</pre> <span>...</span></li></ol>
+              
+                <ol start='35' class="post-context" id="post4463927664"><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        response[&#39;Content-Disposition&#39;] = &#39;inline; filename=files.json&#39;</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        return response</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre></pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>    def get_form_class(self):</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre>        return MaterialForm</pre></li><li onclick="toggle('pre4463927664', 'post4463927664')"><pre></pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463927664')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463927664">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>mapper</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.api.mappers.MaterialMapper object at 0x10a10c050&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.views.MaterialCreateView object at 0x10a10cc50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>form</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.forms.MaterialForm object at 0x10a10ca90&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/site-packages/bpmappers/mappers.py</code> in <code>as_dict</code>
+
+          
+            <div class="context" id="c4463928528">
+              
+                <ol start="109" class="pre-context" id="pre4463928528"><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                else:</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                    v = self._getattr(self.data, k)</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                if callable(v):</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                    v = v()</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                filter_name = &#39;filter_%s&#39; % name</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                if hasattr(self, filter_name):</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                    if field.is_nonkey:</pre></li></ol>
+              
+              <ol start="116" class="context-line"><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                        v = getattr(self, filter_name)()</pre> <span>...</span></li></ol>
+              
+                <ol start='117' class="post-context" id="post4463928528"><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                    else:</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                        v = getattr(self, filter_name)(v)</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                value = field.get_value(self, v)</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                # after filter hook</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                after_filter_name = &#39;after_filter_%s&#39; % name</pre></li><li onclick="toggle('pre4463928528', 'post4463928528')"><pre>                if hasattr(self, after_filter_name):</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463928528')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463928528">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>attach_name</td>
+                    <td class="code"><pre>&#39;attach_delete_type&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>name</td>
+                    <td class="code"><pre>&#39;delete_url&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>attach_parent</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>k</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>filter_name</td>
+                    <td class="code"><pre>&#39;filter_delete_url&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>value</td>
+                    <td class="code"><pre>&#39;DELETE&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.api.mappers.MaterialMapper object at 0x10a10c050&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>field</td>
+                    <td class="code"><pre>&lt;bpmappers.fields.NonKeyField object at 0x10a639b50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>after_filter_name</td>
+                    <td class="code"><pre>&#39;after_filter_delete_type&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>v</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>parsed</td>
+                    <td class="code"><pre>{&#39;pv&#39;: 0, &#39;description&#39;: None, &#39;author&#39;: {&#39;username&#39;: u&#39;giginet&#39;, &#39;nickname&#39;: None, &#39;icon&#39;: &lt;ImageFieldFile: None&gt;, &#39;url&#39;: &#39;&#39;}, &#39;created_at&#39;: datetime.datetime(2011, 10, 23, 16, 33, 50, 502977), &#39;updated_at&#39;: datetime.datetime(2011, 10, 23, 16, 33, 50, 503004), &#39;label&#39;: None, &#39;url&#39;: &#39;&#39;, &#39;delete_type&#39;: &#39;DELETE&#39;}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/materials/api/mappers.py</code> in <code>filter_delete_url</code>
+
+          
+            <div class="context" id="c4463928456">
+              
+                <ol start="14" class="pre-context" id="pre4463928456"><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    delete_url  = NonKeyField()</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    delete_type = NonKeyField()</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    </pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    def filter_url(self):</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>        return self.data.get_absolute_url()</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    </pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    def filter_delete_url(self):</pre></li></ol>
+              
+              <ol start="21" class="context-line"><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>        return reverse(&#39;materials_api&#39;, {&#39;pk&#39; : self.data.pk})</pre> <span>...</span></li></ol>
+              
+                <ol start='22' class="post-context" id="post4463928456"><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    </pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    def filter_delete_type(self):</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>        return &#39;DELETE&#39;</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    </pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    #thumbnail = ListDelegateField(ThumbnailMapper, &#39;thumbnail&#39;) # not implemented ThumbnailField</pre></li><li onclick="toggle('pre4463928456', 'post4463928456')"><pre>    </pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463928456')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463928456">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;Kommonz.materials.api.mappers.MaterialMapper object at 0x10a10c050&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/core/urlresolvers.py</code> in <code>reverse</code>
+
+          
+            <div class="context" id="c4463929536">
+              
+                <ol start="340" class="pre-context" id="pre4463929536"><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    if urlconf is None:</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>        urlconf = get_urlconf()</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    return get_resolver(urlconf).resolve(path)</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre></pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>def reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    if urlconf is None:</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>        urlconf = get_urlconf()</pre></li></ol>
+              
+              <ol start="347" class="context-line"><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    resolver = get_resolver(urlconf)</pre> <span>...</span></li></ol>
+              
+                <ol start='348' class="post-context" id="post4463929536"><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    args = args or []</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    kwargs = kwargs or {}</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre></pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>    if prefix is None:</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre>        prefix = get_script_prefix()</pre></li><li onclick="toggle('pre4463929536', 'post4463929536')"><pre></pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463929536')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463929536">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>viewname</td>
+                    <td class="code"><pre>&#39;materials_api&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>current_app</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>prefix</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>urlconf</td>
+                    <td class="code"><pre>{&#39;pk&#39;: 9}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame">
+          <code>/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/utils/functional.py</code> in <code>wrapper</code>
+
+          
+            <div class="context" id="c4463929032">
+              
+                <ol start="115" class="pre-context" id="pre4463929032"><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>    &#39;cache&#39;. Note that the args to the function must be usable as dictionary</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>    keys.</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre></pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>    Only the first num_args are considered when creating the key.</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>    def wrapper(*args):</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>        mem_args = args[:num_args]</pre></li></ol>
+              
+              <ol start="122" class="context-line"><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>        if mem_args in cache:</pre> <span>...</span></li></ol>
+              
+                <ol start='123' class="post-context" id="post4463929032"><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>            return cache[mem_args]</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>        result = func(*args)</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>        cache[mem_args] = result</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>        return result</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre>    return wraps(func)(wrapper)</pre></li><li onclick="toggle('pre4463929032', 'post4463929032')"><pre></pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4463929032')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4463929032">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>mem_args</td>
+                    <td class="code"><pre>({&#39;pk&#39;: 9},)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>({&#39;pk&#39;: 9},)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>num_args</td>
+                    <td class="code"><pre>1</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>cache</td>
+                    <td class="code"><pre>{(&#39;Kommonz.urls&#39;,): &lt;RegexURLResolver Kommonz.urls (None:None) ^/&gt;}</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>func</td>
+                    <td class="code"><pre>&lt;function get_resolver at 0x10918cde8&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+    </ul>
+  </div>
+  
+  <form action="http://dpaste.com/" name="pasteform" id="pasteform" method="post">
+
+  <div id="pastebinTraceback" class="pastebin">
+    <input type="hidden" name="language" value="PythonConsole">
+    <input type="hidden" name="title" value="TypeError at /materials/create">
+    <input type="hidden" name="source" value="Django Dpaste Agent">
+    <input type="hidden" name="poster" value="Django">
+    <textarea name="content" id="traceback_area" cols="140" rows="25">
+Environment:
+
+
+Request Method: POST
+Request URL: http://localhost:5000/materials/create
+
+Django Version: 1.3.1
+Python Version: 2.7.2
+Installed Applications:
+[&#39;django.contrib.auth&#39;,
+ &#39;django.contrib.contenttypes&#39;,
+ &#39;django.contrib.sessions&#39;,
+ &#39;django.contrib.sites&#39;,
+ &#39;django.contrib.messages&#39;,
+ &#39;django.contrib.staticfiles&#39;,
+ &#39;django.contrib.admin&#39;,
+ &#39;django.contrib.admindocs&#39;,
+ &#39;django_nose&#39;,
+ &#39;social_auth&#39;,
+ &#39;compress&#39;,
+ &#39;reversetag&#39;,
+ &#39;pagination&#39;,
+ &#39;qwert&#39;,
+ &#39;mfw&#39;,
+ &#39;object_permission&#39;,
+ &#39;Kommonz.auth&#39;,
+ &#39;Kommonz.materials&#39;,
+ &#39;Kommonz.massages&#39;,
+ &#39;Kommonz.reports&#39;]
+Installed Middleware:
+(&#39;django.middleware.common.CommonMiddleware&#39;,
+ &#39;mfw.middleware.session.SessionMiddleware&#39;,
+ &#39;mfw.middleware.csrf.CsrfViewMiddleware&#39;,
+ &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+ &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+ &#39;mfw.middleware.device.DeviceDetectionMiddleware&#39;,
+ &#39;mfw.middleware.emoji.DeviceEmojiTranslationMiddleware&#39;,
+ &#39;mfw.middleware.flavour.DeviceFlavourDetectionMiddleware&#39;,
+ &#39;pagination.middleware.PaginationMiddleware&#39;,
+ &#39;qwert.middleware.threadlocals.ThreadLocalsMiddleware&#39;,
+ &#39;qwert.middleware.http.Http403Middleware&#39;,
+ &#39;qwert.middleware.exception.UserBasedExceptionMiddleware&#39;)
+
+
+Traceback:
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/core/handlers/base.py" in get_response
+  111.                         response = callback(request, *callback_args, **callback_kwargs)
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/base.py" in view
+  47.             return self.dispatch(request, *args, **kwargs)
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/base.py" in dispatch
+  68.         return handler(request, *args, **kwargs)
+File "/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/materials/views.py" in post
+  45.         return super(MaterialCreateView, self).post(request, *args, **kwargs)
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/edit.py" in post
+  172.         return super(BaseCreateView, self).post(request, *args, **kwargs)
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/views/generic/edit.py" in post
+  138.             return self.form_valid(form)
+File "/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/materials/views.py" in form_valid
+  34.         response = JSONResponse(mapper.as_dict(), {}, response_mimetype(self.request))
+File "/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/lib/python2.7/site-packages/bpmappers/mappers.py" in as_dict
+  116.                         v = getattr(self, filter_name)()
+File "/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/materials/api/mappers.py" in filter_delete_url
+  21.         return reverse(&#39;materials_api&#39;, {&#39;pk&#39; : self.data.pk})
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/core/urlresolvers.py" in reverse
+  347.     resolver = get_resolver(urlconf)
+File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/site-packages/django/utils/functional.py" in wrapper
+  122.         if mem_args in cache:
+
+Exception Type: TypeError at /materials/create
+Exception Value: unhashable type: &#39;dict&#39;
+</textarea>
+  <br><br>
+  <input type="submit" value="Share this traceback on a public Web site">
+  </div>
+</form>
+</div>
+
+
+
+<div id="requestinfo">
+  <h2>Request information</h2>
+
+
+  <h3 id="get-info">GET</h3>
+  
+    <p>No GET data</p>
+  
+
+  <h3 id="post-info">POST</h3>
+  
+    <table class="req">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td>csrfmiddlewaretoken</td>
+            <td class="code"><pre>u&#39;52363d891975139ffb2de889ee823004&#39;</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  <h3 id="files-info">FILES</h3>
+  
+    <table class="req">
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td>file</td>
+                    <td class="code"><pre>&lt;InMemoryUploadedFile: icon3.jpg (image/jpeg)&gt;</pre></td>
+                </tr>
+            
+        </tbody>
+    </table>
+  
+
+
+  <h3 id="cookie-info">COOKIES</h3>
+  
+    <table class="req">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td>csrftoken</td>
+            <td class="code"><pre>&#39;52363d891975139ffb2de889ee823004&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>__utma</td>
+            <td class="code"><pre>&#39;111872281.339365254.1316783887.1316808047.1316812511.3&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>__utmz</td>
+            <td class="code"><pre>&#39;111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>sessionid</td>
+            <td class="code"><pre>&#39;a8676719b80c23bd71f4b99915291c5f&#39;</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+
+  <h3 id="meta-info">META</h3>
+  <table class="req">
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>RUN_MAIN</td>
+          <td class="code"><pre>&#39;true&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_REFERER</td>
+          <td class="code"><pre>&#39;http://localhost:5000/materials/create&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_PROTOCOL</td>
+          <td class="code"><pre>&#39;HTTP/1.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_SOFTWARE</td>
+          <td class="code"><pre>&#39;WSGIServer/0.1 Python/2.7.2&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SCRIPT_NAME</td>
+          <td class="code"><pre>u&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TMPDIR</td>
+          <td class="code"><pre>&#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>REQUEST_METHOD</td>
+          <td class="code"><pre>&#39;POST&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGNAME</td>
+          <td class="code"><pre>&#39;giginet&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USER</td>
+          <td class="code"><pre>&#39;giginet&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_ORIGIN</td>
+          <td class="code"><pre>&#39;http://localhost:5000&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HOME</td>
+          <td class="code"><pre>&#39;/Users/giginet&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>QUERY_STRING</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PATH</td>
+          <td class="code"><pre>&#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin:/Users/giginet/.pythonbrew/bin:/Users/giginet/.pythonbrew/pythons/Python-2.7.2/bin:/usr/texbin:/Users/giginet/.bin:/usr/local/bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:/Users/giginet/.bin:/usr/bin/android-sdk-mac_86/tools:/opt/local/lib:/opt/local/bin:/opt/local/sbin&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PS1</td>
+          <td class="code"><pre>&#39;(Kommonz)%m%# &#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DISPLAY</td>
+          <td class="code"><pre>&#39;/tmp/launch-ojqS6M/org.x:0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TERM_PROGRAM</td>
+          <td class="code"><pre>&#39;iTerm.app&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANG</td>
+          <td class="code"><pre>&#39;ja_JP.UTF-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TERM</td>
+          <td class="code"><pre>&#39;screen&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHELL</td>
+          <td class="code"><pre>&#39;/bin/zsh&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TZ</td>
+          <td class="code"><pre>&#39;Asia/Tokyo&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_COOKIE</td>
+          <td class="code"><pre>&#39;__utma=111872281.339365254.1316783887.1316808047.1316812511.3; __utmz=111872281.1316783887.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); csrftoken=52363d891975139ffb2de889ee823004; sessionid=a8676719b80c23bd71f4b99915291c5f&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_NAME</td>
+          <td class="code"><pre>&#39;1.0.0.127.in-addr.arpa&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>REMOTE_ADDR</td>
+          <td class="code"><pre>&#39;127.0.0.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHLVL</td>
+          <td class="code"><pre>&#39;3&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MACOSX_DEPLOYMENT_TARGET</td>
+          <td class="code"><pre>&#39;10.7&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SECURITYSESSIONID</td>
+          <td class="code"><pre>&#39;186a5&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.url_scheme</td>
+          <td class="code"><pre>&#39;http&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ITERM_SESSION_ID</td>
+          <td class="code"><pre>&#39;w0t0p0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EDITOR</td>
+          <td class="code"><pre>&#39;/usr/local/bin/vim&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MANPATH</td>
+          <td class="code"><pre>&#39;/opt/local/man:/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/opt/local/man&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CONTENT_LENGTH</td>
+          <td class="code"><pre>&#39;43540&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PATH_INFO</td>
+          <td class="code"><pre>u&#39;/materials/create&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>WORKON_HOME</td>
+          <td class="code"><pre>&#39;/Users/giginet/.virtualenvs&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_PORT</td>
+          <td class="code"><pre>&#39;5000&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_X_REQUESTED_WITH</td>
+          <td class="code"><pre>&#39;XMLHttpRequest&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.file_wrapper</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PYTHONPATH</td>
+          <td class="code"><pre>&#39;/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SSH_AUTH_SOCK</td>
+          <td class="code"><pre>&#39;/tmp/launch-QpJ1zf/Listeners&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>VIRTUAL_ENV</td>
+          <td class="code"><pre>&#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TMUX</td>
+          <td class="code"><pre>&#39;/var/folders/j7/v8p66lxs6rscf8j41x6f19g80000gn/T//tmux-501/default,477,0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.input</td>
+          <td class="code"><pre>&lt;socket._fileobject object at 0x10acc4850&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>Apple_PubSub_Socket_Render</td>
+          <td class="code"><pre>&#39;/tmp/launch-Qqi80K/Render&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_HOST</td>
+          <td class="code"><pre>&#39;localhost:5000&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.multithread</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_CONNECTION</td>
+          <td class="code"><pre>&#39;keep-alive&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>_</td>
+          <td class="code"><pre>&#39;/Users/giginet/.pythonbrew/venvs/Python-2.7.2/Kommonz/bin/python&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_ACCEPT</td>
+          <td class="code"><pre>&#39;application/json, text/javascript, */*; q=0.01&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LSCOLORS</td>
+          <td class="code"><pre>&#39;exfxcxdxbxegedabagacad&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.version</td>
+          <td class="code"><pre>(1, 0)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_USER_AGENT</td>
+          <td class="code"><pre>&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>GATEWAY_INTERFACE</td>
+          <td class="code"><pre>&#39;CGI/1.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.run_once</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE</td>
+          <td class="code"><pre>&#39;52363d891975139ffb2de889ee823004&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>OLDPWD</td>
+          <td class="code"><pre>&#39;/Users/giginet&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.multiprocess</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_ACCEPT_LANGUAGE</td>
+          <td class="code"><pre>&#39;ja-jp&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.errors</td>
+          <td class="code"><pre>&lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x108b38270&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CLICOLOR</td>
+          <td class="code"><pre>&#39;1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>__CF_USER_TEXT_ENCODING</td>
+          <td class="code"><pre>&#39;0x1F5:1:14&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PWD</td>
+          <td class="code"><pre>&#39;/Users/giginet/Documents/aptana3/Kommonz&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DJANGO_SETTINGS_MODULE</td>
+          <td class="code"><pre>&#39;Kommonz.settings&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CONTENT_TYPE</td>
+          <td class="code"><pre>&#39;multipart/form-data; boundary=----WebKitFormBoundaryy2GcJODjZ8OHOjpu&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LS_COLORS</td>
+          <td class="code"><pre>&#39;di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>REMOTE_HOST</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_ACCEPT_ENCODING</td>
+          <td class="code"><pre>&#39;gzip, deflate&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TMUX_PANE</td>
+          <td class="code"><pre>&#39;%1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMAND_MODE</td>
+          <td class="code"><pre>&#39;unix2003&#39;</pre></td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h3 id="settings-info">Settings</h3>
+  <h4>Using settings module <code>Kommonz.settings</code></h4>
+  <table class="req">
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>USE_L10N</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_THOUSAND_SEPARATOR</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_CODE</td>
+          <td class="code"><pre>&#39;ja&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ROOT_URLCONF</td>
+          <td class="code"><pre>&#39;Kommonz.urls&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MANAGERS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_LOADERS</td>
+          <td class="code"><pre>(&#39;mfw.template.loaders.flavour.Loader&#39;,
+ &#39;django.template.loaders.filesystem.Loader&#39;,
+ &#39;django.template.loaders.app_directories.Loader&#39;,
+ &#39;django.template.loaders.eggs.Loader&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_CHARSET</td>
+          <td class="code"><pre>&#39;utf-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATIC_ROOT</td>
+          <td class="code"><pre>&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../static/collected&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEST_DATABASE_CHARSET</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MESSAGE_STORAGE</td>
+          <td class="code"><pre>&#39;django.contrib.messages.storage.user_messages.LegacyFallbackStorage&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_HOST</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>IGNORABLE_404_STARTS</td>
+          <td class="code"><pre>(&#39;/cgi-bin/&#39;, &#39;/_vti_bin&#39;, &#39;/_vti_inf&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SEND_BROKEN_LINK_EMAILS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>URL_VALIDATOR_USER_AGENT</td>
+          <td class="code"><pre>&#39;Django/1.3.1 (http://www.djangoproject.com)&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATICFILES_FINDERS</td>
+          <td class="code"><pre>(&#39;django.contrib.staticfiles.finders.FileSystemFinder&#39;,
+ &#39;django.contrib.staticfiles.finders.AppDirectoriesFinder&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>GOOGLE_OAUTH2_CLIENT_ID</td>
+          <td class="code"><pre>&#39;629057898077-igbq79l66ajhik74drkgine7bhdhogp3.apps.googleusercontent.com&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_DISCONNECT_REDIRECT_URL</td>
+          <td class="code"><pre>&#39;/account-disconnected-redirect-url/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_DOMAIN</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_NAME</td>
+          <td class="code"><pre>&#39;sessionid&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PYTHON_PATHS</td>
+          <td class="code"><pre>(&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../src/libs&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>VERSION</td>
+          <td class="code"><pre>&#39;0.0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMENTS_MODERATORS_GROUP</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TIME_INPUT_FORMATS</td>
+          <td class="code"><pre>(&#39;%H:%M:%S&#39;, &#39;%H:%M&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASES</td>
+          <td class="code"><pre>{&#39;default&#39;: {&#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+             &#39;HOST&#39;: &#39;&#39;,
+             &#39;NAME&#39;: &#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../kommonz.db&#39;,
+             &#39;OPTIONS&#39;: {},
+             &#39;PASSWORD&#39;: &#39;********************&#39;,
+             &#39;PORT&#39;: &#39;&#39;,
+             &#39;TEST_CHARSET&#39;: None,
+             &#39;TEST_COLLATION&#39;: None,
+             &#39;TEST_MIRROR&#39;: None,
+             &#39;TEST_NAME&#39;: None,
+             &#39;TIME_ZONE&#39;: &#39;Asia/Tokyo&#39;,
+             &#39;USER&#39;: &#39;&#39;}}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_DEBUG</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_PERMISSIONS</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TIME_FORMAT</td>
+          <td class="code"><pre>&#39;P&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_HANDLERS</td>
+          <td class="code"><pre>(&#39;django.core.files.uploadhandler.MemoryFileUploadHandler&#39;,
+ &#39;django.core.files.uploadhandler.TemporaryFileUploadHandler&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_CONTENT_TYPE</td>
+          <td class="code"><pre>&#39;text/html&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>APPEND_SLASH</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FIRST_DAY_OF_WEEK</td>
+          <td class="code"><pre>0</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_ROUTERS</td>
+          <td class="code"><pre>[]</pre></td>
+        </tr>
+      
+        <tr>
+          <td>YEAR_MONTH_FORMAT</td>
+          <td class="code"><pre>&#39;F Y&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATICFILES_STORAGE</td>
+          <td class="code"><pre>&#39;django.contrib.staticfiles.storage.StaticFilesStorage&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHES</td>
+          <td class="code"><pre>{&#39;default&#39;: {&#39;BACKEND&#39;: &#39;django.core.cache.backends.locmem.LocMemCache&#39;,
+             &#39;LOCATION&#39;: &#39;&#39;}}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_EMAIL</td>
+          <td class="code"><pre>&#39;root@localhost&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_PATH</td>
+          <td class="code"><pre>&#39;/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_X_FORWARDED_HOST</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>IGNORABLE_404_ENDS</td>
+          <td class="code"><pre>(&#39;mail.pl&#39;, &#39;mailform.pl&#39;, &#39;mail.cgi&#39;, &#39;mailform.cgi&#39;, &#39;favicon.ico&#39;, &#39;.php&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MIDDLEWARE_CLASSES</td>
+          <td class="code"><pre>(&#39;django.middleware.common.CommonMiddleware&#39;,
+ &#39;mfw.middleware.session.SessionMiddleware&#39;,
+ &#39;mfw.middleware.csrf.CsrfViewMiddleware&#39;,
+ &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+ &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+ &#39;mfw.middleware.device.DeviceDetectionMiddleware&#39;,
+ &#39;mfw.middleware.emoji.DeviceEmojiTranslationMiddleware&#39;,
+ &#39;mfw.middleware.flavour.DeviceFlavourDetectionMiddleware&#39;,
+ &#39;pagination.middleware.PaginationMiddleware&#39;,
+ &#39;qwert.middleware.threadlocals.ThreadLocalsMiddleware&#39;,
+ &#39;qwert.middleware.http.Http403Middleware&#39;,
+ &#39;qwert.middleware.exception.UserBasedExceptionMiddleware&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_I18N</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>THOUSAND_SEPARATOR</td>
+          <td class="code"><pre>&#39;,&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SECRET_KEY</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_COOKIE_NAME</td>
+          <td class="code"><pre>&#39;django_language&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_TEMP_DIR</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>OBJECT_PERMISSION_MODIFY_FUNCTION</td>
+          <td class="code"><pre>&#39;modify_object_permission&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TRANSACTIONS_MANAGED</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGGING_CONFIG</td>
+          <td class="code"><pre>&#39;django.utils.log.dictConfig&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_ENABLED_BACKENDS</td>
+          <td class="code"><pre>(&#39;twitter&#39;, &#39;google-oauth2&#39;, &#39;hatena&#39;, &#39;dropbox&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>GOOGLE_OAUTH2_CLIENT_SECRET</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_USER_MODEL</td>
+          <td class="code"><pre>&#39;auth.KommonzUser&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_NAME</td>
+          <td class="code"><pre>&#39;csrftoken&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ROOT</td>
+          <td class="code"><pre>&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEST_DATABASE_COLLATION</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FORCE_SCRIPT_NAME</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_BACKEND</td>
+          <td class="code"><pre>&#39;locmem://&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DECIMAL_SEPARATOR</td>
+          <td class="code"><pre>&#39;.&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_SECURE</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_DOMAIN</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_CHARSET</td>
+          <td class="code"><pre>&#39;utf-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEBUG</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_FILE_PATH</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_FILE_STORAGE</td>
+          <td class="code"><pre>&#39;django.core.files.storage.FileSystemStorage&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>INSTALLED_APPS</td>
+          <td class="code"><pre>[&#39;django.contrib.auth&#39;,
+ &#39;django.contrib.contenttypes&#39;,
+ &#39;django.contrib.sessions&#39;,
+ &#39;django.contrib.sites&#39;,
+ &#39;django.contrib.messages&#39;,
+ &#39;django.contrib.staticfiles&#39;,
+ &#39;django.contrib.admin&#39;,
+ &#39;django.contrib.admindocs&#39;,
+ &#39;django_nose&#39;,
+ &#39;social_auth&#39;,
+ &#39;compress&#39;,
+ &#39;reversetag&#39;,
+ &#39;pagination&#39;,
+ &#39;qwert&#39;,
+ &#39;mfw&#39;,
+ &#39;object_permission&#39;,
+ &#39;Kommonz.auth&#39;,
+ &#39;Kommonz.materials&#39;,
+ &#39;Kommonz.massages&#39;,
+ &#39;Kommonz.reports&#39;]</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGES</td>
+          <td class="code"><pre>((&#39;ar&#39;, &#39;Arabic&#39;),
+ (&#39;az&#39;, &#39;Azerbaijani&#39;),
+ (&#39;bg&#39;, &#39;Bulgarian&#39;),
+ (&#39;bn&#39;, &#39;Bengali&#39;),
+ (&#39;bs&#39;, &#39;Bosnian&#39;),
+ (&#39;ca&#39;, &#39;Catalan&#39;),
+ (&#39;cs&#39;, &#39;Czech&#39;),
+ (&#39;cy&#39;, &#39;Welsh&#39;),
+ (&#39;da&#39;, &#39;Danish&#39;),
+ (&#39;de&#39;, &#39;German&#39;),
+ (&#39;el&#39;, &#39;Greek&#39;),
+ (&#39;en&#39;, &#39;English&#39;),
+ (&#39;en-gb&#39;, &#39;British English&#39;),
+ (&#39;es&#39;, &#39;Spanish&#39;),
+ (&#39;es-ar&#39;, &#39;Argentinian Spanish&#39;),
+ (&#39;es-mx&#39;, &#39;Mexican Spanish&#39;),
+ (&#39;es-ni&#39;, &#39;Nicaraguan Spanish&#39;),
+ (&#39;et&#39;, &#39;Estonian&#39;),
+ (&#39;eu&#39;, &#39;Basque&#39;),
+ (&#39;fa&#39;, &#39;Persian&#39;),
+ (&#39;fi&#39;, &#39;Finnish&#39;),
+ (&#39;fr&#39;, &#39;French&#39;),
+ (&#39;fy-nl&#39;, &#39;Frisian&#39;),
+ (&#39;ga&#39;, &#39;Irish&#39;),
+ (&#39;gl&#39;, &#39;Galician&#39;),
+ (&#39;he&#39;, &#39;Hebrew&#39;),
+ (&#39;hi&#39;, &#39;Hindi&#39;),
+ (&#39;hr&#39;, &#39;Croatian&#39;),
+ (&#39;hu&#39;, &#39;Hungarian&#39;),
+ (&#39;id&#39;, &#39;Indonesian&#39;),
+ (&#39;is&#39;, &#39;Icelandic&#39;),
+ (&#39;it&#39;, &#39;Italian&#39;),
+ (&#39;ja&#39;, &#39;Japanese&#39;),
+ (&#39;ka&#39;, &#39;Georgian&#39;),
+ (&#39;km&#39;, &#39;Khmer&#39;),
+ (&#39;kn&#39;, &#39;Kannada&#39;),
+ (&#39;ko&#39;, &#39;Korean&#39;),
+ (&#39;lt&#39;, &#39;Lithuanian&#39;),
+ (&#39;lv&#39;, &#39;Latvian&#39;),
+ (&#39;mk&#39;, &#39;Macedonian&#39;),
+ (&#39;ml&#39;, &#39;Malayalam&#39;),
+ (&#39;mn&#39;, &#39;Mongolian&#39;),
+ (&#39;nl&#39;, &#39;Dutch&#39;),
+ (&#39;no&#39;, &#39;Norwegian&#39;),
+ (&#39;nb&#39;, &#39;Norwegian Bokmal&#39;),
+ (&#39;nn&#39;, &#39;Norwegian Nynorsk&#39;),
+ (&#39;pa&#39;, &#39;Punjabi&#39;),
+ (&#39;pl&#39;, &#39;Polish&#39;),
+ (&#39;pt&#39;, &#39;Portuguese&#39;),
+ (&#39;pt-br&#39;, &#39;Brazilian Portuguese&#39;),
+ (&#39;ro&#39;, &#39;Romanian&#39;),
+ (&#39;ru&#39;, &#39;Russian&#39;),
+ (&#39;sk&#39;, &#39;Slovak&#39;),
+ (&#39;sl&#39;, &#39;Slovenian&#39;),
+ (&#39;sq&#39;, &#39;Albanian&#39;),
+ (&#39;sr&#39;, &#39;Serbian&#39;),
+ (&#39;sr-latn&#39;, &#39;Serbian Latin&#39;),
+ (&#39;sv&#39;, &#39;Swedish&#39;),
+ (&#39;ta&#39;, &#39;Tamil&#39;),
+ (&#39;te&#39;, &#39;Telugu&#39;),
+ (&#39;th&#39;, &#39;Thai&#39;),
+ (&#39;tr&#39;, &#39;Turkish&#39;),
+ (&#39;uk&#39;, &#39;Ukrainian&#39;),
+ (&#39;ur&#39;, &#39;Urdu&#39;),
+ (&#39;vi&#39;, &#39;Vietnamese&#39;),
+ (&#39;zh-cn&#39;, &#39;Simplified Chinese&#39;),
+ (&#39;zh-tw&#39;, &#39;Traditional Chinese&#39;))</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_ENGINE</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_NAME</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMENTS_FIRST_FEW</td>
+          <td class="code"><pre>0</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PREPEND_WWW</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_HTTPONLY</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_PORT</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEBUG_PROPAGATE_EXCEPTIONS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MONTH_DAY_FORMAT</td>
+          <td class="code"><pre>&#39;F j&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGIN_URL</td>
+          <td class="code"><pre>&lt;django.utils.functional.__proxy__ object at 0x1091a0150&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_EXPIRE_AT_BROWSER_CLOSE</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DROPBOX_API_SECRET</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PROFANITIES_LIST</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DROPBOX_APP_ID</td>
+          <td class="code"><pre>&#39;amhb7ekdyhdse37&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATE_INPUT_FORMATS</td>
+          <td class="code"><pre>(&#39;%Y-%m-%d&#39;,
+ &#39;%m/%d/%Y&#39;,
+ &#39;%m/%d/%y&#39;,
+ &#39;%b %d %Y&#39;,
+ &#39;%b %d, %Y&#39;,
+ &#39;%d %b %Y&#39;,
+ &#39;%d %b, %Y&#39;,
+ &#39;%B %d %Y&#39;,
+ &#39;%B %d, %Y&#39;,
+ &#39;%d %B %Y&#39;,
+ &#39;%d %B, %Y&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGIN_ERROR_URL</td>
+          <td class="code"><pre>&lt;django.utils.functional.__proxy__ object at 0x10919b310&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>AUTHENTICATION_BACKENDS</td>
+          <td class="code"><pre>(&#39;qwert.backends.auth.EmailAuthBackend&#39;,
+ &#39;social_auth.backends.twitter.TwitterBackend&#39;,
+ &#39;social_auth.backends.facebook.FacebookBackend&#39;,
+ &#39;social_auth.backends.google.GoogleOAuthBackend&#39;,
+ &#39;social_auth.backends.google.GoogleOAuth2Backend&#39;,
+ &#39;social_auth.backends.google.GoogleBackend&#39;,
+ &#39;social_auth.backends.yahoo.YahooBackend&#39;,
+ &#39;social_auth.backends.contrib.linkedin.LinkedinBackend&#39;,
+ &#39;social_auth.backends.contrib.livejournal.LiveJournalBackend&#39;,
+ &#39;social_auth.backends.contrib.orkut.OrkutBackend&#39;,
+ &#39;social_auth.backends.contrib.foursquare.FoursquareBackend&#39;,
+ &#39;social_auth.backends.contrib.github.GithubBackend&#39;,
+ &#39;social_auth.backends.OpenIDBackend&#39;,
+ &#39;registration.backends.hatena.HatenaBackend&#39;,
+ &#39;auth.backends.KommonzUserModelBackend&#39;,
+ &#39;object_permission.backends.ObjectPermBackend&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_HOST_PASSWORD</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>AUTO_CREATE_USER</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PASSWORD_RESET_TIMEOUT_DAYS</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TWITTER_CONSUMER_KEY</td>
+          <td class="code"><pre>&#39;M2iYQVuUWP7vqXfng8Czow&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_MIDDLEWARE_ALIAS</td>
+          <td class="code"><pre>&#39;default&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_SAVE_EVERY_REQUEST</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ADMIN_MEDIA_PREFIX</td>
+          <td class="code"><pre>&#39;/static/admin/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>NUMBER_GROUPING</td>
+          <td class="code"><pre>0</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TWITTER_CONSUMER_SECRET</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HATENA_CONSUMER_KEY</td>
+          <td class="code"><pre>&#39;IcgUtdmFjExm4g==&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_ENGINE</td>
+          <td class="code"><pre>&#39;django.contrib.sessions.backends.db&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_FAILURE_VIEW</td>
+          <td class="code"><pre>&#39;django.views.csrf.csrf_failure&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMENTS_SKETCHY_USERS_GROUP</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGIN_REDIRECT_URL</td>
+          <td class="code"><pre>&#39;/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGGING</td>
+          <td class="code"><pre>{&#39;disable_existing_loggers&#39;: False,
+ &#39;handlers&#39;: {&#39;mail_admins&#39;: {&#39;class&#39;: &#39;django.utils.log.AdminEmailHandler&#39;,
+                              &#39;level&#39;: &#39;ERROR&#39;}},
+ &#39;loggers&#39;: {&#39;django.request&#39;: {&#39;handlers&#39;: [&#39;mail_admins&#39;],
+                                &#39;level&#39;: &#39;ERROR&#39;,
+                                &#39;propagate&#39;: True}},
+ &#39;version&#39;: 1}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOCAL_SITE_LOADED</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_MIDDLEWARE_KEY_PREFIX</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>NOSE_ARGS</td>
+          <td class="code"><pre>[&#39;-v&#39;, &#39;-d&#39;]</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOCALE_PATHS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_STRING_IF_INVALID</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMENTS_ALLOW_PROFANITIES</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGOUT_URL</td>
+          <td class="code"><pre>&lt;django.utils.functional.__proxy__ object at 0x1091a0f50&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_USE_TLS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_DIRS</td>
+          <td class="code"><pre>(&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../templates&#39;,
+ &#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../templates/default&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FIXTURE_DIRS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_HOST</td>
+          <td class="code"><pre>&#39;localhost&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATE_FORMAT</td>
+          <td class="code"><pre>&#39;N j, Y&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MEDIA_ROOT</td>
+          <td class="code"><pre>&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../static&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CUSTOM_USER_MODEL</td>
+          <td class="code"><pre>&#39;auth.KommonzUser&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ADMINS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FORMAT_MODULE_PATH</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_FROM_EMAIL</td>
+          <td class="code"><pre>&#39;webmaster@localhost&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_ERROR_KEY</td>
+          <td class="code"><pre>&#39;social_errors&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATICFILES_DIRS</td>
+          <td class="code"><pre>(&#39;/Users/giginet/Documents/aptana3/Kommonz/src/Kommonz/../Kommonz/../../static&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MEDIA_URL</td>
+          <td class="code"><pre>&#39;/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATETIME_FORMAT</td>
+          <td class="code"><pre>&#39;N j, Y, P&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_SUBJECT_PREFIX</td>
+          <td class="code"><pre>&#39;[Django] &#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_NEW_USER_REDIRECT_URL</td>
+          <td class="code"><pre>&#39;/new-users-redirect-url/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SITE_ID</td>
+          <td class="code"><pre>1</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DISALLOWED_USER_AGENTS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ALLOWED_INCLUDE_ROOTS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOCAL_SETTINGS_LOADED</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHORT_DATE_FORMAT</td>
+          <td class="code"><pre>&#39;m/d/Y&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_USER</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEST_DATABASE_NAME</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEST_RUNNER</td>
+          <td class="code"><pre>&#39;django_nose.NoseTestSuiteRunner&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HATENA_CONSUMER_SECRET</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TIME_ZONE</td>
+          <td class="code"><pre>&#39;Asia/Tokyo&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_MAX_MEMORY_SIZE</td>
+          <td class="code"><pre>2621440</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_BACKEND</td>
+          <td class="code"><pre>&#39;django.core.mail.backends.smtp.EmailBackend&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>AKISMET_API_KEY</td>
+          <td class="code"><pre>&#39;your akismet api&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>OBJECT_PERMISSION_MODIFY_M2M_FUNCTION</td>
+          <td class="code"><pre>&#39;modify_object_permission_m2m&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_TABLESPACE</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_CONTEXT_PROCESSORS</td>
+          <td class="code"><pre>(&#39;django.core.context_processors.auth&#39;,
+ &#39;django.core.context_processors.debug&#39;,
+ &#39;django.core.context_processors.i18n&#39;,
+ &#39;django.core.context_processors.media&#39;,
+ &#39;django.core.context_processors.request&#39;,
+ &#39;mfw.core.context_processors.device&#39;,
+ &#39;mfw.core.context_processors.flavour&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_AGE</td>
+          <td class="code"><pre>1209600</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SETTINGS_MODULE</td>
+          <td class="code"><pre>&#39;Kommonz.settings&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_ETAGS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGES_BIDI</td>
+          <td class="code"><pre>(&#39;he&#39;, &#39;ar&#39;, &#39;fa&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_INDEX_TABLESPACE</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>INTERNAL_IPS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATIC_URL</td>
+          <td class="code"><pre>&#39;/static/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_PORT</td>
+          <td class="code"><pre>25</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHORT_DATETIME_FORMAT</td>
+          <td class="code"><pre>&#39;m/d/Y P&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_IMPORT_BACKENDS</td>
+          <td class="code"><pre>(&#39;registration.backends&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ABSOLUTE_URL_OVERRIDES</td>
+          <td class="code"><pre>{}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_OPTIONS</td>
+          <td class="code"><pre>{}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL</td>
+          <td class="code"><pre>&#39;/new-association-redirect-url/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_MIDDLEWARE_SECONDS</td>
+          <td class="code"><pre>600</pre></td>
+        </tr>
+      
+        <tr>
+          <td>BANNED_IPS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATETIME_INPUT_FORMATS</td>
+          <td class="code"><pre>(&#39;%Y-%m-%d %H:%M:%S&#39;,
+ &#39;%Y-%m-%d %H:%M&#39;,
+ &#39;%Y-%m-%d&#39;,
+ &#39;%m/%d/%Y %H:%M:%S&#39;,
+ &#39;%m/%d/%Y %H:%M&#39;,
+ &#39;%m/%d/%Y&#39;,
+ &#39;%m/%d/%y %H:%M:%S&#39;,
+ &#39;%m/%d/%y %H:%M&#39;,
+ &#39;%m/%d/%y&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_PASSWORD</td>
+          <td class="code"><pre>&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ADMIN_FOR</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMENTS_BANNED_USERS_GROUP</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_HOST_USER</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>AKISMET_COMMENT_PROTECT</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+</div>
+
+  <div id="explanation">
+    <p>
+      You're seeing this error because you have <code>DEBUG = True</code> in your
+      Django settings file. Change that to <code>False</code>, and Django will
+      display a standard 500 page.
+    </p>
+  </div>
+
+</body>
+</html>

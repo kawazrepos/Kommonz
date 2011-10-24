@@ -47,6 +47,10 @@ class KommonzUser(User):
         
     def __eq__(self, obj):
         return issubclass(obj.__class__, User) and getattr(self, 'username') == getattr(obj, 'username')
+    
+    #@models.permalink
+    def get_absolute_url(self):
+        return ""
         
 def create_kommonz_user(sender, instance, created, **kwargs):
     if created and isinstance(instance, User) and not isinstance(instance, KommonzUser):
