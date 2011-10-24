@@ -90,7 +90,7 @@ def guess(filename):
             return label
     return 'unknown'
 
-def get_file_class(filename):
+def get_file_model(filename):
     """Return suitable class for file"""
     type = guess(filename)
     if not type or type == 'unknown':

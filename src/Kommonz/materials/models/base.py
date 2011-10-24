@@ -82,6 +82,7 @@ class Material(models.Model):
     def get_thumbnail_url(self):
         return self.file.path
     
+    @property
     def mimetype(self):
         try:
             mimetypes.init()
@@ -90,6 +91,12 @@ class Material(models.Model):
             type = None
         return type
     
+    @property
+    def filetype_model(self):
+        from ..utils.filetypes import get_file_model
+        return get_file_model(self.file.name)
+    
+    @property
     def encoding(self):
         try:
             mimetypes.init()
@@ -98,12 +105,13 @@ class Material(models.Model):
             encoding = None
         return encoding
     
+    @property
     def extention(self):
         return os.path.splitext(self.file.name)[1]
     
     def save(self, *args, **kwargs):
-        from ..utils.filetypes import get_file_class
-        cls = get_file_class(self.file.name)
+        from ..utils.filetypes import get_file_model
+        cls = get_file_model(self.file.name)
         if not isinstance(self, cls):
             extended = cls(pk=self.pk)
             extended.__dict__.update(self.__dict__)

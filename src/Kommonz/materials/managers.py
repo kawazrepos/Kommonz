@@ -5,4 +5,6 @@ __date__ = '2011/10/09'
 from django.db import models
 
 class MaterialManager(models.Manager):
-    pass
+    def get_file_model(self, filename):
+        from utils import get_file_model
+        return get_file_model(filename)

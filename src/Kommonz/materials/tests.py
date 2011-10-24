@@ -14,7 +14,7 @@ class TestMaterial(object):
             Tests get suitable type from sourcecode.
         """
         from materials.models.code import Code
-        cls = Material.objects._get_file_class('file.py')
+        cls = Material.objects.get_file_model('file.py')
         eq_(cls, Code)
 
     def test_suitable_model_image(self):
@@ -22,12 +22,12 @@ class TestMaterial(object):
             Tests get suitable type from image.
         """
         from materials.models.image import Image
-        cls = Material.objects._get_file_class('file.jpg')
+        cls = Material.objects.get_file_model('file.jpg')
         eq_(cls, Image)
         
     def test_suitable_model_others(self):
         """
             Tests get suitable type from filename.
         """
-        cls = Material.objects._get_file_class('file.aaa')
+        cls = Material.objects.get_file_model('file.aaa')
         eq_(cls, Material)
