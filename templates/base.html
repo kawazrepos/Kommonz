@@ -1,4 +1,5 @@
 {% load reversetag %}
+{% load notifications %}
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -24,6 +25,7 @@
     <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
     {% if user.is_staff %}
     <li><a href="/admin">神ページ</a></li>
+    <li>未読メッセージは<a href="{% reverse 'messages_message_inbox' %}">{% message_notification_count %}</a>件です</li>
     {% endif %}
   </ul>
   {% else %}
