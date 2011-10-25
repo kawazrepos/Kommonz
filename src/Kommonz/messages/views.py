@@ -31,8 +31,7 @@ class MessageDetailView(DetailView):
         if not message.read:
             message.read = True
             message.save()
-        return super(MessageDetailView, self).dispatch(self, request, *args, **kwargs)
-
+        return super(MessageDetailView, self).dispatch(request, *args, **kwargs)
 
 class MessageCreateView(CreateView):
     model = Message
@@ -49,7 +48,7 @@ class MessageCreateView(CreateView):
             dict_copy['user_to'] = KommonzUser.objects.get(pk=userid)
             message = Message.objects.create(**dict_copy)
             message.save()
-        return super(MessageCreateView, self).get(self, request, *args, **post_dict)
+        return super(MessageCreateView, self).get(request, *args, **post_dict)
 
 
 def create_template_message(user_to, template_filename):
@@ -59,8 +58,8 @@ def create_template_message(user_to, template_filename):
         create_object_dict = {'user_from' : KommonzUser.objects.get(pk=1),
                               'user_to' : user_to}
         context = Context(create_object_dict.copy())
-        label_loader = get_template_from_string('{% extends "%s" %}{% block label %}{% endblock %}' % template_path)
-        label_loader = get_template_from_string('{% extends "%s" %}{% block label %}{% endblock %}' % template_path)
+        label_loader = get_template_from_string('{%% extends "%s" %%}{%% block label %%}{%% endblock %%}' % template_path)
+        label_loader = get_template_from_string('{%% extends "%s" %%}{%% block label %%}{%% endblock %%}' % template_path)
         create_object_dict.update({'label' : label_loader.render(context), 'body' : body_loader.render(context)})
         message = Message.objects.create(**create_object_dict)
         message.save()
