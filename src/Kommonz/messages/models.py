@@ -4,17 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 from qwert.middleware.threadlocals import request as get_request
 from auth.models import KommonzUser
 
-
 class Message(models.Model):
     u"""Message object a user sends or receives"""
     
-    label           = models.CharField(_('subject'), max_length=255)
-    user_from       = models.ForeignKey(KommonzUser, verbose_name=_('user this message sent from'), 
-                                         related_name="message_from", editable=False)
-    user_to         = models.ForeignKey(KommonzUser, verbose_name=_('user this message sent to'), related_name="message_to")
-    read            = models.BooleanField(_('has already read'), default=False)
-    created_at      = models.DateTimeField(_('datetime sent'), auto_now_add=True)
-    body            = models.TextField(_('body of message'))
+    label           = models.CharField(_('Subject'), max_length=255)
+    user_from       = models.ForeignKey(KommonzUser, verbose_name=_('Sender'), 
+                                         related_name="sent_messages", editable=False)
+    user_to         = models.ForeignKey(KommonzUser, verbose_name=_('Reciver'), related_name="received_messages")
+    read            = models.BooleanField(_('Has already read'), default=False)
+    created_at      = models.DateTimeField(_('Sent at'), auto_now_add=True)
+    body            = models.TextField(_('Body'))
     
     class Meta:
         app_label           = 'messages'
@@ -25,9 +24,9 @@ class Message(models.Model):
     def __unicode__(self):
         return self.label
     
-    #@models.permalink
+    @models.permalink
     def get_absolute_url(self):
-        return "/messages/%i/" % self.id
+        return ('messages_message_detail', (), { 'pk' : self.pk })
     
     def clean(self):
         request = get_request()
@@ -43,4 +42,3 @@ class Message(models.Model):
         mediator.editor(self, self.user_from)
         mediator.reject(self, None)
         mediator.reject(self, 'anonymous')
-        
