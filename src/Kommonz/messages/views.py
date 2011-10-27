@@ -1,14 +1,16 @@
-import os
 from django.template.context import Context
-from django.template.loader import get_template, get_template_from_string
+from django.template.loader import get_template
+from django.template.loader_tags import BlockNode
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
-from object_permission.decorators import permission_required
 from auth.models import KommonzUser
 from forms import MessageCreateForm
 from models import Message
+from object_permission.decorators import permission_required
+import os
+
 
 class MessageListView(ListView):
     model = Message
@@ -28,10 +30,11 @@ class MessageDetailView(DetailView):
     @method_decorator(permission_required('messages.view_message', Message))
     def dispatch(self, request, *args, **kwargs):
         message = Message.objects.get(pk=kwargs['pk'])
-        if not message.read:
+        if request.user == message.user_to and not message.read :
             message.read = True
             message.save()
         return super(MessageDetailView, self).dispatch(request, *args, **kwargs)
+
 
 class MessageCreateView(CreateView):
     model = Message
@@ -51,6 +54,9 @@ class MessageCreateView(CreateView):
         return super(MessageCreateView, self).get(request, *args, **post_dict)
 
 
+# create a fixed pattern message to user_to
+# by messages/template_messages/template_filename
+# usage: create_template_message(KommonzUser.objects.get(pk=1), 'welcome.txt')
 def create_template_message(user_to, template_filename):
     template_path = os.path.join("messages/template_messages", template_filename)
     template = get_template(template_path)
@@ -58,9 +64,12 @@ def create_template_message(user_to, template_filename):
         create_object_dict = {'user_from' : KommonzUser.objects.get(pk=1),
                               'user_to' : user_to}
         context = Context(create_object_dict.copy())
-        label_loader = get_template_from_string('{%% extends "%s" %%}{%% block label %%}{%% endblock %%}' % template_path)
-        label_loader = get_template_from_string('{%% extends "%s" %%}{%% block label %%}{%% endblock %%}' % template_path)
-        create_object_dict.update({'label' : label_loader.render(context), 'body' : body_loader.render(context)})
-        message = Message.objects.create(**create_object_dict)
-        message.save()
+        if len(template.nodelist):
+            for block in template.nodelist:
+                if isinstance(block, BlockNode) and block.name == 'label':
+                    create_object_dict.update({'label' : block.render(context)})
+                if isinstance(block, BlockNode) and block.name == 'body':
+                    create_object_dict.update({'body' : block.render(context)})
+            message = Message.objects.create(**create_object_dict)
+            message.save()
 
