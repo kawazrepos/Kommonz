@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+{% load object_permission_tags %}
 
 {% block title %}送信箱{% endblock %}
 
 {% block content %}
 {% if outbox_object_list %}
     {% for object in outbox_object_list %}
+         {% if 'messages.view_message' of object %}
          <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+         {% endif %}
     {% endfor %}
 {% endif %}
 {% endblock %}

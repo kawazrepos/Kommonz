@@ -1,12 +1,13 @@
+from auth.models import KommonzUser
+from django.http import HttpResponseRedirect
 from django.template.context import Context
 from django.template.loader import get_template
 from django.template.loader_tags import BlockNode
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
-from auth.models import KommonzUser
-from forms import MessageCreateForm
+from forms import MessageCreateForm, MessageDeleteForm
 from models import Message
 from object_permission.decorators import permission_required
 import os
@@ -43,8 +44,9 @@ class MessageCreateView(CreateView):
     def post(self, request, *args, **kwargs):
         post_dict = request.POST.copy()
         users_to = post_dict.getlist('users_to')
-        del post_dict["users_to"]
-        create_object_dict = {"label" : post_dict['label'], "body" : post_dict['body'], 'user_from' : request.user}
+        del post_dict['users_to']
+        create_object_dict = {'label' : post_dict['label'], 'body' : post_dict['body'],
+                               'user_from' : request.user, 'pub_state' : 'sent'}
         
         for userid in users_to:
             dict_copy = create_object_dict.copy()
@@ -53,6 +55,29 @@ class MessageCreateView(CreateView):
             message.save()
         return super(MessageCreateView, self).get(request, *args, **post_dict)
 
+
+class MessageDeleteView(UpdateView):
+    model = Message
+    form_class = MessageDeleteForm
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if self.request.user == self.object.user_to:
+            if self.object.pub_state == 'sender_deleted':
+                self.object.pub_state = 'deleted'
+            else:
+                self.object.pub_state = 'receiver_deleted'
+            self.object.save()
+        
+        elif self.request.user == self.object.user_from:
+            if self.object.pub_state == 'receiver_deleted':
+                self.object.pub_state = 'deleted'
+            else:
+                self.object.pub_state = 'sender_deleted'
+            self.object.save()
+        
+        return HttpResponseRedirect(self.get_success_url())
+    
 
 # create a fixed pattern message to user_to
 # by messages/template_messages/template_filename
