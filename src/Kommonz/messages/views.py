@@ -1,4 +1,4 @@
-from auth.models import KommonzUser
+import os
 from django.http import HttpResponseRedirect
 from django.template.context import Context
 from django.template.loader import get_template
@@ -7,10 +7,10 @@ from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
+from object_permission.decorators import permission_required
+from auth.models import KommonzUser
 from forms import MessageCreateForm, MessageDeleteForm
 from models import Message
-from object_permission.decorators import permission_required
-import os
 
 
 class MessageListView(ListView):
@@ -83,7 +83,7 @@ class MessageDeleteView(UpdateView):
 # by messages/template_messages/template_filename
 # usage: create_template_message(KommonzUser.objects.get(pk=1), 'welcome.txt')
 def create_template_message(user_to, template_filename):
-    template_path = os.path.join("messages/template_messages", template_filename)
+    template_path = os.path.join('messages/template_messages', template_filename)
     template = get_template(template_path)
     if template:
         create_object_dict = {'user_from' : KommonzUser.objects.get(pk=1),

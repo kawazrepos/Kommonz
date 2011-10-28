@@ -16,8 +16,8 @@ class Message(models.Model):
     pub_state       = models.CharField(_('publish status'), choices=PUB_STATES, max_length=20)
     label           = models.CharField(_('subject'), max_length=255)
     user_from       = models.ForeignKey(KommonzUser, verbose_name=_('sender'), 
-                                         related_name="sent_messages", editable=False)
-    user_to         = models.ForeignKey(KommonzUser, verbose_name=_('reciver'), related_name="received_messages")
+                                         related_name='sent_messages', editable=False)
+    user_to         = models.ForeignKey(KommonzUser, verbose_name=_('reciver'), related_name='received_messages')
     read            = models.BooleanField(_('has already read'), default=False)
     created_at      = models.DateTimeField(_('sent at'), auto_now_add=True)
     body            = models.TextField(_('body'))
@@ -25,8 +25,8 @@ class Message(models.Model):
     class Meta:
         app_label           = 'messages'
         ordering            = ('-created_at',)
-        verbose_name        = _('Message')
-        verbose_name_plural = _('Messages')
+        verbose_name        = _('message')
+        verbose_name_plural = _('messages')
         
     def __unicode__(self):
         return self.label
@@ -40,7 +40,6 @@ class Message(models.Model):
         if request.user.is_authenticated():
             self.user_from = request.user
         else:
-            # if guest sender allowed, erase this statement and set self.user_from as guestuser
             raise ValidationError(_('''can not send message without authenticate'''))
         return super(Message, self).clean()
 
