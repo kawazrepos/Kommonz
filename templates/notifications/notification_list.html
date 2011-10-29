@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load object_permission_tags %}
+
+{% block title %}通知リスト{% endblock %}
+
+{% block content %}
+{% if object_list %}
+    {% for object in object_list %}
+        {% if 'notifications.view_notification' of object %}
+         <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endblock %}

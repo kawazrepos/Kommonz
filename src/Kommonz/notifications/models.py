@@ -34,6 +34,11 @@ class Notification(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('notifications_notification_detail', (), { 'pk' : self.pk })
+    
+    def modify_object_permission(self, mediator, created):
+        mediator.viewer(self, self.user_to)
+        mediator.reject(self, None)
+        mediator.reject(self, 'anonymous')
 
 
 def create_notification(related_object, template_filename, 
