@@ -1,2 +1,2 @@
 {% block label %}{{ user_from }}からの新着メッセージ{% endblock %}
-{% block body %}{{ user_from }}さんからメッセージ「<a href="{{ object.get_absolute_url }}">{{ object.label }}</a>」が届いています{% endblock %}
+{% block body %}{{ user_from }}さんからメッセージ「{{ object.label }}」が届いています{% endblock %}

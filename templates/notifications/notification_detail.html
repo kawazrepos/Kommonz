@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}通知リスト - {{ object.label }}{% endblock %}
+{% block breadcrumbs %}Kommonz > Massages > Inbox:{{ object.user_to }}{% endblock %}
+
+{% block content%}
+<section id="detail_main">
+    <h1>{{ object.label }}</h1>
+    <p>From:{{ object.user_from }}</p>
+    <p>通知日時：{{ object.created_at }}</p>
+    <p>URL：{{ object.content_object.get_absolute_url }}</p>
+    <p>本文：</p>
+    <p>{{ object.body }}</p>
+</section>
+{% endblock %}

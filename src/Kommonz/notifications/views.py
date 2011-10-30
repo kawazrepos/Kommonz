@@ -13,8 +13,4 @@ class NotificationDetailView(DetailView):
     
     @method_decorator(permission_required('notifications.view_notification', Notification))
     def dispatch(self, request, *args, **kwargs):
-        notification = Notification.objects.get(pk=kwargs['pk'])
-        if request.user == notification.user_to and not notification.read :
-            notification.read = True
-            notification.save()
         return super(NotificationDetailView, self).dispatch(request, *args, **kwargs)

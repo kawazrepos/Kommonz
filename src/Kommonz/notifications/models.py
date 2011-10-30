@@ -21,7 +21,7 @@ class Notification(models.Model):
                                          related_name='sent_notifications', editable=False)
     user_to         = models.ForeignKey(KommonzUser, verbose_name=_('reciver'),
                                          related_name='received_notifications')
-    read            = models.BooleanField(_('has already read'), default=False)
+    solved          = models.BooleanField(_('has already solved'), default=False)
     created_at      = models.DateTimeField(_('sent at'), auto_now_add=True)
     
     content_type    = models.ForeignKey(ContentType)
@@ -42,7 +42,10 @@ class Notification(models.Model):
 
 
 def create_notification(related_object, template_filename, 
-                        user_to, user_from=KommonzUser.objects.get(pk=1)):
+                        user_to,
+                        user_from = None):
+    if not user_from:
+        user_from = KommonzUser.objects.get(pk=1)
     template_path = os.path.join('notifications/template_notifications', template_filename)
     template = get_template(template_path)
     if template:
@@ -70,4 +73,5 @@ def create_notification(related_object, template_filename,
 def new_message_callback(sender, **kwargs):
     if kwargs.get('created', None):
         instance = kwargs.get('instance', None)
-        create_notification(instance, 'new_message.txt', instance.user_to, user_from=instance.user_from)
+        if instance:
+            create_notification(instance, 'new_message.txt', instance.user_to, user_from=instance.user_from)
