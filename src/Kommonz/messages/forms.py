@@ -1,6 +1,6 @@
+from auth.models import KommonzUser
 from django import forms
 from django.forms.models import ModelForm
-from auth.models import KommonzUser
 from models import Message
 
 
@@ -10,6 +10,13 @@ class MessageCreateForm(ModelForm):
     class Meta:
         model = Message
         fields = ('label', 'users_to', 'body',)
+
+
+class MaterialMessageCreateForm(ModelForm):
+
+    class Meta:
+        model = Message
+        fields = ('label', 'body',)
 
 
 class MessageDeleteForm(ModelForm):

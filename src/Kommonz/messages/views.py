@@ -1,4 +1,5 @@
 import os
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.template.context import Context
 from django.template.loader import get_template
@@ -9,7 +10,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from object_permission.decorators import permission_required
 from auth.models import KommonzUser
-from forms import MessageCreateForm, MessageDeleteForm
+from materials.models.base import Material
+from forms import MessageCreateForm, MaterialMessageCreateForm, MessageDeleteForm
 from models import Message
 
 
@@ -39,21 +41,39 @@ class MessageDetailView(DetailView):
 
 class MessageCreateView(CreateView):
     model = Message
-    form_class = MessageCreateForm
+    
+    def get(self, request, *args, **kwargs):
+        if request.GET.get('pk', None) and request.GET.get('message_type', None) == 'material_message':
+            self.form_class = MaterialMessageCreateForm
+            material = Material.objects.get(pk=request.GET.get('pk'))
+            # if collabolators implemented, edit below
+            self.initial.update({'users_to' : (material.author.pk,)})
+        else:
+            self.form_class = MessageCreateForm
+        return super(MessageCreateView, self).get(request, *args, **kwargs)
+
 
     def post(self, request, *args, **kwargs):
         post_dict = request.POST.copy()
-        users_to = post_dict.getlist('users_to')
-        del post_dict['users_to']
-        create_object_dict = {'label' : post_dict['label'], 'body' : post_dict['body'],
-                               'user_from' : request.user, 'pub_state' : 'sent'}
+        users_to = self.initial.get('users_to', None)
+        if not users_to:
+            users_to = post_dict.getlist('users_to')
+        if post_dict.get('users_to', None):
+            del post_dict['users_to']
         
-        for userid in users_to:
-            dict_copy = create_object_dict.copy()
-            dict_copy['user_to'] = KommonzUser.objects.get(pk=userid)
-            message = Message.objects.create(**dict_copy)
-            message.save()
-        return super(MessageCreateView, self).get(request, *args, **post_dict)
+        if users_to:
+            for userid in users_to:
+                create_object_dict = {'label' : post_dict['label'], 'body' : post_dict['body'],
+                                  'user_from' : request.user, 'pub_state' : 'sent'}
+                create_object_dict['user_to'] = KommonzUser.objects.get(pk=userid)
+                message = Message.objects.create(**create_object_dict)
+                message.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(MessageCreateView, self).post(request, *args, **kwargs)
+        
+    def get_success_url(self):
+        return reverse('messages_message_outbox')
 
 
 class MessageDeleteView(UpdateView):
