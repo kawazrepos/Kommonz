@@ -9,6 +9,7 @@
   <script src="{{ MEDIA_URL }}javascript/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/html5reset.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/lib.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css">
   <!--[if lte IE 8]>
     <script src="{{ MEDIA_URL }}javascript/html5.js" type="text/javascript"></script>
@@ -17,7 +18,7 @@
   {% endblock %}
 </head>
 <body>
-  <header id="page_header" class="clearfix">
+  <header id="page_header" class="clearfix ui-widget-header">
     <section id="page_header_menu">
       {% if user.is_authenticated %}
       <section id="welcome">
@@ -47,11 +48,11 @@
       </ul>
     </nav>
   </header>
-  <section id="content">
+  <section id="content" class="ui-corner-all">
     <header id="content_header" class="clearfix">
       <section id="logo"><!--<img src="kommonzlogo.png">--></section>
       <ul>
-        <li><a href="{% reverse 'index' %}">素材検索</a></li>
+        <li><a href="{% reverse 'index' %}">素材検索(index)</a></li>
         <li>Kommonzについて</li>
         <li>項目３</li>
         <li>項目４</li>

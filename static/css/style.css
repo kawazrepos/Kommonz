@@ -1,19 +1,29 @@
 @charset "utf-8";
-body, textarea { font-family: "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
-input, select { font-family: Arial, "ＭＳ Ｐゴシック", sans-serif; }
-
+/* -- whole settings -- */
+body, textarea { font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
+input, select { font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
+a {
+    color: #222;
+}
+body {
+    font-size: 13px;
+}
+/* -- end of whole settings -- */
 
 /* -- page header -- */
 #page_header {
+    /* to fix jqueryui ui-widget-header */
+    border: 0px;
+    font-weight: normal;
+    /* end fix*/
     border-bottom: solid 1px gray;
-    margin: 0px;
+    padding: 8px 0px;
     background-color: lightgray;
-    line-height: 150%;
 }
 #page_header_menu {float: right;}
 #page_header #welcome {
     float: left;
-    margin: 0px 10px;
+    margin: 0px 8px;
 }
 #page_header ul {float: left;}
 #page_header li {
@@ -29,7 +39,7 @@ input, select { font-family: Arial, "ＭＳ Ｐゴシック", sans-serif; }
     width: 800px;
     min-height: 500px;
     border: solid 1px gray;
-    margin: 20px auto;
+    margin: 30px auto;
 }
 #content_header {
     border-bottom: solid 1px gray;
@@ -38,8 +48,8 @@ input, select { font-family: Arial, "ＭＳ Ｐゴシック", sans-serif; }
     min-height: 50px;
 }
 #content_header #logo {
-    width: 180px;
-    height: 100px;
+    width: 200px;
+    height: 120px;
     background-color: LightGreen;
 }
 #content_header ul {
