@@ -3,6 +3,7 @@ from django.conf.urls.defaults import patterns, url, include
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.functional import lazy
+from django.views.generic import ListView
 from models.base import Material
 from views import MaterialDetailView, MaterialCreateView, MaterialUpdateView, MaterialInlineUpdateView
 __author__ = 'giginet'
@@ -17,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/form/$',   MaterialInlineUpdateView.as_view(),           name="materials_material_inline_update"),
     url(r'^(?P<pk>\d+)/update/$', MaterialUpdateView.as_view(),                 name="materials_material_update"),
     url(r'^create/?$',            MaterialCreateView.as_view(),                 name='materials_material_create'),
+    url(r'^/?$',                  ListView.as_view(model=Material),             name='materials_material_list'),
 )
