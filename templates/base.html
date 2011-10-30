@@ -1,12 +1,14 @@
 {% load reversetag %}
 {% load notifications %}
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>Kommonz - {% block title %}{% endblock %}</title>
   <script src="{{ MEDIA_URL }}javascript/jquery-1.6.4.min.js" type="text/javascript"></script>
   <script src="{{ MEDIA_URL }}javascript/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/html5reset.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/lib.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css">
   <!--[if lte IE 8]>
     <script src="{{ MEDIA_URL }}javascript/html5.js" type="text/javascript"></script>
@@ -15,37 +17,51 @@
   {% endblock %}
 </head>
 <body>
-  <header>
-  <section>
-  {% if user.is_authenticated %}
-  ようこそ{{ user.username }}さん
-  <ul>
-    <li><a href="{% reverse 'materials_material_create' %}">アップロード</a></li>
-    <li>設定</li>
-    <li>アカウント管理</li>
-    <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
-    {% if user.is_staff %}
-    <li><a href="/admin">神ページ</a></li>
-    <li>あなたへの通知が<a href="{% reverse 'notifications_notification_list' %}">{% notification_count %}</a>件あります</li>
-    {% endif %}
-  </ul>
-  {% else %}
-    <ul>
-      <li><a href="{% reverse 'registration_index' %}">ログイン</li>
-    </ul>
-  {% endif %}
-  </section>
-  <nav id="breadcrumbs">
-    <ul>
-      {% block breadcrumbs %}
-      {% endblock %}
-    </ul>
-  </nav>
+  <header id="page_header" class="clearfix">
+    <section id="page_header_menu">
+      {% if user.is_authenticated %}
+      <section id="welcome">
+        ようこそ{{ user.username }}さん
+      </section>
+      <ul>
+        <li>通知：<a href="{% reverse 'notifications_notification_list' %}">{% notification_count %}</a>件</li>
+        <li><a href="{% reverse 'materials_material_create' %}">アップロード</a></li>
+        <li><a href="{% reverse 'messages_message_list' %}">受信箱</a></li>
+        <li>設定</li>
+        <li><a href="{% reverse 'auth_user_detail' pk=request.user.pk %}">アカウント管理</a></li>
+        <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
+        {% if user.is_staff %}
+        <li><a href="/admin">神ページ</a></li>
+        {% endif %}
+      </ul>
+      {% else %}
+      <ul>
+        <li><a href="{% reverse 'registration_index' %}">ログイン</a></li>
+      </ul>
+      {% endif %}
+    </section><!-- end of header_menu-->
+    <nav id="breadcrumbs">
+      <ul>
+        {% block breadcrumbs %}
+        {% endblock %}
+      </ul>
+    </nav>
   </header>
   <section id="content">
-    {% block content %}
-    {% endblock %}
-  </section>
-  <footer></footer>
+    <header id="content_header" class="clearfix">
+      <section id="logo"><!--<img src="kommonzlogo.png">--></section>
+      <ul>
+        <li><a href="{% reverse 'index' %}">素材検索</a></li>
+        <li>Kommonzについて</li>
+        <li>項目３</li>
+        <li>項目４</li>
+      </ul>
+    </header>
+    <section id="content_main">
+      {% block content %}
+      {% endblock %}
+    </section><!-- end of content_main-->
+  </section><!-- end of content-->
+  <footer id="page_footer"></footer>
 </body>
 </html>

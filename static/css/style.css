@@ -2,3 +2,63 @@
 body, textarea { font-family: "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
 input, select { font-family: Arial, "ＭＳ Ｐゴシック", sans-serif; }
 
+
+/* -- page header -- */
+#page_header {
+    border-bottom: solid 1px gray;
+    margin: 0px;
+    background-color: lightgray;
+    line-height: 150%;
+}
+#page_header_menu {float: right;}
+#page_header #welcome {
+    float: left;
+    margin: 0px 10px;
+}
+#page_header ul {float: left;}
+#page_header li {
+    float: left;
+    list-style-type: none;
+    margin: 0px 10px;
+    }
+#page_header #breadcrumbs {}
+/* -- end of page header -- */
+
+/* -- content -- */
+#content {
+    width: 800px;
+    min-height: 500px;
+    border: solid 1px gray;
+    margin: 20px auto;
+}
+#content_header {
+    border-bottom: solid 1px gray;
+    margin: 0px;
+    background-color: lightgray;
+    min-height: 50px;
+}
+#content_header #logo {
+    width: 180px;
+    height: 100px;
+    background-color: LightGreen;
+}
+#content_header ul {
+    bottom: 10px;
+    right: 10px;
+    }
+#content_header li {
+    float: left;
+    list-style-type: none;
+    margin: 10px 10px;
+    }
+#content_main {
+    margin: 10px;
+    line-height: 150%;
+}
+/* -- end of content -- */
+
+
+/* -- page footer -- */
+#page_footer {}
+/* -- end of page footer -- */
+
