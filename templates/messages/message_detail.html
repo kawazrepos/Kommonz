@@ -2,7 +2,7 @@
 {% load reversetag %}
 
 {% block title %}{{ object.label }}{% endblock %}
-{% block breadcrumbs %}Kommonz > メッセージ > 受信箱  > {{ object.label }}{% endblock %}
+{% block breadcrumbs %}Kommonz > メッセージ > {{ object.label }}{% endblock %}
 
 {% block message_content %}
 <section id="detail_main">
@@ -15,5 +15,6 @@
     {% if request.user == object.user_to %}
     <a href="{% reverse 'messages_message_create' %}?message_type=reply&pk={{ object.user_from.pk }}">このメッセージに返信する</a>
     {% endif %}
+    <p><a href="{% reverse 'messages_message_delete' pk=object.pk %}">削除する</a></p>
 </section>
 {% endblock %}

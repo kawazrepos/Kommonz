@@ -85,6 +85,9 @@ class MessageDeleteView(UpdateView):
     model = Message
     form_class = MessageDeleteForm
     
+    def get_success_url(self):
+        return reverse('messages_message_list')
+    
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.request.user == self.object.user_to:

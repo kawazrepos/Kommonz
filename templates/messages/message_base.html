@@ -8,6 +8,9 @@
   <ul>
     <li><a href="{% reverse 'messages_message_list' %}">受信箱</a></li>
     <li><a href="{% reverse 'messages_message_outbox' %}">送信箱</a></li>
+    {% if user.is_staff %}
+    <li><a href="{% reverse 'messages_message_create' %}">一斉送信テストページ</a></li>
+    {% endif %}
   </ul>
 </nav>
 <section>
