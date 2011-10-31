@@ -8,6 +8,9 @@ a {
 body {
     font-size: 13px;
 }
+li {
+    list-style-type: none;
+}
 /* -- end of whole settings -- */
 
 /* -- page header -- */
@@ -28,7 +31,6 @@ body {
 #page_header ul {float: left;}
 #page_header li {
     float: left;
-    list-style-type: none;
     margin: 0px 10px;
     }
 #page_header #breadcrumbs {}
@@ -58,7 +60,6 @@ body {
     }
 #content_header li {
     float: left;
-    list-style-type: none;
     margin: 10px 10px;
     }
 #content_main {

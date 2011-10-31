@@ -1,9 +1,9 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User, UserManager
 from django.db.models.signals import post_save, pre_delete
 from django.utils.translation import ugettext as _
 from imagefield.fields import ImageField
-import os
 
 class KommonzUser(User):
     '''extended User model for Kommonz'''
@@ -26,7 +26,7 @@ class KommonzUser(User):
     
     # required
     nickname = models.CharField(_('Nickname'), max_length=32, blank=False, null=True)
-    remarks  = models.TextField(_('Profile'), blank=False, null=True)                 # it will replace with another markup field.
+    profile  = models.TextField(_('Profile'), blank=False, null=True)                 # it will replace with another markup field.
     
     # not required
     icon            = ImageField(_('Profile Icon'), upload_to=_get_icon_path)
@@ -35,10 +35,14 @@ class KommonzUser(User):
     place           = models.CharField(_('Location'), max_length=255, blank=True)
     url             = models.URLField(_('URL'), max_length=255, blank=True)
     
+    email_notification = models.BooleanField(_('Email Notification'), default=True)
+    
     objects         = UserManager()
     
     def __unicode__(self):
-        return '%s(%s)' % (self.nickname, self.username)
+        if self.nickname:
+            return '%s(%s)' % (self.nickname, self.username)
+        return self.username
     
     class Meta:
         ordering            = ('username',)
@@ -48,9 +52,10 @@ class KommonzUser(User):
     def __eq__(self, obj):
         return issubclass(obj.__class__, User) and getattr(self, 'username') == getattr(obj, 'username')
     
-    #@models.permalink
+    @models.permalink
     def get_absolute_url(self):
-        return ""
+        return ('auth_user_detail', (), { 'pk' : self.pk })
+        
         
 def create_kommonz_user(sender, instance, created, **kwargs):
     if created and isinstance(instance, User) and not isinstance(instance, KommonzUser):
@@ -61,6 +66,7 @@ def create_kommonz_user(sender, instance, created, **kwargs):
             extended_user.__dict__.update(instance.__dict__)
             extended_user.save()
             
+            
 def delete_kommonz_user(sender, instance, **kwargs):
     if isinstance(instance, User) and not isinstance(instance, KommonzUser):
         try:
@@ -68,6 +74,7 @@ def delete_kommonz_user(sender, instance, **kwargs):
             user.delete()
         except:
             pass # fail silently.
+        
         
 post_save.connect(create_kommonz_user, sender=User)
 pre_delete.connect(delete_kommonz_user, sender=User)

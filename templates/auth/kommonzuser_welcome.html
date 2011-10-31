@@ -1,0 +1,9 @@
+{% extends "../base.html" %}
+{% load reversetag %}
+
+{% block title %}新規登録が完了しました{% endblock %}
+
+{% block content%}
+<p>新規登録が完了しました。</p>
+<p><a href="{% reverse 'auth_user_update' %}">ユーザ設定ページへ</a></p>
+{% endblock %}

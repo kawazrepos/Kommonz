@@ -1,10 +1,17 @@
-# Create your views here.
-from Kommonz.auth.models import KommonzUser
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from forms import UserUpdateForm
+from models import KommonzUser
 
 class UserDetailView(DetailView):
-    template_name = 'detail.html'
-    model=KommonzUser
-    def get_context_data(self, **kwargs):
-        context=super(DetailView, self).get_context_data(**kwargs)
-        return context
+    model = KommonzUser
+
+
+class UserUpdateView(UpdateView):
+    model       = KommonzUser
+    form_class  = UserUpdateForm
+    
+    def get_queryset(self):
+        self.kwargs.update({'pk' : self.request.user.pk})
+        return super(UserUpdateView, self).get_queryset()
+
