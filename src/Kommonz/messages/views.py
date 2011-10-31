@@ -11,7 +11,8 @@ from django.views.generic.list import ListView
 from object_permission.decorators import permission_required
 from auth.models import KommonzUser
 from materials.models.base import Material
-from forms import MessageCreateForm, MaterialMessageCreateForm, MessageDeleteForm
+from forms import MessageCreateForm, MaterialMessageCreateForm, \
+                  ReplyMessageCreateForm, MessageDeleteForm
 from models import Message
 
 
@@ -43,11 +44,15 @@ class MessageCreateView(CreateView):
     model = Message
     
     def get(self, request, *args, **kwargs):
-        if request.GET.get('pk', None) and request.GET.get('message_type', None) == 'material_message':
-            self.form_class = MaterialMessageCreateForm
-            material = Material.objects.get(pk=request.GET.get('pk'))
-            # if collabolators implemented, edit below
-            self.initial.update({'users_to' : (material.author.pk,)})
+        if request.GET.get('pk', None):
+            if request.GET.get('message_type', None) == 'material_message':
+                self.form_class = MaterialMessageCreateForm
+                material = Material.objects.get(pk=request.GET.get('pk'))
+                # if collabolators implemented, edit below
+                self.initial.update({'users_to' : (material.author.pk,)})
+            elif request.GET.get('message_type', None) == 'reply':
+                self.form_class = ReplyMessageCreateForm
+                self.initial.update({'users_to' : (request.GET.get('pk'),)})
         else:
             self.form_class = MessageCreateForm
         return super(MessageCreateView, self).get(request, *args, **kwargs)

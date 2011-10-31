@@ -19,6 +19,12 @@ class MaterialMessageCreateForm(ModelForm):
         fields = ('label', 'body',)
 
 
+class ReplyMessageCreateForm(ModelForm):
+
+    class Meta:
+        model = Message
+        fields = ('label', 'body',)
+
 class MessageDeleteForm(ModelForm):
    
     class Meta:

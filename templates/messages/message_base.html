@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load reversetag %}
+
+{% block title %}メッセージ - {% endblock %}
+
+{% block content %}
+<nav id="message_nav" class="clearfix">
+  <ul>
+    <li><a href="{% reverse 'messages_message_list' %}">受信箱</a></li>
+    <li><a href="{% reverse 'messages_message_outbox' %}">送信箱</a></li>
+  </ul>
+</nav>
+<section>
+  {% block message_content %}{% endblock %}
+</section>
+{% endblock %}

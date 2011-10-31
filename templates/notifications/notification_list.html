@@ -7,7 +7,10 @@
 {% if object_list %}
     {% for object in object_list %}
         {% if 'notifications.view_notification' of object %}
-         <p>{% if not object.solved %}*{% endif %}<a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+        <section class="notification">
+         <h1>{% if not object.solved %}*{% endif %}<a href="{{ object.get_absolute_url }}">{{ object.label }}</a></h1>
+         <p>{{ object.body }}</p>
+         </section>
         {% endif %}
     {% endfor %}
 {% endif %}

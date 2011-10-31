@@ -25,9 +25,9 @@
         ようこそ{{ user.username }}さん
       </section>
       <ul>
-        <li>通知：<a href="{% reverse 'notifications_notification_list' %}">{% notification_count %}</a>件</li>
+        <li>通知：<a href="{% reverse 'notifications_notification_list' %}">{% notification_count %}</a>件▼</li>
         <li><a href="{% reverse 'materials_material_create' %}">アップロード</a></li>
-        <li><a href="{% reverse 'messages_message_list' %}">受信箱</a></li>
+        <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
         <li><a href="{% reverse 'auth_user_detail' pk=request.user.pk %}">アカウント管理</a></li>
         <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
         <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>

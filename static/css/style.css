@@ -11,7 +11,21 @@ body {
 li {
     list-style-type: none;
 }
+
 /* -- end of whole settings -- */
+
+
+/* -- stubs -- */
+#breadcrumbs {margin: 0px 10px;}
+.notification h1 {
+    font-weight: normal;
+}
+#message_nav li{
+    float: left;
+    margin: 10px;
+}
+/* -- end of stubs -- */
+
 
 /* -- page header -- */
 #page_header {
