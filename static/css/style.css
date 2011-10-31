@@ -47,6 +47,23 @@ li {
     float: left;
     margin: 0px 10px;
     }
+#notification_dropdown_list {position: relative;}
+#notification_dropdown_list ul {
+  background: #ffffff;
+  width: 400px;
+  height: 200px;
+  overflow: scroll;
+  position: absolute;
+  top: -999em;
+  left: -1px;
+  line-height: 150%;
+}
+#notification_dropdown_list li:hover ul,
+#notification_dropdown_list li.sfHover ul {top: 15px;}
+#notification_dropdown_list ul a {
+  padding-right: 20px;
+  width: 400px;
+}
 #page_header #breadcrumbs {}
 /* -- end of page header -- */
 

@@ -7,6 +7,7 @@
   <title>Kommonz - {% block title %}{% endblock %}</title>
   <script src="{{ MEDIA_URL }}javascript/jquery-1.6.4.min.js" type="text/javascript"></script>
   <script src="{{ MEDIA_URL }}javascript/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+  <script src="{{ MEDIA_URL }}javascript/notifications/notification.js" type="text/javascript"></script>
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/html5reset.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/lib.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
@@ -24,8 +25,14 @@
       <section id="welcome">
         ようこそ{{ user.username }}さん
       </section>
-      <ul>
-        <li>通知：<a href="{% reverse 'notifications_notification_list' %}">{% notification_count %}</a>件▼</li>
+      <ul id="notification_dropdown_list">
+        <li>
+          <a href="{% reverse 'notifications_notification_list' %}">通知：{% notification_count %}件</a>
+          <a class="notification_dropdown">▼</a>
+          <ul>
+          {% notification_list %}
+         </ul>
+        </li>
         <li><a href="{% reverse 'materials_material_create' %}">アップロード</a></li>
         <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
         <li><a href="{% reverse 'auth_user_detail' pk=request.user.pk %}">アカウント管理</a></li>

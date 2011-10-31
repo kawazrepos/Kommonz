@@ -1,0 +1,8 @@
+{% if object_list %}
+{% for object in object_list %}
+<li>
+  <p>{% if not object.solved %}*{% endif %}<a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+  <p>{{ object.body }}</p>
+</li>
+{% endfor %}
+{% endif %}
