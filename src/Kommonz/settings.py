@@ -216,6 +216,8 @@ SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
 SOCIAL_AUTH_USER_MODEL = CUSTOM_USER_MODEL
 
+QWERT_AUTO_CREATE_USER = CUSTOM_USER_MODEL
+
 #
 # Testing configuration via nose.
 #
