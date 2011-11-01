@@ -42,6 +42,15 @@ DATABASES = {
     }
 }
 
+# django-storages File Storage Settings
+DB_FILES_URL = os.path.join(ROOT, 'storage.db')
+DB_FILES = {
+            'db_table'     : 'files',
+            'fname_column' : 'filename',
+            'blob_column'  : 'blob',
+            'size_column'  : 'size'
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -160,6 +169,7 @@ INSTALLED_APPS = (
     'compress',                     # JavaScript/CSS compress library
     'reversetag',                   # Useful templatetag library
     'pagination',                   # Useful paginatin library
+    'storages',
     # Github libraries
     'qwert',                        # Useful snippet collection library
     'mfw',                          # Django mobile framework library
@@ -217,6 +227,7 @@ SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
 SOCIAL_AUTH_USER_MODEL = CUSTOM_USER_MODEL
 
 QWERT_AUTO_CREATE_USER = CUSTOM_USER_MODEL
+QWERT_AUTO_CREATE_PASSWORD = 'password'
 
 #
 # Testing configuration via nose.

@@ -9,7 +9,7 @@ from django import forms
 
 from object_permission.decorators import permission_required
 
-from models.base import Material
+from models.base import Material, MaterialData
 from forms import MaterialForm
 from api.mappers import MaterialMapper
 
@@ -28,13 +28,13 @@ def response_mimetype(request):
         return "text/plain"
 
 class MaterialCreateView(CreateView):
-    model = Material
+    model = MaterialData
     template_name = 'materials/material_form.html'
    
     def form_valid(self, form):
         self.object = form.save()
         
-        mapper = MaterialMapper(self.object)
+        mapper = MaterialMapper(self.object.material)
         
         response = JSONResponse([mapper.as_dict(),], {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'

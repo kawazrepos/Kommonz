@@ -15,6 +15,11 @@
 {% block title %}素材投稿{% endblock %}
 
 {% block content %}
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.file }}
+  <input type="submit">
+</form>
 <div id="material-uploader">
     <form method="post" action="" enctype="multipart/form-data">
         <div class="fileupload-buttonbar">
