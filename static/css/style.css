@@ -38,32 +38,50 @@ li {
     background-color: lightgray;
 }
 #page_header_menu {float: right;}
-#page_header #welcome {
+#page_header_menu #welcome {
     float: left;
     margin: 0px 8px;
 }
-#page_header ul {float: left;}
-#page_header li {
+#page_header_menu ul {
+    position: relative;
+    float: left;
+    }
+#page_header_menu li {
     float: left;
     margin: 0px 10px;
     }
-#notification_dropdown_list {position: relative;}
-#notification_dropdown_list ul {
-  background: #ffffff;
-  width: 400px;
-  height: 200px;
-  overflow: scroll;
+
+#notification_dropdown_list #notification_timeline,
+#notification_dropdown_list #notification_timeline_title,
+#notification_dropdown_list #notification_timeline_inner {
+  background-color: white;
+  width: 500px;
+  height: 300px;
+  z-index: 100;
   position: absolute;
   top: -999em;
   left: -1px;
-  line-height: 150%;
 }
-#notification_dropdown_list li:hover ul,
-#notification_dropdown_list li.sfHover ul {top: 15px;}
-#notification_dropdown_list ul a {
-  padding-right: 20px;
-  width: 400px;
+#notification_dropdown_list:hover #notification_timeline{
+    background-color: rgba(255, 255, 255, 0.0);
+    top: 15px;
+    }
+#notification_dropdown_list:hover #notification_timeline_title{
+    background-color: rgba(255, 255, 255, 0.7);
+    top: 0px;
+    font-size:13px;
+    margin: 10px;
+    padding-top:10px;
+    padding-left:10px;
 }
+#notification_dropdown_list:hover #notification_timeline_inner {
+    background-color: rgba(255, 255, 255, 0.7);
+    overflow: scroll;
+    top: 30px;
+    margin: 10px;
+    padding:10px;
+    line-height: 150%;
+    }
 #page_header #breadcrumbs {}
 /* -- end of page header -- */
 
