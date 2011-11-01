@@ -17,7 +17,7 @@ def notification_list(context):
     
     object_list = Notification.objects.filter(user_to=request.user, solved=False)
     
-    context['object_list'] = object_list
+    context['notification_object_list'] = object_list
                       
     return context
  
