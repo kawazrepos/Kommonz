@@ -166,7 +166,7 @@ INSTALLED_APPS = (
     'object_permission',            # Object permission library
     # Kommonz
     'Kommonz.auth',
-    'Kommonz.builtins',
+    'Kommonz.autocmd',
     'Kommonz.materials',
     'Kommonz.messages',
     'Kommonz.notifications',

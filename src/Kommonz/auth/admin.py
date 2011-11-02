@@ -7,11 +7,11 @@ __date__ = '2011/10/09'
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('nickname', 'profile', 'icon', 'sex', 'birthday', 'place', 'url',)
+    list_display = ('user', 'nickname', 'profile', 'icon', 'sex', 'birthday', 'place', 'url',)
 
 
 class UserConfigAdmin(admin.ModelAdmin):
-    list_display = ('email_notification',)
+    list_display = ('user', 'email_notification',)
 
 
 admin.site.register(UserProfile, UserProfileAdmin)

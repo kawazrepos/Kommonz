@@ -1,6 +1,5 @@
 from django.template.base import add_to_builtins
 
-
 #
 # Add some useful extra templatetags in builtin templatetags
 #----------------------------------------------------------------------------------------------------
