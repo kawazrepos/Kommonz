@@ -1,9 +1,9 @@
 # Create your views here.
 from django.views.generic import TemplateView
-from lists.model import List
-from lists.model import ListInfo
+from lists.models import List
+from lists.models import ListInfo
 from django.views.generic import CreateView, DetailView
-from models.base import Material
+from materials.models.base import Material
 from forms import MaterialForm
 
 class ListDetailView(DetailView):
