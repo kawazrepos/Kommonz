@@ -2,7 +2,7 @@
 {% load reversetag %}
 
 {% block title %}{{ object.user.username }}の設定{% endblock %}
-{% block breadcrumbs %}Kommonz > UserConfig {{ object.username }}の設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール設定{% endblock %}
 
 {% block content%}
 <h1>ユーザー：{{ object.user.username }}の設定</h1>
