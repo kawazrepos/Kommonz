@@ -1,4 +1,4 @@
-# Create your models here.
+ # Create your models here.
 from materials.models.base import Material
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -16,7 +16,7 @@ class List(models.Model):
     pub_state = models.CharField(u"公開設定",max_length=10,choices=PUB_STATES, default="public",)
 
 class ListInfo(models.Model):
-    list = ForeignKey(MyList)
+    list = ForeignKey(List)
     material = ForeignKey(Material)
     date = models.DateTimeField
     comment = models.CharField

@@ -9,11 +9,11 @@ from forms import MaterialForm
 class ListDetailView(DetailView):
     model = List
     def get_context_data(self, **kwargs):
-        context=super(DetailView, self).get_context_data(**kwargs)
+        context = super(DetailView, self).get_context_data(**kwargs)
         return context
 
 class ListListView(ListView):
     model = List
     def get_context_data(self, **kwargs):
-        context=super(DetailView, self).get_context_data(**kwargs)
+        context = super(DetailView, self).get_context_data(**kwargs)
         return context
