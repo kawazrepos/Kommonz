@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = patterns('',
-    url(r'^(?P<pk>\d+)/$', UserDetailView.as_view(), name='auth_user_detail'),
+#    url(r'^(?P<pk>\d+)/$',   UserDetailView.as_view(), name='auth_user_detail'),
+    url(r'^(?P<slug>\w+)/$', UserDetailView.as_view(), name='auth_user_detail'),
     url(r'^config/?$',     login_required(UserUpdateView.as_view()),
         name='auth_user_update'),
     url(r'^welcome/?$',    TemplateView.as_view(template_name="auth/kommonzuser_welcome.html"),

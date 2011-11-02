@@ -35,7 +35,7 @@
         </li>
         <li><a href="{% reverse 'materials_material_create' %}">アップロード</a></li>
         <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
-        <li><a href="{% reverse 'auth_user_detail' pk=request.user.pk %}">アカウント管理</a></li>
+        <li><a href="{% reverse 'auth_user_detail' slug=request.user.username %}">アカウント管理</a></li>
         <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
         <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
         {% if user.is_staff %}

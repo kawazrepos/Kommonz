@@ -1,9 +1,11 @@
 import os
-from django.db import models
 from django.contrib.auth.models import User, UserManager
+from django.db import models
 from django.db.models.signals import post_save, pre_delete
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from imagefield.fields import ImageField
+
 
 class KommonzUser(User):
     '''extended User model for Kommonz'''
@@ -36,6 +38,7 @@ class KommonzUser(User):
     url             = models.URLField(_('URL'), max_length=255, blank=True)
     
     email_notification = models.BooleanField(_('Email Notification'), default=True)
+    slug               = models.SlugField(_('Slug'), max_length=30)
     
     objects         = UserManager()
     
@@ -43,6 +46,10 @@ class KommonzUser(User):
         if self.nickname:
             return '%s(%s)' % (self.nickname, self.username)
         return self.username
+    
+    def save(self, force_insert=False, force_update=False, using=None):
+        self.slug = slugify(self.username)
+        super(KommonzUser, self).save(force_insert=force_insert, force_update=force_update, using=using)
     
     class Meta:
         ordering            = ('username',)
