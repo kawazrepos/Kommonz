@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^registration/',        include('Kommonz.registration.urls')),
     url(r'^materials/',           include('Kommonz.materials.urls')),
     url(r'^messages/',            include('Kommonz.messages.urls')),
-    url(r'^lists/',                include('Kommonz.list.urls')),
+    url(r'^lists/',               include('Kommonz.lists.urls')),
     url(r'^users/(?P<pk>\d+)/',   UserDetailView.as_view(), name="user_detail"),
     url(r'^$',                    TemplateView.as_view(template_name='index.html'), name='index')
 )
