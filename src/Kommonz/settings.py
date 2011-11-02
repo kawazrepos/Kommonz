@@ -168,7 +168,8 @@ INSTALLED_APPS = (
     'Kommonz.auth',
     'Kommonz.materials',
     'Kommonz.messages',
-    'Kommonz.reports'
+    'Kommonz.reports',
+    'Kommonz.lists'
 )
 
 AUTHENTICATION_BACKENDS = (
