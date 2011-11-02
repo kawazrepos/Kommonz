@@ -2,9 +2,8 @@
 from django.views.generic import TemplateView
 from lists.models import List
 from lists.models import ListInfo
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from materials.models.base import Material
-from forms import MaterialForm
 
 class ListDetailView(DetailView):
     model = List
