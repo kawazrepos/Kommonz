@@ -8,10 +8,10 @@ from auth.models import KommonzUser
 class Message(models.Model):
     u"""Message object a user sends or receives"""
     PUB_STATES = (
-                ('sent',             'sent message'),
-                ('deleted',          'deleted message'),
-                ('receiver_deleted', 'deleted by receiver'),
-                ('sender_deleted',   'deleted by sender'),
+                ('sent',             _('sent message')),
+                ('deleted',          _('deleted message')),
+                ('receiver_deleted', _('deleted by receiver')),
+                ('sender_deleted',   _('deleted by sender')),
         )
     pub_state       = models.CharField(_('publish status'), choices=PUB_STATES, max_length=20)
     label           = models.CharField(_('subject'), max_length=255)
@@ -49,13 +49,25 @@ class Message(models.Model):
             mediator.viewer(self, self.user_from)
             mediator.reject(self, None)
             mediator.reject(self, 'anonymous')
+            
         elif self.pub_state == 'deleted':
             mediator.reject(self, self.user_to)
             mediator.reject(self, self.user_from)
+            mediator.reject(self, None)
+            mediator.reject(self, 'anonymous')
+            
         elif self.pub_state == 'receiver_deleted':
             mediator.reject(self, self.user_to)
+            mediator.viewer(self, self.user_from)
+            mediator.reject(self, None)
+            mediator.reject(self, 'anonymous')
+            
         elif self.pub_state == 'sender_deleted':
+            mediator.viewer(self, self.user_to)
             mediator.reject(self, self.user_from)
+            mediator.reject(self, None)
+            mediator.reject(self, 'anonymous')
+            
         else:
             mediator.reject(self, None)
             mediator.reject(self, 'anonymous')
