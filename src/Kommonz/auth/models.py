@@ -37,7 +37,6 @@ class KommonzUser(User):
     place           = models.CharField(_('Location'), max_length=255, blank=True)
     url             = models.URLField(_('URL'), max_length=255, blank=True)
     
-    email_notification = models.BooleanField(_('Email Notification'), default=True)
     slug               = models.SlugField(_('Slug'), max_length=30)
     
     objects         = UserManager()
@@ -63,7 +62,15 @@ class KommonzUser(User):
     def get_absolute_url(self):
         return ('auth_user_detail', (), { 'pk' : self.pk })
         
-        
+
+class UserProfile(models.Model):
+    # This field is required.
+    user = models.OneToOneField(User)
+
+    # Other fields here
+    email_notification = models.BooleanField(_('Email Notification'), default=True)
+
+
 def create_kommonz_user(sender, instance, created, **kwargs):
     if created and isinstance(instance, User) and not isinstance(instance, KommonzUser):
         try:
@@ -82,6 +89,13 @@ def delete_kommonz_user(sender, instance, **kwargs):
         except:
             pass # fail silently.
         
-        
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+post_save.connect(create_user_profile, sender=User)
 post_save.connect(create_kommonz_user, sender=User)
 pre_delete.connect(delete_kommonz_user, sender=User)

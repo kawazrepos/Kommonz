@@ -194,6 +194,8 @@ AUTHENTICATION_BACKENDS = (
 
 CUSTOM_USER_MODEL = 'auth.KommonzUser'
 
+AUTH_PROFILE_MODULE = 'auth.UserProfile'
+
 #
 # SocialAuth Setting
 #

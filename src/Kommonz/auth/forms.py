@@ -6,4 +6,4 @@ class UserUpdateForm(ModelForm):
 
     class Meta:
         model = KommonzUser
-        fields = ('nickname', 'icon', 'sex', 'birthday', 'place', 'url', 'email', 'email_notification', 'profile',)
+        fields = ('nickname', 'icon', 'sex', 'birthday', 'place', 'url', 'email', 'profile',)
