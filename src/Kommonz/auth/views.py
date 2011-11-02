@@ -1,14 +1,14 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from forms import UserUpdateForm
-from models import KommonzUser
+from models import User
 
 class UserDetailView(DetailView):
-    model = KommonzUser
+    model = User
 
 
 class UserUpdateView(UpdateView):
-    model       = KommonzUser
+    model       = User
     form_class  = UserUpdateForm
     
     def get_queryset(self):

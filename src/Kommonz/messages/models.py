@@ -1,8 +1,9 @@
-from django.db import models
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from qwert.middleware.threadlocals import request as get_request
-from auth.models import KommonzUser
+
 
 
 class Message(models.Model):
@@ -15,9 +16,9 @@ class Message(models.Model):
         )
     pub_state       = models.CharField(_('publish status'), choices=PUB_STATES, max_length=20)
     label           = models.CharField(_('subject'), max_length=255)
-    user_from       = models.ForeignKey(KommonzUser, verbose_name=_('sender'), 
+    user_from       = models.ForeignKey(User, verbose_name=_('sender'), 
                                          related_name='sent_messages', editable=False)
-    user_to         = models.ForeignKey(KommonzUser, verbose_name=_('reciver'), related_name='received_messages')
+    user_to         = models.ForeignKey(User, verbose_name=_('reciver'), related_name='received_messages')
     read            = models.BooleanField(_('has already read'), default=False)
     created_at      = models.DateTimeField(_('sent at'), auto_now_add=True)
     body            = models.TextField(_('body'))

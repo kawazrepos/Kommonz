@@ -3,19 +3,19 @@
 #    Kommonz.materials.models.base
 #    created by giginet on 2011/10/02
 #
-import os
-import mimetypes
-from django.db import models
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext as _
-
-from qwert.middleware.threadlocals import request as get_request
-from imagefield.fields import ImageField
-from object_permission.mediators import ObjectPermissionMediator as Mediator
-
-from auth.models import KommonzUser
 from ccfield.models import CreativeCommonsField
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.translation import ugettext as _
+from imagefield.fields import ImageField
 from materials.managers import MaterialManager
+from object_permission.mediators import ObjectPermissionMediator as Mediator
+from qwert.middleware.threadlocals import request as get_request
+import mimetypes
+import os
+
+
 
 class Material(models.Model):
     u"""
@@ -49,7 +49,7 @@ class Material(models.Model):
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at  = models.DateTimeField(_('Updated At'), auto_now=True)
-    author      = models.ForeignKey(KommonzUser, verbose_name=_('author'), editable=False, related_name="materials")
+    author      = models.ForeignKey(User, verbose_name=_('author'), editable=False, related_name="materials")
     pv          = models.PositiveIntegerField(_('Page View'), default=0, editable=False)
     download    = models.PositiveIntegerField(_('Download Count'), default=0, editable=False)
     ip          = models.IPAddressField(_('IP Address'), editable=False)
@@ -71,7 +71,7 @@ class Material(models.Model):
             self.author = request.user
             self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
         else:
-            self.author = KommonzUser.objects.get(pk=1)
+            self.author = User.objects.get(pk=1)
         if not self.label:
             self.label = self.file.name
         return super(Material, self).clean()

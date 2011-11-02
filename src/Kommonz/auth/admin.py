@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from Kommonz.auth.models import KommonzUser
 from auth.models import UserProfile
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
@@ -19,5 +17,4 @@ class KommonzUserAdmin(UserAdmin):
     )
     list_display = ('nickname', 'username', 'sex', 'birthday', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'sex',)
-admin.site.register(KommonzUser, UserAdmin)
 admin.site.register(UserProfile)
