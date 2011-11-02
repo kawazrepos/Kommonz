@@ -7,7 +7,7 @@ __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/09'
 
-class KommonzUserAdmin(UserAdmin):
+class UserProfileAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),

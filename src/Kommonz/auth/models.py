@@ -7,7 +7,6 @@ from django.utils.translation import ugettext as _
 from imagefield.fields import ImageField
 
 
-
 class UserProfile(models.Model):
     # This field is required.
     user = models.OneToOneField(User)
@@ -53,12 +52,12 @@ class UserProfile(models.Model):
         return self.user.username
     
     def save(self, force_insert=False, force_update=False, using=None):
-        self.slug = slugify(self.username)
+        self.slug = slugify(self.user.username)
         super(UserProfile, self).save(force_insert=force_insert, force_update=force_update, using=using)
     
     class Meta:
-        verbose_name        = _('Kommonz User')
-        verbose_name_plural = _('Kommonz Users')
+        verbose_name        = _('User Profile')
+        verbose_name_plural = _('User Profiles')
         
 
     @models.permalink
@@ -69,7 +68,7 @@ class UserProfile(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
+        UserProfile.objects.get_or_create(user=instance)
 
 
 post_save.connect(create_user_profile, sender=User)
