@@ -28,8 +28,11 @@ def response_mimetype(request):
         return "text/plain"
 
 class MaterialCreateView(CreateView):
+    model = Material
+
+class MaterialFileCreateView(CreateView):
     model = MaterialData
-    template_name = 'materials/material_form.html'
+    template_name = 'materials/material_file_form.html'
    
     def form_valid(self, form):
         self.object = form.save()

@@ -17,6 +17,35 @@ from auth.models import KommonzUser
 from ccfield.models import CreativeCommonsField
 from materials.managers import MaterialManager
 
+class MaterialFile(models.Model):
+    u"""
+        model for file
+    """
+    
+    def _get_file_path(self, filename):
+        request = get_request()
+        path = u'storage/materials/%s/' % request.user.username
+        return os.path.join(path, filename)
+    
+    file       = models.FileField(_('File'), upload_to=_get_file_path)
+    
+    class Meta:
+        app_label = 'materials'
+        ordering            = ('-material__pk',)
+        verbose_name        = _('MaterialData')
+        verbose_name_plural = _('MaterialDatas')
+
+    def __unicode__(self):
+        return self.file.name
+    
+    def clean(self):
+        material = Material.objects.create(label=self.file.name)
+        self.material = material
+        return super(MaterialData, self).clean()
+    
+    def save(self, *args, **kwargs):
+        return super(MaterialData, self).save(*args, **kwargs)
+
 class Material(models.Model):
     u"""
         abstract model of whole materials.
@@ -39,6 +68,7 @@ class Material(models.Model):
     # not required 
     description = models.TextField(_('Description'), blank=False, null=True)
     thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True) # it will replace to ThumbnailField
+    _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
@@ -57,7 +87,7 @@ class Material(models.Model):
         verbose_name_plural = _('Materials')
         
     def __unicode__(self):
-        return '%s(%s)' % (self.label, self.data.file.name)
+        return '%s(%s)' % (self.label, self.file.name)
     
     def clean(self):
         return super(Material, self).clean()
@@ -67,13 +97,17 @@ class Material(models.Model):
         return ('materials_material_detail', (), {'pk': self.pk})
     
     def get_thumbnail_url(self):
-        return self.data.file.path
+        return self.file.path
+
+    @property
+    def file(self):
+        return self._file.file
     
     @property
     def mimetype(self):
         try:
             mimetypes.init()
-            type = mimetypes.guess_type(self.data.file.name)[0]
+            type = mimetypes.guess_type(self.file.name)[0]
         except:
             type = None
         return type
@@ -81,20 +115,20 @@ class Material(models.Model):
     @property
     def filetype_model(self):
         from ..utils.filetypes import get_file_model
-        return get_file_model(self.data.file.name)
+        return get_file_model(self.file.name)
     
     @property
     def encoding(self):
         try:
             mimetypes.init()
-            encoding = mimetypes.guess_type(self.data.file.name)[1]
+            encoding = mimetypes.guess_type(self.file.name)[1]
         except:
             encoding = None
         return encoding
     
     @property
     def extention(self):
-        return os.path.splitext(self.data.file.name)[1]
+        return os.path.splitext(self.file.name)[1]
     
     def save(self, *args, **kwargs):
         from ..utils.filetypes import get_file_model
@@ -116,36 +150,6 @@ class Material(models.Model):
         # ToDo collaborators
         # map(lambda user: mediator.editor(self, user), self.collaborators)
         
-class MaterialData(models.Model):
-    u"""
-        model for file
-    """
-    
-    def _get_file_path(self, filename):
-        request = get_request()
-        path = u'storage/materials/%s/' % request.user.username
-        return os.path.join(path, filename)
-    
-    file       = models.FileField(_('File'), upload_to=_get_file_path)
-    material   = models.OneToOneField(Material, verbose_name=('Material'), related_name='data')
-    
-    class Meta:
-        app_label = 'materials'
-        ordering            = ('-material__pk',)
-        verbose_name        = _('MaterialData')
-        verbose_name_plural = _('MaterialDatas')
-
-    def __unicode__(self):
-        return self.file.name
-    
-    def clean(self):
-        material = Material.objects.create(label=self.file.name)
-        self.material = material
-        return super(MaterialData, self).clean()
-    
-    def save(self, *args, **kwargs):
-        return super(MaterialData, self).save(*args, **kwargs)
-
 class Kero(models.Model):
     u"""
         Kero is a rating system for Materials.
