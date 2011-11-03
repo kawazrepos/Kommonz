@@ -32,19 +32,18 @@ class MaterialFile(models.Model):
     class Meta:
         app_label = 'materials'
         ordering            = ('-material__pk',)
-        verbose_name        = _('MaterialData')
-        verbose_name_plural = _('MaterialDatas')
+        verbose_name        = _('MaterialFile')
+        verbose_name_plural = _('MaterialFiles')
 
     def __unicode__(self):
         return self.file.name
     
-    def clean(self):
-        material = Material.objects.create(label=self.file.name)
-        self.material = material
-        return super(MaterialData, self).clean()
-    
     def save(self, *args, **kwargs):
-        return super(MaterialData, self).save(*args, **kwargs)
+        return super(MaterialFile, self).save(*args, **kwargs)
+
+    @property
+    def extension(self):
+      return os.path.splitext(self.file.name)[1][1:]
 
 class Material(models.Model):
     u"""
@@ -127,8 +126,8 @@ class Material(models.Model):
         return encoding
     
     @property
-    def extention(self):
-        return os.path.splitext(self.file.name)[1]
+    def extension(self):
+      return os.path.splitext(self.file.name)[1][1:]
     
     def save(self, *args, **kwargs):
         from ..utils.filetypes import get_file_model

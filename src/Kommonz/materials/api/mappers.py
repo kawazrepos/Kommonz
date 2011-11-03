@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from bpmappers import DelegateField, NonKeyField
 from bpmappers.djangomodel import ModelMapper
 from Kommonz.auth.mappers import KommonzUserMapper
-from ..models.base import Material
+from ..models.base import Material, MaterialFile
 
 class MaterialMapper(ModelMapper):
     #author = DelegateField(KommonzUserMapper, 'author')
@@ -36,3 +36,18 @@ class MaterialMapper(ModelMapper):
     class Meta:
         model  = Material
         fields = ('label', 'description', 'file.name', 'created_at.__unicode__', 'updated_at.__unicode__', 'pv', 'download', )
+
+class MaterialFileMapper(ModelMapper):
+    filename = NonKeyField()
+    filetype = NonKeyField()
+
+    def filter_filename(self):
+        import os
+        return os.path.split(self.data.file.name)[1]
+
+    def filter_filetype(self):
+        return self.data.extension
+
+    class Meta:
+        model  = MaterialFile
+        fields = ('id',)

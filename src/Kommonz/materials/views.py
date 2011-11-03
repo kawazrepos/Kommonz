@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -9,9 +10,9 @@ from django import forms
 
 from object_permission.decorators import permission_required
 
-from models.base import Material, MaterialData
-from forms import MaterialForm
-from api.mappers import MaterialMapper
+from models.base import Material, MaterialFile
+from forms import MaterialForm, MaterialFileForm
+from api.mappers import MaterialMapper, MaterialFileMapper
 
 
 class MaterialDetailView(DetailView):
@@ -31,24 +32,30 @@ class MaterialCreateView(CreateView):
     model = Material
 
 class MaterialFileCreateView(CreateView):
-    model = MaterialData
+    model = MaterialFile
     template_name = 'materials/material_file_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MaterialFileCreateView, self).get_context_data(**kwargs)
+        context['material_form'] = MaterialForm()
+        return context
    
     def form_valid(self, form):
         self.object = form.save()
         
-        mapper = MaterialMapper(self.object.material)
-        
-        response = JSONResponse([mapper.as_dict(),], {}, response_mimetype(self.request))
+        mapper = MaterialFileMapper(self.object)
+        json = mapper.as_dict()
+        json['form_url'] = reverse('materials_material_create', args=[])
+        response = JSONResponse([json,], {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
     def get_form_class(self):
-        return MaterialForm
+        return MaterialFileForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MaterialCreateView, self).dispatch(*args, **kwargs)
+        return super(MaterialFileCreateView, self).dispatch(*args, **kwargs)
 
 def set_model(func):
     def _decorator(self, request, *args, **kwargs):
