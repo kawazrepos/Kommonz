@@ -166,6 +166,7 @@ INSTALLED_APPS = (
     'object_permission',            # Object permission library
     # Kommonz
     'Kommonz.auth',
+    'Kommonz.autocmd',
     'Kommonz.materials',
     'Kommonz.messages',
     'Kommonz.notifications',
@@ -188,11 +189,11 @@ AUTHENTICATION_BACKENDS = (
 #    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
     'registration.backends.hatena.HatenaBackend',
-    'auth.backends.KommonzUserModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 
-CUSTOM_USER_MODEL = 'auth.KommonzUser'
+AUTH_PROFILE_MODULE = 'auth.UserProfile'
 
 #
 # SocialAuth Setting
@@ -214,9 +215,6 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
-SOCIAL_AUTH_USER_MODEL = CUSTOM_USER_MODEL
-
-QWERT_AUTO_CREATE_USER = CUSTOM_USER_MODEL
 
 #
 # Testing configuration via nose.

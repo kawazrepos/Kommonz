@@ -1,4 +1,4 @@
-import os
+from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -8,8 +8,8 @@ from django.template.context import Context
 from django.template.loader import get_template
 from django.template.loader_tags import BlockNode
 from django.utils.translation import ugettext_lazy as _
-from auth.models import KommonzUser
 from messages.models import Message
+import os
 
 
 class Notification(models.Model):
@@ -17,9 +17,9 @@ class Notification(models.Model):
     
     label           = models.CharField(_('subject'), max_length=255)
     body            = models.TextField(_('body'))
-    user_from       = models.ForeignKey(KommonzUser, verbose_name=_('sender'), 
+    user_from       = models.ForeignKey(User, verbose_name=_('sender'), 
                                          related_name='sent_notifications', editable=False)
-    user_to         = models.ForeignKey(KommonzUser, verbose_name=_('reciver'),
+    user_to         = models.ForeignKey(User, verbose_name=_('reciver'),
                                          related_name='received_notifications')
     solved          = models.BooleanField(_('has already solved'), default=False)
     created_at      = models.DateTimeField(_('sent at'), auto_now_add=True)
@@ -45,7 +45,7 @@ def create_notification(related_object, template_filename,
                         user_to,
                         user_from = None):
     if not user_from:
-        user_from = KommonzUser.objects.get(pk=1)
+        user_from = User.objects.get(pk=1)
     template_path = os.path.join('notifications/template_notifications', template_filename)
     template = get_template(template_path)
     if template:

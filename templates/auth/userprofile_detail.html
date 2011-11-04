@@ -1,0 +1,19 @@
+{% extends "../base.html" %}
+
+{% block title %}{{ object.user.username }}{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール{% endblock %}
+
+{% block content%}
+<section id="detail_main">
+    <h1>{% if object.nickname %}{{ object.nickname }}{% else %}{{ object.user.username }}{% endif %}</h1>
+    <p><img src="{{ object.icon }}"></p>
+    <p>UserName：{{ object.user.username }}</p>
+    <p>プロフィール：{{ object.profile }}</p>
+    <p>性別：{{ object.sex }}</p>
+    <p>誕生日：{{ object.birthday }}</p>
+    <p>地域：{{ object.place }}</p>
+    <p>ウェブサイト：{{ object.url }}</p>
+    <p>メール：{{ object.user.email }}</p>
+    <p>最終ログイン：{{ object.user.last_login }}</p>
+</section>
+{% endblock %}

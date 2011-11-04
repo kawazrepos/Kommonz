@@ -9,7 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from object_permission.decorators import permission_required
-from auth.models import KommonzUser
+from auth.models import User
 from materials.models.base import Material
 from forms import MessageCreateForm, MaterialMessageCreateForm, \
                   ReplyMessageCreateForm, MessageDeleteForm
@@ -70,7 +70,7 @@ class MessageCreateView(CreateView):
             for userid in users_to:
                 create_object_dict = {'label' : post_dict['label'], 'body' : post_dict['body'],
                                   'user_from' : request.user, 'pub_state' : 'sent'}
-                create_object_dict['user_to'] = KommonzUser.objects.get(pk=userid)
+                create_object_dict['user_to'] = User.objects.get(pk=userid)
                 message = Message.objects.create(**create_object_dict)
                 message.save()
             return HttpResponseRedirect(self.get_success_url())
@@ -109,12 +109,12 @@ class MessageDeleteView(UpdateView):
 
 # create a fixed pattern message to user_to
 # by messages/template_messages/template_filename
-# usage: create_template_message(KommonzUser.objects.get(pk=1), 'welcome.txt')
+# usage: create_template_message(User.objects.get(pk=1), 'welcome.txt')
 def create_template_message(user_to, template_filename):
     template_path = os.path.join('messages/template_messages', template_filename)
     template = get_template(template_path)
     if template:
-        create_object_dict = {'user_from' : KommonzUser.objects.get(pk=1),
+        create_object_dict = {'user_from' : User.objects.get(pk=1),
                               'user_to' : user_to}
         context = Context(create_object_dict.copy())
         if len(template.nodelist):

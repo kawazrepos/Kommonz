@@ -1,11 +1,11 @@
-from auth.models import KommonzUser
 from django import forms
+from django.contrib.auth.models import User
 from django.forms.models import ModelForm
 from models import Message
 
 
 class MessageCreateForm(ModelForm):
-    users_to = forms.ModelMultipleChoiceField(queryset=KommonzUser.objects.all())
+    users_to = forms.ModelMultipleChoiceField(queryset=User.objects.all())
     
     class Meta:
         model = Message
