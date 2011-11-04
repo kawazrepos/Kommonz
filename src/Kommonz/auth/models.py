@@ -26,9 +26,9 @@ class UserProfile(models.Model):
     }
     
     # required
-    user     = models.OneToOneField(User, related_name='profile')
-    nickname = models.CharField(_('Nickname'), max_length=32, blank=False, null=True)
-    profile  = models.TextField(_('Profile'), blank=False, null=True)
+    user        = models.OneToOneField(User, related_name='profile')
+    nickname    = models.CharField(_('Nickname'), max_length=32, blank=False, null=True)
+    description = models.TextField(_('Profile Text'), blank=False, null=True)
     
     # not required
     icon         = ImageField(_('Profile Icon'), upload_to=_get_icon_path)

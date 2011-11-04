@@ -12,5 +12,5 @@ class UserUpdateForm(ModelForm):
 class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('nickname', 'profile', 'icon', 'sex', 'birthday', 'place', 'url')
+        fields = ('nickname', 'description', 'icon', 'sex', 'birthday', 'place', 'url')
         

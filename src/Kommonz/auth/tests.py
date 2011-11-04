@@ -30,12 +30,12 @@ class TestAuthentication(object):
         ok_(UserConfig.objects.get(user=kagamin))
 
         
-#class TestKommonzUserMapper(object):
-#    def test_user_mapper(self):
-#        from mappers import KommonzUserMapper
-#        user = User.objects.create_user(username='kawaz', email='kawaz@gmail.com')
-#        user.nickname = 'Kawaz Inonaka'
-#        user.save()
-#        mapper = KommonzUserMapper(user)
-#        dict = mapper.as_dict()
-#        eq_(dict['nickname'], 'Kawaz Inonaka')
+class TestUserProfileMapper(object):
+    def test_user_mapper(self):
+        from mappers import UserProfileMapper
+        user = User.objects.create_user(username='kawaz', email='kawaz@gmail.com')
+        user.profile.nickname = 'Kawaz Inonaka'
+        user.save()
+        mapper = UserProfileMapper(user.profile)
+        dict = mapper.as_dict()
+        eq_(dict['nickname'], 'Kawaz Inonaka')
