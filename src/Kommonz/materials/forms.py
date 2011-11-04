@@ -7,9 +7,12 @@ from django import forms
 from models.base import Material, MaterialFile
 
 class MaterialForm(forms.ModelForm):
+    _file = forms.IntegerField()
+    
     class Meta:
         model  = Material
 
 class MaterialFileForm(forms.ModelForm):
+
     class Meta:
         model = MaterialFile

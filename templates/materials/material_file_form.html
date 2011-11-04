@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load upload_tags %}
+{% load reversetag %}
 
 {% block head %}
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
@@ -37,6 +38,8 @@
     <table class="files"></table>
     <div class="fileupload-progressbar"></div>
   </div>
+</div>
+<div class="material-info-forms" form-url="{% reverse "materials_material_create" %}">
 </div>
 {% upload_js %}
 {% endblock %}

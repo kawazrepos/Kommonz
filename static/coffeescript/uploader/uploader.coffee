@@ -1,22 +1,24 @@
 $ ->
   $uploader = $('#material-uploader')
+  $infoForms = $ ".material-info-forms"
   $uploader.fileupload
+    send : (event, response) ->
+      form_url = $infoForms.attr 'form-url'
+      console.log form_url
+      $infoForm = $('<div>').addClass 'material-info-form'
+      $infoForm.load form_url, (data) ->
+        #$(@).find("input[type='submit']").hide()
+        $(@).find("form").attr('action', form_url)
+        $infoForms.append @
+        $(@).toggle(false)
+         .toggle 'slow'
+      true
     done : (event, response) ->
       $(response.result).each ->
-        data = this
-        console.log(this)
-        form_url = data['form_url']
-        table = $uploader.find('table.files')
-        $tr = $('<tr>').addClass('material-info-form')
-        $tr.load form_url, (data) ->
-          table.append($tr)
-          $tr.toggle(false)
-            .toggle('normal')
-          $tr.find('input[type=submit]').click ->
-            console.log($tr.find('form').serialize())
-            $.post form_url, $tr.find('form').serialize(), (data) ->
-              console.log(data)
-            return false
+        $fileField = $('#id__file')
+        console.log($fileField)
+        $fileField.val(@['id'])
+        return false
   
   $.getJSON $uploader.find('form').prop('action'), (files) ->
     fu = $uploader.data('fileupload')
@@ -24,10 +26,10 @@ $ ->
     fu._renderDownload(files)
       .append(material.find('.files'))
       .fadeIn -> 
-        $(this).show()
+        $(@).show()
   
   $uploader.find('.files a:not([target^=_blank])').live 'click', (e) ->
     e.preventDefault()
     $('iframe').css('display', 'none')
-      .prop('src', this.href)
+      .prop('src', @href)
       .appendTo('body')

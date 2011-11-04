@@ -31,22 +31,18 @@ def response_mimetype(request):
 class MaterialCreateView(CreateView):
     model = Material
 
+    def get_form_class(self):
+        return MaterialForm
+
 class MaterialFileCreateView(CreateView):
     model = MaterialFile
     template_name = 'materials/material_file_form.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(MaterialFileCreateView, self).get_context_data(**kwargs)
-        context['material_form'] = MaterialForm()
-        return context
-   
     def form_valid(self, form):
         self.object = form.save()
         
         mapper = MaterialFileMapper(self.object)
-        json = mapper.as_dict()
-        json['form_url'] = reverse('materials_material_create', args=[])
-        response = JSONResponse([json,], {}, response_mimetype(self.request))
+        response = JSONResponse([mapper.as_dict(),], {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
