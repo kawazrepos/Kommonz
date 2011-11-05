@@ -16,6 +16,9 @@
           $form = $(this).find('form');
           $form.attr('action', form_url);
           $form.find('#id__file').val(file_id);
+          if (!file_id) {
+            $form.find("input[type='submit']").hide();
+          }
           $form.find('#id_label').val(response.files[0].fileName);
           $form.submit(function() {
             $.post(form_url, $form.serialize(), function(data) {
@@ -54,9 +57,10 @@
           var $fileField;
           $fileField = $('#id__file');
           file_id = this['id'];
-          return $fileField.val(this['id']);
+          $fileField.val(this['id']);
+          return $('.material-info-form').find("input[type='submit']").show();
         });
-        return true;
+        return false;
       }
     });
     $.getJSON($uploader.find('form').prop('action'), function(files) {

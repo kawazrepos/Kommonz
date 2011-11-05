@@ -12,6 +12,8 @@ $ ->
         $form = $(@).find('form')
         $form.attr('action', form_url)
         $form.find('#id__file').val(file_id)
+        if not file_id
+          $form.find("input[type='submit']").hide()
         $form.find('#id_label').val(response.files[0].fileName)
         $form.submit ->
           $.post form_url, $form.serialize(), (data) ->
@@ -34,7 +36,8 @@ $ ->
         $fileField = $('#id__file')
         file_id = @['id']
         $fileField.val(@['id'])
-      true
+        $('.material-info-form').find("input[type='submit']").show()
+      false
   
   $.getJSON $uploader.find('form').prop('action'), (files) ->
     fu = $uploader.data('fileupload')

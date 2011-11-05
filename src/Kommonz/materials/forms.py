@@ -7,7 +7,7 @@ from django import forms
 from models.base import Material, MaterialFile
 
 class MaterialForm(forms.ModelForm):
-    _file = forms.IntegerField()
+    _file = forms.IntegerField(widget=forms.HiddenInput())
     
     class Meta:
         model  = Material
