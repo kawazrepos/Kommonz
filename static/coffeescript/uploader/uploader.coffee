@@ -2,6 +2,8 @@ $ ->
   $uploader = $('#material-uploader')
   $infoForms = $ ".material-info-forms"
   $uploader.fileupload
+    autoUpload : true
+    maxNumberOfFiles : 1
     send : (event, response) ->
       form_url = $infoForms.attr 'form-url'
       console.log form_url
@@ -17,8 +19,9 @@ $ ->
       $(response.result).each ->
         $fileField = $('#id__file')
         console.log($fileField)
+        console.log(@['id'])
         $fileField.val(@['id'])
-        return false
+      true
   
   $.getJSON $uploader.find('form').prop('action'), (files) ->
     fu = $uploader.data('fileupload')

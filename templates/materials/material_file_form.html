@@ -16,11 +16,6 @@
 {% block title %}素材投稿{% endblock %}
 
 {% block content %}
-<form method="post" action="" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.file }}
-  <input type="submit">
-</form>
 <div id="material-uploader">
   <form method="post" action="" enctype="multipart/form-data">
     <div class="fileupload-buttonbar">
@@ -29,17 +24,13 @@
         <span>Add files...</span>
         {{ form.file }}
       </label>
-      <button type="submit" class="start">Start upload</button>
-      <button type="reset" class="cancel">Cancel upload</button>
-      <button type="button" class="delete">Delete files</button>
     </div>
   </form>
   <div class="fileupload-content">
     <table class="files"></table>
     <div class="fileupload-progressbar"></div>
+    <div class="material-info-forms" form-url="{% reverse "materials_material_create" %}"></div>
   </div>
-</div>
-<div class="material-info-forms" form-url="{% reverse "materials_material_create" %}">
 </div>
 {% upload_js %}
 {% endblock %}

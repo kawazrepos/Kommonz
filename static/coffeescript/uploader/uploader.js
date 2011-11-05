@@ -4,6 +4,8 @@
     $uploader = $('#material-uploader');
     $infoForms = $(".material-info-forms");
     $uploader.fileupload({
+      autoUpload: true,
+      maxNumberOfFiles: 1,
       send: function(event, response) {
         var $infoForm, form_url;
         form_url = $infoForms.attr('form-url');
@@ -17,13 +19,14 @@
         return true;
       },
       done: function(event, response) {
-        return $(response.result).each(function() {
+        $(response.result).each(function() {
           var $fileField;
           $fileField = $('#id__file');
           console.log($fileField);
-          $fileField.val(this['id']);
-          return false;
+          console.log(this['id']);
+          return $fileField.val(this['id']);
         });
+        return true;
       }
     });
     $.getJSON($uploader.find('form').prop('action'), function(files) {

@@ -34,13 +34,29 @@ class MaterialCreateView(CreateView):
     def get_form_class(self):
         return MaterialForm
 
+    def form_valid(self, form):
+        super(MaterialCreateView, self).form_valid(form)
+        response = {
+                    'status' : 'success',
+                    'url' : self.get_success_url()
+        }
+        return JSONResponse([response,], {}, response_mimetype(self.request))
+
+    def form_invalid(self, form):
+        super(MaterialCreateView, self).form_invalid(form)
+        response = {
+                    'status' : 'error',
+                    'errors' : form.errors,
+        }
+        return JSONResponse([response,], {}, response_mimetype(self.request))
+
+
 class MaterialFileCreateView(CreateView):
     model = MaterialFile
     template_name = 'materials/material_file_form.html'
 
     def form_valid(self, form):
         self.object = form.save()
-        
         mapper = MaterialFileMapper(self.object)
         response = JSONResponse([mapper.as_dict(),], {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
