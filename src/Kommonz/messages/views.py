@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+#
+# Author:        tohhy
+# Date:          2011/11/04
+#
 import os
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -107,15 +112,32 @@ class MessageDeleteView(UpdateView):
         return HttpResponseRedirect(self.get_success_url())
     
 
-# create a fixed pattern message to user_to
-# by messages/template_messages/template_filename
-# usage: create_template_message(User.objects.get(pk=1), 'welcome.txt')
-def create_template_message(user_to, template_filename):
+
+def create_template_message(user_to, template_filename, **kwargs):
+    u"""
+    Create a fixed pattern message to user_to by template
+    
+    Attribute:
+        user_to           - User created message send to
+        template_filename - message template filename at messages/template_messages/.
+                            template should include block label and body, used as message subject and body
+        kwargs            - this dict will be thrown to template as context.
+        
+    Notice:
+        context by default includes user_from and user_to, so you can call it in template
+        as {{ user_from }} or {{ user_to }}.
+        user_from is by default User whose pk=1.
+    
+    Usage: 
+        create_template_message(User.objects.get(pk=1), 'welcome.txt')
+        
+    """
     template_path = os.path.join('messages/template_messages', template_filename)
     template = get_template(template_path)
     if template:
         create_object_dict = {'user_from' : User.objects.get(pk=1),
                               'user_to' : user_to}
+        create_object_dict.update(kwargs)
         context = Context(create_object_dict.copy())
         if len(template.nodelist):
             for block in template.nodelist:

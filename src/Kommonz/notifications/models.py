@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+#
+# Author:        tohhy
+# Date:          2011/11/04
+#
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
@@ -43,7 +48,26 @@ class Notification(models.Model):
 
 def create_notification(related_object, template_filename, 
                         user_to,
-                        user_from = None):
+                        user_from = None,
+                        **kwargs):
+    u"""
+    Create notification to user_to by template.
+    
+    Attribute:
+        related_object    - object which related to notification
+        template_filename - message template filename at notifications/template_notifications/.
+                            template should include block label and body, used as message subject and body
+        user_to           - User created notification send to
+        kwargs            - this dict will be thrown to template as context.
+        
+    Notice:
+        context by default includes user_from and user_to, so you can call it in template
+        as {{ user_from }} or {{ user_to }}.
+        user_from is by default User whose pk=1.
+    
+    Usage: 
+        create_notification(message_instance, 'new_message.txt', instance.user_to, user_from=instance.user_from)
+    """
     if not user_from:
         user_from = User.objects.get(pk=1)
     template_path = os.path.join('notifications/template_notifications', template_filename)
@@ -55,6 +79,7 @@ def create_notification(related_object, template_filename,
                               'object_id' : related_object.pk}
         context = Context(create_object_dict)
         context.update({'object':related_object})
+        context.update(kwargs)
         
         if len(template.nodelist):
             for block in template.nodelist:
@@ -71,6 +96,7 @@ def create_notification(related_object, template_filename,
 # signal callbacks below
 @receiver(post_save, sender=Message,  dispatch_uid='notifications.models')
 def new_message_callback(sender, **kwargs):
+    u"""notification of new message received"""
     if kwargs.get('created', None):
         instance = kwargs.get('instance', None)
         if instance:
