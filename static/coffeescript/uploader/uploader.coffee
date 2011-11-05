@@ -1,16 +1,30 @@
 $ ->
   $uploader = $('#material-uploader')
   $infoForms = $ ".material-info-forms"
+  file_id = undefined
   $uploader.fileupload
     autoUpload : true
     maxNumberOfFiles : 1
     send : (event, response) ->
       form_url = $infoForms.attr 'form-url'
-      console.log form_url
       $infoForm = $('<div>').addClass 'material-info-form'
       $infoForm.load form_url, (data) ->
-        #$(@).find("input[type='submit']").hide()
-        $(@).find("form").attr('action', form_url)
+        $form = $(@).find('form')
+        $form.attr('action', form_url)
+        $form.find('#id__file').val(file_id)
+        $form.find('#id_label').val(response.files[0].fileName)
+        $form.submit ->
+          $.post form_url, $form.serialize(), (data) ->
+            if(data['status'] is 'success')
+              location.href = location.href.split('/')[0..2].join('/') + data['url']
+            else if(data['status'] is 'error')
+              for field, values of data['errors']
+                for value in values
+                  $e = $('<p>').append(value).addClass('material-form-error')
+                  $form.find('.material-form-error').remove()
+                  $form.find("#id_#{field}").after($e)
+          , 'json'
+          false
         $infoForms.append @
         $(@).toggle(false)
          .toggle 'slow'
@@ -18,8 +32,7 @@ $ ->
     done : (event, response) ->
       $(response.result).each ->
         $fileField = $('#id__file')
-        console.log($fileField)
-        console.log(@['id'])
+        file_id = @['id']
         $fileField.val(@['id'])
       true
   

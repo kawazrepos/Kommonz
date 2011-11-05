@@ -40,7 +40,7 @@ class MaterialCreateView(CreateView):
                     'status' : 'success',
                     'url' : self.get_success_url()
         }
-        return JSONResponse([response,], {}, response_mimetype(self.request))
+        return JSONResponse(response, {}, response_mimetype(self.request))
 
     def form_invalid(self, form):
         super(MaterialCreateView, self).form_invalid(form)
@@ -48,7 +48,7 @@ class MaterialCreateView(CreateView):
                     'status' : 'error',
                     'errors' : form.errors,
         }
-        return JSONResponse([response,], {}, response_mimetype(self.request))
+        return JSONResponse(response, {}, response_mimetype(self.request))
 
 
 class MaterialFileCreateView(CreateView):

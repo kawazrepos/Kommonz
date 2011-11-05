@@ -1,18 +1,49 @@
 (function() {
   $(function() {
-    var $infoForms, $uploader;
+    var $infoForms, $uploader, file_id;
     $uploader = $('#material-uploader');
     $infoForms = $(".material-info-forms");
+    file_id = void 0;
     $uploader.fileupload({
       autoUpload: true,
       maxNumberOfFiles: 1,
       send: function(event, response) {
         var $infoForm, form_url;
         form_url = $infoForms.attr('form-url');
-        console.log(form_url);
         $infoForm = $('<div>').addClass('material-info-form');
         $infoForm.load(form_url, function(data) {
-          $(this).find("form").attr('action', form_url);
+          var $form;
+          $form = $(this).find('form');
+          $form.attr('action', form_url);
+          $form.find('#id__file').val(file_id);
+          $form.find('#id_label').val(response.files[0].fileName);
+          $form.submit(function() {
+            $.post(form_url, $form.serialize(), function(data) {
+              var $e, field, value, values, _ref, _results;
+              if (data['status'] === 'success') {
+                return location.href = location.href.split('/').slice(0, 3).join('/') + data['url'];
+              } else if (data['status'] === 'error') {
+                _ref = data['errors'];
+                _results = [];
+                for (field in _ref) {
+                  values = _ref[field];
+                  _results.push((function() {
+                    var _i, _len, _results2;
+                    _results2 = [];
+                    for (_i = 0, _len = values.length; _i < _len; _i++) {
+                      value = values[_i];
+                      $e = $('<p>').append(value).addClass('material-form-error');
+                      $form.find('.material-form-error').remove();
+                      _results2.push($form.find("#id_" + field).after($e));
+                    }
+                    return _results2;
+                  })());
+                }
+                return _results;
+              }
+            }, 'json');
+            return false;
+          });
           $infoForms.append(this);
           return $(this).toggle(false).toggle('slow');
         });
@@ -22,8 +53,7 @@
         $(response.result).each(function() {
           var $fileField;
           $fileField = $('#id__file');
-          console.log($fileField);
-          console.log(this['id']);
+          file_id = this['id'];
           return $fileField.val(this['id']);
         });
         return true;
