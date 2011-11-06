@@ -7,17 +7,18 @@ $ ->
     maxNumberOfFiles : 1
     send : (event, response) ->
       form_url = $infoForms.attr 'form-url'
+      filename = response.files[0].fileName
       $infoForm = $('<div>').addClass 'material-info-form'
-      $infoForm.load form_url, (data) ->
+      console.log filename
+      $infoForm.load "#{form_url}?filename=#{filename}", (data) ->
         $form = $(@).find('form')
         $form.attr('action', form_url)
         $form.find('#id__file').val(file_id)
         if not file_id
           $form.find("input[type='submit']").hide()
-        $form.find('#id_label').val(response.files[0].fileName)
+        $form.find('#id_label').val(filename)
         $form.submit ->
           $.post form_url, $form.serialize(), (data) ->
-            console.log(data)
             if(data['status'] is 'success')
               location.href = location.href.split('/')[0..2].join('/') + data['url']
             else if(data['status'] is 'error')

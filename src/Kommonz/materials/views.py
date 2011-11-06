@@ -19,7 +19,7 @@ class MaterialDetailView(DetailView):
     model = Material
     
     def get_context_data(self, **kwargs):
-        context=super(DetailView, self).get_context_data(**kwargs)
+        context = super(DetailView, self).get_context_data(**kwargs)
         return context
 
 def response_mimetype(request):
@@ -28,11 +28,24 @@ def response_mimetype(request):
     else:
         return "text/plain"
 
+def set_material_model(func):
+    def _decorator(self, request, *args, **kwargs):
+        filename = request.GET.get('filename', None)
+        self.material_model = Material.objects.get_file_model(filename)
+        res = func(self, request, *args, **kwargs)
+        return res
+    return _decorator
+
 class MaterialCreateView(CreateView):
     model = Material
 
-    def get_form_class(self):
-        return MaterialForm
+    @set_material_model
+    def get(self, request, *args, **kwargs):
+        return super(MaterialCreateView, self).get(request, *args, **kwargs)
+
+    @set_material_model
+    def post(self, request, *args, **kwargs):
+        return super(MaterialCreateView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
         super(MaterialCreateView, self).form_valid(form)
@@ -49,6 +62,15 @@ class MaterialCreateView(CreateView):
         }
         return JSONResponse(response, {}, response_mimetype(self.request))
 
+    def get_form_class(self):
+        # ref http://www.agmweb.ca/blog/andy/2249/
+        args = getattr(self, 'FORM_META_ARGS', {})
+        args.update({'model' : self.material_model})
+        meta = type('Meta', (), args) # create Meta class(ref Expert Python Programming p119)
+        from django import forms
+        filefield = forms.IntegerField(widget=forms.HiddenInput())
+        modelform_class = type('modelform', (forms.ModelForm,), {"Meta": meta, "_file" : filefield}) # create new class extended MaterialUpdateForm
+        return modelform_class
 
 class MaterialFileCreateView(CreateView):
     model = MaterialFile
@@ -68,34 +90,9 @@ class MaterialFileCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(MaterialFileCreateView, self).dispatch(*args, **kwargs)
 
-def set_model(func):
-    def _decorator(self, request, *args, **kwargs):
-        pk = kwargs.get('pk', None)
-        instance = get_object_or_404(Material, pk=pk)
-        self.model = instance.filetype_model
-        res = func(self, request, *args, **kwargs)
-        return res
-    return _decorator
-
 class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
-    
-    @set_model
-    def get(self, request, *args, **kwargs):
-        return super(MaterialUpdateView, self).get(request, *args, **kwargs)
-    
-    @set_model
-    def post(self, request, *args, **kwargs):
-        return super(MaterialUpdateView, self).post(request, *args, **kwargs)
-    
-    def get_form_class(self):
-        # ref http://www.agmweb.ca/blog/andy/2249/
-        args = getattr(self, 'FORM_META_ARGS', {})
-        args.update({'model' : self.model})
-        meta = type('Meta', (), args) # create Meta class(ref Expert Python Programming p119)
-        modelform_class = type('modelform', (forms.ModelForm,), {"Meta": meta}) # create new class extended MaterialUpdateForm
-        return modelform_class
     
     @method_decorator(permission_required('materials.change_material', Material))
     def dispatch(self, *args, **kwargs):

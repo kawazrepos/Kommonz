@@ -8,10 +8,12 @@
       autoUpload: true,
       maxNumberOfFiles: 1,
       send: function(event, response) {
-        var $infoForm, form_url;
+        var $infoForm, filename, form_url;
         form_url = $infoForms.attr('form-url');
+        filename = response.files[0].fileName;
         $infoForm = $('<div>').addClass('material-info-form');
-        $infoForm.load(form_url, function(data) {
+        console.log(filename);
+        $infoForm.load("" + form_url + "?filename=" + filename, function(data) {
           var $form;
           $form = $(this).find('form');
           $form.attr('action', form_url);
@@ -19,11 +21,10 @@
           if (!file_id) {
             $form.find("input[type='submit']").hide();
           }
-          $form.find('#id_label').val(response.files[0].fileName);
+          $form.find('#id_label').val(filename);
           $form.submit(function() {
             $.post(form_url, $form.serialize(), function(data) {
               var $e, field, value, values, _ref, _results;
-              console.log(data);
               if (data['status'] === 'success') {
                 return location.href = location.href.split('/').slice(0, 3).join('/') + data['url'];
               } else if (data['status'] === 'error') {

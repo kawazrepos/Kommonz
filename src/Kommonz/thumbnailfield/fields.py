@@ -1,26 +1,59 @@
 # -*- coding: utf-8 -*-
 #
-# src/Kommonz/thumbnailfield/models.py
+# src/Kommonz/thumbnailfield/fields.py
 # created by giginet on 2011/11/06
 #
-from django.db.models.fields.files import ImageField
+from django.db.models.fields.files import ImageField as _ImageField
 from django.db.models import signals
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from types import Thumbnail
 from widgets import DelAdminFileWidget
-from forms import ThumbnailFormField
+from forms import ImageFormField
 import os, shutil
 
-class ThumbnailField(ImageField):
-    def __init__(self, *args, **kwargs):
-        #
+class ThumbnailField:
+    '''
+    Instances of this class will be used to access data of the
+    generated thumbnails
+    '''
+    def __init__(self, name):
+        self.name = name
+        self.storage = FileSystemStorage()
+
+    @property
+    def path(self):
+        return self.storage.path(self.name)
+
+    @property
+    def url(self):
+        return self.storage.url(self.name)
+
+    @property
+    def size(self):
+        return self.storage.size(self.name)
+
+class ImageField(_ImageField):
+    '''
+    Django field that behaves as ImageField, with some extra features like:
+        - Auto resizing
+        - Automatically generate thumbnails
+        - Allow image deletion
+    '''
+    def __init__(self, verbose_name=None, name=None, width_field=None, height_field=None, size=None, thumbnail_size_patterns=None, **kwargs):
+        '''
+        Added fields:
+            - size: a tuple containing width and height to resize image, and an optional boolean setting if is wanted forcing that size (None for not resizing).
+                * Example: (640, 480, True) -> Will resize image to a width of 640px and a height of 480px. File will be cutted if necessary for forcing te image to have the desired size
+            - thumbnail_size: a tuple with same values than `size' (None for not creating a thumbnail 
+        '''
         params_size = ('width', 'height', 'force')
-        thumbnail_size_patterns = kwargs.pop('thumbnail_size_patterns', ())
-        self.pattern_names = [pattern_name for pattern_name in thumbnail_size_patterns.iteritems()]
-        for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems():
-            setattr(self, pattern_name, dict(map(None, params_size, thumbnail_size)))
-        super(ThumbnailField, self).__init__(*args, **kwargs) 
+        self.size = dict(map(None, params_size, size)) if size else None
+        self.pattern_names = []
+        if thumbnail_size_patterns:
+            for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems():
+                setattr(self, "%s_size"%pattern_name, dict(map(None, params_size, thumbnail_size)))
+                self.pattern_names.append(pattern_name)
+        super(ImageField, self).__init__(verbose_name, name, width_field, height_field, **kwargs)
 
     def _get_thumbnail_filename(self, filename, pattern_name):
         '''
@@ -98,15 +131,16 @@ class ThumbnailField(ImageField):
             filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
             for pattern_name in self.pattern_names:
                 thumbnail_filename = self._get_thumbnail_filename(filename, pattern_name)
-                thumbnail_field = Thumbnail(thumbnail_filename)
+                thumbnail_field = ThumbnailField(thumbnail_filename)
                 setattr(getattr(instance, self.name), pattern_name, thumbnail_field)
+
 
     def formfield(self, **kwargs):
         '''
         Specify form field and widget to be used on the forms
         '''
         kwargs['widget'] = DelAdminFileWidget
-        kwargs['form_class'] = ThumbnailFormField
+        kwargs['form_class'] = ImageFormField
         return super(ImageField, self).formfield(**kwargs)
 
     def save_form_data(self, instance, data):

@@ -3,17 +3,17 @@
 #    Kommonz.materials.models.base
 #    created by giginet on 2011/10/02
 #
-from ccfield.models import CreativeCommonsField
+import os
+import mimetypes
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext as _
-from imagefield.fields import ImageField
-from materials.managers import MaterialManager
 from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
-import mimetypes
-import os
+from ccfield.models import CreativeCommonsField
+from thumbnailfield.models import ThumbnailField
+from materials.managers import MaterialManager
 
 class MaterialFile(models.Model):
     u"""
@@ -64,7 +64,7 @@ class Material(models.Model):
     
     # not required 
     description = models.TextField(_('Description'), blank=False, null=True)
-    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True) # it will replace to ThumbnailField
+    thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True) # it will replace to ThumbnailField
     _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
     
     # auto add

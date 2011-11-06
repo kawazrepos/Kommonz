@@ -6,5 +6,5 @@ from django.db import models
 
 class MaterialManager(models.Manager):
     def get_file_model(self, filename):
-        from utils import get_file_model
+        from utils.filetypes import get_file_model
         return get_file_model(filename)
