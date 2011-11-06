@@ -23,6 +23,7 @@
           $form.submit(function() {
             $.post(form_url, $form.serialize(), function(data) {
               var $e, field, value, values, _ref, _results;
+              console.log(data);
               if (data['status'] === 'success') {
                 return location.href = location.href.split('/').slice(0, 3).join('/') + data['url'];
               } else if (data['status'] === 'error') {

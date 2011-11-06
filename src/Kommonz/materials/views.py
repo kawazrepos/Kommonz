@@ -43,7 +43,6 @@ class MaterialCreateView(CreateView):
         return JSONResponse(response, {}, response_mimetype(self.request))
 
     def form_invalid(self, form):
-        super(MaterialCreateView, self).form_invalid(form)
         response = {
                     'status' : 'error',
                     'errors' : form.errors,
