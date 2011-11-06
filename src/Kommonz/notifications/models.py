@@ -6,6 +6,7 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from django.core.mail import send_mail
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
@@ -13,6 +14,7 @@ from django.template.context import Context
 from django.template.loader import get_template
 from django.template.loader_tags import BlockNode
 from django.utils.translation import ugettext_lazy as _
+from local_settings import EMAIL_SUBJECT_PREFIX
 from messages.models import Message
 import os
 
@@ -94,10 +96,29 @@ def create_notification(related_object, template_filename,
 
 
 # signal callbacks below
-@receiver(post_save, sender=Message,  dispatch_uid='notifications.models')
+@receiver(post_save, sender=Message, dispatch_uid='notifications.models')
 def new_message_callback(sender, **kwargs):
     u"""notification of new message received"""
     if kwargs.get('created', None):
         instance = kwargs.get('instance', None)
         if instance:
             create_notification(instance, 'new_message.txt', instance.user_to, user_from=instance.user_from)
+
+
+@receiver(post_save, sender=Notification, dispatch_uid='notifications.models')
+def new_notification_callback(sender, **kwargs):
+    if kwargs.get('created', None):
+        instance = kwargs.get('instance', None)
+        if instance:
+            send_notification_mail(instance.content_object)
+
+
+def send_notification_mail(notification_object):
+    instance = notification_object
+    if instance.user_to.email and instance.user_to.config.email_notification:
+        subject = EMAIL_SUBJECT_PREFIX + 'Message notification:' + instance.label
+        send_mail(subject, instance.body, 'from@example.com',
+                  (instance.user_to.email,))
+    else:
+        print "send_notification_mail: user not found or user.email not registered"
+
