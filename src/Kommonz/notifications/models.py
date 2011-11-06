@@ -14,7 +14,7 @@ from django.template.context import Context
 from django.template.loader import get_template
 from django.template.loader_tags import BlockNode
 from django.utils.translation import ugettext_lazy as _
-from local_settings import EMAIL_SUBJECT_PREFIX
+from django.conf import settings
 from messages.models import Message
 import os
 
@@ -115,8 +115,12 @@ def new_notification_callback(sender, **kwargs):
 
 def send_notification_mail(notification_object):
     instance = notification_object
+    EMAIL_SUBJECT_PREFIX = getattr(settings, 'EMAIL_SUBJECT_PREFIX', '')
     if instance.user_to.email and instance.user_to.config.email_notification:
-        subject = EMAIL_SUBJECT_PREFIX + 'Message notification:' + instance.label
+        subject = "%(prefix)sMessageNotification:%(label)s" % { 
+                'prefix' :EMAIL_SUBJECT_PREFIX, 
+                'label' : instance.label 
+        }
         send_mail(subject, instance.body, 'from@example.com',
                   (instance.user_to.email,))
     else:
