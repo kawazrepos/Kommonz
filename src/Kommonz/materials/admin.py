@@ -4,8 +4,7 @@
 #    created by giginet on 2011/10/02
 #
 from django.contrib import admin
-from models.base import Material, Kero, License, CreativeCommons, Category
-#from models.application import Application  保留
+from models.base import MaterialFile, Material, Kero, License, CreativeCommons, Category
 from models.archive import Archive
 from models.audio import Audio
 from models.code import Code
@@ -15,9 +14,13 @@ from models.movie import Movie
 
 # base models
 
+class MaterialFileAdmin(admin.ModelAdmin):
+    list_display    = ('pk', 'file',)
+admin.site.register(MaterialFile, MaterialFileAdmin)
+
 class MaterialAdmin(admin.ModelAdmin):
     date_hierarchy  = 'created_at'
-    list_display    = ('__unicode__', 'author', 'created_at', 'ip', 'pv',)
+    list_display    = ('__unicode__', 'author', 'created_at', '_file', 'ip', 'pv',)
     list_filter     = ('author',)
     search_fields   = ('label', 'description',)
 admin.site.register(Material, MaterialAdmin)

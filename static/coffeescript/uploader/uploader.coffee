@@ -17,6 +17,7 @@ $ ->
         $form.find('#id_label').val(response.files[0].fileName)
         $form.submit ->
           $.post form_url, $form.serialize(), (data) ->
+            console.log(data)
             if(data['status'] is 'success')
               location.href = location.href.split('/')[0..2].join('/') + data['url']
             else if(data['status'] is 'error')
