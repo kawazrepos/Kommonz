@@ -1,6 +1,14 @@
 from django.contrib import admin
 from messages.models import Message
-from lists.models import List
+from lists.models import List, ListInfo
 
+class ListAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_at'
+    list_display   = ('__unicode__', 'author',  'pub_state', 'created_at',)
+    
+
+class ListInfoAdmin(admin.ModelAdmin):
+    pass
         
-admin.site.register(List)
+admin.site.register(List,ListAdmin)
+admin.site.register(ListInfo,ListInfoAdmin)
