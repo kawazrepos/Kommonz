@@ -5,6 +5,6 @@ from lists.views import ListDetailView, ListListView
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',ListListView.as_view,name='lists_list_list'),
-    url(r'^(?P<pk>\d+)/$',ListDetailView.as_view,name='lists_list_detail'),
+    url(r'^$',              ListListView.as_view(),     name='lists_list_list'),
+    url(r'^(?P<pk>\d+)/$',  ListDetailView.as_view(),   name='lists_list_detail'),
 )

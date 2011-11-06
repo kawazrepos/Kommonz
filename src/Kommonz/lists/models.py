@@ -13,9 +13,11 @@ PUB_STATES = (
 
 class List(models.Model):
     title = models.CharField(_('title'), max_length=64)
-    author = models.ForeignKey(KommonzUser, verbose_name=_('author'), editable=False, related_name="lists")
+    author = models.ForeignKey(KommonzUser, verbose_name=_('author'),related_name="lists")
     matelials = models.ManyToManyField(Material, through='ListInfo')
     pub_state = models.CharField(u"公開設定",max_length=10,choices=PUB_STATES, default="public",)
+    
+    class Admin: pass #
 
 class ListInfo(models.Model):
     list = models.ForeignKey(List)
