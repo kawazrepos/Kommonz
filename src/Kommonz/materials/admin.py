@@ -38,7 +38,8 @@ class CreativeCommonsAdmin(admin.ModelAdmin):
 admin.site.register(CreativeCommons, CreativeCommonsAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display    = ('__unicode__',)
+    list_display    = ('__unicode__', 'parent',)
+    ordering        = ['parent']
 admin.site.register(Category, CategoryAdmin)
 
 

@@ -139,7 +139,7 @@ class Material(models.Model):
             self.author = request.user
             self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
         else:
-            self.author = KommonzUser.objects.get(pk=1)
+            self.author = User.objects.get(pk=1)
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):
@@ -215,13 +215,15 @@ class CreativeCommons(models.Model):
             raise ValidationError(_('''can not set 'Share Alike' and 'Not Derivative Works' together.'''))
         return super(CreativeCommons, self).clean()
     
+    
 class Category(models.Model):
     """
         Model for Category of materials.
     """
-    label   = models.CharField(_('Label'), max_length=32)
-    parent  = models.ForeignKey('self', verbose_name=_('Parent Category'), null=True, blank=True, related_name='children')
-    material = models.ManyToManyField(Material, verbose_name=(_('Materials')), editable=False)
+    label      = models.CharField(_('Label'), max_length=32)
+    parent     = models.ForeignKey('self', verbose_name=_('Parent Category'),
+                                    null=True, blank=True, related_name='children')
+    materials  = models.ManyToManyField(Material, verbose_name=_('Materials'))
 
     class Meta:
         app_label           = 'materials'
@@ -230,3 +232,4 @@ class Category(models.Model):
         
     def __unicode__(self):
         return self.label
+
