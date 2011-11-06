@@ -1,28 +1,66 @@
 (function() {
   $(function() {
-    var $uploader;
+    var $infoForms, $uploader, file_id;
     $uploader = $('#material-uploader');
+    $infoForms = $(".material-info-forms");
+    file_id = void 0;
     $uploader.fileupload({
-      done: function(event, response) {
-        return $(response.result).each(function() {
-          var $tr, data, form_url, table;
-          data = this;
-          console.log(this);
-          form_url = data['form_url'];
-          table = $uploader.find('table.files');
-          $tr = $('<tr>').addClass('material-info-form');
-          return $tr.load(form_url, function(data) {
-            table.append($tr);
-            $tr.toggle(false).toggle('normal');
-            return $tr.find('input[type=submit]').click(function() {
-              console.log($tr.find('form').serialize());
-              $.post(form_url, $tr.find('form').serialize(), function(data) {
-                return console.log(data);
-              });
-              return false;
-            });
+      autoUpload: true,
+      maxNumberOfFiles: 1,
+      send: function(event, response) {
+        var $infoForm, form_url;
+        form_url = $infoForms.attr('form-url');
+        $infoForm = $('<div>').addClass('material-info-form');
+        $infoForm.load(form_url, function(data) {
+          var $form;
+          $form = $(this).find('form');
+          $form.attr('action', form_url);
+          $form.find('#id__file').val(file_id);
+          if (!file_id) {
+            $form.find("input[type='submit']").hide();
+          }
+          $form.find('#id_label').val(response.files[0].fileName);
+          $form.submit(function() {
+            $.post(form_url, $form.serialize(), function(data) {
+              var $e, field, value, values, _ref, _results;
+              if (data['status'] === 'success') {
+                return location.href = location.href.split('/').slice(0, 3).join('/') + data['url'];
+              } else if (data['status'] === 'error') {
+                _ref = data['errors'];
+                _results = [];
+                for (field in _ref) {
+                  values = _ref[field];
+                  _results.push((function() {
+                    var _i, _len, _results2;
+                    _results2 = [];
+                    for (_i = 0, _len = values.length; _i < _len; _i++) {
+                      value = values[_i];
+                      $e = $('<p>').append(value).addClass('material-form-error');
+                      $form.find('.material-form-error').remove();
+                      _results2.push($form.find("#id_" + field).after($e));
+                    }
+                    return _results2;
+                  })());
+                }
+                return _results;
+              }
+            }, 'json');
+            return false;
           });
+          $infoForms.append(this);
+          return $(this).toggle(false).toggle('slow');
         });
+        return true;
+      },
+      done: function(event, response) {
+        $(response.result).each(function() {
+          var $fileField;
+          $fileField = $('#id__file');
+          file_id = this['id'];
+          $fileField.val(this['id']);
+          return $('.material-info-form').find("input[type='submit']").show();
+        });
+        return false;
       }
     });
     $.getJSON($uploader.find('form').prop('action'), function(files) {

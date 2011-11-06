@@ -15,17 +15,38 @@ from qwert.middleware.threadlocals import request as get_request
 import mimetypes
 import os
 
-
-
-class Material(models.Model):
+class MaterialFile(models.Model):
     u"""
-        abstract model of whole materials.
+        model for file
     """
     
     def _get_file_path(self, filename):
         request = get_request()
         path = u'storage/materials/%s/' % request.user.username
         return os.path.join(path, filename)
+    
+    file       = models.FileField(_('File'), upload_to=_get_file_path)
+    
+    class Meta:
+        app_label = 'materials'
+        ordering            = ('-material__pk',)
+        verbose_name        = _('MaterialFile')
+        verbose_name_plural = _('MaterialFiles')
+
+    def __unicode__(self):
+        return self.file.name
+    
+    def save(self, *args, **kwargs):
+        return super(MaterialFile, self).save(*args, **kwargs)
+
+    @property
+    def extension(self):
+      return os.path.splitext(self.file.name)[1][1:]
+
+class Material(models.Model):
+    u"""
+        abstract model of whole materials.
+    """
     
     def _get_thumbnail_path(self, filename):
         path = u'storage/materials/%s/thumbnails/' % self.author.username
@@ -39,12 +60,12 @@ class Material(models.Model):
     }
     
     # required
-    label       = models.CharField(_('Label'), max_length=128, blank=False, null=True)
-    description = models.TextField(_('Description'), blank=False, null=True)
-    file        = models.FileField(_('File'), upload_to=_get_file_path)
+    label       = models.CharField(_('Label'), max_length=128)
     
     # not required 
-    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
+    description = models.TextField(_('Description'), blank=False, null=True)
+    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True) # it will replace to ThumbnailField
+    _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
@@ -66,14 +87,6 @@ class Material(models.Model):
         return '%s(%s)' % (self.label, self.file.name)
     
     def clean(self):
-        request = get_request()
-        if request.user.is_authenticated():
-            self.author = request.user
-            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
-        else:
-            self.author = User.objects.get(pk=1)
-        if not self.label:
-            self.label = self.file.name
         return super(Material, self).clean()
             
     @models.permalink
@@ -82,6 +95,10 @@ class Material(models.Model):
     
     def get_thumbnail_url(self):
         return self.file.path
+
+    @property
+    def file(self):
+        return self._file.file
     
     @property
     def mimetype(self):
@@ -107,23 +124,29 @@ class Material(models.Model):
         return encoding
     
     @property
-    def extention(self):
-        return os.path.splitext(self.file.name)[1]
+    def extension(self):
+      return os.path.splitext(self.file.name)[1][1:]
     
     def save(self, *args, **kwargs):
         from ..utils.filetypes import get_file_model
-        cls = get_file_model(self.file.name)
+        cls = get_file_model(self.label)
         if not isinstance(self, cls):
             extended = cls(pk=self.pk)
             extended.__dict__.update(self.__dict__)
             extended.save()
+        request = get_request()
+        if request.user.is_authenticated():
+            self.author = request.user
+            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
+        else:
+            self.author = KommonzUser.objects.get(pk=1)
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):
         mediator.manager(self, self.author)
         # ToDo collaborators
         # map(lambda user: mediator.editor(self, user), self.collaborators)
-
+        
 class Kero(models.Model):
     u"""
         Kero is a rating system for Materials.

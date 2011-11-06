@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -9,9 +10,9 @@ from django import forms
 
 from object_permission.decorators import permission_required
 
-from models.base import Material
-from forms import MaterialForm
-from api.mappers import MaterialMapper
+from models.base import Material, MaterialFile
+from forms import MaterialForm, MaterialFileForm
+from api.mappers import MaterialMapper, MaterialFileMapper
 
 
 class MaterialDetailView(DetailView):
@@ -29,23 +30,44 @@ def response_mimetype(request):
 
 class MaterialCreateView(CreateView):
     model = Material
-    template_name = 'materials/material_form.html'
-   
+
+    def get_form_class(self):
+        return MaterialForm
+
+    def form_valid(self, form):
+        super(MaterialCreateView, self).form_valid(form)
+        response = {
+                    'status' : 'success',
+                    'url' : self.get_success_url()
+        }
+        return JSONResponse(response, {}, response_mimetype(self.request))
+
+    def form_invalid(self, form):
+        super(MaterialCreateView, self).form_invalid(form)
+        response = {
+                    'status' : 'error',
+                    'errors' : form.errors,
+        }
+        return JSONResponse(response, {}, response_mimetype(self.request))
+
+
+class MaterialFileCreateView(CreateView):
+    model = MaterialFile
+    template_name = 'materials/material_file_form.html'
+
     def form_valid(self, form):
         self.object = form.save()
-        
-        mapper = MaterialMapper(self.object)
-        
+        mapper = MaterialFileMapper(self.object)
         response = JSONResponse([mapper.as_dict(),], {}, response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
     def get_form_class(self):
-        return MaterialForm
+        return MaterialFileForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MaterialCreateView, self).dispatch(*args, **kwargs)
+        return super(MaterialFileCreateView, self).dispatch(*args, **kwargs)
 
 def set_model(func):
     def _decorator(self, request, *args, **kwargs):
