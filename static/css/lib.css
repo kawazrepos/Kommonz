@@ -1,0 +1,18 @@
+/* -- clearfix -- */
+.clear{
+    clear:both;
+}
+.clearfix{
+    min-height:0;
+    display: block;
+}
+.clearfix:after{
+    content:".";
+    display:block;
+    height:0;
+    font-size:0;
+    clear: both;
+    visibility:hidden;
+}
+
+/* -- end of clearfix -- */

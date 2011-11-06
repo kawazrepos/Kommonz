@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if object_list %}
+    <h1>MyList</h1>
+    
+    <ul>
+    {% for list in object_list %}
+        <li><a href="/lists/{{ list.id }}/">{{ list.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h1>nothing</h1>
+{% endif %}
+    
+{% endblock %}

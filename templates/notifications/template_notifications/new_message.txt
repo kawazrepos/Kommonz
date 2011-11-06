@@ -1,0 +1,2 @@
+{% block label %}{{ user_from }}からの新着メッセージ{% endblock %}
+{% block body %}{{ user_from }}さんからメッセージ「{{ object.label }}」が届いています{% endblock %}

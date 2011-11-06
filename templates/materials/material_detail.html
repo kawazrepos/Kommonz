@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
 
@@ -31,5 +30,6 @@
         {% endif %}
     </p>
     <p>MIMETYPE：{{ object.mimetype }}</p>
+    <p><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></p>
 </section>
 {% endblock %}

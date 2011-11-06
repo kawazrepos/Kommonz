@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from auth.views import UserDetailView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -11,7 +10,8 @@ urlpatterns = patterns('',
     url(r'^materials/',           include('Kommonz.materials.urls')),
     url(r'^messages/',            include('Kommonz.messages.urls')),
     url(r'^lists/',               include('Kommonz.lists.urls')),
-    url(r'^users/(?P<pk>\d+)/',   UserDetailView.as_view(), name="user_detail"),
+    url(r'^notifications/',       include('Kommonz.notifications.urls')),
+    url(r'^users/',               include('Kommonz.auth.urls')),
     url(r'^$',                    TemplateView.as_view(template_name='index.html'), name='index')
 )
 

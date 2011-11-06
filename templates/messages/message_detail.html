@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "messages/message_base.html" %}
 
-{% block title %}メッセージ - {{ object.label }}{% endblock %}
-{% block breadcrumbs %}Kommonz > Massages > Inbox:{{ object.user_to }}{% endblock %}
+{% block title %}{{ object.label }}{% endblock %}
+{% block breadcrumbs %}Kommonz > メッセージ > {{ object.label }}{% endblock %}
 
-{% block content%}
+{% block message_content %}
 <section id="detail_main">
     <h1>{{ object.label }}</h1>
     <p>From:{{ object.user_from }}</p>
@@ -11,5 +11,9 @@
     <p>送信日時：{{ object.created_at }}</p>
     <p>本文：</p>
     <p>{{ object.body }}</p>
+    {% if request.user == object.user_to %}
+    <a href="{% reverse 'messages_message_create' %}?message_type=reply&pk={{ object.user_from.pk }}">このメッセージに返信する</a>
+    {% endif %}
+    <p><a href="{% reverse 'messages_message_delete' pk=object.pk %}">削除する</a></p>
 </section>
 {% endblock %}

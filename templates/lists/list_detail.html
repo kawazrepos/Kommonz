@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if object_list %}
+    <h1>{{ object_list.title }}t</h1>
+    
+    <ul>
+    {% for list in object_list %}
+        {{ list.tile }}
+        {{ list.author }}
+    {% endfor %}
+    </ul>
+{% else %}
+<h1>nothing</h1>
+
+{% endif %}
+{% endblock %}

@@ -3,25 +3,50 @@
 #    Kommonz.materials.models.base
 #    created by giginet on 2011/10/02
 #
-import os
-import mimetypes
-from django.db import models
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext as _
-from qwert.middleware.threadlocals import request as get_request
-from imagefield.fields import ImageField
-from auth.models import KommonzUser
-from materials.managers import MaterialManager
 from ccfield.models import CreativeCommonsField
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.translation import ugettext as _
+from imagefield.fields import ImageField
+from materials.managers import MaterialManager
+from object_permission.mediators import ObjectPermissionMediator as Mediator
+from qwert.middleware.threadlocals import request as get_request
+import mimetypes
+import os
+
+class MaterialFile(models.Model):
+    u"""
+        model for file
+    """
+    
+    def _get_file_path(self, filename):
+        request = get_request()
+        path = u'storage/materials/%s/' % request.user.username
+        return os.path.join(path, filename)
+    
+    file       = models.FileField(_('File'), upload_to=_get_file_path)
+    
+    class Meta:
+        app_label = 'materials'
+        ordering            = ('-material__pk',)
+        verbose_name        = _('MaterialFile')
+        verbose_name_plural = _('MaterialFiles')
+
+    def __unicode__(self):
+        return self.file.name
+    
+    def save(self, *args, **kwargs):
+        return super(MaterialFile, self).save(*args, **kwargs)
+
+    @property
+    def extension(self):
+      return os.path.splitext(self.file.name)[1][1:]
 
 class Material(models.Model):
     u"""
         abstract model of whole materials.
     """
-    
-    def _get_file_path(self, filename):
-        path = u'storage/materials/%s/' % self.author.username
-        return os.path.join(path, filename)
     
     def _get_thumbnail_path(self, filename):
         path = u'storage/materials/%s/thumbnails/' % self.author.username
@@ -36,17 +61,16 @@ class Material(models.Model):
     
     # required
     label       = models.CharField(_('Label'), max_length=128)
-    description = models.TextField(_('Description'))
-    file        = models.FileField(_('File'), upload_to=_get_file_path)
-    license     = models.ForeignKey(_('License'), verbose_name=_('License'))
     
     # not required 
-    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
+    description = models.TextField(_('Description'), blank=False, null=True)
+    thumbnail   = ImageField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True) # it will replace to ThumbnailField
+    _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at  = models.DateTimeField(_('Updated At'), auto_now=True)
-    author      = models.ForeignKey(KommonzUser, verbose_name=_('author'), editable=False, related_name="materials")
+    author      = models.ForeignKey(User, verbose_name=_('author'), editable=False, related_name="materials")
     pv          = models.PositiveIntegerField(_('Page View'), default=0, editable=False)
     download    = models.PositiveIntegerField(_('Download Count'), default=0, editable=False)
     ip          = models.IPAddressField(_('IP Address'), editable=False)
@@ -63,18 +87,20 @@ class Material(models.Model):
         return '%s(%s)' % (self.label, self.file.name)
     
     def clean(self):
-        request = get_request()
-        if request.user.is_authenticated():
-            self.author = request.user
-            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
-        else:
-            self.author = KommonzUser.objects.get(pk=1)
         return super(Material, self).clean()
             
-    #@models.permalink
+    @models.permalink
     def get_absolute_url(self):
-        return ""
+        return ('materials_material_detail', (), {'pk': self.pk})
     
+    def get_thumbnail_url(self):
+        return self.file.path
+
+    @property
+    def file(self):
+        return self._file.file
+    
+    @property
     def mimetype(self):
         try:
             mimetypes.init()
@@ -83,6 +109,12 @@ class Material(models.Model):
             type = None
         return type
     
+    @property
+    def filetype_model(self):
+        from ..utils.filetypes import get_file_model
+        return get_file_model(self.file.name)
+    
+    @property
     def encoding(self):
         try:
             mimetypes.init()
@@ -91,9 +123,30 @@ class Material(models.Model):
             encoding = None
         return encoding
     
-    def extention(self):
-        return os.path.splitext(self.file.name)[1]
-
+    @property
+    def extension(self):
+      return os.path.splitext(self.file.name)[1][1:]
+    
+    def save(self, *args, **kwargs):
+        from ..utils.filetypes import get_file_model
+        cls = get_file_model(self.label)
+        if not isinstance(self, cls):
+            extended = cls(pk=self.pk)
+            extended.__dict__.update(self.__dict__)
+            extended.save()
+        request = get_request()
+        if request.user.is_authenticated():
+            self.author = request.user
+            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
+        else:
+            self.author = KommonzUser.objects.get(pk=1)
+        return super(Material, self).save(*args, **kwargs)
+    
+    def modify_object_permission(self, mediator, created):
+        mediator.manager(self, self.author)
+        # ToDo collaborators
+        # map(lambda user: mediator.editor(self, user), self.collaborators)
+        
 class Kero(models.Model):
     u"""
         Kero is a rating system for Materials.

@@ -42,6 +42,15 @@ DATABASES = {
     }
 }
 
+# django-storages File Storage Settings
+DB_FILES_URL = os.path.join(ROOT, 'storage.db')
+DB_FILES = {
+            'db_table'     : 'files',
+            'fname_column' : 'filename',
+            'blob_column'  : 'blob',
+            'size_column'  : 'size'
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -166,10 +175,12 @@ INSTALLED_APPS = (
     'object_permission',            # Object permission library
     # Kommonz
     'Kommonz.auth',
+    'Kommonz.autocmd',
     'Kommonz.materials',
     'Kommonz.messages',
-    'Kommonz.reports',
-    'Kommonz.lists'
+    'Kommonz.lists',
+    'Kommonz.notifications',
+    'Kommonz.reports'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -188,11 +199,11 @@ AUTHENTICATION_BACKENDS = (
 #    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
     'registration.backends.hatena.HatenaBackend',
-    'auth.backends.KommonzUserModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
 
-CUSTOM_USER_MODEL = 'auth.KommonzUser'
+AUTH_PROFILE_MODULE = 'auth.UserProfile'
 
 #
 # SocialAuth Setting
@@ -205,16 +216,15 @@ lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
 LOGIN_ERROR_URL     = lazy_reverse('registration_error')
 LOGIN_REDIRECT_URL  = "/"
-LOGIN_URL           = lazy_reverse('registration_lotin')
+LOGIN_URL           = lazy_reverse('registration_index')
 LOGOUT_URL          = lazy_reverse('registration_logout')
 
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = '/new-users-redirect-url/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = lazy_reverse('auth_user_welcome')
 SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
-SOCIAL_AUTH_USER_MODEL = CUSTOM_USER_MODEL
 
 #
 # Testing configuration via nose.

@@ -1,11 +1,15 @@
-{% extends "base.html" %}
+{% extends "messages/message_base.html" %}
 
 {% block title %}受信箱{% endblock %}
+{% block breadcrumbs %}Kommonz > メッセージ > 受信箱{% endblock %}
 
-{% block content %}
+{% block message_content %}
+<h1>受信箱</h1>
 {% if inbox_object_list %}
     {% for object in inbox_object_list %}
-         <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+        {% if 'messages.view_message' of object %}
+         <p>{% if not object.read %}*{% endif %}<a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+        {% endif %}
     {% endfor %}
 {% endif %}
 {% endblock %}

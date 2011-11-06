@@ -1,8 +1,9 @@
-from django.db import models
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.generic import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from Kommonz.auth.models import KommonzUser
+
 
 class Report(models.Model):
     """
@@ -15,7 +16,7 @@ class Report(models.Model):
     
     checked        = models.BooleanField(_('Checked'), default=False)
     
-    author         = models.ForeignKey(KommonzUser, verbose_name=_('Author'), editable=False)
+    author         = models.ForeignKey(User, verbose_name=_('Author'), editable=False)
     created_at     = models.DateTimeField(_('created at'), auto_now=True)
     
     class Meta:
