@@ -15,6 +15,7 @@ from ccfield.models import CreativeCommonsField
 from thumbnailfield.models import ThumbnailField
 from materials.managers import MaterialManager
 
+
 class MaterialFile(models.Model):
     u"""
         model for file
@@ -42,6 +43,7 @@ class MaterialFile(models.Model):
     @property
     def extension(self):
       return os.path.splitext(self.file.name)[1][1:]
+
 
 class Material(models.Model):
     u"""
@@ -233,3 +235,4 @@ class Category(models.Model):
     def __unicode__(self):
         return self.label
 
+  
