@@ -14,7 +14,7 @@
         $infoForm = $('<div>').addClass('material-info-form');
         console.log(filename);
         $infoForm.load("" + form_url + "?filename=" + filename, function(data) {
-          var $form;
+          var $form, $syntax;
           $form = $(this).find('form');
           $form.attr('action', form_url);
           $form.find('#id__file').val(file_id);
@@ -22,6 +22,10 @@
             $form.find("input[type='submit']").hide();
           }
           $form.find('#id_label').val(filename);
+          $syntax = $form.find('#id_syntax');
+          if ($syntax && filename.match(/\.(.*?)$/)) {
+            $syntax.val(RegExp.$1);
+          }
           $form.submit(function() {
             $.post(form_url, $form.serialize(), function(data) {
               var $e, field, value, values, _ref, _results;

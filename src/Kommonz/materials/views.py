@@ -51,7 +51,8 @@ class MaterialCreateView(CreateView):
         super(MaterialCreateView, self).form_valid(form)
         response = {
                     'status' : 'success',
-                    'url' : self.get_success_url()
+                    'url' : self.get_success_url(),
+                    'syntax' : syntax
         }
         return JSONResponse(response, {}, response_mimetype(self.request))
 

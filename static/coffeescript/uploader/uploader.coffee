@@ -17,6 +17,9 @@ $ ->
         if not file_id
           $form.find("input[type='submit']").hide()
         $form.find('#id_label').val(filename)
+        $syntax = $form.find('#id_syntax')
+        if $syntax and filename.match(/\.(.*?)$/)
+          $syntax.val(RegExp.$1)
         $form.submit ->
           $.post form_url, $form.serialize(), (data) ->
             if(data['status'] is 'success')
