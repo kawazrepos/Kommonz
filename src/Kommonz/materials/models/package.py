@@ -1,6 +1,6 @@
 from django.db import models
-from materials.models.base import Material
-
+from django.utils.translation import ugettext as _
+from base import Material
 
 class Package(models.Model):
     """
@@ -9,11 +9,7 @@ class Package(models.Model):
     
     materials  = models.ManyToManyField(Material, verbose_name=_('Materials'))
     
-
     class Meta:
         app_label           = 'packages'
         verbose_name        = _('Package')
         verbose_name_plural = _('Packages')
-        
-    
-    
