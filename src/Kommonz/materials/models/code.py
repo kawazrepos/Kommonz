@@ -5,6 +5,7 @@ __date__ = '2011/10/10'
 
 from django.db import models
 from django.utils.translation import ugettext as _
+from ..utils.syntaxes import SYNTAXES, guess_syntax
 from base import Material
 
 class Code(Material):
@@ -12,13 +13,18 @@ class Code(Material):
         Model for Source Code material.
     """
     
-    language = models.CharField(_('Syntax'), max_length='32')
+    syntax = models.CharField(_('Syntax'), max_length='32', choices=SYNTAXES)
     
     class Meta:
         app_label           = 'materials'
         verbose_name        = _('Code')
         verbose_name_plural = _('Codes')
     
-    def _guess_language(self):
+    def clean(self):
+        if not self.syntax:
+            self.syntax = self._guess_syntax()
+        super(Code, self).clean()
+
+    def _guess_syntax(self):
         """guess a programming language from the filename"""
-        # has not implemented
+        return guess_syntax(self.file.name)

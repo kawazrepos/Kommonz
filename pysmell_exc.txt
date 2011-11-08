@@ -10,20 +10,6 @@ Traceback (most recent call last):
     return self.transform(parser.suite(text))
   File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 124, in transform
     return self.compile_node(tree)
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 157, in compile_node
-    return self.file_input(node[1:])
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 188, in file_input
-    self.com_append_stmt(stmts, node)
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 1097, in com_append_stmt
-    result = self.lookup_node(node)(node[1:])
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 317, in stmt
-    return self.com_stmt(nodelist[0])
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 1090, in com_stmt
-    result = self.lookup_node(node)(node[1:])
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 317, in stmt
-    return self.com_stmt(nodelist[0])
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 1090, in com_stmt
-    result = self.lookup_node(node)(node[1:])
-  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 798, in lookup_node
-    return self._dispatch[node[0]]
-KeyError: 330
+  File "/Users/giginet/.pythonbrew/pythons/Python-2.7.2/lib/python2.7/compiler/transformer.py", line 167, in compile_node
+    raise WalkerError, ('unexpected node type', n)
+WalkerError: ('unexpected node type', 340)

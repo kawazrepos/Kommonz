@@ -15,7 +15,6 @@ from ccfield.models import CreativeCommonsField
 from thumbnailfield.models import ThumbnailField
 from materials.managers import MaterialManager
 
-
 class MaterialFile(models.Model):
     u"""
         model for file
