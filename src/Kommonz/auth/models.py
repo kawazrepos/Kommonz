@@ -60,14 +60,14 @@ class UserProfile(models.Model):
         return ('auth_user_detail', (), { 'slug' : self.slug })
     
         
-class UserConfig(models.Model):
-    user = models.OneToOneField(User, related_name='config')
+class UserOption(models.Model):
+    user = models.OneToOneField(User, related_name='option')
     
     email_notification = models.BooleanField(_('Email Notification'), default=True)
     
     class Meta:
-        verbose_name        = _('User Config')
-        verbose_name_plural = _('User Configs')
+        verbose_name        = _('User Option')
+        verbose_name_plural = _('User Options')
 
 
 # signal callbacks below
@@ -78,6 +78,6 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.get_or_create(user=instance)
 
 @receiver(post_save, sender=User)
-def create_user_config(sender, instance, created, **kwargs):
+def create_user_option(sender, instance, created, **kwargs):
     if created:
-        UserConfig.objects.get_or_create(user=instance)
+        UserOption.objects.get_or_create(user=instance)

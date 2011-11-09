@@ -1,0 +1,13 @@
+{% extends "../base.html" %}
+{% load reversetag %}
+
+{% block title %}{{ object.user.username }}の設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール設定{% endblock %}
+
+{% block content%}
+<h1>ユーザー：{{ object.user.username }}の設定</h1>
+<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="設定完了">
+</form> 
+{% endblock %}

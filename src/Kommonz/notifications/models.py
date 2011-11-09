@@ -116,7 +116,7 @@ def new_notification_callback(sender, **kwargs):
 def send_notification_mail(notification_object):
     instance = notification_object
     EMAIL_SUBJECT_PREFIX = getattr(settings, 'EMAIL_SUBJECT_PREFIX', '')
-    if instance.user_to.email and instance.user_to.config.email_notification:
+    if instance.user_to.email and instance.user_to.option.email_notification:
         subject = "%(prefix)sMessageNotification:%(label)s" % { 
                 'prefix' :EMAIL_SUBJECT_PREFIX, 
                 'label' : instance.label 
