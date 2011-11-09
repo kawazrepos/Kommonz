@@ -1,5 +1,5 @@
 from django.contrib import admin
-from auth.models import UserProfile, UserConfig
+from models import UserProfile, UserOption
 
 __author__ = 'giginet'
 __version__ = '1.0.0'
@@ -10,9 +10,9 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'nickname', 'description', 'icon', 'sex', 'birthday', 'place', 'url',)
 
 
-class UserConfigAdmin(admin.ModelAdmin):
+class UserOptionAdmin(admin.ModelAdmin):
     list_display = ('user', 'email_notification',)
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
-admin.site.register(UserConfig, UserConfigAdmin)
+admin.site.register(UserOption, UserOptionAdmin)

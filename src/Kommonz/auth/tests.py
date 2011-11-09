@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from nose.tools import *
-from auth.models import UserProfile, UserConfig
+from auth.models import UserProfile, UserOption
 from models import User
 
 
@@ -23,11 +23,11 @@ class TestAuthentication(object):
         
     def test_user_downcast(self):
         """
-            Tests create UserProfile and UserConfig when auth.User created.
+            Tests create UserProfile and UserOption when auth.User created.
         """
         kagamin = User.objects.create_user(username='kagamin', email='kagamin@gmail.com')
         ok_(UserProfile.objects.get(user=kagamin))
-        ok_(UserConfig.objects.get(user=kagamin))
+        ok_(UserOption.objects.get(user=kagamin))
 
         
 class TestUserProfileMapper(object):
@@ -37,5 +37,5 @@ class TestUserProfileMapper(object):
         user.profile.nickname = 'Kawaz Inonaka'
         user.save()
         mapper = UserProfileMapper(user.profile)
-        dict = mapper.as_dict()
-        eq_(dict['nickname'], 'Kawaz Inonaka')
+        test_dict = mapper.as_dict()
+        eq_(test_dict['nickname'], 'Kawaz Inonaka')

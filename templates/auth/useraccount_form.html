@@ -1,0 +1,22 @@
+{% extends "auth/config_base.html" %}
+
+{% block title %}{{ request.user.username }}のアカウント設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ request.user.username }}のアカウント設定{% endblock %}
+
+{% block contentmain %}
+<h1>{{ request.user.username }}のアカウント設定</h1>
+<ul>
+  <li>
+    <a href="{% reverse 'socialauth_associate_begin' 'twitter' %}">Twitterと関連付ける</a>
+  </li>
+  <li>
+    <a href="{% reverse 'socialauth_associate_begin' 'google-oauth2' %}">Googleと関連付ける</a>
+  </li>
+  <li>
+   <a href="{% reverse 'socialauth_associate_begin' 'hatena' %}">はてなと関連付ける</a>
+  </li>
+  <li>
+  <a href="{% reverse 'socialauth_associate_begin' 'dropbox' %}">Dropboxと関連付ける</a>
+  </li>
+</ul>
+{% endblock %}
