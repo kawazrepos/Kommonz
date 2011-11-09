@@ -10,9 +10,9 @@ from django import forms
 
 from object_permission.decorators import permission_required
 
-from models.base import Material, MaterialFile
-from forms import MaterialForm, MaterialFileForm
-from api.mappers import MaterialMapper, MaterialFileMapper
+from ..models.base import Material, MaterialFile
+from ..forms import MaterialForm, MaterialFileForm
+from ..api.mappers import MaterialMapper, MaterialFileMapper
 
 
 class MaterialDetailView(DetailView):
