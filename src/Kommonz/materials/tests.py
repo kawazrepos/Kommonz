@@ -43,3 +43,4 @@ class TestCode(object):
         eq_(syntax, 'Python')
         syntax = guess_syntax('hoge.coffee')
         eq_(syntax, 'CoffeeScript')
+
