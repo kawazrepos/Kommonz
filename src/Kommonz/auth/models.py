@@ -68,6 +68,10 @@ class UserOption(models.Model):
     class Meta:
         verbose_name        = _('User Option')
         verbose_name_plural = _('User Options')
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('auth_user_detail', (), { 'slug' : self.user.profile.slug })
 
 
 # signal callbacks below

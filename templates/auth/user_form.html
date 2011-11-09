@@ -1,10 +1,9 @@
-{% extends "../base.html" %}
-{% load reversetag %}
+{% extends "auth/config_base.html" %}
 
-{% block title %}{{ object.user.username }}の設定{% endblock %}
+{% block title %}{{ object.user.username }}の設定 - ユーザ情報{% endblock %}
 {% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール設定{% endblock %}
 
-{% block content%}
+{% block contentmain %}
 <h1>ユーザー：{{ object.user.username }}の設定</h1>
 <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
     {{ form.as_p }}
