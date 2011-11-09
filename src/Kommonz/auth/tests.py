@@ -37,5 +37,5 @@ class TestUserProfileMapper(object):
         user.profile.nickname = 'Kawaz Inonaka'
         user.save()
         mapper = UserProfileMapper(user.profile)
-        dict = mapper.as_dict()
-        eq_(dict['nickname'], 'Kawaz Inonaka')
+        test_dict = mapper.as_dict()
+        eq_(test_dict['nickname'], 'Kawaz Inonaka')

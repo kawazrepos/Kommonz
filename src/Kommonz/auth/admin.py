@@ -1,5 +1,5 @@
 from django.contrib import admin
-from auth.models import UserProfile, UserOption
+from models import UserProfile, UserOption
 
 __author__ = 'giginet'
 __version__ = '1.0.0'

@@ -1,10 +1,10 @@
 {% extends "auth/config_base.html" %}
 
-{% block title %}{{ object.user.username }}のアカウント設定{% endblock %}
-{% block breadcrumbs %}Kommonz > {{ object.user.username }}のアカウント設定{% endblock %}
+{% block title %}{{ request.user.username }}のアカウント設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ request.user.username }}のアカウント設定{% endblock %}
 
 {% block contentmain %}
-<h1>アカウント設定</h1>
+<h1>{{ request.user.username }}のアカウント設定</h1>
 <ul>
   <li>
     <a href="{% reverse 'socialauth_associate_begin' 'twitter' %}">Twitterと関連付ける</a>

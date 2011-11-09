@@ -1,10 +1,10 @@
 {% extends "auth/config_base.html" %}
 
-{% block title %}{{ object.user.username }}の設定{% endblock %}
-{% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール設定{% endblock %}
+{% block title %}{{ request.user.username }}の設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ request.user.username }}のオプション設定{% endblock %}
 
 {% block contentmain %}
-<h1>ユーザー：{{ object.user.username }}の設定</h1>
+<h1>ユーザー：{{ request.user.username }}のオプション設定</h1>
 <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="設定完了">
