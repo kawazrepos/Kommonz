@@ -83,6 +83,3 @@ class MaterialZipView(MultipleMaterialZipResponseMixin, BaseListView):
     """
     Generate zip archive from Material queryset.
     """
-
-class MaterialZipTestView(MaterialZipView):
-    queryset = Material.objects.filter(pk__lte=5)
