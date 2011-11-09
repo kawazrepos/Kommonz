@@ -13,7 +13,9 @@ from django.views.generic.list import BaseListView
 from ..models.base import Material
 
 class ZipResponse(HttpResponse):
-    """Zip response class."""
+    """
+    Zip response class.
+    """
     def __init__(self, archive=None, filename="", mimetype="application/zip", *args, **kwargs):
         if archive:
             archive.flush()
@@ -32,19 +34,28 @@ class MultipleZipResponseMixin(object):
 
     def render_to_response(self, context, **response_kwargs):
         """
-        Returns a response with a template rendered with the given context.
+        Returns a response with a zip archive with the files.
         """
-        pathes = self.get_material_files()
+        pathes = self.get_files()
         temp = self._create_zip(pathes)
-        response = ZipResponse(filename=self.get_archive_name(), archive=temp)
+        response = self.response_class(
+                filename=self.get_archive_name(), 
+                archive=temp
+        )
         temp.close()
         return response
 
-    def get_material_files(self):
+    def get_files(self):
         """
-        Returns a list with files.
+        Returns a list with file pathes.
         """
-        raise exceptions.NotImplementedError('get_material_files is not implemented.')
+        raise exceptions.NotImplementedError('get_files is not implemented.')
+
+    def get_archive_name(self):
+        """
+        Returns archive name.
+        """
+        return "test.zip"
 
     def _create_zip(self, pathes):
         """
@@ -60,25 +71,18 @@ class MultipleZipResponseMixin(object):
         archive.close()
         return temp
 
-    def get_archive_name(self):
-        """
-        Returns archive name.
-        """
-        return "test.zip"
-
 class MultipleMaterialZipResponseMixin(MultipleZipResponseMixin):
-    def get_material_files(self):
+    def get_files(self):
         qs = self.get_queryset()
         for material in qs:
             if not isinstance(material, Material):
                 raise exceptions.TypeError('MultipleZipResponseMixin only takes materials.Material')
         return [material.file.path for material in qs]
 
-
 class MaterialZipView(MultipleMaterialZipResponseMixin, BaseListView):
     """
-    Generate zip archive from queryset.
+    Generate zip archive from Material queryset.
     """
 
 class MaterialZipTestView(MaterialZipView):
-    queryset = Material.objects.filter(pk__lt=5)
+    queryset = Material.objects.filter(pk__lte=5)
