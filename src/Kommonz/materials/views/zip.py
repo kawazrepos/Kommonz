@@ -36,7 +36,9 @@ class MultipleZipResponseMixin(object):
         """
         Returns a response with a zip archive with the files.
         """
-        pathes = self.get_files()
+        files = self.get_files()
+        extras = self.get_extra_files()
+        pathes = files + extras
         temp = self._create_zip(pathes)
         response = self.response_class(
                 filename=self.get_archive_name(), 
@@ -51,18 +53,17 @@ class MultipleZipResponseMixin(object):
         """
         raise exceptions.NotImplementedError('get_files is not implemented.')
 
+    def get_extra_files(self):
+        """
+        Returns a list with extra file pathes.
+        """
+        return []
+
     def get_archive_name(self):
         """
         Returns archive name.
         """
         return "test.zip"
-
-    def add_extra_files(self, archive):
-        """
-        Add extra files.
-        Returns the given archive.
-        """
-        return archive
 
     def _create_zip(self, pathes):
         """
@@ -75,7 +76,6 @@ class MultipleZipResponseMixin(object):
             filename = os.path.basename(path)
             file = open(path, 'r')
             archive.writestr(filename, file.read())
-        archive = self.add_extra_files(archive)
         archive.close()
         return temp
 
