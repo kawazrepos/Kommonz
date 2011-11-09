@@ -30,14 +30,23 @@ def response_mimetype(request):
 
 def set_material_model(func):
     def _decorator(self, request, *args, **kwargs):
-        filename = request.GET.get('filename', None)
+        filename = None
+        if request.META['REQUEST_METHOD'] == 'GET':
+            filename = request.GET.get('filename', None)
+        elif request.META['REQUEST_METHOD'] == 'POST':
+            try:
+                file_pk = request.POST.get('_file', None)
+                file = MaterialFile.objects.get(pk=file_pk)
+                filename = file.file.name
+            except:
+                pass
         self.material_model = Material.objects.get_file_model(filename)
         res = func(self, request, *args, **kwargs)
         return res
     return _decorator
 
 class MaterialCreateView(CreateView):
-    model = Material
+    template_name = "materials/material_form.html"
 
     @set_material_model
     def get(self, request, *args, **kwargs):
@@ -52,7 +61,6 @@ class MaterialCreateView(CreateView):
         response = {
                     'status' : 'success',
                     'url' : self.get_success_url(),
-                    'syntax' : syntax
         }
         return JSONResponse(response, {}, response_mimetype(self.request))
 
