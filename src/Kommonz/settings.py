@@ -219,7 +219,7 @@ LOGIN_URL           = lazy_reverse('registration_index')
 LOGOUT_URL          = lazy_reverse('registration_logout')
 
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = lazy_reverse('auth_user_welcome')
-SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = lazy_reverse('auth_useraccount_update')
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 

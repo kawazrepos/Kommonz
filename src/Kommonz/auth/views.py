@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from forms import UserUpdateForm, UserProfileUpdateForm, UserOptionUpdateForm
@@ -34,3 +35,8 @@ class UserOptionUpdateView(UpdateView):
     def get_queryset(self):
         self.kwargs.update({'pk' : self.request.user.pk})
         return super(UserOptionUpdateView, self).get_queryset()
+    
+    
+class UserAccountUpdateView(TemplateView):
+    template_name="auth/useraccount_form.html"
+    
