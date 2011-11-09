@@ -57,6 +57,13 @@ class MultipleZipResponseMixin(object):
         """
         return "test.zip"
 
+    def add_extra_files(self, archive):
+        """
+        Add extra files.
+        Returns the given archive.
+        """
+        return archive
+
     def _create_zip(self, pathes):
         """
         Create temporary zip archive via the given pathes list.
@@ -68,6 +75,7 @@ class MultipleZipResponseMixin(object):
             filename = os.path.basename(path)
             file = open(path, 'r')
             archive.writestr(filename, file.read())
+        archive = self.add_extra_files(archive)
         archive.close()
         return temp
 
