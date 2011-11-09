@@ -36,13 +36,13 @@ class MultipleZipResponseMixin(object):
         """
         pathes = self.get_material_files()
         temp = self._create_zip(pathes)
-        response = ZipResponse(filename="hoge.zip", archive=temp)
+        response = ZipResponse(filename=self.get_archive_name(), archive=temp)
         temp.close()
         return response
 
     def get_material_files(self):
         """
-        Returns a list with file pathes.
+        Returns a list with files.
         """
         raise exceptions.NotImplementedError('get_material_files is not implemented.')
 
@@ -54,9 +54,17 @@ class MultipleZipResponseMixin(object):
         temp = StringIO()
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
         for path in pathes:
-            archive.write(path)
+            filename = os.path.basename(path)
+            file = open(path, 'r')
+            archive.writestr(filename, file.read())
         archive.close()
         return temp
+
+    def get_archive_name(self):
+        """
+        Returns archive name.
+        """
+        return "test.zip"
 
 class MultipleMaterialZipResponseMixin(MultipleZipResponseMixin):
     def get_material_files(self):
