@@ -14,5 +14,5 @@ urlpatterns = patterns('',
         name='auth_useroption_update'),
     url(r'^config/accounts/?$',      login_required(UserAccountUpdateView.as_view()),
         name='auth_useraccount_update'),
-    url(r'^(?P<slug>\w+)/$', UserProfileDetailView.as_view(), name='auth_user_detail'),
+    url(r'^(?P<slug>[a-zA-Z0-9_\-\.]+)/$', UserProfileDetailView.as_view(), name='auth_user_detail'),
 )
