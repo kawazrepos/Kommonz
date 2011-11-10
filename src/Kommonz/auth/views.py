@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
+from django.utils.decorators import classonlymethod
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from forms import UserUpdateForm, UserProfileUpdateForm, UserOptionUpdateForm
 from models import UserProfile, UserOption
+from social_auth.models import UserSocialAuth
 
 
 class UserProfileDetailView(DetailView):
@@ -38,5 +40,10 @@ class UserOptionUpdateView(UpdateView):
     
     
 class UserAccountUpdateView(TemplateView):
-    template_name="auth/useraccount_form.html"
+    template_name = "auth/useraccount_form.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(UserAccountUpdateView, self).get_context_data(**kwargs)
+        context.update({'associated_accounts' : UserSocialAuth.objects.filter(user=self.request.user)})
+        return context
     

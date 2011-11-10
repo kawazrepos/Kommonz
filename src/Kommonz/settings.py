@@ -207,7 +207,7 @@ AUTH_PROFILE_MODULE = 'auth.UserProfile'
 #
 # SocialAuth Setting
 #
-SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'hatena', 'dropbox',)
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'github', 'dropbox', 'hatena',)
 
 from django.utils.functional import lazy
 from django.core.urlresolvers import reverse
@@ -218,9 +218,9 @@ LOGIN_REDIRECT_URL  = "/"
 LOGIN_URL           = lazy_reverse('registration_index')
 LOGOUT_URL          = lazy_reverse('registration_logout')
 
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = lazy_reverse('auth_user_welcome')
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = lazy_reverse('registration_welcome')
 SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = lazy_reverse('auth_useraccount_update')
-SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = lazy_reverse('auth_useraccount_update')
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
 SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )

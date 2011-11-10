@@ -14,7 +14,5 @@ urlpatterns = patterns('',
         name='auth_useroption_update'),
     url(r'^config/accounts/?$',      login_required(UserAccountUpdateView.as_view()),
         name='auth_useraccount_update'),
-    url(r'^welcome/?$',    TemplateView.as_view(template_name="auth/user_welcome.html"),
-                           name='auth_user_welcome'),
     url(r'^(?P<slug>\w+)/$', UserProfileDetailView.as_view(), name='auth_user_detail'),
 )
