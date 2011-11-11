@@ -10,6 +10,6 @@ class Package(models.Model):
     materials  = models.ManyToManyField(Material, verbose_name=_('Materials'))
     
     class Meta:
-        app_label           = 'packages'
+        app_label           = 'materials'
         verbose_name        = _('Package')
         verbose_name_plural = _('Packages')

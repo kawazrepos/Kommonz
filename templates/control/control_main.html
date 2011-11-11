@@ -1,0 +1,12 @@
+{% extends "../base.html" %}
+
+{% block title %}コントロールパネル{% endblock %}
+
+{% block content %}
+<p><a href="/admin/">神ページ</a></p>
+<p><a href="{% reverse 'messages_message_create' %}">全体メールの送信</a></p>
+<p><a>カテゴリの編集</a></p>
+<p><a>通報理由の編集</a></p>
+<p><a>通報一覧</a></p>
+<p><a>ユーザパーミッションの管理</a></p>
+{% endblock %}
