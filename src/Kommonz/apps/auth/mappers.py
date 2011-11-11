@@ -1,6 +1,6 @@
-from auth.models import UserProfile
 from bpmappers import NonKeyField
 from bpmappers.djangomodel import ModelMapper
+from models import UserProfile
 __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/23'

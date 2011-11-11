@@ -174,8 +174,8 @@ INSTALLED_APPS = (
     'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
     # Kommonz
-    'Kommonz.auth',
     'Kommonz.autocmd',
+    'Kommonz.apps.auth',
     'Kommonz.apps.materials',
     'Kommonz.apps.messages',
     'Kommonz.apps.notifications',
@@ -197,7 +197,7 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.github.GithubBackend',
 #    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
-    'registration.backends.hatena.HatenaBackend',
+    'apps.registration.backends.hatena.HatenaBackend',
     'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
@@ -223,7 +223,7 @@ SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = lazy_reverse('auth_useraccount_update
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = lazy_reverse('auth_useraccount_update')
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
-SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
+SOCIAL_AUTH_IMPORT_BACKENDS = ('apps.registration.backends', )
 
 #
 # Testing configuration via nose.

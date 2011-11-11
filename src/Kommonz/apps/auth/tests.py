@@ -1,8 +1,8 @@
+from nose.tools import *
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test.client import Client
-from nose.tools import *
-from auth.models import UserProfile, UserOption
-from models import User
+from models import UserProfile, UserOption
 
 
 class TestAuthentication(object):

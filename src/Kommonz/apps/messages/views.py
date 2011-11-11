@@ -4,6 +4,7 @@
 # Date:          2011/11/04
 #
 import os
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.template.context import Context
@@ -14,10 +15,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from object_permission.decorators import permission_required
-from auth.models import User
 from apps.materials.models.base import Material
 from forms import MessageCreateForm, MaterialMessageCreateForm, \
-                  ReplyMessageCreateForm, MessageDeleteForm
+    ReplyMessageCreateForm, MessageDeleteForm
 from models import Message
 
 
