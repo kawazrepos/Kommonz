@@ -11,8 +11,8 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
-from ccfield.models import CreativeCommonsField
-from thumbnailfield.models import ThumbnailField
+from fields.ccfield.models import CreativeCommonsField
+from fields.thumbnailfield.models import ThumbnailField
 from materials.managers import MaterialManager
 
 class MaterialFile(models.Model):
@@ -147,6 +147,7 @@ class Material(models.Model):
         mediator.manager(self, self.author)
         # ToDo collaborators
         # map(lambda user: mediator.editor(self, user), self.collaborators)
+        
         
 class Kero(models.Model):
     u"""

@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from thumbnailfield.models import ThumbnailField
+from fields.thumbnailfield.models import ThumbnailField
 
 class UserProfile(models.Model):
     def _get_icon_path(self, filename):
