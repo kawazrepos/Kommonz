@@ -3,13 +3,20 @@
 # src/Kommonz/thumbnailfield/models.py
 # created by giginet on 2011/11/06
 #
+import os, shutil
 from django.db.models.fields.files import ImageField
 from django.db.models import signals
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from widgets import DelAdminFileWidget
 from forms import ThumbnailFormField
-import os, shutil
+
+class DuplicatePatterNameException(Exception):
+    def __init__(self, pattern_name):
+        self.pattern_name = pattern_name
+    
+    def __str__(self):
+        return 'Pattern name "%s" have been already defined."' % self.pattern_name
 
 class ThumbnailField(ImageField):
     def __init__(self, *args, **kwargs):
@@ -72,8 +79,6 @@ class ThumbnailField(ImageField):
             dst_fullpath = os.path.join(settings.MEDIA_ROOT, dst)
             if created or os.path.abspath(filename) != os.path.abspath(dst_fullpath):
                 if 'fixtures' in filename:
-                    # 開発バージョンでプロフィールアイコンを設定するための部分
-                    # 転写先が存在しない場合は作成
                     if not os.path.exists(os.path.dirname(dst_fullpath)):
                         os.makedirs(os.path.dirname(dst_fullpath))
                     shutil.copyfile(filename, dst_fullpath)
@@ -97,6 +102,8 @@ class ThumbnailField(ImageField):
         if getattr(instance, self.name):
             filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
             for pattern_name in self.pattern_names:
+                if hasattr(getattr(instance), pattern_name):
+                    raise DuplicatePatterNameException(pattern_name)
                 thumbnail_filename = self._get_thumbnail_filename(filename, pattern_name)
                 thumbnail_type = self.attr_class(instance, self, thumbnail_filename)
                 setattr(getattr(instance, self.name), pattern_name, thumbnail_type)
