@@ -7,6 +7,7 @@ $ ->
     maxNumberOfFiles : 1
     send : (event, response) ->
       form_url = $infoForms.attr 'form-url'
+      validate_url = $infoForms.attr 'validate-url'
       filename = response.files[0].fileName
       $infoForm = $('<div>').addClass 'material-info-form'
       console.log filename
@@ -21,18 +22,17 @@ $ ->
         if $syntax and filename.match(/\.(.*?)$/)
           $syntax.val(RegExp.$1)
         $form.submit ->
-          $.post form_url, $form.serialize(), (data) ->
+          $.post validate_url, $form.serialize(), (data) ->
             if(data['status'] is 'success')
-              return true
+              $form.get(0).submit()
             else if(data['status'] is 'error')
               for field, values of data['errors']
                 for value in values
                   $e = $('<p>').append(value).addClass('material-form-error')
                   $form.find('.material-form-error').remove()
                   $form.find("#id_#{field}").after($e)
-              return false
           , 'json'
-          true
+          false
         $infoForms.append @
         $(@).toggle(false)
          .toggle 'slow'

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.functional import lazy
 from django.views.generic import ListView
 from models.base import Material
-from views.edit import MaterialDetailView, MaterialCreateView, MaterialUpdateView, MaterialFileCreateView
+from views.edit import MaterialDetailView, MaterialCreateView, MaterialUpdateView, MaterialFileCreateView, MaterialValidateView
 __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/10'
@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/update/$', MaterialUpdateView.as_view(),                 name="materials_material_update"),
     url(r'^create/?$',            MaterialFileCreateView.as_view(),             name='materials_material_file_create'),
     url(r'^create/form/?$',       MaterialCreateView.as_view(),                 name='materials_material_create'),
+    url(r'^create/validate/?$',   MaterialValidateView.as_view(),               name='materials_material_validate'),
     url(r'^/?$',                  ListView.as_view(model=Material),             name='materials_material_list'),
 )

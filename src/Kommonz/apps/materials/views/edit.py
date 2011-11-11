@@ -14,7 +14,6 @@ from ..models.base import Material, MaterialFile
 from ..forms import MaterialForm, MaterialFileForm
 from ..api.mappers import MaterialMapper, MaterialFileMapper
 
-
 class MaterialDetailView(DetailView):
     model = Material
     
@@ -56,21 +55,6 @@ class MaterialCreateView(CreateView):
     def post(self, request, *args, **kwargs):
         return super(MaterialCreateView, self).post(request, *args, **kwargs)
 
-    def form_valid(self, form):
-        super(MaterialCreateView, self).form_valid(form)
-        response = {
-                    'status' : 'success',
-                    'url' : self.get_success_url(),
-        }
-        return JSONResponse(response, {}, response_mimetype(self.request))
-
-    def form_invalid(self, form):
-        response = {
-                    'status' : 'error',
-                    'errors' : form.errors,
-        }
-        return JSONResponse(response, {}, response_mimetype(self.request))
-
     def get_form_class(self):
         # ref http://www.agmweb.ca/blog/andy/2249/
         args = getattr(self, 'FORM_META_ARGS', {})
@@ -80,6 +64,20 @@ class MaterialCreateView(CreateView):
         filefield = forms.IntegerField(widget=forms.HiddenInput())
         modelform_class = type('modelform', (forms.ModelForm,), {"Meta": meta, "_file" : filefield}) # create new class extended MaterialUpdateForm
         return modelform_class
+
+class MaterialValidateView(MaterialCreateView):
+    def form_valid(self, form):
+        response = {
+                    'status' : 'success',
+        }
+        return JSONResponse(response, {}, response_mimetype(self.request))
+
+    def form_invalid(self, form):
+        response = {
+                    'status' : 'error',
+                    'errors' : form.errors,
+        }
+        return JSONResponse(response, {}, response_mimetype(self.request))
 
 class MaterialFileCreateView(CreateView):
     model = MaterialFile

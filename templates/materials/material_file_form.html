@@ -29,7 +29,7 @@
   <div class="fileupload-content">
     <table class="files"></table>
     <div class="fileupload-progressbar"></div>
-    <div class="material-info-forms" form-url="{% reverse "materials_material_create" %}"></div>
+    <div class="material-info-forms" validate-url="{% reverse "materials_material_validate" %}" form-url="{% reverse "materials_material_create" %}"></div>
   </div>
 </div>
 {% upload_js %}

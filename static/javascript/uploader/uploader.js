@@ -8,8 +8,9 @@
       autoUpload: true,
       maxNumberOfFiles: 1,
       send: function(event, response) {
-        var $infoForm, filename, form_url;
+        var $infoForm, filename, form_url, validate_url;
         form_url = $infoForms.attr('form-url');
+        validate_url = $infoForms.attr('validate-url');
         filename = response.files[0].fileName;
         $infoForm = $('<div>').addClass('material-info-form');
         console.log(filename);
@@ -27,25 +28,31 @@
             $syntax.val(RegExp.$1);
           }
           $form.submit(function() {
-            $.post(form_url, $form.serialize(), function(data) {
-              var $e, field, value, values, _i, _len, _ref;
+            $.post(validate_url, $form.serialize(), function(data) {
+              var $e, field, value, values, _ref, _results;
               if (data['status'] === 'success') {
-                return true;
+                return $form.get(0).submit();
               } else if (data['status'] === 'error') {
                 _ref = data['errors'];
+                _results = [];
                 for (field in _ref) {
                   values = _ref[field];
-                  for (_i = 0, _len = values.length; _i < _len; _i++) {
-                    value = values[_i];
-                    $e = $('<p>').append(value).addClass('material-form-error');
-                    $form.find('.material-form-error').remove();
-                    $form.find("#id_" + field).after($e);
-                  }
+                  _results.push((function() {
+                    var _i, _len, _results2;
+                    _results2 = [];
+                    for (_i = 0, _len = values.length; _i < _len; _i++) {
+                      value = values[_i];
+                      $e = $('<p>').append(value).addClass('material-form-error');
+                      $form.find('.material-form-error').remove();
+                      _results2.push($form.find("#id_" + field).after($e));
+                    }
+                    return _results2;
+                  })());
                 }
-                return false;
+                return _results;
               }
             }, 'json');
-            return true;
+            return false;
           });
           $infoForms.append(this);
           return $(this).toggle(false).toggle('slow');

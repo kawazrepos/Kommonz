@@ -13,7 +13,7 @@ from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
 from fields.ccfield.models import CreativeCommonsField
 from fields.thumbnailfield.models import ThumbnailField
-from apps.materials.managers import MaterialManager
+from ..managers import MaterialManager
 
 class MaterialFile(models.Model):
     u"""
