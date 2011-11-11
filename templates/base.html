@@ -38,7 +38,7 @@
         <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
         <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
         {% if user.is_staff %}
-        <li><a href="/admin">神ページ</a></li>
+        <li><a href="{% reverse 'control_main' %}">神ページ</a></li>
         {% endif %}
       </ul>
       {% else %}
