@@ -7,32 +7,32 @@ from django.db.models.fields.files import ImageField
 from django.db.models import signals
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from types import Thumbnail
 from widgets import DelAdminFileWidget
 from forms import ThumbnailFormField
 import os, shutil
 
 class ThumbnailField(ImageField):
     def __init__(self, *args, **kwargs):
-        #
         params_size = ('width', 'height', 'force')
         thumbnail_size_patterns = kwargs.pop('thumbnail_size_patterns', ())
-        self.pattern_names = [pattern_name for pattern_name in thumbnail_size_patterns.iteritems()]
+        self.pattern_names = [pattern_name for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems()]
         for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems():
-            setattr(self, pattern_name, dict(map(None, params_size, thumbnail_size)))
+            setattr(self, "%s_size" % pattern_name, dict(map(None, params_size, thumbnail_size)))
         super(ThumbnailField, self).__init__(*args, **kwargs) 
 
-    def _get_thumbnail_filename(self, filename, pattern_name):
+    @staticmethod
+    def _get_thumbnail_filename(filename, pattern_name):
         '''
         Returns the thumbnail name associated to the standard image filename
             * Example: /var/www/myproject/media/img/picture_1.jpeg
                 will return /var/www/myproject/media/img/picture_1.thumbnail.jpeg
         '''
         splitted_filename = list(os.path.splitext(filename))
-        splitted_filename.insert(1, '.%s'%pattern_name)
+        splitted_filename.insert(1, '.%s' % pattern_name)
         return ''.join(splitted_filename)
-
-    def _resize_image(self, filename, size):
+    
+    @staticmethod
+    def _resize_image(filename, size):
         '''
         Resizes the image to specified width, height and force option
             - filename: full path of image to resize
@@ -79,12 +79,12 @@ class ThumbnailField(ImageField):
                     shutil.copyfile(filename, dst_fullpath)
                 elif os.path.exists(filename):
                     os.rename(filename, dst_fullpath)
-                if self.size:
-                    self._resize_image(dst_fullpath, self.size)
+                #if self.size:
+                #    self._resize_image(dst_fullpath, self.size)
                 for pattern_name in self.pattern_names:
                     thumbnail_filename = self._get_thumbnail_filename(dst_fullpath, pattern_name)
                     shutil.copyfile(dst_fullpath, thumbnail_filename)
-                    self._resize_image(thumbnail_filename, getattr(self, "%s_size"%pattern_name))
+                    self._resize_image(thumbnail_filename, getattr(self, "%s_size" % pattern_name))
                 setattr(instance, self.attname, dst)
                 instance.save()
 
@@ -98,8 +98,20 @@ class ThumbnailField(ImageField):
             filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
             for pattern_name in self.pattern_names:
                 thumbnail_filename = self._get_thumbnail_filename(filename, pattern_name)
-                thumbnail_field = Thumbnail(thumbnail_filename)
-                setattr(getattr(instance, self.name), pattern_name, thumbnail_field)
+                thumbnail_type = self.attr_class(instance, self, thumbnail_filename)
+                setattr(getattr(instance, self.name), pattern_name, thumbnail_type)
+
+    def _get_thumbnail_file(self, instance, pattern_name):
+        if getattr(instance, self.name):
+            try:
+                from PIL import Image, ImageOps
+            except ImportError:
+                import Image
+                import ImageOps
+            filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
+            thumbnail_filename = self._get_thumbnail_filename(filename, pattern_name)
+            return Image.open(thumbnail_filename)
+        return None
 
     def formfield(self, **kwargs):
         '''

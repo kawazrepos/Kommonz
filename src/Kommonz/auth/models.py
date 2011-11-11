@@ -5,8 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from imagefield.fields import ImageField
-
+from thumbnailfield.models import ThumbnailField
 
 class UserProfile(models.Model):
     def _get_icon_path(self, filename):
@@ -31,7 +30,7 @@ class UserProfile(models.Model):
     description = models.TextField(_('Profile Text'), blank=False, null=True)
     
     # not required
-    icon         = ImageField(_('Profile Icon'), upload_to=_get_icon_path)
+    icon         = ThumbnailField(_('Profile Icon'), upload_to=_get_icon_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS)
     sex          = models.CharField(_('Sex'), max_length=10, choices=SEX_TYPES, blank=True)
     birthday     = models.DateField(_('Birthday'), null=True, blank=True)
     place        = models.CharField(_('Location'), max_length=255, blank=True)
