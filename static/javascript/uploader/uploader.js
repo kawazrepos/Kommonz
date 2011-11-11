@@ -28,30 +28,24 @@
           }
           $form.submit(function() {
             $.post(form_url, $form.serialize(), function(data) {
-              var $e, field, value, values, _ref, _results;
+              var $e, field, value, values, _i, _len, _ref;
               if (data['status'] === 'success') {
-                return location.href = location.href.split('/').slice(0, 3).join('/') + data['url'];
+                return true;
               } else if (data['status'] === 'error') {
                 _ref = data['errors'];
-                _results = [];
                 for (field in _ref) {
                   values = _ref[field];
-                  _results.push((function() {
-                    var _i, _len, _results2;
-                    _results2 = [];
-                    for (_i = 0, _len = values.length; _i < _len; _i++) {
-                      value = values[_i];
-                      $e = $('<p>').append(value).addClass('material-form-error');
-                      $form.find('.material-form-error').remove();
-                      _results2.push($form.find("#id_" + field).after($e));
-                    }
-                    return _results2;
-                  })());
+                  for (_i = 0, _len = values.length; _i < _len; _i++) {
+                    value = values[_i];
+                    $e = $('<p>').append(value).addClass('material-form-error');
+                    $form.find('.material-form-error').remove();
+                    $form.find("#id_" + field).after($e);
+                  }
                 }
-                return _results;
+                return false;
               }
             }, 'json');
-            return false;
+            return true;
           });
           $infoForms.append(this);
           return $(this).toggle(false).toggle('slow');

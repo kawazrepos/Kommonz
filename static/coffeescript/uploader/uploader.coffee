@@ -23,15 +23,16 @@ $ ->
         $form.submit ->
           $.post form_url, $form.serialize(), (data) ->
             if(data['status'] is 'success')
-              location.href = location.href.split('/')[0..2].join('/') + data['url']
+              return true
             else if(data['status'] is 'error')
               for field, values of data['errors']
                 for value in values
                   $e = $('<p>').append(value).addClass('material-form-error')
                   $form.find('.material-form-error').remove()
                   $form.find("#id_#{field}").after($e)
+              return false
           , 'json'
-          false
+          true
         $infoForms.append @
         $(@).toggle(false)
          .toggle 'slow'

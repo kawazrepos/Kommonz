@@ -28,7 +28,7 @@ class MaterialFile(models.Model):
     file       = models.FileField(_('File'), upload_to=_get_file_path)
     
     class Meta:
-        app_label = 'materials'
+        app_label           = 'materials'
         ordering            = ('-material__pk',)
         verbose_name        = _('MaterialFile')
         verbose_name_plural = _('MaterialFiles')
@@ -65,7 +65,7 @@ class Material(models.Model):
     
     # not required 
     description = models.TextField(_('Description'), blank=False, null=True)
-    thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True) # it will replace to ThumbnailField
+    thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
     _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
     
     # auto add
