@@ -4,13 +4,11 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
+from django.test.client import Client
+from nose.tools import *
 
-from django.test import TestCase
-
-
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class TestThumbnailField(object):
+    def test_thumbnail_generate(self):
         """
-        Tests that 1 + 1 always equals 2.
+            Tests thumbnail generating
         """
-        self.assertEqual(1 + 1, 2)
