@@ -21,4 +21,4 @@ class ListListView(ListView):
 
 def List_ordered_by_add_at(request):
     ordered_list = List.objects.all().order_by('-created_at')
-    return render_to_response('templates/lists/list_lists.html', {'object_list': ordered_list})
+    return render_to_response('lists/list_list.html', {'object_list': ordered_list})

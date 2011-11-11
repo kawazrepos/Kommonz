@@ -16,10 +16,10 @@ ORDER_STATES =(
     ('downloads_times',          _('downloads times')),
     ('material_upload_date',     _('material upload date')),
     ('author',                   _('auther')),
-    ('-add_date',                _('-add date')),
+    ('-created_date',            _('-add date')),
     ('-download_times',          _('-downloadb times')),
     ('-material_upload_date',    _('-material upload date')),
-    ('-author',                  _('-auther')),
+    ('-author',                  _('-author')),
 )
 
 
@@ -29,16 +29,16 @@ class List(models.Model):
     materials         = models.ManyToManyField(Material, through='ListInfo')
     pub_state         = models.CharField(_('public configration'),max_length=10,choices=PUB_STATES, default="public",)
     created_at        = models.DateTimeField(_('create at'), auto_now_add=True)
-    order             = models.CharField(_('order'),choices=ORDER_STATES,default="created_at", max_length=64)
+    order             = models.CharField(_('order'),choices=ORDER_STATES,default="created_date", max_length=64)
+    description       = models.CharField(_('introduce comment'), max_length=100)
     
     class Meta:
-        app_label           = 'lists'
-        ordering            = ('-created_at',)
+        ordering            = ['-created_at']
         verbose_name        = _('list')
         verbose_name_plural = _('lists')
     
     def __unicode__(self):
-        return self.title
+        return self.label
     
     @models.permalink
     def get_absolute_url(self):
@@ -47,17 +47,16 @@ class List(models.Model):
 class ListInfo(models.Model):
     list         = models.ForeignKey(List)
     material     = models.ForeignKey(Material, related_name='listinfo')
-    add_at       = models.DateTimeField(_('Add Date'), auto_now_add=True)
+    created_at   = models.DateTimeField(_('Add Date'), auto_now_add=True)
     comment      = models.CharField(_('Comment'), max_length=128)
     
     class Meta:
-        app_label           = 'listinfos'
-        ordering            = ('-add_at',)
+        ordering            = ['-created_at']
         verbose_name        = _('list_info')
         verbose_name_plural = _('list_infos')
     
     def __unicode__(self):
-        return self.list.label
+        return self.material.label
         
 
 
