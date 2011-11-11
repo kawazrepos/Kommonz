@@ -15,7 +15,7 @@ from django.template.loader import get_template
 from django.template.loader_tags import BlockNode
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from messages.models import Message
+from apps.messages.models import Message
 import os
 
 
@@ -96,7 +96,7 @@ def create_notification(related_object, template_filename,
 
 
 # signal callbacks below
-@receiver(post_save, sender=Message, dispatch_uid='notifications.models')
+@receiver(post_save, sender=Message, dispatch_uid='apps.notifications.models')
 def new_message_callback(sender, **kwargs):
     u"""notification of new message received"""
     if kwargs.get('created', None):
@@ -105,7 +105,7 @@ def new_message_callback(sender, **kwargs):
             create_notification(instance, 'new_message.txt', instance.user_to, user_from=instance.user_from)
 
 
-@receiver(post_save, sender=Notification, dispatch_uid='notifications.models')
+@receiver(post_save, sender=Notification, dispatch_uid='apps.notifications.models')
 def new_notification_callback(sender, **kwargs):
     if kwargs.get('created', None):
         instance = kwargs.get('instance', None)

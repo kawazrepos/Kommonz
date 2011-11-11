@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 from django.contrib.auth.decorators import login_required
-from messages.views import MessageListView, MessageDetailView, MessageCreateView, MessageDeleteView
+from views import MessageListView, MessageDetailView, MessageCreateView, MessageDeleteView
 
 
 urlpatterns = patterns('',

@@ -36,7 +36,7 @@ class MessageListView(ListView):
 class MessageDetailView(DetailView):
     model = Message
     
-    @method_decorator(permission_required('messages.view_message', Message))
+    @method_decorator(permission_required('apps.messages.view_message', Message))
     def dispatch(self, request, *args, **kwargs):
         message = Message.objects.get(pk=kwargs['pk'])
         if request.user == message.user_to and not message.read :

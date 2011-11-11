@@ -11,6 +11,6 @@ class NotificationListView(ListView):
 class NotificationDetailView(DetailView):
     model = Notification
     
-    @method_decorator(permission_required('notifications.view_notification', Notification))
+    @method_decorator(permission_required('apps.notifications.view_notification', Notification))
     def dispatch(self, request, *args, **kwargs):
         return super(NotificationDetailView, self).dispatch(request, *args, **kwargs)

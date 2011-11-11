@@ -8,8 +8,8 @@ urlpatterns = patterns('',
     url(r'^admin/',               include(admin.site.urls),                         name='admin'),
     url(r'^registration/',        include('Kommonz.registration.urls')),
     url(r'^materials/',           include('Kommonz.materials.urls')),
-    url(r'^messages/',            include('Kommonz.messages.urls')),
-    url(r'^notifications/',       include('Kommonz.notifications.urls')),
+    url(r'^messages/',            include('Kommonz.apps.messages.urls')),
+    url(r'^notifications/',       include('Kommonz.apps.notifications.urls')),
     url(r'^users/',               include('Kommonz.auth.urls')),
     url(r'^$',                    TemplateView.as_view(template_name='index.html'), name='index')
 )
