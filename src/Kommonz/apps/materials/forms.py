@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# src/Kommonz/materials/forms.py
+# src/Kommonz/apps/materials/forms.py
 # created by giginet on 2011/10/14
 #
 from django import forms

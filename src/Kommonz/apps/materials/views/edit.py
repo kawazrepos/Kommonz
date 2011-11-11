@@ -103,7 +103,7 @@ class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
     
-    @method_decorator(permission_required('materials.change_material', Material))
+    @method_decorator(permission_required('apps.materials.change_material', Material))
     def dispatch(self, *args, **kwargs):
         return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 
@@ -114,7 +114,7 @@ class MaterialInlineUpdateView(MaterialUpdateView):
     }
     
     @method_decorator(csrf_exempt)    
-    @method_decorator(permission_required('materials.change_material', Material))
+    @method_decorator(permission_required('apps.materials.change_material', Material))
     def dispatch(self, *args, **kwargs):
         return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 

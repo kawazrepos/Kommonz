@@ -1,10 +1,10 @@
 # ref : http://www.essentialcode.com/2009/01/26/splitting-django-models-into-separate-files/
-# if you want to add a new model in materials.models package, you must define Model.Meta.app_label = 'materials'.
+# if you want to add a new model in apps.materials.models package, you must define Model.Meta.app_label = 'materials'.
 import os
 import re
 import types
  
-PACKAGE = 'materials.models'
+PACKAGE = 'apps.materials.models'
 MODEL_RE = r"^.*.py$"
 
 def get_models(package_dir):

@@ -13,7 +13,7 @@ __date__ = '2011/10/10'
 lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
 urlpatterns = patterns('',
-    url(r'^api/',                 include('Kommonz.materials.api.urls')),
+    url(r'^api/',                 include('Kommonz.apps.materials.api.urls')),
     url(r'^(?P<pk>\d+)/$',        MaterialDetailView.as_view(),                 name="materials_material_detail"),
     url(r'^(?P<pk>\d+)/update/$', MaterialUpdateView.as_view(),                 name="materials_material_update"),
     url(r'^create/?$',            MaterialFileCreateView.as_view(),             name='materials_material_file_create'),

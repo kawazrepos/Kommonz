@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #    
-#    Kommonz.materials.admin
+#    Kommonz.apps.materials.admin
 #    created by giginet on 2011/10/02
 #
 from django.contrib import admin

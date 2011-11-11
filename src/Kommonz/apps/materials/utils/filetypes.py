@@ -5,7 +5,7 @@
 # Modifier:      giginet
 #
 import mimetypes
-from Kommonz.materials.models.base import Material
+from Kommonz.apps.materials.models.base import Material
 
 IMAGE = (
     'image/bmp',

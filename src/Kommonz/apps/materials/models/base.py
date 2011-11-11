@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #    
-#    Kommonz.materials.models.base
+#    Kommonz.apps.materials.models.base
 #    created by giginet on 2011/10/02
 #
 import os
@@ -13,7 +13,7 @@ from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
 from fields.ccfield.models import CreativeCommonsField
 from fields.thumbnailfield.models import ThumbnailField
-from materials.managers import MaterialManager
+from apps.materials.managers import MaterialManager
 
 class MaterialFile(models.Model):
     u"""

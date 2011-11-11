@@ -15,7 +15,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from object_permission.decorators import permission_required
 from auth.models import User
-from materials.models.base import Material
+from apps.materials.models.base import Material
 from forms import MessageCreateForm, MaterialMessageCreateForm, \
                   ReplyMessageCreateForm, MessageDeleteForm
 from models import Message

@@ -84,7 +84,7 @@ class MultipleMaterialZipResponseMixin(MultipleZipResponseMixin):
         qs = self.get_queryset()
         for material in qs:
             if not isinstance(material, Material):
-                raise exceptions.TypeError('MultipleZipResponseMixin only takes materials.Material')
+                raise exceptions.TypeError('MultipleZipResponseMixin only takes apps.materials.Material')
         return [material.file.path for material in qs]
 
 class MaterialZipView(MultipleMaterialZipResponseMixin, BaseListView):
