@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, UserManager
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
-from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.models import ThumbnailField
 
@@ -36,8 +35,6 @@ class UserProfile(models.Model):
     place        = models.CharField(_('Location'), max_length=255, blank=True)
     url          = models.URLField(_('URL'), max_length=255, blank=True)
     
-    # auto set and uneditable
-    slug         = models.SlugField(_('Slug'), max_length=30, editable=False)
     
     objects      = UserManager()
     
@@ -46,9 +43,6 @@ class UserProfile(models.Model):
             return '%s(%s)' % (self.nickname, self.user.username)
         return self.user.username
     
-    def save(self, force_insert=False, force_update=False, using=None):
-        self.slug = slugify(self.user.username)
-        super(UserProfile, self).save(force_insert=force_insert, force_update=force_update, using=using)
     
     class Meta:
         verbose_name        = _('User Profile')
@@ -56,7 +50,7 @@ class UserProfile(models.Model):
         
     @models.permalink
     def get_absolute_url(self):
-        return ('auth_user_detail', (), { 'slug' : self.slug })
+        return ('auth_user_detail', (), { 'pk' : self.id })
     
         
 class UserOption(models.Model):
