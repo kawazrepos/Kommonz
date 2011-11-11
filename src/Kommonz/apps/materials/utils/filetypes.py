@@ -5,7 +5,7 @@
 # Modifier:      giginet
 #
 import mimetypes
-from Kommonz.apps.materials.models.base import Material
+from ..models.base import Material
 
 IMAGE = (
     'image/bmp',
@@ -97,7 +97,7 @@ def get_file_model(filename):
         return Material
     cls_name = type[0].upper() + type[1:] #convert from 'type' to 'Type'
     try:
-        module = __import__('.'.join(('Kommonz', 'materials', 'models', type)), globals(), locals(), [cls_name])
+        module = __import__('.'.join(('Kommonz', 'apps', 'materials', 'models', type)), globals(), locals(), [cls_name])
         return getattr(module, cls_name)
     except:
         return Material
