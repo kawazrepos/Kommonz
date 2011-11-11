@@ -16,7 +16,7 @@ class DuplicatePatterNameException(Exception):
         self.pattern_name = pattern_name
     
     def __str__(self):
-        return 'Pattern name "%s" have been already defined."' % self.pattern_name
+        return 'Pattern name "%s" have been already defined.' % self.pattern_name
 
 class ThumbnailField(ImageField):
     def __init__(self, *args, **kwargs):
@@ -102,7 +102,7 @@ class ThumbnailField(ImageField):
         if getattr(instance, self.name):
             filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
             for pattern_name in self.pattern_names:
-                if hasattr(getattr(instance), pattern_name):
+                if hasattr(getattr(instance, self.name), pattern_name):
                     raise DuplicatePatterNameException(pattern_name)
                 thumbnail_filename = self._get_thumbnail_filename(filename, pattern_name)
                 thumbnail_type = self.attr_class(instance, self, thumbnail_filename)
