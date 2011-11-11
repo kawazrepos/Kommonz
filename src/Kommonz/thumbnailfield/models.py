@@ -19,8 +19,9 @@ class DuplicatePatterNameException(Exception):
         return 'Pattern name "%s" have been already defined.' % self.pattern_name
 
 class ThumbnailField(ImageField):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, size=None, *args, **kwargs):
         params_size = ('width', 'height', 'force')
+        self.size = dict(map(None, params_size, size)) if size else None
         thumbnail_size_patterns = kwargs.pop('thumbnail_size_patterns', ())
         self.pattern_names = [pattern_name for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems()]
         for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems():
@@ -84,8 +85,8 @@ class ThumbnailField(ImageField):
                     shutil.copyfile(filename, dst_fullpath)
                 elif os.path.exists(filename):
                     os.rename(filename, dst_fullpath)
-                #if self.size:
-                #    self._resize_image(dst_fullpath, self.size)
+                if self.size:
+                    self._resize_image(dst_fullpath, self.size)
                 for pattern_name in self.pattern_names:
                     thumbnail_filename = self._get_thumbnail_filename(dst_fullpath, pattern_name)
                     shutil.copyfile(dst_fullpath, thumbnail_filename)
