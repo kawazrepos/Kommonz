@@ -22,6 +22,11 @@ class Image(Material):
             self.thumbnail.storage = self._create_thumbnail()
         return super(Image, self).save()
 
+    def clean(self):
+        if not self.thumbnail:
+            self.thumbnail = self.file
+        super(Image, self).clean()
+
     def _create_thumbnail(self):
         """Create thumbnail from image and return that's path."""
         # implement this
