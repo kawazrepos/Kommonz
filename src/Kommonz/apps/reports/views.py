@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from Kommonz.reports.models import Report
 from django.views.generic.edit import CreateView
+from models import Report
 class ReportCreateView(CreateView):
     model = Report
 
