@@ -9,7 +9,7 @@ from models.audio import Audio
 from models.code import Code
 from models.image import Image
 from models.movie import Movie
-
+from models.packages import Package
 
 # base models
 
@@ -54,3 +54,7 @@ admin.site.register(Image, ImageAdmin)
 class MovieAdmin(admin.ModelAdmin):
     list_display    = ('__unicode__',)
 admin.site.register(Movie, MovieAdmin)
+
+class PackageAdmin(admin.ModelAdmin):
+    list_display    = ('__unicode__',)
+admin.site.register(Package, PackageAdmin)

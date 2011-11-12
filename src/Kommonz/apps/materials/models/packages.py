@@ -26,26 +26,36 @@ class Package(Material):
     def save(self, *args, **kwargs):
         super(Package, self).save(*args, **kwargs)
         archive = zipfile.ZipFile(self.file.path, "r")
-        original_path = self.file.path
-        path = os.path.split(original_path)[0]
-        print path
-        for info in archive.infolist():
-            filename = info.filename.encode('utf-8')
-            extracted_file = File(archive.extract(filename))
-            material_file = MaterialFile.objects.create(file=extracted_file)
-            extracted_path = os.path.split(os.path.join(path, filename))[0]
-            if not os.path.exists(extracted_path):
-                os.makedirs(extracted_path)
-            try:
-                dst = open(extracted_path, "w")
-                shutil.copyfile(extracted_file, dst)
-                material = Material.objects.create(
-                        label=filename,
-                        _file=material_file,
-                        description=self.description,
-                        author=self.author,
-                        category=self.category
+        package_path = self.file.path
+        upload_path = os.path.dirname(package_path)
+        for name in archive.namelist():
+            filename = os.path.basename(name)
+            if name.endswith('/'):
+                try: # Don't try to create a directory if exists
+                    os.mkdir(os.path.join(upload_path, name))
+                except:
+                    pass
+            elif name.startswith('__MACOSX') or filename.startswith('.'):
+                # ignore __MACOSX junk and dotfiles.
+                continue
+            else:
+                raw_file = open(os.path.join(upload_path, name), 'wb')
+                raw_file.write(archive.read(name))
+                raw_file.close()
+                raw_file = open(os.path.join(upload_path, name), 'rb')
+                file = File(raw_file)
+                material_file = MaterialFile.objects.create(file=file)
+                self.materials.create(
+                    label=name,
+                    _file=material_file,
+                    description=self.description,
+                    author=self.author,
+                    category=self.category
                 )
-                self.materials.add(material)
-            except:
-                pass #fail silently
+                raw_file.close()
+        super(Package, self).save(*args, **kwargs)
+        try:
+            osxjunk = os.path.join(upload_path, '__MACOSX')
+            shutil.rmtree(osxjunk)
+        except:
+            pass
