@@ -7,7 +7,7 @@ import os
 import shutil
 from django.db import models
 from django.utils.translation import ugettext as _
-from fields.thumbnailfield.utils import create_thumbnail
+from fields.thumbnailfield.utils import create_thumbnail, convert_patterns_dict
 from base import Material
 
 class Image(Material):
@@ -25,15 +25,21 @@ class Image(Material):
             self.thumbnail.storage = self._create_thumbnail()
         return super(Image, self).save()
 
-    def clean(self):
+    def save(self, *args, **kwargs):
         if not self.thumbnail:
             self.thumbnail = self.file
             self._create_thumbnail(self.thumbnail.path)
-        super(Image, self).clean()
+        super(Image, self).save(*args, **kwargs)
 
     def _create_thumbnail(self, filename):
         """
         Create thumbnail from image and return that's path.
         """
+        # implement this
+        params_size = ('width', 'height', 'force')
+        path, original_filename = os.path.split(filename)
+        thumbnail = os.path.join(path, "thumbnail", original_filename)
+        patterns = convert_patterns_dict(Material.THUMBNAIL_SIZE_PATTERNS)
+        create_thumbnail(filename, thumbnail, patterns)
         return filename
 
