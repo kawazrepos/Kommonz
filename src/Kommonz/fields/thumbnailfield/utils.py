@@ -15,7 +15,20 @@ def get_thumbnail_filename(filename, pattern_name):
     splitted_filename.insert(1, '.%s' % pattern_name)
     return ''.join(splitted_filename)
 
-def resize_image(filename, size):
+def convert_patterns_dict(thumbnail_size_patterns):
+    PARAMS_SIZE = ('width', 'height', 'force')
+    patterns_dict = {}
+    for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems():
+        patterns_dict[pattern_name] = dict(map(None, PARAMS_SIZE, thumbnail_size))
+    return patterns_dict
+
+def create_thumbnail(original, thumbnail, patterns):
+        for pattern_name, pattern_size in patterns.iteritems():
+            thumbnail_filename = get_thumbnail_filename(thumbnail, pattern_name)
+            shutil.copyfile(thumbnail, thumbnail_filename)
+            _resize_image(thumbnail_filename, pattern_size)
+
+def _resize_image(filename, size):
     '''
     Resizes the image to specified width, height and force option
         - filename: full path of image to resize

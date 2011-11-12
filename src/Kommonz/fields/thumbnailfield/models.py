@@ -11,17 +11,13 @@ from django.core.files.storage import FileSystemStorage
 from widgets import DelAdminFileWidget
 from forms import ThumbnailFormField
 from exceptions import DuplicatePatterNameException
-from utils import get_thumbnail_filename as _get_thumbnail_filename
-from utils import resize_image as _resize_image
+from utils import get_thumbnail_filename, create_thumbnail, convert_patterns_dict
 
 class ThumbnailField(ImageField):
-    def __init__(self, size=None, *args, **kwargs):
-        params_size = ('width', 'height', 'force')
-        self.size = dict(map(None, params_size, size)) if size else None
+    def __init__(self, *args, **kwargs):
+        #self.size = dict(map(None, self.PARAMS_SIZE, size)) if size else None
         thumbnail_size_patterns = kwargs.pop('thumbnail_size_patterns', ())
-        self.pattern_names = [pattern_name for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems()]
-        for pattern_name, thumbnail_size in thumbnail_size_patterns.iteritems():
-            setattr(self, "%s_size" % pattern_name, dict(map(None, params_size, thumbnail_size)))
+        self.thumbnail_size_patterns = convert_patterns_dict(thumbnail_size_patterns)
         super(ThumbnailField, self).__init__(*args, **kwargs) 
 
     def _rename_resize_image(self, sender, instance, created, **kwargs):
@@ -37,15 +33,10 @@ class ThumbnailField(ImageField):
                 if 'fixtures' in filename:
                     if not os.path.exists(os.path.dirname(dst_fullpath)):
                         os.makedirs(os.path.dirname(dst_fullpath))
-                    shutil.copyfile(filename, dst_fullpath)
+                        shutil.copyfile(filename, dst_fullpath)
                 elif os.path.exists(filename):
                     os.rename(filename, dst_fullpath)
-                if self.size:
-                    _resize_image(dst_fullpath, self.size)
-                for pattern_name in self.pattern_names:
-                    thumbnail_filename = _get_thumbnail_filename(dst_fullpath, pattern_name)
-                    shutil.copyfile(dst_fullpath, thumbnail_filename)
-                    _resize_image(thumbnail_filename, getattr(self, "%s_size" % pattern_name))
+                create_thumbnail(dst_fullpath, dst_fullpath, self.thumbnail_size_patterns)
                 setattr(instance, self.attname, dst)
                 instance.save()
 
@@ -57,10 +48,10 @@ class ThumbnailField(ImageField):
         '''
         if getattr(instance, self.name):
             filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
-            for pattern_name in self.pattern_names:
+            for pattern_name, pattern_size in self.thumbnail_size_patterns.iteritems():
                 if hasattr(getattr(instance, self.name), pattern_name):
                     raise DuplicatePatterNameException(pattern_name)
-                thumbnail_filename = _get_thumbnail_filename(filename, pattern_name)
+                thumbnail_filename = get_thumbnail_filename(filename, pattern_name)
                 thumbnail_type = self.attr_class(instance, self, thumbnail_filename)
                 setattr(getattr(instance, self.name), pattern_name, thumbnail_type)
 
@@ -82,7 +73,7 @@ class ThumbnailField(ImageField):
             if os.path.exists(filename):
                 os.remove(filename)
             for pattern_name in self.pattern_names:
-                thumbnail_filename = _get_thumbnail_filename(filename, pattern_name)
+                thumbnail_filename = get_thumbnail_filename(filename, pattern_name)
                 if os.path.exists(thumbnail_filename):
                     os.remove(thumbnail_filename)
             setattr(instance, self.name, None)
