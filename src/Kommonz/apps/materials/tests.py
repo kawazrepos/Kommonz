@@ -17,7 +17,7 @@ from models.base import Material, MaterialFile
 class TestMaterialUtils(object):
     def test_suitable_model_code(self):
         """
-            Tests get suitable type from sourcecode.
+        Tests get suitable type from sourcecode.
         """
         from apps.materials.models.code import Code
         cls = Material.objects.get_file_model('file.py')
@@ -25,7 +25,7 @@ class TestMaterialUtils(object):
 
     def test_suitable_model_image(self):
         """
-            Tests get suitable type from image.
+        Tests get suitable type from image.
         """
         from apps.materials.models.image import Image
         cls = Material.objects.get_file_model('file.jpg')
@@ -41,7 +41,7 @@ class TestMaterialUtils(object):
 class TestCode(object):
     def test_suitable_syntax(self):
         """
-            Tests get suitable syntax type from filename
+        Tests get suitable syntax type from filename
         """
         from utils.syntaxes import guess_syntax
         syntax = guess_syntax(u'おっ.py')
@@ -49,13 +49,16 @@ class TestCode(object):
         syntax = guess_syntax('hoge.coffee')
         eq_(syntax, 'CoffeeScript')
 
-class TestMaterialTypeCast(object):
+class TestMaterialUpload(object):
     def setup(self):
         if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
             os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
         Category.objects.create(label=u"現代医学の敗北シリーズ")
 
     def test_auto_cast_material_type(self):
+        """
+        Test cast material model to suitable type when file was uploaded.
+        """
         from apps.materials.models.code import Code
         test_file = File(tempfile.NamedTemporaryFile(
             mode="r+w+t", suffix=".py", 
