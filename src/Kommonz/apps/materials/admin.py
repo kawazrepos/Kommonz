@@ -4,7 +4,7 @@
 #    created by giginet on 2011/10/02
 #
 from django.contrib import admin
-from models.base import MaterialFile, Material, Kero, License, CreativeCommons, Category
+from models.base import MaterialFile, Material, Kero, License, CreativeCommons
 from models.archive import Archive
 from models.audio import Audio
 from models.code import Code
@@ -36,12 +36,6 @@ admin.site.register(License, LisenceAdmin)
 class CreativeCommonsAdmin(admin.ModelAdmin):
     list_display    = ('__unicode__',)
 admin.site.register(CreativeCommons, CreativeCommonsAdmin)
-
-class CategoryAdmin(admin.ModelAdmin):
-    list_display    = ('__unicode__', 'parent',)
-    ordering        = ['parent']
-admin.site.register(Category, CategoryAdmin)
-
 
 # paticular models
 

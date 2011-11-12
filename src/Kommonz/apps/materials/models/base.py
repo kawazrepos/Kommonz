@@ -11,9 +11,11 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
+from apps.categories.models import Category
 from fields.ccfield.models import CreativeCommonsField
 from fields.thumbnailfield.models import ThumbnailField
 from ..managers import MaterialManager
+
 
 class MaterialFile(models.Model):
     u"""
@@ -62,6 +64,7 @@ class Material(models.Model):
     
     # required
     label       = models.CharField(_('Label'), max_length=128)
+    category    = models.ForeignKey(Category, verbose_name=_('Category'), related_name="materials")
     
     # not required 
     description = models.TextField(_('Description'), blank=False, null=True)
@@ -170,6 +173,7 @@ class Kero(models.Model):
     def __unicode__(self):
         return self.label
 
+
 class License(models.Model):
     u"""
         License
@@ -186,6 +190,7 @@ class License(models.Model):
         
     def __unicode__(self):
         return self.label 
+
 
 class CreativeCommons(models.Model):
     u"""
@@ -217,22 +222,3 @@ class CreativeCommons(models.Model):
             raise ValidationError(_('''can not set 'Share Alike' and 'Not Derivative Works' together.'''))
         return super(CreativeCommons, self).clean()
     
-    
-class Category(models.Model):
-    """
-        Model for Category of materials.
-    """
-    label      = models.CharField(_('Label'), max_length=32)
-    parent     = models.ForeignKey('self', verbose_name=_('Parent Category'),
-                                    null=True, blank=True, related_name='children')
-    materials  = models.ManyToManyField(Material, verbose_name=_('Materials'))
-
-    class Meta:
-        app_label           = 'materials'
-        verbose_name        = _('Category')
-        verbose_name_plural = _('Categories')
-        
-    def __unicode__(self):
-        return self.label
-
-  

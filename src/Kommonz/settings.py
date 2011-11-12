@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     # Kommonz
     'Kommonz.autocmd',
     'Kommonz.apps.auth',
+    'Kommonz.apps.categories',
     'Kommonz.apps.materials',
     'Kommonz.apps.messages',
     'Kommonz.apps.notifications',
