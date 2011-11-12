@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.views.generic.edit import CreateView
+from apps.materials.models.base import Material
 from models import Report
+from forms import ReportCreateForm
+
+
 class ReportCreateView(CreateView):
     model = Report
+    form_class = ReportCreateForm
 
-    def get(self, request, *args, **kwargs):
-        return super(ReportCreateView, self).get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return super(ReportCreateView, self).post(request, *args, **kwargs)
