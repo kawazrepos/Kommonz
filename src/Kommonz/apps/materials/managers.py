@@ -8,3 +8,5 @@ class MaterialManager(models.Manager):
     def get_file_model(self, filename):
         from utils.filetypes import get_file_model
         return get_file_model(filename)
+    
+

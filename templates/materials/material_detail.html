@@ -6,13 +6,7 @@
 <section id="detail_main">
     <h1>{{ object.label }}</h1>
     <h2>{{ object.author.username }}</h2>
-    <p>カテゴリ：
-        {% if object.category_set %}
-            {% for category in object.category_set.all %}
-                {{ category }}
-            {% endfor %}
-        {% endif %}
-    </p>
+    <p>カテゴリ：{{ object.category }}</p>
     <p>閲覧回数：{{ object.pv }}　ダウンロード数：{{ object.download }}</p>
     <p>作成日時：{{ object.created_at }}</p>
     <p>更新日時：{{ object.updated_at }}</p>
