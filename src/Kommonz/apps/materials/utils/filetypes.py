@@ -27,7 +27,7 @@ MOVIE = (
     'video/x-msvideo',
     'video/x-flv',
 )
-ARCHIVE = (
+PACKAGE = (
     'application/x-bzip2',
     'application/x-gtar',
     'application/x-gzip',
@@ -72,7 +72,7 @@ TYPES = (
     ('audio',       AUDIO),
     ('movie',       MOVIE),
     ('text',        TEXT),
-    ('archive',     ARCHIVE),
+    ('package',     PACKAGE),
     ('application', APPLICATION),
     ('code',        CODE)
 )
