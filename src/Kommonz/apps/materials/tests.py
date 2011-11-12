@@ -30,10 +30,18 @@ class TestMaterialUtils(object):
         from apps.materials.models.image import Image
         cls = Material.objects.get_file_model('file.jpg')
         eq_(cls, Image)
+
+    def test_suitable_model_package(self):
+        """
+        Tests get suitable type from package.
+        """
+        from apps.materials.models.packages import Package
+        cls = Material.objects.get_file_model('file.zip')
+        eq_(cls, Package)
         
     def test_suitable_model_others(self):
         """
-            Tests get suitable type from filename.
+            Tests get suitable type from other file.
         """
         cls = Material.objects.get_file_model('file.aaa')
         eq_(cls, Material)
@@ -55,9 +63,9 @@ class TestMaterialUpload(object):
             os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
         Category.objects.create(label=u"現代医学の敗北シリーズ")
 
-    def test_auto_cast_material_type(self):
+    def test_auto_cast_material_type_code(self):
         """
-        Test cast material model to suitable type when file was uploaded.
+        Test cast material model to suitable type when code file was uploaded.
         """
         from apps.materials.models.code import Code
         test_file = File(tempfile.NamedTemporaryFile(
@@ -73,6 +81,26 @@ class TestMaterialUpload(object):
         )
         ok_(isinstance(material, Code))
         test_file.close()
+
+    def test_auto_cast_material_type_other(self):
+        """
+        Test cast material model to suitable type when other file was uploaded.
+        """
+        from apps.materials.models.base import Material
+        test_file = File(tempfile.NamedTemporaryFile(
+            mode="r+w+t", suffix=".hoge", 
+            dir=settings.TEST_TEMPORARY_FILE_DIR
+        ))
+        test_file.write("hello!hello!")
+        material_file = MaterialFile.objects.create(file=test_file)
+        material = Material.objects.create(
+                _file=material_file, 
+                description="description", 
+                category=Category.objects.get(pk=1)
+        )
+        ok_(isinstance(material, Material))
+        test_file.close()
+
 
     def teardown(self):
         if os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
