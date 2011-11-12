@@ -147,9 +147,10 @@ class Material(models.Model):
             self.label = self.file.name
         if request and request.user.is_authenticated():
             self.author = request.user
-            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
+            self.ip = request.META['REMOTE_ADDR']
         else:
             self.author = User.objects.get(pk=1)
+            self.ip = "0.0.0.0"
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):

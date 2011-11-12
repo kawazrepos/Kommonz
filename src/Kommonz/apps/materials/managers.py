@@ -16,3 +16,4 @@ class MaterialManager(models.Manager):
     #         model = self.get_file_model(file.path)
     #         return model.objects.create(cast_enable=False, *args, **kwargs)
     #     return super(MaterialManager, self).create(*args, **kwargs)
+    

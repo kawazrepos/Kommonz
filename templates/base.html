@@ -54,6 +54,7 @@
       </ul>
     </nav>
   </header>
+  {% block content_all %}
   <section id="content" class="ui-corner-all">
     <header id="content_header" class="clearfix">
       <section id="logo"><!--<img src="kommonzlogo.png">--></section>
@@ -61,7 +62,7 @@
         <li><a href="{% reverse 'index' %}">素材検索(index)</a></li>
         <li><a href="{% reverse 'materials_material_list' %}">新着素材一覧</a></li>
         <li>Kommonzについて</li>
-        <li>項目４</li>
+        <li><a href="{% reverse 'categories_category_list' %}">カテゴリ</a></li>
       </ul>
     </header>
     <section id="content_main">
@@ -69,6 +70,10 @@
       {% endblock %}
     </section><!-- end of content_main-->
   </section><!-- end of content-->
-  <footer id="page_footer"></footer>
+  {% endblock %}
+  <footer id="page_footer">
+      {% block page_footer %}
+      {% endblock %}
+  </footer>
 </body>
 </html>
