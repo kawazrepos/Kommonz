@@ -5,7 +5,6 @@
 #
 from django.contrib import admin
 from models.base import MaterialFile, Material, Kero, License, CreativeCommons
-from models.archive import Archive
 from models.audio import Audio
 from models.code import Code
 from models.image import Image
@@ -39,9 +38,6 @@ admin.site.register(CreativeCommons, CreativeCommonsAdmin)
 
 # paticular models
 
-class ArchiveAdmin(admin.ModelAdmin):
-    list_display    = ('__unicode__',)
-admin.site.register(Archive, ArchiveAdmin)
 
 class AudioAdmin(admin.ModelAdmin):
     list_display    = ('__unicode__',)
