@@ -18,13 +18,16 @@ class SearchResultView(ListView):
     model = Material
     
     def get_context_data(self, **kwargs):
-        category_id = self.request.GET.get('category_id', None)
+        category_id    = self.request.GET.get('category_id', None)
+        search_keyword = self.request.GET.get('search_keyword', None)
+        object_list = Material.objects
         print kwargs
         context = super(SearchResultView, self).get_context_data(**kwargs)
         if category_id:
-            print "ok"
-            object_list = Material.objects.filter(category=Category.objects.get(id=category_id))
-            context['object_list'] = object_list
-            
+            object_list = object_list.filter(category=Category.objects.get(id=category_id))
+        if search_keyword:
+            object_list = object_list.filter(label__contains=search_keyword)
+        
+        context['object_list'] = object_list
         return context
     

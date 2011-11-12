@@ -95,13 +95,12 @@ li {
 #content_header {
     border-bottom: solid 1px gray;
     margin: 0px;
-    background-color: lightgray;
     min-height: 50px;
 }
 #content_header #logo {
-    width: 200px;
-    height: 120px;
-    background-color: LightGreen;
+    width: 253px;
+    height: 80px;
+    margin:30px auto 20px auto;
 }
 #content_header ul {
     bottom: 10px;
