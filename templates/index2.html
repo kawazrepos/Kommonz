@@ -5,17 +5,15 @@
 {% endblock %}
 {% block content_all %}
 <section id="index_search">
-<h1 id="index_title"><img src="image/style/kawazhead.jpg"></h1>
-<form id="index_search_form">
+<h1 id="index_title"><img src="{{ MEDIA_URL }}image/style/kawazhead.jpg"></h1>
+<form id="index_search_form" method="get" action="{% reverse 'searches_result' %}" enctype="multipart/form-data">
 <p>
-    <select>
-        <option>項目１</option>
-        <option>項目１</option>
-        <option>項目１</option>
-        <option>項目１</option>
-        <option>項目１</option>
+    <select name="category_id">
+        {% for category in object_list %}
+        <option value="{{ category.id }}">{{ category.label }}</option>
+        {% endfor %}
     </select>
-    <input id="index_search_keyword" type="text">
+    <input id="index_search_keyword" type="text" name="search_keyword">
     <input id="index_search_submit" type="submit">
 </p>
 </form>

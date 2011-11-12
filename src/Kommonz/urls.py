@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+from apps.searches.views import SearchIndexView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -12,8 +13,9 @@ urlpatterns = patterns('',
     url(r'^materials/',           include('Kommonz.apps.materials.urls')),
     url(r'^messages/',            include('Kommonz.apps.messages.urls')),
     url(r'^notifications/',       include('Kommonz.apps.notifications.urls')),
+    url(r'^searches/',            include('Kommonz.apps.searches.urls')),
     url(r'^users/',               include('Kommonz.apps.auth.urls')),
-    url(r'^$',                    TemplateView.as_view(template_name='index2.html'), name='index')
+    url(r'^$',                    SearchIndexView.as_view(template_name='index2.html'), name='index')
 )
 
 from django.conf import settings

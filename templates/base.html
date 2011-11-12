@@ -57,7 +57,7 @@
   {% block content_all %}
   <section id="content" class="ui-corner-all">
     <header id="content_header" class="clearfix">
-      <section id="logo"><!--<img src="kommonzlogo.png">--></section>
+      <section id="logo"><a href="{% reverse 'index' %}"><img src="{{ MEDIA_URL }}image/style/kawazhead.jpg"></a></section>
       <ul>
         <li><a href="{% reverse 'index' %}">素材検索(index)</a></li>
         <li><a href="{% reverse 'materials_material_list' %}">新着素材一覧</a></li>
