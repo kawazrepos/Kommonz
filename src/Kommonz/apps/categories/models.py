@@ -25,3 +25,4 @@ class Category(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('categories_category_detail', (), { 'pk' : self.pk })
+    
