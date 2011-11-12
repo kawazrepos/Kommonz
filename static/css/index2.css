@@ -14,7 +14,20 @@
     width:100%;
 }
 
-#index_footer_menu{
-    background: #CCCCCC;
+#page_footer{
+    background: #DDDDDD;
     height:200px;
+}
+
+#index_footer_menu_left{
+    float: left;
+    width: 33%;
+}
+#index_footer_menu_center{
+    float: left;
+    width: 33%; 
+}
+#index_footer_menu_right{
+    float: left;
+    width: 33%;
 }
