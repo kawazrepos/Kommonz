@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.generic import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+from qwert.middleware.threadlocals import request as get_request
 
 
 class Reason(models.Model):
@@ -36,5 +36,16 @@ class Report(models.Model):
         verbose_name_plural = _('Reports')
         
     def __unicode__(self):
-        return self.content_object.__unicode__()
+        return self.reason.label
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('index', (), {})
 
+    def clean(self):
+        request = get_request()
+        if request.user.is_authenticated():
+            self.author = request.user
+        else:
+            raise ValidationError(_('''can not make a report without authenticate'''))
+        return super(Report, self).clean()

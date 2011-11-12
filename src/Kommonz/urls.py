@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^materials/',           include('Kommonz.apps.materials.urls')),
     url(r'^messages/',            include('Kommonz.apps.messages.urls')),
     url(r'^notifications/',       include('Kommonz.apps.notifications.urls')),
+    url(r'^reports/',             include('Kommonz.apps.reports.urls')),
     url(r'^searches/',            include('Kommonz.apps.searches.urls')),
     url(r'^users/',               include('Kommonz.apps.auth.urls')),
     url(r'^$',                    SearchIndexView.as_view(template_name='index2.html'), name='index')
