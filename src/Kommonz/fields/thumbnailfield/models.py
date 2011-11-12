@@ -10,13 +10,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from widgets import DelAdminFileWidget
 from forms import ThumbnailFormField
-
-class DuplicatePatterNameException(Exception):
-    def __init__(self, pattern_name):
-        self.pattern_name = pattern_name
-    
-    def __str__(self):
-        return 'Pattern name "%s" have been already defined.' % self.pattern_name
+from exceptions import DuplicatePatterNameException
 
 class ThumbnailField(ImageField):
     def __init__(self, size=None, *args, **kwargs):

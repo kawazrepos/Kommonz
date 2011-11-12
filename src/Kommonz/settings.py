@@ -175,6 +175,8 @@ INSTALLED_APPS = (
     'object_permission',            # Object permission library
     # Kommonz
     'Kommonz.autocmd',
+    'Kommonz.utils',
+    # Kommonz apps
     'Kommonz.apps.auth',
     'Kommonz.apps.materials',
     'Kommonz.apps.messages',
@@ -195,7 +197,7 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.orkut.OrkutBackend',
     'social_auth.backends.contrib.foursquare.FoursquareBackend',
     'social_auth.backends.contrib.github.GithubBackend',
-#    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
+    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
     'apps.registration.backends.hatena.HatenaBackend',
     'django.contrib.auth.backends.ModelBackend',
