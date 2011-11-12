@@ -24,7 +24,11 @@ class MaterialFile(models.Model):
     
     def _get_file_path(self, filename):
         request = get_request()
-        path = u'storage/materials/%s/' % request.user.username
+        if not request:
+            user = User.objects.get(pk=1)
+        else:
+            user = request.user
+        path = u'storage/materials/%s/' % user.username
         return os.path.join(path, filename)
     
     file       = models.FileField(_('File'), upload_to=_get_file_path)
@@ -63,7 +67,7 @@ class Material(models.Model):
     }
     
     # required
-    label       = models.CharField(_('Label'), max_length=128)
+    label       = models.CharField(_('Label'), max_length=128, null=False, blank=True)
     category    = models.ForeignKey(Category, verbose_name=_('Category'), related_name="materials")
     
     # not required 
@@ -139,11 +143,14 @@ class Material(models.Model):
             extended.__dict__.update(self.__dict__)
             extended.save()
         request = get_request()
-        if request.user.is_authenticated():
+        if not self.label:
+            self.label = self.file.name
+        if request and request.user.is_authenticated():
             self.author = request.user
-            self.ip = request.META['REMOTE_ADDR']  if request else "127.0.0.1"
+            self.ip = request.META['REMOTE_ADDR']
         else:
             self.author = User.objects.get(pk=1)
+            self.ip = "0.0.0.0"
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):
