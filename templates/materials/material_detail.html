@@ -25,5 +25,6 @@
     </p>
     <p>MIMETYPE：{{ object.mimetype }}</p>
     <p><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></p>
+    <p><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">この素材を通報する</a></p>
 </section>
 {% endblock %}

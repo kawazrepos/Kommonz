@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from qwert.middleware.threadlocals import request as get_request
+from apps.materials.models.base import Material
 
 
 class Reason(models.Model):
@@ -28,6 +29,7 @@ class Report(models.Model):
     remarks     = models.TextField(_('remarks'))
     checked     = models.BooleanField(_('Checked'), default=False)
     author      = models.ForeignKey(User, verbose_name=_('Author'), editable=False)
+    material    = models.ForeignKey(Material, verbose_name=_('Material'), related_name='reports', editable=False)
     created_at  = models.DateTimeField(_('created at'), auto_now=True)
     
     class Meta:
@@ -48,4 +50,6 @@ class Report(models.Model):
             self.author = request.user
         else:
             raise ValidationError(_('''can not make a report without authenticate'''))
+        if request.GET.get('pk', None):
+            self.material = Material.objects.get(pk=request.GET.get('pk'))
         return super(Report, self).clean()
