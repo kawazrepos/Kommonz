@@ -1,0 +1,12 @@
+- model: categories.category
+  pk: 1
+  fields:
+    label: 画像
+- model: categories.category
+  pk: 2
+  fields:
+    label: 音楽
+- model: categories.category
+  pk: 3
+  fields:
+    label: その他

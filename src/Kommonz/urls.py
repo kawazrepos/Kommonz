@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^messages/',            include('Kommonz.apps.messages.urls')),
     url(r'^notifications/',       include('Kommonz.apps.notifications.urls')),
     url(r'^users/',               include('Kommonz.apps.auth.urls')),
-    url(r'^$',                    TemplateView.as_view(template_name='index.html'), name='index')
+    url(r'^$',                    TemplateView.as_view(template_name='index2.html'), name='index')
 )
 
 from django.conf import settings

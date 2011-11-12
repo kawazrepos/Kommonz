@@ -54,6 +54,7 @@
       </ul>
     </nav>
   </header>
+  {% block content_all %}
   <section id="content" class="ui-corner-all">
     <header id="content_header" class="clearfix">
       <section id="logo"><!--<img src="kommonzlogo.png">--></section>
@@ -69,6 +70,10 @@
       {% endblock %}
     </section><!-- end of content_main-->
   </section><!-- end of content-->
-  <footer id="page_footer"></footer>
+  {% endblock %}
+  <footer id="page_footer">
+      {% block page_footer %}
+      {% endblock %}
+  </footer>
 </body>
 </html>
