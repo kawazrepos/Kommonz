@@ -5,11 +5,15 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
+import os
+import tempfile
 from django.test.client import Client
+from django.core.files.base import File
+from django.conf import settings
 from nose.tools import *
-from models.base import Material
+from models.base import Material, MaterialFile
 
-class TestMaterial(object):
+class TestMaterialUtils(object):
     def test_suitable_model_code(self):
         """
             Tests get suitable type from sourcecode.
@@ -44,3 +48,16 @@ class TestCode(object):
         syntax = guess_syntax('hoge.coffee')
         eq_(syntax, 'CoffeeScript')
 
+class TestMaterialTypeCast(object):
+    def setup(self):
+        if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
+            os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
+
+    def test_auto_cast_material_type(self):
+        from apps.materials.models.code import Code
+        test_file = File(tempfile.NamedTemporaryFile(mode="r+w+t", suffix=".py", dir=settings.TEST_TEMPORARY_FILE_DIR))
+        test_file.write("hello!hello!")
+        test_file.seek(0)
+        material_file = MaterialFile.objects.create(file=test_file)
+        material = Material.objects.create(label="hoge.py", _file=material_file, description="description", category=Category)
+        ok_(isinstance(material, Code))
