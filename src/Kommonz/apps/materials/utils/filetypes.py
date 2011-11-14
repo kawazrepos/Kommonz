@@ -5,7 +5,7 @@
 # Modifier:      giginet
 #
 import mimetypes
-from ..models.base import Material
+from ..models import Material
 
 IMAGE = (
     'image/bmp',
@@ -91,13 +91,16 @@ def guess(filename):
     return 'unknown'
 
 def get_file_model(filename):
-    """Return suitable class for file"""
+    """
+    Return suitable class for file
+    """
+    import os
     type = guess(filename)
     if not type or type == 'unknown':
         return Material
     cls_name = type[0].upper() + type[1:] #convert from 'type' to 'Type'
     try:
-        module = __import__('.'.join(('Kommonz', 'apps', 'materials', 'models', type)), globals(), locals(), [cls_name])
+        module = __import__('.'.join(('Kommonz', 'apps', 'materials', '%ss' % type, 'models')), globals(), locals(), [cls_name])
         return getattr(module, cls_name)
     except:
         return Material

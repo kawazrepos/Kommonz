@@ -11,7 +11,7 @@ class MaterialManager(models.Manager):
         return get_file_model(filename)
 
     def create(self, type_cast=True, *args, **kwargs):
-        from models.base import Material, MaterialFile
+        from models import Material, MaterialFile
         material_file = kwargs.get("_file")
         model = self.get_file_model(material_file.file.name)
         if model == Material:

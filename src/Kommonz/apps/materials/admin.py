@@ -4,12 +4,12 @@
 #    created by giginet on 2011/10/02
 #
 from django.contrib import admin
-from models.base import MaterialFile, Material, Kero, License, CreativeCommons
-from models.audio import Audio
-from models.code import Code
-from models.image import Image
-from models.movie import Movie
-from models.packages import Package
+from models import MaterialFile, Material, Kero, License, CreativeCommons
+from audios.models import Audio
+from codes.models import Code
+from images.models import Image
+from movies.models import Movie
+from packages.models import Package
 
 # base models
 

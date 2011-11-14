@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.functional import lazy
 from django.views.generic import ListView
-from models.base import Material
+from models import Material
 from views.edit import MaterialDetailView, MaterialCreateView, MaterialUpdateView, MaterialFileCreateView, MaterialValidateView
 __author__ = 'giginet'
 __version__ = '1.0.0'

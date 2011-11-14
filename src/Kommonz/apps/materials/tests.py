@@ -6,14 +6,14 @@ from django.core.files.base import File
 from django.conf import settings
 from nose.tools import *
 from apps.categories.models import Category
-from models.base import Material, MaterialFile
+from models import Material, MaterialFile
 
 class TestMaterialUtils(object):
     def test_suitable_model_code(self):
         """
         Tests get suitable type from sourcecode.
         """
-        from apps.materials.models.code import Code
+        from apps.materials.codes.models import Code
         cls = Material.objects.get_file_model('file.py')
         eq_(cls, Code)
 
@@ -21,7 +21,7 @@ class TestMaterialUtils(object):
         """
         Tests get suitable type from image.
         """
-        from apps.materials.models.image import Image
+        from apps.materials.images.models import Image
         cls = Material.objects.get_file_model('file.jpg')
         eq_(cls, Image)
 
@@ -29,7 +29,7 @@ class TestMaterialUtils(object):
         """
         Tests get suitable type from package.
         """
-        from apps.materials.models.packages import Package
+        from apps.materials.packages.models import Package
         cls = Material.objects.get_file_model('file.zip')
         eq_(cls, Package)
         
@@ -61,7 +61,7 @@ class TestMaterialUpload(object):
         """
         Test cast material model to suitable type when code file was uploaded.
         """
-        from apps.materials.models.code import Code
+        from apps.materials.codes.models import Code
         test_file = File(tempfile.NamedTemporaryFile(
             mode="r+w+t", suffix=".py", 
             dir=settings.TEST_TEMPORARY_FILE_DIR
@@ -80,7 +80,7 @@ class TestMaterialUpload(object):
         """
         Test cast material model to suitable type when other file was uploaded.
         """
-        from apps.materials.models.base import Material
+        from apps.materials.models import Material
         test_file = File(tempfile.NamedTemporaryFile(
             mode="r+w+t", suffix=".hoge", 
             dir=settings.TEST_TEMPORARY_FILE_DIR

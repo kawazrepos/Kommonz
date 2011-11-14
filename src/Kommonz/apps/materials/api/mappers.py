@@ -5,7 +5,7 @@ __date__ = '2011/10/23'
 from django.core.urlresolvers import reverse
 from bpmappers import DelegateField, NonKeyField
 from bpmappers.djangomodel import ModelMapper
-from ..models.base import Material, MaterialFile
+from ..models import Material, MaterialFile
 
 class MaterialMapper(ModelMapper):
     #author = DelegateField(KommonzUserMapper, 'author')
