@@ -15,7 +15,6 @@ from utils import get_thumbnail_filename, create_thumbnail, convert_patterns_dic
 
 class ThumbnailField(ImageField):
     def __init__(self, *args, **kwargs):
-        #self.size = dict(map(None, self.PARAMS_SIZE, size)) if size else None
         thumbnail_size_patterns = kwargs.pop('thumbnail_size_patterns', ())
         self.thumbnail_size_patterns = convert_patterns_dict(thumbnail_size_patterns)
         super(ThumbnailField, self).__init__(*args, **kwargs) 
