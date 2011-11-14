@@ -35,12 +35,10 @@ class Image(Material):
         """
         Create thumbnail from image and return that's path.
         """
+        # implement this
         params_size = ('width', 'height', 'force')
         path, original_filename = os.path.split(filename)
-        thumbnail_dir = os.path.join(path, "thumbnail")
-        if not os.path.exists(thumbnail_dir):
-            os.mkdir(thumbnail_dir)
-        thumbnail = os.path.join(thumbnail_dir, original_filename)
+        thumbnail = os.path.join(path, "thumbnail", original_filename)
         patterns = convert_patterns_dict(Material.THUMBNAIL_SIZE_PATTERNS)
         create_thumbnail(filename, thumbnail, patterns)
         return filename

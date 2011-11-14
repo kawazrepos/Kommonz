@@ -25,6 +25,9 @@ def convert_patterns_dict(thumbnail_size_patterns):
 def create_thumbnail(original, thumbnail, patterns):
         for pattern_name, pattern_size in patterns.iteritems():
             thumbnail_filename = get_thumbnail_filename(thumbnail, pattern_name)
+            path = os.path.dirname(thumbnail_filename)
+            if not os.path.exists(path):
+                os.makedirs(path)
             shutil.copyfile(original, thumbnail_filename)
             _resize_image(thumbnail_filename, pattern_size)
 
