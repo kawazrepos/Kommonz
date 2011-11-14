@@ -14,8 +14,18 @@ from qwert.middleware.threadlocals import request as get_request
 from apps.categories.models import Category
 from fields.ccfield.models import CreativeCommonsField
 from fields.thumbnailfield.models import ThumbnailField
-from ..managers import MaterialManager
+from managers import MaterialManager
 
+def load():
+    import imp
+    MODELS = ['application', 'audio', 'code', 'image', 'movie', 'package',]
+    root = os.path.dirname(__file__)
+    filename = os.path.basename(__file__)
+    for model in MODELS:
+        package = imp.load_source('%ss' % model, root)
+        __import__('%ss' % model)
+
+load()
 class MaterialFile(models.Model):
     u"""
         model for file
@@ -118,7 +128,7 @@ class Material(models.Model):
     
     @property
     def filetype_model(self):
-        from ..utils.filetypes import get_file_model
+        from utils.filetypes import get_file_model
         return get_file_model(self.file.name)
     
     @property
@@ -135,7 +145,7 @@ class Material(models.Model):
       return os.path.splitext(self.file.name)[1][1:]
     
     def save(self, *args, **kwargs):
-        from ..utils.filetypes import get_file_model
+        from utils.filetypes import get_file_model
         cls = get_file_model(self.label)
         if not isinstance(self, cls):
             extended = cls(pk=self.pk)

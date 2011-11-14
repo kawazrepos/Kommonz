@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from qwert.middleware.threadlocals import request as get_request
-from apps.materials.models.base import Material
+from apps.materials.models import Material
 
 
 class Reason(models.Model):

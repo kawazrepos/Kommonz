@@ -5,7 +5,7 @@ __date__ = '2011/10/10'
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from base import Material
+from ..models import Material
 
 class Audio(Material):
     """

@@ -4,7 +4,7 @@
 # created by giginet on 2011/10/14
 #
 from django import forms
-from models.base import Material, MaterialFile
+from models import Material, MaterialFile
 
 class MaterialForm(forms.ModelForm):
     _file = forms.IntegerField(widget=forms.HiddenInput())

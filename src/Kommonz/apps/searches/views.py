@@ -4,10 +4,9 @@
 # Date:          2011/11/04
 #
 from apps.categories.models import Category
-from apps.materials.models.base import Material
+from apps.materials.models import Material
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-
 
 class SearchIndexView(ListView):
     model=Category

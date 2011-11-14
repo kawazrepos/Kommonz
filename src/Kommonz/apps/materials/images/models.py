@@ -8,7 +8,7 @@ import shutil
 from django.db import models
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.utils import create_thumbnail, convert_patterns_dict
-from base import Material
+from ..models import Material
 
 class Image(Material):
     """

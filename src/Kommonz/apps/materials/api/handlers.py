@@ -4,7 +4,7 @@ __version__ = '1.0.0'
 __date__ = '2011/10/23'
 from piston.handler import BaseHandler
 from piston.utils import rc, validate, throttle
-from ..models.base import Material
+from ..models import Material
 from mappers import MaterialMapper
 
 class MaterialHandler(BaseHandler):

@@ -6,7 +6,7 @@ __date__ = '2011/10/10'
 from django.db import models
 from django.utils.translation import ugettext as _
 from ..utils.syntaxes import SYNTAXES, guess_syntax
-from base import Material
+from ..models import Material
 
 class Code(Material):
     """

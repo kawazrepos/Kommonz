@@ -182,7 +182,16 @@ INSTALLED_APPS = (
     'Kommonz.apps.materials',
     'Kommonz.apps.messages',
     'Kommonz.apps.notifications',
-    'Kommonz.apps.reports'
+    'Kommonz.apps.reports',
+    # Kommonz materials
+    'Kommonz.apps.materials.applications',
+    'Kommonz.apps.materials.audios',
+    'Kommonz.apps.materials.cgmodels',
+    'Kommonz.apps.materials.codes',
+    'Kommonz.apps.materials.images',
+    'Kommonz.apps.materials.movies',
+    'Kommonz.apps.materials.packages',
+    'Kommonz.apps.materials.texts'
 )
 
 AUTHENTICATION_BACKENDS = (

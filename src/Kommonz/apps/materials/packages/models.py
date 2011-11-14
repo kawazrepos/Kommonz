@@ -9,7 +9,7 @@ import shutil
 from django.db import models
 from django.core.files.base import File
 from django.utils.translation import ugettext as _
-from base import Material, MaterialFile
+from ..models import Material, MaterialFile
 
 class Package(Material):
     """

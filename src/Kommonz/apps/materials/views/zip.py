@@ -10,7 +10,7 @@ from cStringIO import StringIO
 from django.http import HttpResponse, Http404
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.list import BaseListView
-from ..models.base import Material
+from ..models import Material
 
 class ZipResponse(HttpResponse):
     """
