@@ -27,7 +27,7 @@ class MaterialFile(models.Model):
             user = User.objects.get(pk=1)
         else:
             user = request.user
-        path = u'storage/materials/%s/' % user.username
+        path = u'storage/materials/%s/%s/' % (user.username, filename)
         return os.path.join(path, filename)
     
     file       = models.FileField(_('File'), upload_to=_get_file_path)

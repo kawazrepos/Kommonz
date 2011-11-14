@@ -31,7 +31,7 @@ class Package(Material):
         for name in archive.namelist():
             filename = os.path.basename(name)
             if name.endswith('/'):
-                try: # Don't try to create a directory if exists
+                try:
                     os.mkdir(os.path.join(upload_path, name))
                 except:
                     pass
@@ -39,10 +39,8 @@ class Package(Material):
                 # ignore __MACOSX junk and dotfiles.
                 continue
             else:
-                raw_file = open(os.path.join(upload_path, name), 'wb')
+                raw_file = open(os.path.basename(name), "wb")
                 raw_file.write(archive.read(name))
-                raw_file.close()
-                raw_file = open(os.path.join(upload_path, name), 'rb')
                 file = File(raw_file)
                 material_file = MaterialFile.objects.create(file=file)
                 self.materials.create(
