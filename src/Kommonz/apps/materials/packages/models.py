@@ -35,21 +35,23 @@ class Package(Material):
             recursive(optional)
                 if true, it will create other packages from files in inner directories.
         """
+        # on OSX archive contains "__MACOSX" directory.
+        ignores = ['__MACOSX',]
         archive = zipfile.ZipFile(self.file.path, "r")
         archive_root_path = os.path.join(os.path.dirname(self.file.path))
         if not os.path.exists(archive_root_path):
             os.mkdir(archive_root_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
-            if files and not name in files:
+            if (files and not name in files) or name in ignores:
                 continue
-            elif name.startswith('__MACOSX') or filename.startswith('.'):
+            elif filename.startswith('.'):
                 # ignore __MACOSX junk and dotfiles.
                 continue
             elif name.endswith('/'): # if 'name' is directory
                 if not os.path.exists(name):
                     os.mkdir(os.path.join(archive_root_path, name))
-                # if recursive:
+                if recursive:
             else: # if 'name' is file
                 upload_path = os.path.join(archive_root_path, os.path.dirname(name), filename)
                 if not os.path.exists(upload_path):

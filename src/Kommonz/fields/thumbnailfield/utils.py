@@ -30,7 +30,6 @@ def create_thumbnail(original, thumbnail, patterns):
             if not os.path.exists(path):
                 os.makedirs(path)
             shutil.copy(original, thumbnail_filename)
-            #original_file.save(thumbnail_filename)
             _resize_image(thumbnail_filename, pattern_size)
 
 def _resize_image(filename, size):
