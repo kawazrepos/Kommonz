@@ -40,7 +40,9 @@ class Package(Material):
         upload_path = os.path.dirname(package_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
-            if name.startswith('__MACOSX') or filename.startswith('.'):
+            if files and not name in files:
+                continue
+            elif name.startswith('__MACOSX') or filename.startswith('.'):
                 # ignore __MACOSX junk and dotfiles.
                 continue
             elif name.endswith('/'): # if 'name' is directory
@@ -48,19 +50,18 @@ class Package(Material):
                     os.mkdir(os.path.join(upload_path, name))
                 # if recursive:
             else: # if 'name' is file
-                raw_file = open(os.path.join(upload_path, name), 'wb')
+                raw_file = open(os.path.join(upload_path, name), 'w+b')
                 raw_file.write(archive.read(name))
-                raw_file.close()
-                raw_file = open(os.path.join(upload_path, name), 'rb')
-                file = File(raw_file)
+                file = File(raw_file, name)
                 material_file = MaterialFile.objects.create(file=file)
-                self.materials.create(
+                Material.objects.create(
                     label=name,
                     _file=material_file,
                     description=self.description,
                     author=self.author,
                     category=self.category
                 )
+                raw_file.close()
         try:
             osxjunk = os.path.join(upload_path, '__MACOSX')
             shutil.rmtree(osxjunk)

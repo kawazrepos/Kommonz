@@ -27,11 +27,8 @@ class Image(Material):
 
     def save(self, *args, **kwargs):
         if not self.thumbnail:
-            try:
-                self.thumbnail = self.file
-                self._create_thumbnail(self.thumbnail.path)
-            except:
-                pass
+            self.thumbnail = self.file
+            self._create_thumbnail(self.thumbnail.path)
         super(Image, self).save(*args, **kwargs)
 
     def _create_thumbnail(self, filename):

@@ -7,6 +7,7 @@ import os
 import mimetypes
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.translation import ugettext as _
 from object_permission.mediators import ObjectPermissionMediator as Mediator
@@ -29,9 +30,10 @@ class MaterialFile(models.Model):
         else:
             user = request.user
         path = os.path.join(MATERIAL_FILE_PATH, user.username, filename)
+        path = default_storage.get_available_name(path) # dirname will not duplicate.
         return os.path.join(path, filename)
     
-    file       = models.FileField(_('File'), upload_to=_get_file_path)
+    file = models.FileField(_('File'), upload_to=_get_file_path)
     
     class Meta:
         app_label           = 'materials'
