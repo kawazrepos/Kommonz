@@ -7,6 +7,7 @@ import os
 import zipfile
 import tempfile
 import shutil
+from cStringIO import StringIO
 from django.db import models
 from django.core.files.base import File
 from django.utils.translation import ugettext as _
@@ -43,6 +44,8 @@ class Package(Material):
             os.mkdir(archive_root_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
+            upload_path = os.path.join(archive_root_path, os.path.dirname(name), filename)
+            file_path = os.path.join(upload_path, filename)
             if (files and not name in files) or name in ignores:
                 continue
             elif filename.startswith('.'):
@@ -52,11 +55,31 @@ class Package(Material):
                 if not os.path.exists(name):
                     os.mkdir(os.path.join(archive_root_path, name))
                 if recursive:
+                    sub_files = [path for path in archive.namelist() if path.startswith(name) and not path is name]
+                    print sub_files
+                    raw_file = open(file_path, 'w+b')
+                    sub_archive = zipfile.ZipFile(raw_file, 'w+b', zipfile.ZIP_DEFLATED)
+                    for path in sub_files:
+                        file = open(path, 'r')
+                        archive.writestr(filename, file.read())
+                        file.close()
+                    sub_archive.close()
+                    raw_file.close()
+                    material_file = MaterialFile.objects.create(file=file_path)
+                    sub_package = Material.objects.create(
+                        label=name,
+                        _file=material_file,
+                        description=self.description,
+                        author=self.author,
+                        category=self.category
+                    )
+                    sub_package.extract_package(recursive=True)
+                    self.materials.add(sub_package)
+                    map(lambda material : self.materials.add(material), sub_package.materials)
             else: # if 'name' is file
-                upload_path = os.path.join(archive_root_path, os.path.dirname(name), filename)
+                # package files will be saved in /storage/materials/username/packagename/path/to/file/filename/filename.ext
                 if not os.path.exists(upload_path):
                     os.mkdir(upload_path)
-                file_path = os.path.join(upload_path, filename)
                 raw_file = open(file_path, 'w+b')
                 raw_file.write(archive.read(name))
                 raw_file.close()

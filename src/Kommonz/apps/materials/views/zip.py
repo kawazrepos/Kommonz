@@ -76,6 +76,7 @@ class MultipleZipResponseMixin(object):
             filename = os.path.basename(path)
             file = open(path, 'r')
             archive.writestr(filename, file.read())
+            file.close()
         archive.close()
         return temp
 
