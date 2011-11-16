@@ -108,7 +108,7 @@ class TestMaterialUpload(object):
 
     def test_auto_cast_material_type_other(self):
         """
-        Test cast material model to suitable type when other file was uploaded.
+        Tests cast material model to suitable type when other file was uploaded.
         """
         from apps.materials.models import Material
         test_file = File(tempfile.NamedTemporaryFile(
@@ -139,12 +139,25 @@ class TestMaterialPackage(object):
         self.package = Package.objects.get(pk=self.package.pk)
 
     def test_package_extract(self):
+        """
+        Tests extract zipped file and create new material from them.
+        """
         from images.models import Image
         self.package.extract_package()
         filename = os.path.basename(self.package.file.name)
         material_path = os.path.dirname(self.package.file.path)
         ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
         eq_(self.package.materials.count(), 6)
+
+    def test_package_extract_recursively(self):
+        """
+        Tests extract zipped file and create new packages recursively.
+        """
+        self.package.extract_package(recursive=True)
+        filename = os.path.basename(self.package.file.name)
+        material_path = os.path.dirname(self.package.file.path)
+        ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
+        eq_(self.package.materials.count(), 8)
 
     def teardown(self):
         self.package.delete()

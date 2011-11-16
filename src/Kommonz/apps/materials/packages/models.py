@@ -4,6 +4,7 @@ __version__ = '1.0.0'
 __date__ = '2011/10/10'
 
 import os
+import re
 import zipfile
 import tempfile
 import shutil
@@ -37,32 +38,35 @@ class Package(Material):
                 if true, it will create other packages from files in inner directories.
         """
         # on OSX archive contains "__MACOSX" directory.
-        ignores = ['__MACOSX',]
+        ignores = []
         archive = zipfile.ZipFile(self.file.path, "r")
+        root_dir = archive.namelist()[0]
+        print root_dir
+        def _is_ignore_file(name):
+            filename = os.path.basename(name)
+            return (files and not name in files) or name.startswith('__MACOSX') or name in ignores or filename.startswith('.')
         archive_root_path = os.path.join(os.path.dirname(self.file.path))
         if not os.path.exists(archive_root_path):
             os.mkdir(archive_root_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
             upload_path = os.path.join(archive_root_path, os.path.dirname(name), filename)
-            file_path = os.path.join(upload_path, filename)
-            if (files and not name in files) or name in ignores:
-                continue
-            elif filename.startswith('.'):
+            if _is_ignore_file(name):
                 # ignore __MACOSX junk and dotfiles.
                 continue
             elif name.endswith('/'): # if 'name' is directory
                 if not os.path.exists(name):
                     os.mkdir(os.path.join(archive_root_path, name))
-                if recursive:
-                    sub_files = [path for path in archive.namelist() if path.startswith(name) and not path is name]
+                if recursive and not name == root_dir:
+                    print name
+                    sub_files = [re.sub(r'^%s' % name, '', path) for path in archive.namelist() if path.startswith(name) and not _is_ignore_file(path) and not path == name and not path == root_dir]
                     print sub_files
+                    file_path = os.path.join(upload_path, '%s.zip' % os.path.basename(name[:-1]))
                     raw_file = open(file_path, 'w+b')
-                    sub_archive = zipfile.ZipFile(raw_file, 'w+b', zipfile.ZIP_DEFLATED)
+                    sub_archive = zipfile.ZipFile(raw_file, 'w', zipfile.ZIP_DEFLATED)
                     for path in sub_files:
-                        file = open(path, 'r')
-                        archive.writestr(filename, file.read())
-                        file.close()
+                        print path
+                        sub_archive.writestr(filename, archive.read(os.path.join(name, path)))
                     sub_archive.close()
                     raw_file.close()
                     material_file = MaterialFile.objects.create(file=file_path)
@@ -75,9 +79,12 @@ class Package(Material):
                     )
                     sub_package.extract_package(recursive=True)
                     self.materials.add(sub_package)
-                    map(lambda material : self.materials.add(material), sub_package.materials)
+                    map(lambda material : self.materials.add(material), sub_package.materials.iterator())
+                    ignores += sub_files
             else: # if 'name' is file
                 # package files will be saved in /storage/materials/username/packagename/path/to/file/filename/filename.ext
+                file_path = os.path.join(upload_path, filename)
+                if len(filename) == 0: continue
                 if not os.path.exists(upload_path):
                     os.mkdir(upload_path)
                 raw_file = open(file_path, 'w+b')
