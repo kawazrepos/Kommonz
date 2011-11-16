@@ -5,6 +5,7 @@
 #
 import os
 import shutil
+
 def get_thumbnail_filename(filename, pattern_name):
     '''
     Returns the thumbnail name associated to the standard image filename
@@ -29,6 +30,7 @@ def create_thumbnail(original, thumbnail, patterns):
             if not os.path.exists(path):
                 os.makedirs(path)
             shutil.copy(original, thumbnail_filename)
+            #original_file.save(thumbnail_filename)
             _resize_image(thumbnail_filename, pattern_size)
 
 def _resize_image(filename, size):
@@ -42,19 +44,19 @@ def _resize_image(filename, size):
                 if False, it will have the bigger size that fits the specified
                 size, but without cropping, so it could be smaller on width or height
     '''
-    WIDTH, HEIGHT = 0, 1
     try:
         from PIL import Image, ImageOps
     except ImportError:
         import Image
         import ImageOps
+    WIDTH, HEIGHT = 0, 1
     img = Image.open(filename)
     if img.size[WIDTH] > size['width'] or img.size[HEIGHT] > size['height']:
         if size['force']:
             img = ImageOps.fit(img, (size['width'], size['height']), Image.ANTIALIAS)
-        # else:
-        #     "img.thumbnail((size['width'], size['height']), Image.ANTIALIAS)"
-        # try:
-        #     img.save(filename, optimize=1)
-        # except IOError:
-        #     img.save(filename)
+        else:
+            img.thumbnail((size['width'], size['height']), Image.ANTIALIAS)
+        try:
+            img.save(filename, optimize=1)
+        except IOError:
+            img.save(filename)

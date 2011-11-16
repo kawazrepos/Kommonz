@@ -36,9 +36,9 @@ class Package(Material):
                 if true, it will create other packages from files in inner directories.
         """
         archive = zipfile.ZipFile(self.file.path, "r")
-        upload_path = os.path.join(os.path.dirname(self.file.path))
-        if not os.path.exists(upload_path):
-            os.mkdir(upload_path)
+        archive_root_path = os.path.join(os.path.dirname(self.file.path))
+        if not os.path.exists(archive_root_path):
+            os.mkdir(archive_root_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
             if files and not name in files:
@@ -48,12 +48,16 @@ class Package(Material):
                 continue
             elif name.endswith('/'): # if 'name' is directory
                 if not os.path.exists(name):
-                    os.mkdir(os.path.join(upload_path, name))
+                    os.mkdir(os.path.join(archive_root_path, name))
                 # if recursive:
             else: # if 'name' is file
-                file_path = os.path.join(upload_path, name)
+                upload_path = os.path.join(archive_root_path, os.path.dirname(name), filename)
+                if not os.path.exists(upload_path):
+                    os.mkdir(upload_path)
+                file_path = os.path.join(upload_path, filename)
                 raw_file = open(file_path, 'w+b')
                 raw_file.write(archive.read(name))
+                raw_file.close()
                 material_file = MaterialFile.objects.create(file=file_path)
                 material = Material.objects.create(
                     label=name,
@@ -63,9 +67,8 @@ class Package(Material):
                     category=self.category
                 )
                 self.materials.add(material)
-                raw_file.close()
         try:
-            osxjunk = os.path.join(upload_path, '__MACOSX')
+            osxjunk = os.path.join(archive_root_path, '__MACOSX')
             shutil.rmtree(osxjunk)
         except:
             pass
