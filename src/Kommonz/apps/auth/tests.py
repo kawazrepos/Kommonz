@@ -45,12 +45,17 @@ class TestUserProfileMapper(object):
         eq_(test_dict['nickname'], 'Kawaz Inonaka')
 
 class TestUserThumbnail(object):
-    def test_thumbnail_resizing(self):
+    def setup(self):
+        try:
+            self.kawaz = User.objects.create_user(username='kawaztan2', email='kawaztan@kawaz.org', password='password')
+        except:
+            self.kawaz = User.objects.get(username='kawaztan2')
+    def test_thumbnail(self):
         """
         Tests thumbnails are resized automatically when user profile was updated.
         """
         import os
-        kawaz = User.objects.create_user(username='kawaztan2', email='kawaztan@kawaz.org', password='password')
+        from models import USER_ICON_PATH
         c = Client()
         ok_(c.login(username='kawaztan2', password='password'))
         icon = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawaztan.png'), 'rb')
@@ -59,6 +64,20 @@ class TestUserThumbnail(object):
             'description' : u'来てっ！',
             'icon' : icon
         })
-        eq_(kawaz.profile.nickname, u'かわずたん')
-        ok_(kawaz.profile.icon.small)
-        ok_(os.path.exists(os.path.join(settings.ROOT, 'static', 'storage', 'profiles', kawaz.username, 'icon_%d.small.png' % kawaz.profile.pk)))
+        eq_(self.kawaz.profile.nickname, u'かわずたん')
+        ok_(self.kawaz.profile.icon.small)
+        small_icon = self.kawaz.profile.icon.small.path
+        ok_(os.path.exists(small_icon))
+
+    def test_thumbnail_deletion(self):
+        """
+        Tests UserProfile.clean_up_icon works well.
+        """
+        import os
+        from models import USER_ICON_PATH
+        icon_dir = os.path.join(settings.ROOT, USER_ICON_PATH, self.kawaz.username)
+        self.kawaz.profile.clean_up_icon()
+        ok_(not os.path.exists(icon_dir))
+
+    def teardown(self):
+        self.kawaz.profile.clean_up_icon()

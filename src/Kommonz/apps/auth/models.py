@@ -1,14 +1,16 @@
 import os
 from django.contrib.auth.models import User, UserManager
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.models import ThumbnailField
 
+USER_ICON_PATH = os.path.join('storage', 'profiles')
+
 class UserProfile(models.Model):
     def _get_icon_path(self, filename):
-        path = u'storage/profiles/%s' % self.user.username
+        path = os.path.join(USER_ICON_PATH, self.user.username)
         return os.path.join(path, filename)
     
     SEX_TYPES = (
@@ -33,8 +35,7 @@ class UserProfile(models.Model):
     sex          = models.CharField(_('Sex'), max_length=10, choices=SEX_TYPES, blank=True)
     birthday     = models.DateField(_('Birthday'), null=True, blank=True)
     place        = models.CharField(_('Location'), max_length=255, blank=True)
-    url          = models.URLField(_('URL'), max_length=255, blank=True)
-    
+    url          = models.URLField(_('URL'), max_length=255, blank=True)    
     
     objects      = UserManager()
     
@@ -52,6 +53,13 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         return ('auth_user_detail', (), { 'pk' : self.id })
     
+
+    def clean_up_icon(self):
+        icon_dir = os.path.dirname(self.icon.path)
+        if os.path.exists(icon_dir):
+            for icon in os.listdir(icon_dir):
+                os.remove(os.path.join(icon_dir, icon))
+            os.rmdir(icon_dir)
         
 class UserOption(models.Model):
     user = models.OneToOneField(User, related_name='option')
@@ -78,3 +86,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 def create_user_option(sender, instance, created, **kwargs):
     if created:
         UserOption.objects.get_or_create(user=instance)
+

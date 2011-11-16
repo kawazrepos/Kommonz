@@ -95,7 +95,6 @@ class TestMaterialUpload(object):
         ok_(isinstance(material, Material))
         test_file.close()
 
-
     def teardown(self):
         if os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
             for file in os.listdir(settings.TEST_TEMPORARY_FILE_DIR):
