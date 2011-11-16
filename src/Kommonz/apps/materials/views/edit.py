@@ -15,7 +15,7 @@ from ..forms import MaterialForm, MaterialFileForm
 from ..api.mappers import MaterialMapper, MaterialFileMapper
 
 def response_mimetype(request):
-    if "application/json" in request.META['HTTP_ACCEPT']:
+    if request.META.has_key('HTTP_ACCEPT') and "application/json" in request.META['HTTP_ACCEPT']:
         return "application/json"
     else:
         return "text/plain"

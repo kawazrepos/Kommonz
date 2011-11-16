@@ -5,10 +5,12 @@ __date__ = '2011/10/10'
 
 import os
 import zipfile
+import tempfile
 import shutil
 from django.db import models
 from django.core.files.base import File
 from django.utils.translation import ugettext as _
+from django.conf import settings
 from ..models import Material, MaterialFile
 
 class Package(Material):
@@ -23,22 +25,29 @@ class Package(Material):
         verbose_name        = _('Package')
         verbose_name_plural = _('Packages')
 
-    def save(self, *args, **kwargs):
-        super(Package, self).save(*args, **kwargs)
+    def extract_package(self, files=None, recursive=False):
+        """
+        Extract package and create Material instance from each files.
+        Args
+            files(optional)
+                it contains pathes of include file.
+                Material model objects will created from files in this list.
+            recursive(optional)
+                if true, it will create other packages from files in inner directories.
+        """
         archive = zipfile.ZipFile(self.file.path, "r")
         package_path = self.file.path
         upload_path = os.path.dirname(package_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
-            if name.endswith('/'):
-                try: # Don't try to create a directory if exists
-                    os.mkdir(os.path.join(upload_path, name))
-                except:
-                    pass
-            elif name.startswith('__MACOSX') or filename.startswith('.'):
+            if name.startswith('__MACOSX') or filename.startswith('.'):
                 # ignore __MACOSX junk and dotfiles.
                 continue
-            else:
+            elif name.endswith('/'): # if 'name' is directory
+                if not os.path.exists(name):
+                    os.mkdir(os.path.join(upload_path, name))
+                # if recursive:
+            else: # if 'name' is file
                 raw_file = open(os.path.join(upload_path, name), 'wb')
                 raw_file.write(archive.read(name))
                 raw_file.close()
@@ -52,20 +61,9 @@ class Package(Material):
                     author=self.author,
                     category=self.category
                 )
-                raw_file.close()
-        super(Package, self).save(*args, **kwargs)
         try:
             osxjunk = os.path.join(upload_path, '__MACOSX')
             shutil.rmtree(osxjunk)
         except:
             pass
-
-    def _extract_package(self, files=[], recursive=False):
-        """
-        Extract package and create Material instance from each files.
-        Args
-            files
-                it contains pathes of include file.
-            recursive
-                if true, it will create other packages from files in inner directories.
-        """
+        self.save()

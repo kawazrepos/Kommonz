@@ -1,12 +1,37 @@
 # -*- coding: utf-8 -*-
 import os
+import re
 import tempfile
+import shutil
 from django.test.client import Client
 from django.core.files.base import File
+from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.utils import simplejson
 from nose.tools import *
 from apps.categories.models import Category
 from models import Material, MaterialFile
+from packages.models import Package
+
+def upload_material(file, username='hogehoge', password='fugafuga', **kwargs):
+    """
+    Create material model from view.
+    """
+    try:
+        user = User.objects.create_user(username=username, password=password, email="test@test.com")
+    except:
+        user = User.objects.get(username=username)
+    c = Client()
+    c.login(username=username, password=password)
+    response = c.post(reverse('materials_material_file_create'), {'file' : file})
+    file_pk = simplejson.loads(response.content)[0]['id']
+
+    kwargs.update({'_file' : file_pk})
+    response = c.post(reverse('materials_material_create'), kwargs)
+    match = re.search(r'(?P<pk>\d+)/$', response['Location'])
+    pk = match.groupdict()['pk']
+    return Material.objects.get(pk=pk)
 
 class TestMaterialUtils(object):
     def test_suitable_model_code(self):
@@ -57,6 +82,11 @@ class TestMaterialUpload(object):
             os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
         Category.objects.create(label=u"現代医学の敗北シリーズ")
 
+    def teardown(self):
+        if os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
+            shutil.rmtree(settings.TEST_TEMPORARY_FILE_DIR)
+        os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
+
     def test_auto_cast_material_type_code(self):
         """
         Test cast material model to suitable type when code file was uploaded.
@@ -95,7 +125,25 @@ class TestMaterialUpload(object):
         ok_(isinstance(material, Material))
         test_file.close()
 
+class TestMaterialPackage(object):
+    def setup(self):
+        if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
+            os.path.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
+        category = Category.objects.create(label=u"かわずたん")
+        f = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawazicon.zip'), 'rb')
+        self.package = upload_material(f,
+                label=u"かわずたんアイコン詰め合わせ",
+                description=u"かわずたん詰め合わせ",
+                category=category.pk
+        )
+        self.package = Package.objects.get(pk=self.package.pk)
+
+    def test_package_extract(self):
+        self.package.extract_package()
+        filename = os.path.basename(self.package.file.name)
+        material_path = os.path.dirname(self.package.file.path)
+        print material_path
+        ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
+
     def teardown(self):
-        if os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
-            for file in os.listdir(settings.TEST_TEMPORARY_FILE_DIR):
-                os.remove(os.path.join(settings.TEST_TEMPORARY_FILE_DIR, file))
+        self.package.delete()

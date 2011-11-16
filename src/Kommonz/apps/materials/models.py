@@ -198,7 +198,6 @@ class License(models.Model):
     def __unicode__(self):
         return self.label 
 
-
 class CreativeCommons(models.Model):
     u"""
         CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
