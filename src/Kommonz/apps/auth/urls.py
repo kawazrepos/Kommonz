@@ -4,7 +4,6 @@ from django.views.generic.base import TemplateView
 from views import UserProfileDetailView, UserUpdateView, UserProfileUpdateView,\
                   UserOptionUpdateView, UserAccountUpdateView
 
-
 urlpatterns = patterns('',
     url(r'^config/?$',     login_required(UserUpdateView.as_view()),
         name='auth_user_update'),
