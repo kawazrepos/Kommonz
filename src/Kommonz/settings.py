@@ -242,7 +242,8 @@ SOCIAL_AUTH_IMPORT_BACKENDS = ('apps.registration.backends', )
 #
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-v', '-d']
-TEST_TEMPORARY_FILE_DIR = os.path.join(ROOT, "static/test")
+TEST_TEMPORARY_FILE_DIR = os.path.join(ROOT, "static/test/temporary")
+TEST_FIXTURE_FILE_DIR = os.path.join(ROOT, "static/test/fixtures")
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

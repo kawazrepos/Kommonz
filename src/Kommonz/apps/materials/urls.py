@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.functional import lazy
 from django.views.generic import ListView
 from models import Material
-from views.edit import MaterialDetailView, MaterialCreateView, MaterialUpdateView, MaterialFileCreateView, MaterialValidateView
+from views.detail import MaterialDetailView
+from views.edit import MaterialCreateView, MaterialUpdateView, MaterialFileCreateView, MaterialValidateView
 __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/10'

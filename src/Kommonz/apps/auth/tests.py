@@ -3,11 +3,11 @@ from nose.tools import *
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.test import client
 from django.test.client import Client
 from models import UserProfile, UserOption
 
 class TestAuthentication(object):
-    
     def test_user_creation(self):
         """
         Tests can create User
@@ -45,31 +45,20 @@ class TestUserProfileMapper(object):
         eq_(test_dict['nickname'], 'Kawaz Inonaka')
 
 class TestUserThumbnail(object):
-    def setup(self):
-        try:
-            from PIL import Image, ImageOps
-        except ImportError:
-            import Image
-            import ImageOps
-        import tempfile
-        icon = Image.new('RGBA', (512, 512))
-        self.icon_file = tempfile.NamedTemporaryFile(
-                mode="r+w+b",
-                suffix=".png",
-                dir=settings.TEST_TEMPORARY_FILE_DIR
-        )
-        icon.save(self.icon_file)
-
     def test_thumbnail_resizing(self):
         """
         Tests thumbnails are resized automatically when user profile was updated.
         """
+        import os
         kawaz = User.objects.create_user(username='kawaztan2', email='kawaztan@kawaz.org', password='password')
         c = Client()
-        c.login(username='kawaztan2', password='pass')
+        ok_(c.login(username='kawaztan2', password='password'))
+        icon = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawaztan.png'), 'rb')
         response = c.post(reverse('auth_userprofile_update'), {
             'nickname' : u'かわずたん',
             'description' : u'来てっ！',
-            'icon' : self.icon_file
+            'icon' : icon
         })
-
+        eq_(kawaz.profile.nickname, u'かわずたん')
+        ok_(kawaz.profile.icon.small)
+        ok_(os.path.exists(os.path.join(settings.ROOT, 'static', 'storage', 'profiles', kawaz.username, 'icon_%d.small.png' % kawaz.profile.pk)))

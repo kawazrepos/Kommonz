@@ -59,3 +59,13 @@ class Package(Material):
             shutil.rmtree(osxjunk)
         except:
             pass
+
+    def _extract_package(self, files=[], recursive=False):
+        """
+        Extract package and create Material instance from each files.
+        Args
+            files
+                it contains pathes of include file.
+            recursive
+                if true, it will create other packages from files in inner directories.
+        """

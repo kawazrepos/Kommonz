@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -13,13 +13,6 @@ from object_permission.decorators import permission_required
 from ..models import Material, MaterialFile
 from ..forms import MaterialForm, MaterialFileForm
 from ..api.mappers import MaterialMapper, MaterialFileMapper
-
-class MaterialDetailView(DetailView):
-    model = Material
-    
-    def get_context_data(self, **kwargs):
-        context = super(DetailView, self).get_context_data(**kwargs)
-        return context
 
 def response_mimetype(request):
     if "application/json" in request.META['HTTP_ACCEPT']:
