@@ -50,6 +50,7 @@ class TestUserThumbnail(object):
             self.kawaz = User.objects.create_user(username='kawaztan2', email='kawaztan@kawaz.org', password='password')
         except:
             self.kawaz = User.objects.get(username='kawaztan2')
+
     def test_thumbnail(self):
         """
         Tests thumbnails are resized automatically when user profile was updated.

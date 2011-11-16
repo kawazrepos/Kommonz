@@ -16,18 +16,19 @@ from fields.ccfield.models import CreativeCommonsField
 from fields.thumbnailfield.models import ThumbnailField
 from managers import MaterialManager
 
+MATERIAL_FILE_PATH = os.path.join('storage', 'materials')
+
 class MaterialFile(models.Model):
     u"""
         model for file
     """
-    
     def _get_file_path(self, filename):
         request = get_request()
         if not request:
             user = User.objects.get(pk=1)
         else:
             user = request.user
-        path = u'storage/materials/%s/%s/' % (user.username, filename)
+        path = os.path.join(MATERIAL_FILE_PATH, user.username, filename)
         return os.path.join(path, filename)
     
     file       = models.FileField(_('File'), upload_to=_get_file_path)

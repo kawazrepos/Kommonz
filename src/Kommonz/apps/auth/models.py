@@ -1,4 +1,5 @@
 import os
+import shutil
 from django.contrib.auth.models import User, UserManager
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
@@ -57,9 +58,7 @@ class UserProfile(models.Model):
     def clean_up_icon(self):
         icon_dir = os.path.dirname(self.icon.path)
         if os.path.exists(icon_dir):
-            for icon in os.listdir(icon_dir):
-                os.remove(os.path.join(icon_dir, icon))
-            os.rmdir(icon_dir)
+            shutil.rmtree(icon_dir)
         
 class UserOption(models.Model):
     user = models.OneToOneField(User, related_name='option')
@@ -73,7 +72,6 @@ class UserOption(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('auth_useroption_update', (), {})
-
 
 # signal callbacks below
 
