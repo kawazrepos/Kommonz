@@ -139,11 +139,12 @@ class TestMaterialPackage(object):
         self.package = Package.objects.get(pk=self.package.pk)
 
     def test_package_extract(self):
+        from images.models import Image
         self.package.extract_package()
         filename = os.path.basename(self.package.file.name)
         material_path = os.path.dirname(self.package.file.path)
-        print material_path
         ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
+        eq_(self.package.materials.count(), 6)
 
     def teardown(self):
         self.package.delete()

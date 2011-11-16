@@ -36,8 +36,9 @@ class Package(Material):
                 if true, it will create other packages from files in inner directories.
         """
         archive = zipfile.ZipFile(self.file.path, "r")
-        package_path = self.file.path
-        upload_path = os.path.dirname(package_path)
+        upload_path = os.path.join(os.path.dirname(self.file.path))
+        if not os.path.exists(upload_path):
+            os.mkdir(upload_path)
         for name in archive.namelist():
             filename = os.path.basename(name)
             if files and not name in files:
@@ -50,17 +51,18 @@ class Package(Material):
                     os.mkdir(os.path.join(upload_path, name))
                 # if recursive:
             else: # if 'name' is file
-                raw_file = open(os.path.join(upload_path, name), 'w+b')
+                file_path = os.path.join(upload_path, name)
+                raw_file = open(file_path, 'w+b')
                 raw_file.write(archive.read(name))
-                file = File(raw_file, name)
-                material_file = MaterialFile.objects.create(file=file)
-                Material.objects.create(
+                material_file = MaterialFile.objects.create(file=file_path)
+                material = Material.objects.create(
                     label=name,
                     _file=material_file,
                     description=self.description,
                     author=self.author,
                     category=self.category
                 )
+                self.materials.add(material)
                 raw_file.close()
         try:
             osxjunk = os.path.join(upload_path, '__MACOSX')

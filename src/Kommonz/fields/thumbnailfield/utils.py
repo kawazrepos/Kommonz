@@ -28,7 +28,7 @@ def create_thumbnail(original, thumbnail, patterns):
             path = os.path.dirname(thumbnail_filename)
             if not os.path.exists(path):
                 os.makedirs(path)
-            shutil.copyfile(original, thumbnail_filename)
+            shutil.copy(original, thumbnail_filename)
             _resize_image(thumbnail_filename, pattern_size)
 
 def _resize_image(filename, size):
@@ -48,15 +48,13 @@ def _resize_image(filename, size):
     except ImportError:
         import Image
         import ImageOps
-
     img = Image.open(filename)
     if img.size[WIDTH] > size['width'] or img.size[HEIGHT] > size['height']:
         if size['force']:
             img = ImageOps.fit(img, (size['width'], size['height']), Image.ANTIALIAS)
-        else:
-            img.thumbnail((size['width'], size['height']), Image.ANTIALIAS)
-        try:
-            img.save(filename, optimize=1)
-        except IOError:
-            img.save(filename)
-
+        # else:
+        #     "img.thumbnail((size['width'], size['height']), Image.ANTIALIAS)"
+        # try:
+        #     img.save(filename, optimize=1)
+        # except IOError:
+        #     img.save(filename)
