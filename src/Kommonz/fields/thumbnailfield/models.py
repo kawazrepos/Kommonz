@@ -74,7 +74,7 @@ class ThumbnailField(ImageField):
             for pattern_name in self.pattern_names:
                 thumbnail_filename = get_thumbnail_filename(filename, pattern_name)
                 if os.path.exists(thumbnail_filename):
-                    os.remove(thumbnail_filename)
+                        os.remove(thumbnail_filename)
             setattr(instance, self.name, None)
         else:
             super(ImageField, self).save_form_data(instance, data)
