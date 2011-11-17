@@ -8,6 +8,7 @@ import shutil
 from django.db import models
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.utils import create_thumbnail, convert_patterns_dict
+from ..managers import MaterialManager
 from ..models import Material
 
 class Image(Material):
@@ -15,6 +16,8 @@ class Image(Material):
     Model for Image material.
     """
     
+    objects = MaterialManager()
+
     class Meta:
         app_label           = 'materials'
         verbose_name        = _('Image')

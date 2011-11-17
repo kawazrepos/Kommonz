@@ -6,6 +6,7 @@ __date__ = '2011/10/10'
 from django.db import models
 from django.utils.translation import ugettext as _
 from ..models import Material
+from ..managers import MaterialManager
 
 class Movie(Material):
     """
@@ -13,6 +14,8 @@ class Movie(Material):
     """
     
     play_time = models.PositiveSmallIntegerField(_('Play Time'))
+
+    objects = MaterialManager()
     
     class Meta:
         app_label           = 'materials'
