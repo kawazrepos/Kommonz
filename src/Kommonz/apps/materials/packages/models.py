@@ -41,7 +41,6 @@ class Package(Material):
         ignores = []
         archive = zipfile.ZipFile(self.file.path, "r")
         root_dir = archive.namelist()[0]
-        print root_dir
         def _is_ignore_file(name):
             filename = os.path.basename(name)
             return (files and not name in files) or name.startswith('__MACOSX') or name in ignores or filename.startswith('.')
@@ -58,14 +57,11 @@ class Package(Material):
                 if not os.path.exists(name):
                     os.mkdir(os.path.join(archive_root_path, name))
                 if recursive and not name == root_dir:
-                    print name
                     sub_files = [re.sub(r'^%s' % name, '', path) for path in archive.namelist() if path.startswith(name) and not _is_ignore_file(path) and not path == name and not path == root_dir]
-                    print sub_files
                     file_path = os.path.join(upload_path, '%s.zip' % os.path.basename(name[:-1]))
                     raw_file = open(file_path, 'w+b')
                     sub_archive = zipfile.ZipFile(raw_file, 'w', zipfile.ZIP_DEFLATED)
                     for path in sub_files:
-                        print path
                         sub_archive.writestr(filename, archive.read(os.path.join(name, path)))
                     sub_archive.close()
                     raw_file.close()
