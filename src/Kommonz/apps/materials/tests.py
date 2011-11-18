@@ -128,7 +128,7 @@ class TestMaterialUpload(object):
 class TestMaterialPackage(object):
     def setup(self):
         if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
-            os.path.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
+            os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
         category = Category.objects.create(label=u"かわずたん")
         f = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawazicon.zip'), 'rb')
         self.package = upload_material(f,

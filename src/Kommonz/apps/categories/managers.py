@@ -5,7 +5,6 @@ from django.db.models import Q
 class CategoryManager(models.Manager):
     def get_children(self, category):
         from models import Category
-        if category.children.count() is 0: return self.none()
         def _get_set(category):
             categories = set([category,])
             for child in category.children.iterator():

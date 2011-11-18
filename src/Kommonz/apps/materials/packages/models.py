@@ -29,18 +29,19 @@ class Package(Material):
 
     def extract_package(self, files=None, recursive=False):
         """
-        Extract package and create Material instance from each files.
+        Extract package and create Material model from each files.
         Args
             files(optional)
-                it contains pathes of include file.
-                Material model objects will created from files in this list.
+                it contains pathes of include files.
+                Material model objects will be created from files in this list.
             recursive(optional)
                 if true, it will create other packages from files in inner directories.
         """
         # on OSX archive contains "__MACOSX" directory.
         ignores = []
         archive = zipfile.ZipFile(self.file.path, "r")
-        root_dir = archive.namelist()[0]
+        if archive.namelist()[0].endswith('/'):
+            root_dir = archive.namelist()[0]
         def _is_ignore_file(name):
             filename = os.path.basename(name)
             return (files and not name in files) or name.startswith('__MACOSX') or name in ignores or filename.startswith('.')
@@ -80,7 +81,7 @@ class Package(Material):
             else: # if 'name' is file
                 # package files will be saved in /storage/materials/username/packagename/path/to/file/filename/filename.ext
                 file_path = os.path.join(upload_path, filename)
-                if len(filename) == 0: continue
+                if not filename: continue
                 if not os.path.exists(upload_path):
                     os.mkdir(upload_path)
                 raw_file = open(file_path, 'w+b')
@@ -95,9 +96,4 @@ class Package(Material):
                     category=self.category
                 )
                 self.materials.add(material)
-        try:
-            osxjunk = os.path.join(archive_root_path, '__MACOSX')
-            shutil.rmtree(osxjunk)
-        except:
-            pass
         self.save()

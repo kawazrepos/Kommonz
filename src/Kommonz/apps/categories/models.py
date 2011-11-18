@@ -5,7 +5,7 @@ from managers import CategoryManager
    
 class Category(models.Model):
     """
-        Model for Category of materials.
+    Model for Category of materials.
     """
     label      = models.CharField(_('Label'), max_length=32)
     parent     = models.ForeignKey('self', verbose_name=_('Parent Category'),
