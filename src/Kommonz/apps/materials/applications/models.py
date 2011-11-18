@@ -6,6 +6,7 @@ __date__ = '2011/10/10'
 from django.db import models
 from django.utils.translation import ugettext as _
 from ..models import Material
+from ..managers import MaterialManager
 
 class Application(Material):
     """
@@ -14,6 +15,8 @@ class Application(Material):
     
     version = models.CharField(_('Application Version'), max_length=64)
     
+    objects = MaterialManager()
+
     class Meta:
         app_label           = 'materials'
         verbose_name        = _('Application')

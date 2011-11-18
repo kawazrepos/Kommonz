@@ -149,6 +149,9 @@ class TestMaterialPackage(object):
         ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
         eq_(self.package.materials.count(), 6)
 
+        for image in self.package.materials.iterator():
+            ok_(image.model == Image)
+
     def test_package_extract_recursively(self):
         """
         Tests extract zipped file and create new packages recursively.

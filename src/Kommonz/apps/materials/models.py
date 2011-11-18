@@ -120,7 +120,7 @@ class Material(models.Model):
         return type
     
     @property
-    def filetype_model(self):
+    def model(self):
         from utils.filetypes import get_file_model
         return get_file_model(self.file.name)
     

@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from ..utils.syntaxes import SYNTAXES, guess_syntax
 from ..models import Material
+from ..managers import MaterialManager
 
 class Code(Material):
     """
@@ -14,6 +15,8 @@ class Code(Material):
     """
     
     syntax = models.CharField(_('Syntax'), max_length='32', choices=SYNTAXES)
+
+    objects = MaterialManager()
     
     class Meta:
         app_label           = 'materials'

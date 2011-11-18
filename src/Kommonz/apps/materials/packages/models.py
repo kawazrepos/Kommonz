@@ -14,6 +14,7 @@ from django.core.files.base import File
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from ..models import Material, MaterialFile
+from ..managers import MaterialManager
 
 class Package(Material):
     """
@@ -21,6 +22,8 @@ class Package(Material):
     """
 
     materials = models.ManyToManyField('Material', verbose_name=_("materials"), related_name="packages", null=True, blank=True)
+    
+    objects = MaterialManager()
     
     class Meta:
         app_label           = 'materials'

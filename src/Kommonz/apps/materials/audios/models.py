@@ -6,14 +6,17 @@ __date__ = '2011/10/10'
 from django.db import models
 from django.utils.translation import ugettext as _
 from ..models import Material
+from ..managers import MaterialManager
 
 class Audio(Material):
     """
         Model for Audio material.
     """
     
-    play_tim = models.PositiveSmallIntegerField(_('Play Time'))
+    play_time = models.PositiveSmallIntegerField(_('Play Time'))
     
+    objects = MaterialManager()
+
     class Meta:
         app_label           = 'materials'
         verbose_name        = _('Audio')
