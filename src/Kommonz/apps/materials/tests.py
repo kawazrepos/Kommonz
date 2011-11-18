@@ -149,8 +149,8 @@ class TestMaterialPackage(object):
         ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
         eq_(self.package.materials.count(), 6)
 
-        print type(self.package.materials)
-        ok_(isinstance(self.package.materials.latest('created_at'), Image))
+        for image in self.package.materials.iterator():
+            ok_(image.model == Image)
 
     def test_package_extract_recursively(self):
         """
