@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.files.storage import default_storage
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
 from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
@@ -229,4 +231,9 @@ class CreativeCommons(models.Model):
         if self.commons.no_derivative and self.commons.share_alike:
             raise ValidationError(_('''can not set 'Share Alike' and 'Not Derivative Works' together.'''))
         return super(CreativeCommons, self).clean()
-    
+
+@receiver(pre_delete, sender=Material)
+def delete_material_file(sender, instance, **kwargs):
+    import shutil
+    if os.path.exists(os.path.dirname(instance.file.path)):
+        shutil.rmtree(os.path.dirname(instance.file.path))

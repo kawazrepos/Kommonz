@@ -125,6 +125,35 @@ class TestMaterialUpload(object):
         ok_(isinstance(material, Material))
         test_file.close()
 
+class TestMaterialUpload(object):
+    def setup(self):
+        category = Category.objects.create(label=u"かわずたん")
+        self.username = 'hogehoge'
+        self.filename = 'kawaztan.png'
+        f = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, self.filename), 'rb')
+        self.material = upload_material(f, username=self.username,
+                label=u"かわずたん",
+                description=u"かわずたんアイコン",
+                category=category.pk
+        )
+
+    def teardown(self):
+        if self.material.pk:
+            self.material.delete()
+
+    def test_upload_from_view(self):
+        """
+        Tests user can upload materials from view.
+        """
+        ok_(os.path.exists(self.material.file.path))
+
+    def test_material_file_deletion(self):
+        """
+        Tests material was deleted. It's file will delete together.
+        """
+        self.material.delete()
+        ok_(not os.path.exists(os.path.dirname(self.material.file.path)))
+
 class TestMaterialPackage(object):
     def setup(self):
         if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
