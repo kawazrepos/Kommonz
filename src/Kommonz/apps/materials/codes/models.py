@@ -4,7 +4,7 @@ __version__ = '1.0.0'
 __date__ = '2011/10/10'
 
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from django.utils.translation import ugettext as _
 from ..utils.syntaxes import SYNTAXES, guess_syntax
 from ..models import Material
@@ -26,12 +26,14 @@ class Code(Material):
         verbose_name_plural = _('Codes')
     
     def clean(self):
+        syntaxes = dict(SYNTAXES)
         if not self.syntax:
             self.syntax = self._guess_syntax()
+        elif syntaxes.has_key(self.syntax):
+            self.syntax = syntaxes[self.syntax]
         super(Code, self).clean()
 
     def save(self, *args, **kwargs):
-        post_save.connect(set_body, sender=Code)
         super(Code, self).save(*args, **kwargs)
 
     def _guess_syntax(self):
@@ -40,7 +42,8 @@ class Code(Material):
         """
         return guess_syntax(self.file.name)
 
-def set_body(sender, instance, created, **kwargs):
+def set_body(sender, instance, **kwargs):
     code = open(instance.file.path)
     instance.body = code.read()
     code.close()
+pre_save.connect(set_body, sender=Code)

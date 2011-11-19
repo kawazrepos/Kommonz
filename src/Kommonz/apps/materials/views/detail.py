@@ -8,3 +8,8 @@ from ..models import Material
 
 class MaterialDetailView(DetailView):
     model = Material
+    template_name = "materials/material_detail.html"
+
+    def get_object(self, queryset=None):
+        instance = super(MaterialDetailView, self).get_object(queryset)
+        return instance.model.objects.get(pk=instance.pk)

@@ -8,7 +8,7 @@ $ ->
     send : (event, response) ->
       form_url = $infoForms.attr 'form-url'
       validate_url = $infoForms.attr 'validate-url'
-      filename = response.files[0].fileName
+      filename = response.files[0].name
       $infoForm = $('<div>').addClass 'material-info-form'
       $infoForm.load "#{form_url}?filename=#{filename}", (data) ->
         $form = $(@).find('form')

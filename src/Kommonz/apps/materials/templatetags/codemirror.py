@@ -26,14 +26,16 @@ class RenderCodeMirrorNode(template.Node):
 
     def render(self, context):
         code = self.code.resolve(context)
+        body = code.body
         if self.syntax:
             syntax = self.syntax.resolve(context)
         else:
-            syntax = "python"
+            syntax = getattr(code, 'syntax', 'undefined')
+        syntax = syntax.lower()
         context.push()
         import random
         html = render_to_string("codemirror/code.html", {
-            'code' : code,
+            'body' : body,
             'syntax' : syntax,
             'cls' : 'codemirror%d' % random.randint(0, 100000000)
         })
