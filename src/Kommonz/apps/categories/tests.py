@@ -56,10 +56,17 @@ class TestCategoryManager(object):
         Tests manager can get a category's dict tree.
         """
         map_dict = Category.objects.get_children_tree(self.category6)
-        print map_dict
         eq_(map_dict.get('Town'), {})
         eq_(map_dict.get('Dungeon'), {'Forest' : {}})
         
+    def test_get_children_json(self):
+        """
+        Tests manager can get a category's children json.
+        """
+        map_json = Category.objects.get_children_json(self.category6)
+        print map_json
+        #not yet
+     
         
     def test_get_filetype_category(self):
         """

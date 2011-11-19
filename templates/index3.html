@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}デザイン案1{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/index2.css" type="text/css">
+{% endblock %}
+{% block content_all %}
+<section id="index_search">
+<h1 id="index_title"><img src="{{ MEDIA_URL }}image/style/kawazhead.jpg"></h1>
+<form id="index_search_form" method="get" action="{% reverse 'searches_result' %}" enctype="multipart/form-data">
+<p>
+    {{ form.as_p }}
+    <select name="category_id">
+        {% for category in object_list %}
+        <option value="{{ category.id }}">{{ category.label }}</option>
+        {% endfor %}
+    </select>
+    <input id="index_search_keyword" type="text" name="search_keyword">
+    <input id="index_search_submit" type="submit">
+</p>
+</form>
+</section>
+{% endblock %}
+
+
+{% block page_footer %}
+<div id="index_footer_menu" class="clearfix">
+    <section id="index_footer_menu_left">
+        <p>新着素材</p>
+    </section>
+    <section id="index_footer_menu_center">test</section>
+    <section id="index_footer_menu_right">
+        <p>ユーザ検索</p>
+    </section>
+</div>
+{% endblock %}

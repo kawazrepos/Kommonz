@@ -3,13 +3,18 @@
 # Author:        tohhy
 # Date:          2011/11/04
 #
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from apps.categories.models import Category
 from apps.materials.models import Material
-from django.views.generic.list import ListView
-from django.views.generic.base import TemplateView
+from apps.searches.forms import SearchIndexForm
 
-class SearchIndexView(ListView):
-    model=Category
+
+class SearchIndexView(TemplateView):
+#    model=Category
+#    form_class = SearchIndexForm
+    template_name='index2.html'
     
 
 
