@@ -1,7 +1,9 @@
 from django.db import models
+from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from managers import CategoryManager
-   
+from utils.views import JSONResponse
+
    
 class Category(models.Model):
     """
@@ -26,3 +28,15 @@ class Category(models.Model):
     def get_absolute_url(self):
         return ('categories_category_detail', (), { 'pk' : self.pk })
     
+    def get_children_tree(self, category):
+        def _get_dict(category):
+            child_categories = {}
+            for child in category.children.iterator():
+                child_categories.update({child.label : _get_dict(child)})
+            return child_categories
+        result = _get_dict(category)
+        return result
+        
+    def get_children_json(self, category):
+        tree_dict = self.get_children_tree(category)
+        return simplejson.dumps(tree_dict)

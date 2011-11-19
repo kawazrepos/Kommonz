@@ -2,6 +2,24 @@
 {% block title %}デザイン案1{% endblock %}
 {% block head %}
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/index2.css" type="text/css">
+  <!-- REQUIRED SCRIPTS AND STYLES -->
+    <link rel="stylesheet" type="text/css" href="path-to-jsTree/tree_component.css" />
+
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/css.js"></script>   
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/jquery.js"></script>
+
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/tree_component.js"></script>
+
+    <!-- required for xml data type -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/sarissa.js"></script>
+
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/sarissa_ieemu_xpath.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/jquery.xslt.js"></script>
+    <!-- required for metadata rule definitions -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/jquery.metadata.js"></script>
+
+    <!-- required for cookie functionality -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}/javascript/jstree/_lib/jquery.cookie.js"></script> 
 {% endblock %}
 {% block content_all %}
 <section id="index_search">
@@ -17,6 +35,9 @@
     <input id="index_search_submit" type="submit">
 </p>
 </form>
+<p>
+    
+</p>
 </section>
 {% endblock %}
 

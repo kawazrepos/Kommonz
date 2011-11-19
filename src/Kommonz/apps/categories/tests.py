@@ -51,11 +51,12 @@ class TestCategoryManager(object):
         image_parents = Category.objects.get_parents(self.category0)
         eq_(image_parents.count(), 0)
         
-    def test_get_children_tree(self):
+    def test_get_tree(self):
         """
         Tests manager can get a category's dict tree.
         """
-        map_dict = Category.objects.get_children_tree(self.category6)
+        map_category = Category.objects.get(pk=self.category6.pk)
+        map_dict = map_category.get_children_tree(map_category)
         eq_(map_dict.get('Town'), {})
         eq_(map_dict.get('Dungeon'), {'Forest' : {}})
         
@@ -63,7 +64,8 @@ class TestCategoryManager(object):
         """
         Tests manager can get a category's children json.
         """
-        map_json = Category.objects.get_children_json(self.category6)
+        map_category = Category.objects.get(pk=self.category6.pk)
+        map_json = map_category.get_children_json(map_category)
         print map_json
         #not yet
      
