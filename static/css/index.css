@@ -7,7 +7,7 @@
 #content-header #logo {
   width: 253px;
   height: 81px;
-  margin: 50px auto 20px;
+  margin: 30px auto 20px;
 }
 
 #content-main {
@@ -34,63 +34,32 @@ div#search-category {
   display: inline-block;
 }
 
-#search-query-wrapper {
+#search-query {
+  font-size: large;
+  background: #fff url(image/magnifier.png) 10px 13px no-repeat;
   margin: 0;
-  padding: 0;
+  padding: 13px 10px 13px 44px;
   border: solid #cecece 1px;
   border-radius: 5px;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -web-kit-border-radius: 5px;
   float: left;
-  width: 550px;
-  height: 50px;
+  width: 496px;
+  height: 24px;
   display: inline-block;
 }
 
-#search-query-wrapper:focus {
+#search-query:focus {
   border: solid rgb(169, 219, 128) 1px;
-}
-
-#search-query {
-  font-size: large;
-  margin: 13px 10px 13px 0px;
-  padding: 0;
-  border-width: 0px;
-  float: left;
-  width: 501px;
-  height: 24px;
-  display: inline-block;
-}
-
-.search-icon {
-  background: #fff url(image/magnifier.png) 0px 0px no-repeat;
-  margin: 13px 5px 13px 10px;
-  padding: 0;
-  float: left;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
 }
 
 #search-button {
   color: #eee;
-  font-size: large;
-  font-weight: bold;
-  border-width: 1px;
-  background: rgb(169,219,128);
-  background: -moz-linear-gradient(top,  rgba(169,219,128,1) 0%, rgba(150,197,111,1) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,219,128,1)), color-stop(100%,rgba(150,197,111,1)));
-  background: -webkit-linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
-  background: -o-linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
-  background: -ms-linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
-  background: linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 );
   margin: 0;
-  padding: 0px;
+  padding: 0;
   float: left;
   width: 88px;
   height: 50px;
-  display: inline-block;
 }
 
 /* -- end of content -- */
@@ -108,12 +77,12 @@ div#search-category {
     text-align: center;
 }
 
-#footer-menus {
-    position:absolute;
-    bottom:2px;
-    width:100%;
+#footer {
+    position: absolute;
+    bottom: 2px;
+    width: 100%;
     background: #DDDDDD;
-    height:200px;
+    height: 200px;
 }
 
 .footer-menu {

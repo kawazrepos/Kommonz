@@ -1,14 +1,20 @@
 @charset "utf-8";
 /* -- whole settings -- */
+* {
+  margin: 0;
+  padding: 0;
+}
 body, textarea { font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
 input, select { font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
 a {
   color: #222;
 }
+
 body {
   color: #333333;
   font-size: 13px;
 }
+
 li {
     list-style-type: none;
 }
@@ -27,61 +33,7 @@ li {
 }
 /* -- end of stubs -- */
 
+#content {
+  margin: 70px auto 20px;
+  width: 1080px;
 
-/* -- page header -- */
-#header {
-    /* to fix jqueryui ui-widget-header */
-    border: 0px;
-    font-weight: normal;
-    /* end fix*/
-    border-bottom: solid 1px gray;
-    padding: 8px 0px;
-    background-color: lightgray;
-}
-#header-menu {float: right;}
-#header-menu #welcome {
-    float: left;
-    margin: 0px 8px;
-}
-#header-menu ul {
-    position: relative;
-    float: left;
-    }
-#header-menu li {
-    float: left;
-    margin: 0px 10px;
-    }
-
-#notification_dropdown_list #notification_timeline,
-#notification_dropdown_list #notification_timeline_title,
-#notification_dropdown_list #notification_timeline_inner {
-  background-color: white;
-  width: 500px;
-  height: 300px;
-  z-index: 100;
-  position: absolute;
-  top: -999em;
-  left: -1px;
-}
-#notification_dropdown_list:hover #notification_timeline{
-    background-color: rgba(255, 255, 255, 0.0);
-    top: 15px;
-    }
-#notification_dropdown_list:hover #notification_timeline_title{
-    background-color: rgba(255, 255, 255, 0.7);
-    top: 0px;
-    font-size:13px;
-    margin: 10px;
-    padding-top:10px;
-    padding-left:10px;
-}
-#notification_dropdown_list:hover #notification_timeline_inner {
-    background-color: rgba(255, 255, 255, 0.7);
-    overflow: scroll;
-    top: 30px;
-    margin: 10px;
-    padding:10px;
-    line-height: 150%;
-    }
-#page_header #breadcrumbs {}
-/* -- end of page header -- */

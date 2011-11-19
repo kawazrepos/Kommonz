@@ -1,1 +1,49 @@
+.usericon {
+  background: red;
+  margin: 2px 4px 0px;
+  display: inline-block;
+}
+
+.usericon.small {
+  width: 24px;
+  height: 24px;
+}
+
+.usericon.middle {
+  width: 48px;
+  height: 48px;
+}
+
+.usericon.large {
+  width: 96px;
+  height: 96px;
+}
+
+.usericon.huge {
+  width: 288px;
+  height: 228px;
+}
+
+.confirm-button {
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 -1px 1px #666;
+  -webkit-box-shadow: 1px 1px 2px #E7E7E7;
+  -moz-box-shadow: 1px 1px 2px #E7E7E7;
+  padding: auto;
+  background: rgb(169,219,128);
+  background: -moz-linear-gradient(top,  rgba(169,219,128,1) 0%, rgba(150,197,111,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,219,128,1)), color-stop(100%,rgba(150,197,111,1)));
+  background: -webkit-linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
+  background: -o-linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
+  background: linear-gradient(top,  rgba(169,219,128,1) 0%,rgba(150,197,111,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 );
+  border: solid #cccccc 1px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -web-kit-border-radius: 2px;
+  display: inline-block;
+}
 

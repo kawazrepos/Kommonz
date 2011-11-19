@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/common.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/header.css" type="text/css">
   <!--[if lte IE 8]>
     <script src="{{ MEDIA_URL }}javascript/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -22,24 +23,29 @@
     <section id="header-menu">
       {% if user.is_authenticated %}
       <ul>
-        <li>ようこそ<img src="{{ user.icon.small }}" class="usericon small">{{ user.username }}さん</li>
-        <li id="notification_dropdown_list">
+        <li><img src="{{ user.icon.small }}" class="usericon small"></li>
+        <li id="notification_dropdown_list"></li>
+        <li><a href="{% reverse 'materials_material_file_create' %}" class="confirm-button upload-button">アップロード</a></li>
+      </ul>
+      <div id="notifications" style="display: none;">
           <a href="{% reverse 'notifications_notification_list' %}">通知：{% notification_count %}件</a>
           <a id="notification_dropdown_mark">▼</a>
           <section id="notification_timeline">
             <h1 id="notification_timeline_title">通知リスト</h1>
             <ul id="notification_timeline_inner">{% notification_list %}</ul>
           </section>
+      </div>
+      <div id="mymenus" style="display: none;">
+        <li>
+          <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
+          <li><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
+          <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
+          {% if user.is_staff %}
+          <li><a href="{% reverse 'control_main' %}">神ページ</a></li>
+          {% endif %}
+          <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
         </li>
-        <li><a href="{% reverse 'materials_material_file_create' %}">アップロード</a></li>
-        <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
-        <li><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
-        <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
-        <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
-        {% if user.is_staff %}
-        <li><a href="{% reverse 'control_main' %}">神ページ</a></li>
-        {% endif %}
-      </ul>
+      </div>
       {% else %}
       <ul>
         <li><a href="{% reverse 'registration_index' %}">ログイン</a></li>
@@ -53,11 +59,13 @@
       </ul>
     </nav>
   </header>
+  <section id="content" class="ui-corner-all">
   {% block content %}
   {% endblock %}
+  </section>
   <footer id="footer">
-      {% block footer %}
-      {% endblock %}
+    {% block footer %}
+    {% endblock %}
   </footer>
 </body>
 </html>
