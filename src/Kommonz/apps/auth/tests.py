@@ -20,7 +20,7 @@ class TestAuthentication(object):
         """
         User.objects.create_user(username='kawaztan', email='kawaz@kawaz.org', password='password')
         c = Client()
-        ok_(c.login(username='kawaztan', password='pass'))
+        ok_(c.login(username='kawaztan', password='password'))
         
     def test_auto_profile_creation(self):
         """

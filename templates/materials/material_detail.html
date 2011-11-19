@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load codemirror %}
+{% block head %}
+  {{ block.super }}
+  {% render_codemirror_head %}
+{% endblock %}
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
 
@@ -24,7 +29,11 @@
         {% endif %}
     </p>
     <p>MIMETYPE：{{ object.mimetype }}</p>
+    {% if object.body %}
+      {% render_codemirror object %}
+    {% endif %}
     <p><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></p>
     <p><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">この素材を通報する</a></p>
+
 </section>
 {% endblock %}

@@ -145,4 +145,5 @@ def guess_syntax(filename):
     import os
     ext = os.path.splitext(filename)[1][1:]
     syntax = dict(SYNTAXES).get(ext, None)
+    print syntax
     return syntax

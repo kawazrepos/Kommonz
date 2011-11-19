@@ -23,7 +23,7 @@ MATERIAL_FILE_PATH = os.path.join('storage', 'materials')
 
 class MaterialFile(models.Model):
     u"""
-        model for file
+    model for file
     """
     def _get_file_path(self, filename):
         request = get_request()
@@ -56,7 +56,7 @@ class MaterialFile(models.Model):
 
 class Material(models.Model):
     u"""
-        abstract model of whole materials.
+    abstract model of whole materials.
     """
     
     def _get_thumbnail_path(self, filename):
@@ -155,6 +155,8 @@ class Material(models.Model):
         else:
             self.author = User.objects.get(pk=1)
             self.ip = "0.0.0.0"
+        if not self.category:
+            pass
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):
@@ -165,7 +167,7 @@ class Material(models.Model):
         
 class Kero(models.Model):
     u"""
-        Kero is a rating system for Materials.
+    Kero is a rating system for Materials.
     """
     
     def _get_file_path(self, filename):
@@ -187,7 +189,7 @@ class Kero(models.Model):
 
 class License(models.Model):
     u"""
-        License
+    License
     """
     
     label        = models.CharField(_('Label'), max_length=32)
@@ -204,7 +206,7 @@ class License(models.Model):
 
 class CreativeCommons(models.Model):
     u"""
-        CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
+    CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
     """
 
     commons       = CreativeCommonsField(_('Creative Commons'))

@@ -65,7 +65,7 @@ class TestMaterialUtils(object):
         cls = Material.objects.get_file_model('file.aaa')
         eq_(cls, Material)
 
-class TestCode(object):
+class TestMaterialCode(object):
     def setup(self):
         if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
             os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
@@ -82,7 +82,7 @@ class TestCode(object):
 
     def test_code_body(self):
         """
-        Tests when codefile was uploaded, read file ans set as body.
+        Tests when codefile was uploaded, read file and set as body.
         """
         category = Category.objects.create(label=u"ソースコード")
         f = File(tempfile.NamedTemporaryFile(
@@ -102,6 +102,7 @@ class TestCode(object):
                 description="description", 
                 category=category
         )
+        print code.body
         f.close()
         eq_(code.body, body)
         code.delete()
