@@ -23,7 +23,7 @@
   border-collapse: collapse;
 }
 
-div#search-category {
+#search-category {
   background: #eeeeee;
   margin: 0;
   padding: 0;
@@ -78,14 +78,42 @@ div#search-category {
 }
 
 #footer {
-    position: absolute;
-    bottom: 2px;
-    width: 100%;
-    background: #DDDDDD;
-    height: 200px;
+  background: #eeeeee;
+  border-top: solid #cccccc 1px;
+  border-bottom: solid #cccccc 1px;
+  bottom: 50px;
+  width: 100%;
+  height: 200px;
+  position: absolute;
+}
+
+#footer-menus {
+  margin: 0 auto;
+  padding: 0 auto 15px;
+  width: 1080px;
+}
+
+#footer-menus h2 {
+  margin: 10px auto 0;
+  padding: 0 10px 10px;
+  border-bottom: dotted 1px #333;
+}
+
+#footer-menus ul {
+  margin: 10px 20px 5px;
+}
+
+#footer-menus ul li {
+  margin-bottom: 8px;
+}
+
+.footer-box {
+  float: left;
+  width: 33%;
+  position: relative;
 }
 
 .footer-menu {
-    float: left;
-    width: 33%;
+  width: 80%;
 }
+

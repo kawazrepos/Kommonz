@@ -15,13 +15,13 @@
     <section id="content-main">
       <section id="search">
         <form method="get" action="{% reverse 'searches_result' %}">
-            <div id="search-category">
+            <menu id="search-category">
               <select id="category" style="display: none;" name="category_id">
                 {% for category in object_list %}
                 <option value="{{ category.id }}">{{ category.label }}</option>
                 {% endfor %}
               </select>
-            </div>
+            </menu>
             <input id="search-query" type="text" name="search-query">
             <input id="search-button" class="confirm-button" value="検索" type="submit">
         </form>
@@ -31,30 +31,35 @@
 
 {% block footer %}
 <div id="footer-menus" class="clearfix">
-    <section id="footer-left" class="footer-menu">
+    <section id="footer-left" class="footer-box">
+      <nav class="footer-menu">
         <h2>Kommonzって何？</h2>
-        <div>
-        </div>
         <ul>
           <li>利用規約</li>
           <li>プライバシーポリシー</li>
           <li>ヘルプ</li>
         </ul>
+      </nav>
     </section>
-    <section id="footer-center" class="footer-menu">
+    <section id="footer-center" class="footer-box">
+      <nav class="footer-menu">
       <h2>最近の人気素材</h2>
         <ul>
         </ul>
+      </nav>
     </section>
-    <section id="footer-right" class="footer-menu">
+    <section id="footer-right" class="footer-box">
+      <nav class="footer-menu">
       <h2>もっとKommonz</h2>
         <ul>
           <li>運営ブログ</li>
+          <li>Twitter bot</li>
           <li>障害情報</li>
           <li>かわずたん日記</li>
           <li>Documentation</li>
           <li>札幌ゲーム制作者コミュニティ Kawaz</li>
         </ul>
+      </nav>
     </section>
 </div>
 {% endblock %}

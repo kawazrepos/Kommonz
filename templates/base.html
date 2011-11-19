@@ -23,7 +23,7 @@
     <section id="header-menu">
       {% if user.is_authenticated %}
       <ul>
-        <li><img src="{{ user.icon.small }}" class="usericon small"></li>
+        <li><img src="{{ user.profile.icon.small }}" class="usericon small"></li>
         <li id="notification_dropdown_list"></li>
         <li><a href="{% reverse 'materials_material_file_create' %}" class="confirm-button upload-button">アップロード</a></li>
       </ul>
@@ -35,8 +35,7 @@
             <ul id="notification_timeline_inner">{% notification_list %}</ul>
           </section>
       </div>
-      <div id="mymenus" style="display: none;">
-        <li>
+      <menu id="mymenus" style="display: none;">
           <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
           <li><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
           <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
@@ -44,8 +43,7 @@
           <li><a href="{% reverse 'control_main' %}">神ページ</a></li>
           {% endif %}
           <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
-        </li>
-      </div>
+      </menu>
       {% else %}
       <ul>
         <li><a href="{% reverse 'registration_index' %}">ログイン</a></li>
@@ -66,6 +64,9 @@
   <footer id="footer">
     {% block footer %}
     {% endblock %}
+  </footer>
+  <footer id="copyright">
+    <address>2009-2012 www.kawaz.org</address>
   </footer>
 </body>
 </html>

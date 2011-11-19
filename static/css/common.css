@@ -1,5 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body, textarea { font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
+input, select { font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
+a {
+  color: #222;
+}
+
+body {
+  color: #333333;
+  font-size: 13px;
+  background: #fefefe;
+}
+
 .usericon {
-  background: red;
   margin: 2px 4px 0px;
   display: inline-block;
 }

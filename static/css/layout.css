@@ -1,19 +1,5 @@
 @charset "utf-8";
 /* -- whole settings -- */
-* {
-  margin: 0;
-  padding: 0;
-}
-body, textarea { font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
-input, select { font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
-a {
-  color: #222;
-}
-
-body {
-  color: #333333;
-  font-size: 13px;
-}
 
 li {
     list-style-type: none;
@@ -36,4 +22,19 @@ li {
 #content {
   margin: 70px auto 20px;
   width: 1080px;
+}
 
+footer#copyright {
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+footer#copyright address {
+  color: #ababab;
+  font-size: small;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 auto 15px;
+  width: 300px;
+}
