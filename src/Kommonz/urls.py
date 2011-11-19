@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from apps.searches.views import SearchIndexView
+from apps.index.views import IndexView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     url(r'^reports/',             include('Kommonz.apps.reports.urls')),
     url(r'^searches/',            include('Kommonz.apps.searches.urls')),
     url(r'^users/',               include('Kommonz.apps.auth.urls')),
-    url(r'^$',                    SearchIndexView.as_view(), name='index')
+    url(r'^$',                    IndexView.as_view(), name='index')
 )
 
 from django.conf import settings

@@ -3,10 +3,11 @@
 body, textarea { font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
 input, select { font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
 a {
-    color: #222;
+  color: #222;
 }
 body {
-    font-size: 13px;
+  color: #333333;
+  font-size: 13px;
 }
 li {
     list-style-type: none;
@@ -28,7 +29,7 @@ li {
 
 
 /* -- page header -- */
-#page_header {
+#header {
     /* to fix jqueryui ui-widget-header */
     border: 0px;
     font-weight: normal;
@@ -37,16 +38,16 @@ li {
     padding: 8px 0px;
     background-color: lightgray;
 }
-#page_header_menu {float: right;}
-#page_header_menu #welcome {
+#header-menu {float: right;}
+#header-menu #welcome {
     float: left;
     margin: 0px 8px;
 }
-#page_header_menu ul {
+#header-menu ul {
     position: relative;
     float: left;
     }
-#page_header_menu li {
+#header-menu li {
     float: left;
     margin: 0px 10px;
     }
@@ -84,40 +85,3 @@ li {
     }
 #page_header #breadcrumbs {}
 /* -- end of page header -- */
-
-/* -- content -- */
-#content {
-    width: 800px;
-    min-height: 500px;
-    border: solid 1px gray;
-    margin: 30px auto;
-}
-#content_header {
-    border-bottom: solid 1px gray;
-    margin: 0px;
-    min-height: 50px;
-}
-#content_header #logo {
-    width: 253px;
-    height: 80px;
-    margin:30px auto 20px auto;
-}
-#content_header ul {
-    bottom: 10px;
-    right: 10px;
-    }
-#content_header li {
-    float: left;
-    margin: 10px 10px;
-    }
-#content_main {
-    margin: 10px;
-    line-height: 150%;
-}
-/* -- end of content -- */
-
-
-/* -- page footer -- */
-#page_footer {}
-/* -- end of page footer -- */
-
