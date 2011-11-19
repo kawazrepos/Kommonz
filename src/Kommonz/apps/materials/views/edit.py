@@ -9,6 +9,8 @@ from utils.views import JSONResponse
 
 from object_permission.decorators import permission_required
 
+from apps.categories.models import Category
+
 from ..models import Material, MaterialFile
 from ..forms import MaterialForm, MaterialFileForm
 from ..api.mappers import MaterialMapper, MaterialFileMapper
@@ -23,15 +25,15 @@ def set_material_model(func):
     def _decorator(self, request, *args, **kwargs):
         filename = None
         if request.META['REQUEST_METHOD'] == 'GET':
-            filename = request.GET.get('filename', None)
+            self.filename = request.GET.get('filename', None)
         elif request.META['REQUEST_METHOD'] == 'POST':
             try:
                 file_pk = request.POST.get('_file', None)
                 file = MaterialFile.objects.get(pk=file_pk)
-                filename = file.file.name
+                self.filename = file.file.name
             except:
                 pass
-        self.material_model = Material.objects.get_file_model(filename)
+        self.material_model = Material.objects.get_file_model(self.filename)
         res = func(self, request, *args, **kwargs)
         return res
     return _decorator
@@ -54,7 +56,13 @@ class MaterialCreateView(CreateView):
         meta = type('Meta', (), args) # create Meta class(ref Expert Python Programming p119)
         from django import forms
         filefield = forms.IntegerField(widget=forms.HiddenInput())
-        modelform_class = type('modelform', (forms.ModelForm,), {"Meta": meta, "_file" : filefield}) # create new class extended MaterialUpdateForm
+        category = Category.objects.get_filetype_category(self.filename)
+        modelform_class = type('modelform', (forms.ModelForm,), {
+            "Meta": meta, 
+            "_file" : filefield, 
+            "label.initial" : self.filename, 
+            "category" : forms.ModelChoiceField(queryset=Category.objects.all(), initial=category)
+        }) # create new class extended MaterialUpdateForm
         return modelform_class
 
 class MaterialValidateView(MaterialCreateView):

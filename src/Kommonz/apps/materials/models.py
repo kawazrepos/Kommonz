@@ -47,7 +47,7 @@ class MaterialFile(models.Model):
         return self.file.name
     
     def save(self, *args, **kwargs):
-        return super(MaterialFile, self).save(*args, **kwargs)
+       return super(MaterialFile, self).save(*args, **kwargs)
 
     @property
     def extension(self):
@@ -99,6 +99,9 @@ class Material(models.Model):
         return '%s(%s)' % (self.label, self.file.name)
     
     def clean(self):
+        print "clean"
+        if not self.category:
+            self.category = Category.objects.get_filetype_category(self.file.name)
         return super(Material, self).clean()
             
     @models.permalink
@@ -156,7 +159,7 @@ class Material(models.Model):
             self.author = User.objects.get(pk=1)
             self.ip = "0.0.0.0"
         if not self.category:
-            pass
+            self.category = Category.objects.get_filetype_category(self.file.name)
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):
