@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}デザイン案1{% endblock %}
+{% block content %}
+<section id="search_result_form">
+<form id="index_search_form" method="get" action="{% reverse 'searches_result' %}" enctype="multipart/form-data">
+<p>
+    <select name="category_id">
+        {% for category in category_list %}
+        <option value="{{ category.id }}">{{ category.label }}</option>
+        {% endfor %}
+    </select>
+    <input id="index_search_keyword" type="text" name="search_keyword" value="{{ request.GET.search_keyword }}">
+    <input id="index_search_submit" type="submit">
+</p>
+</form>
+</section>
+<hr>
+<section id="search_result">
+<h1>検索結果　件</h1>
+{% if object_list %}
+    {% for object in object_list %}
+         <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+    {% endfor %}
+{% endif %}
+</section>
+{% endblock %}

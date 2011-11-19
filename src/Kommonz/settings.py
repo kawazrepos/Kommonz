@@ -183,6 +183,7 @@ INSTALLED_APPS = (
     'Kommonz.apps.messages',
     'Kommonz.apps.notifications',
     'Kommonz.apps.reports',
+    'Kommonz.apps.searches',
     # Kommonz materials
     'Kommonz.apps.materials.applications',
     'Kommonz.apps.materials.audios',
