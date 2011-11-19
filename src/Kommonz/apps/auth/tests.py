@@ -18,7 +18,7 @@ class TestAuthentication(object):
         """
         Tests can login with User.
         """
-        User.objects.create_user(username='kawaztan', email='kawaz@kawaz.org', password='pass')
+        User.objects.create_user(username='kawaztan', email='kawaz@kawaz.org', password='password')
         c = Client()
         ok_(c.login(username='kawaztan', password='pass'))
         
@@ -29,7 +29,6 @@ class TestAuthentication(object):
         kagamin = User.objects.create_user(username='kagamin', email='kagamin@example.com')
         ok_(UserProfile.objects.get(user=kagamin))
         ok_(UserOption.objects.get(user=kagamin))
-
         
 class TestUserProfileMapper(object):
     def test_user_mapper(self):
