@@ -3,16 +3,15 @@ from django.db import models
 from django.db.models import Q
 
 class CategoryManager(models.Manager):
-    def get_children_tree(self):
-        from models import Category
+    
+    def get_children_tree(self, category):
         def _get_dict(category):
-            categories = set([category,])
+            child_categories = {}
             for child in category.children.iterator():
-                categories.update(_get_set(child))
-            caregory_dict = {category : categories}
-            categories = set([category,])
-            for child in category.children.iterator():
-                categories.update(_get_set(child)) 
+                child_categories.update({child.label : _get_dict(child)})
+            return child_categories
+        result = _get_dict(category)
+        return result
         
     
     def get_filetype_category(self, filename):
@@ -50,17 +49,9 @@ class CategoryManager(models.Manager):
             if category.parent:
                 categories.update(_get_set(category.parent))
             return categories
-        categories = _get_set(category).remove(category)
-        queries = [Q(pk=category.pk) for category in _get_set(categories)]
-        query = reduce(lambda a, b : a | b, queries)
+        categories = _get_set(category)
+        categories.remove(category)
+        queries = [Q(pk=category.pk) for category in categories]
+        query = reduce(lambda a, b : a | b, queries, Q(pk=None))
         return Category.objects.filter(query)
     
-    
-#    def get_parents(self, instance):
-#        results = instance.parent
-#        if instance.parent:
-#            if instance.parent.parent:
-#                for p in self.get_parents(instance.parent).iterator():
-#                    results.add(p)    
-#        return results
-#    

@@ -43,13 +43,22 @@ class TestCategoryManager(object):
         """
         Tests manager can get a category's parents.
         """
-        forest = Category.objects.get_parents(self.category9)
-        ok_(isinstance(forest, QuerySet))
-        eq_(forest.count(), 4)
-        map = Category.objects.get_children(self.category6)
-        eq_(map.count(), 2)
-        image = Category.objects.get_children(self.category0)
-        eq_(image.count(), 0)
+        forest_parents = Category.objects.get_parents(self.category9)
+        ok_(isinstance(forest_parents, QuerySet))
+        eq_(forest_parents.count(), 4)
+        map_parents = Category.objects.get_parents(self.category6)
+        eq_(map_parents.count(), 2)
+        image_parents = Category.objects.get_parents(self.category0)
+        eq_(image_parents.count(), 0)
+        
+    def test_get_children_tree(self):
+        """
+        Tests manager can get a category's dict tree.
+        """
+        map_dict = Category.objects.get_children_tree(self.category6)
+        print map_dict
+        eq_(map_dict.get('Town'), {})
+        eq_(map_dict.get('Dungeon'), {'Forest' : {}})
         
         
     def test_get_filetype_category(self):
