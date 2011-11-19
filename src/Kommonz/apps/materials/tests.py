@@ -14,7 +14,7 @@ from apps.categories.models import Category
 from models import Material, MaterialFile
 from packages.models import Package
 
-def upload_material(file, username='hogehoge', password='fugafuga', **kwargs):
+def upload_material(file, username='hogehoge', password='password', **kwargs):
     """
     Create material model from view.
     """
@@ -60,12 +60,16 @@ class TestMaterialUtils(object):
         
     def test_suitable_model_others(self):
         """
-            Tests get suitable type from other file.
+        Tests get suitable type from other file.
         """
         cls = Material.objects.get_file_model('file.aaa')
         eq_(cls, Material)
 
 class TestCode(object):
+    def setup(self):
+        if not os.path.exists(settings.TEST_TEMPORARY_FILE_DIR):
+            os.mkdir(settings.TEST_TEMPORARY_FILE_DIR)
+
     def test_suitable_syntax(self):
         """
         Tests get suitable syntax type from filename
@@ -75,6 +79,32 @@ class TestCode(object):
         eq_(syntax, 'Python')
         syntax = guess_syntax('hoge.coffee')
         eq_(syntax, 'CoffeeScript')
+
+    def test_code_body(self):
+        """
+        Tests when codefile was uploaded, read file ans set as body.
+        """
+        category = Category.objects.create(label=u"ソースコード")
+        f = File(tempfile.NamedTemporaryFile(
+            mode="r+w+t", suffix=".py", 
+            dir=settings.TEST_TEMPORARY_FILE_DIR
+        ))
+        
+        body = """
+            import this
+            print "this is a sample code file"
+            hoge = 1 + 1
+        """
+        f.write(body)
+        material_file = MaterialFile.objects.create(file=f)
+        code = Material.objects.create(
+                _file=material_file, 
+                description="description", 
+                category=category
+        )
+        f.close()
+        eq_(code.body, body)
+        code.delete()
 
 class TestMaterialUpload(object):
     def setup(self):
