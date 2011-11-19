@@ -4,7 +4,7 @@
 #    created by giginet on 2011/10/02
 #
 from django.contrib import admin
-from models import MaterialFile, Material, Kero, License, CreativeCommons
+from models import MaterialFile, Material, Kero
 from audios.models import Audio
 from codes.models import Code
 from images.models import Image
@@ -27,14 +27,6 @@ admin.site.register(Material, MaterialAdmin)
 class KeroAdmin(admin.ModelAdmin):
     list_display    = ('__unicode__',)
 admin.site.register(Kero, KeroAdmin)
-
-class LisenceAdmin(admin.ModelAdmin):
-    list_display    = ('__unicode__',)
-admin.site.register(License, LisenceAdmin)
-
-class CreativeCommonsAdmin(admin.ModelAdmin):
-    list_display    = ('__unicode__',)
-admin.site.register(CreativeCommons, CreativeCommonsAdmin)
 
 # paticular models
 

@@ -6,7 +6,6 @@
 import os
 import mimetypes
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.signals import pre_delete
@@ -15,7 +14,7 @@ from django.utils.translation import ugettext as _
 from object_permission.mediators import ObjectPermissionMediator as Mediator
 from qwert.middleware.threadlocals import request as get_request
 from apps.categories.models import Category
-from fields.ccfield.models import CreativeCommonsField
+
 from fields.thumbnailfield.models import ThumbnailField
 from managers import MaterialManager
 
@@ -189,53 +188,6 @@ class Kero(models.Model):
     def __unicode__(self):
         return self.label
 
-
-class License(models.Model):
-    u"""
-    License
-    """
-    
-    label        = models.CharField(_('Label'), max_length=32)
-    description  = models.TextField(_('Description'))
-
-
-    class Meta:
-        app_label           = 'materials'
-        verbose_name        = _('License')
-        verbose_name_plural = _('Licenses')
-        
-    def __unicode__(self):
-        return self.label 
-
-class CreativeCommons(models.Model):
-    u"""
-    CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
-    """
-
-    commons       = CreativeCommonsField(_('Creative Commons'))
-    material      = models.OneToOneField('Material', verbose_name=_('Creative Commons'), parent_link=True)
-    
-    class Meta:
-        app_label           = 'materials'
-        verbose_name        = _('Creative Commons')
-        verbose_name_plural = verbose_name
-        
-    def __unicode__(self):
-        return self._get_commons_description()
-    
-    def _get_commons_description(self):
-        nc, nd, sa = self.commons.noncommerical, self.commons.no_derivative, self.commons.share_alike
-        if not nd:
-            return 'CC BY' if not nc else 'CC BY-NC'
-        elif not nd and sa:
-            return 'CC BY-SA' if not nc else 'CC-BY-NC-SA'
-        elif nd:
-            return 'CC BY-ND' if not nc else 'CC BY-NC-ND'
-        
-    def clean(self):
-        if self.commons.no_derivative and self.commons.share_alike:
-            raise ValidationError(_('''can not set 'Share Alike' and 'Not Derivative Works' together.'''))
-        return super(CreativeCommons, self).clean()
 
 @receiver(pre_delete, sender=Material)
 def delete_material_file(sender, instance, **kwargs):
