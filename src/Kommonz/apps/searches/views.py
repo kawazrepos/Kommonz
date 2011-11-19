@@ -13,7 +13,7 @@ from django.views.generic.list import ListView
 class SearchIndexView(ListView):
     model = Category
     template_name='index2.html'
-
+    
 
 class SearchResultView(ListView):
     model = Material
