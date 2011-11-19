@@ -9,9 +9,37 @@ class License(models.Model):
     License
     """
     
-    label        = models.CharField(_('Label'), max_length=32)
-    description  = models.TextField(_('Description'))
-
+    # correct transration required below
+    
+    USE_CHOICES = (
+                ('free',             _('free')),
+                ('non-commercial',   _('non commercial')),
+        )
+    REDESTRIBUTE_CHOICES = (
+                ('free',             _('free')),
+                ('prohibitted',      _('prohibitted')),
+        )
+    REPROCESSING_CHOICES = (
+                ('free',             _('free')),
+                ('prohibitted',      _('prohibitted')),
+        )
+    CONTACT_CHOICES = (
+                ('not required',      _('not required')),
+                ('required',          _('required')),
+        )
+    CREDIT_CHOICES = (
+                ('not required',      _('not required')),
+                ('required',          _('required')),
+        )
+    
+    label        = models.CharField(_('Label'),        max_length=32)
+    
+    use          = models.CharField(_('Use range'),    max_length=32, choices=USE_CHOICES)
+    redestribute = models.CharField(_('Redestribute'), max_length=32, choices=REDESTRIBUTE_CHOICES)
+    reprocessing = models.CharField(_('Reprocessing'), max_length=32, choices=REPROCESSING_CHOICES)
+    contact      = models.CharField(_('Contact'),      max_length=32, choices=CONTACT_CHOICES)
+    credit       = models.CharField(_('Credit'),       max_length=32, choices=CREDIT_CHOICES)
+    
 
     class Meta:
         app_label           = 'materials'
@@ -20,6 +48,8 @@ class License(models.Model):
         
     def __unicode__(self):
         return self.label 
+    
+    
 
 
 class CreativeCommons(models.Model):
