@@ -76,7 +76,6 @@ class Material(models.Model):
     
     # not required 
     description = models.TextField(_('Description'), blank=False, null=True)
-    thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
     _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
     
     # auto add
@@ -86,6 +85,7 @@ class Material(models.Model):
     pv          = models.PositiveIntegerField(_('Page View'), default=0, editable=False)
     download    = models.PositiveIntegerField(_('Download Count'), default=0, editable=False)
     ip          = models.IPAddressField(_('IP Address'), editable=False)
+    thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, editable=False)
     
     objects     = MaterialManager()
     
