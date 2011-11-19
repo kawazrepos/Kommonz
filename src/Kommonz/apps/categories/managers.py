@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.db.models import Q
+from utils.views import JSONResponse
 
 class CategoryManager(models.Manager):
     
@@ -13,6 +14,9 @@ class CategoryManager(models.Manager):
         result = _get_dict(category)
         return result
         
+    def get_children_json(self, category):
+        response = JSONResponse([self.get_children_tree(category),], {})
+        return response
     
     def get_filetype_category(self, filename):
         from django.contrib.contenttypes.models import ContentType

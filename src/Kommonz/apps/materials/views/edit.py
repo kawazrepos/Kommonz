@@ -1,12 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.utils import simplejson
 from django.utils.decorators import method_decorator
 from django import forms
+from utils.views import JSONResponse
 
 from object_permission.decorators import permission_required
 
@@ -109,8 +108,4 @@ class MaterialInlineUpdateView(MaterialUpdateView):
     def dispatch(self, *args, **kwargs):
         return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 
-class JSONResponse(HttpResponse):
-    """JSON response class."""
-    def __init__(self, obj='', json_opts={}, mimetype="application/json", *args, **kwargs):
-        content = simplejson.dumps(obj, **json_opts)
-        super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)
+

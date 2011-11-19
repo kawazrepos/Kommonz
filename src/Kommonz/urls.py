@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     url(r'^reports/',             include('Kommonz.apps.reports.urls')),
     url(r'^searches/',            include('Kommonz.apps.searches.urls')),
     url(r'^users/',               include('Kommonz.apps.auth.urls')),
-    url(r'^$',                    SearchIndexView.as_view(template_name='index2.html'), name='index')
+    url(r'^$',                    SearchIndexView.as_view(), name='index')
 )
 
 from django.conf import settings
