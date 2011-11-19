@@ -70,12 +70,12 @@ class Material(models.Model):
     }
     
     # required
-    label       = models.CharField(_('Label'), max_length=128, null=False, blank=True)
-    category    = models.ForeignKey(Category, verbose_name=_('Category'), related_name="materials")
-    
-    # not required 
-    description = models.TextField(_('Description'), blank=False, null=True)
+    label       = models.CharField(_('Label'), max_length=128, null=False, blank=False)
     _file       = models.OneToOneField(MaterialFile, verbose_name=('Material'), related_name='material')
+
+    # not required 
+    description = models.TextField(_('Description'), blank=True, null=True)
+    category    = models.ForeignKey(Category, verbose_name=_('Category'), related_name='materials', blank=True, null=True)
     
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)

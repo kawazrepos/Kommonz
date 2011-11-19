@@ -1,0 +1,11 @@
+- model: materials.materialfile
+  pk: 1
+  fields:
+    file: fixtures/images/kawaz.png
+- model: materials.image
+  pk: 1
+  fields:
+    label: test
+    _file: 1
+    author: 1
+    ip: 127.0.0.1
