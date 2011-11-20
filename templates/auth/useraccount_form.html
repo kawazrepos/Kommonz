@@ -1,9 +1,9 @@
-{% extends "auth/config_base.html" %}
+{% extends "auth/base.html" %}
 
 {% block title %}{{ request.user.username }}のアカウント設定{% endblock %}
 {% block breadcrumbs %}Kommonz > {{ request.user.username }}のアカウント設定{% endblock %}
 
-{% block contentmain %}
+{% block main %}
 <h1>{{ request.user.username }}のアカウント設定</h1>
 <h2>現在関連付けているアカウント</h2>
 <ul>

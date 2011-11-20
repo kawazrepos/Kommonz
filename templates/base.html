@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/common.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/header.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/menuicon.css" type="text/css">
   <!--[if lte IE 8]>
     <script src="{{ MEDIA_URL }}javascript/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -31,7 +32,7 @@
               <ul id="notification_timeline_inner">{% notification_list %}</ul>
             </section>
         </div>
-        <menu id="mymenus" class="dropdown">
+        <menu class="dropdown">
             <dt class="dashboard">ダッシュボード</dt>
             <dd class="material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></dd>
             <dd class="mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></dd>
@@ -39,9 +40,9 @@
             <dd class="myprofile"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></dd>
             <dt class="config">設定</dt>
             <dd class="account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></dd>
-            <dd class="profile-config"><a href="{% reverse 'auth_user_update' %}">プロフィール設定</a></dd>
-            <dd class="notify-config"><a href="{% reverse 'auth_user_update' %}">通知設定</a></dd>
-            <dd class="service-config"><a href="{% reverse 'auth_user_update' %}">外部サービス設定</a></dd>
+            <dd class="profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></dd>
+            <dd class="notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></dd>
+            <dd class="service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></dd>
             {% if user.is_staff %}
             <dt class="separator"></dt>
             <dd class="god"><a href="{% reverse 'control_main' %}">神ページ</a></dd>
@@ -50,7 +51,7 @@
             <dd class="logout"><a href="{% reverse 'registration_logout' %}">ログアウト</a></dd>
         </menu>
         <ul>
-          <li><img src="{{ user.profile.icon.small }}" class="usericon small"></li>
+          <li><img src="/{{ user.profile.icon.small }}" class="usericon small"></li>
           <li id="notification_dropdown_list"></li>
           <li><a href="{% reverse 'materials_material_file_create' %}" class="confirm-button blue-button header-button">アップロード</a></li>
         </ul>

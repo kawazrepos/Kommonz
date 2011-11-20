@@ -1,0 +1,52 @@
+/* ToDo CSS Sprite */
+menu dt.dashboard {
+  background-image: url(image/block.png);
+}
+
+menu dt.activity {
+  background-image: url(image/clock-frame.png);
+}
+
+menu dt.material, menu dd.material {
+  background-image: url(image/box.png);
+}
+
+menu dt.mylist, menu dd.mylist {
+  background-image: url(image/heart.png);
+}
+
+menu dt.message, menu dd.message {
+  background-image: url(image/mail.png);
+}
+
+menu dd.myprofile {
+  background-image: url(image/card-address.png);
+}
+
+menu dt.config {
+  background-image: url(image/gear.png);
+}
+
+menu dd.account-config {
+  background-image: url(image/user.png);
+}
+
+menu dd.profile-config {
+  background-image: url(image/card--pencil.png);
+}
+
+menu dd.notify-config {
+  background-image: url(image/bell.png);
+}
+
+menu dd.service-config {
+  background-image: url(image/chain.png);
+}
+
+menu dd.god {
+  background-image: url(image/wrench.png);
+}
+
+menu dd.logout {
+  background-image: url(image/door.png);
+}

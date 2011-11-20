@@ -1,9 +1,9 @@
-{% extends "auth/config_base.html" %}
+{% extends "auth/base.html" %}
 
 {% block title %}{{ request.user.username }}のユーザ設定{% endblock %}
 {% block breadcrumbs %}Kommonz > {{ request.user.username }}のユーザ設定{% endblock %}
 
-{% block contentmain %}
+{% block main %}
 <h1>ユーザー：{{ request.user.username }}のユーザ設定</h1>
 <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
     {{ form.as_p }}

@@ -2,6 +2,7 @@
 {% load codemirror %}
 {% block head %}
   {{ block.super }}
+  <link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
   {% render_codemirror_head %}
 {% endblock %}
 {% block title %}{{ object.label }}{% endblock %}

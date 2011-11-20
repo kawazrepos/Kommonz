@@ -1,0 +1,48 @@
+section.user-info {
+  display: block;
+  position: relative;
+}
+
+section.user-info img {
+  margin: 0 auto;
+  display: block;
+}
+
+section.user-info span {
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px 0;
+  display: block;
+}
+
+menu#dashboard-action {
+  margin: 5px 0px 5px 5px;
+}
+
+menu#dashboard-action dt, menu#dashboard-action dd {
+  background-position: 5px 8px;
+  background-repeat: no-repeat;
+  border-bottom: solid 1px #ccc;
+  margin-left: 5px;
+}
+
+menu#dashboard-action dt {
+  border-collapse: collapse;
+  padding: 10px 0px 10px 25px;
+}
+
+menu#dashboard-action dd {
+  background-position: 20px 8px;
+  padding: 10px 0 10px 40px;
+}
+
+menu#dashboard-action dd.caption {
+  color: #999;
+  font-size: small;
+  padding-left: 20px;
+}
+
+menu#dashboard-action .active {
+  background-color: #f6f6f6;
+  font-weight: bold;
+}

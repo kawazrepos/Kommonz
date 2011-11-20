@@ -58,12 +58,6 @@ menu.dropdown {
   position: absolute;
 }
 
-menu.dropdown dt {
-  background: 0 3px no-repeat;
-  font-weight: bold;
-  padding: 5px 0 8px 18px;
-  border-bottom: dotted 1px #333;
-}
 
 menu.dropdown dd {
   background: 0 3px no-repeat;
@@ -71,57 +65,14 @@ menu.dropdown dd {
   padding: 5px 0 5px 20px;
 }
 
-
-/* ToDo CSS Sprite */
-menu.dropdown dt.dashboard {
-  background-image: url(image/block.png);
+menu.dropdown dt {
+  background: 0 3px no-repeat;
+  font-weight: bold;
+  padding: 5px 0 8px 18px;
+  border-bottom: dotted 1px #333;
 }
 
-menu.dropdown dd.material {
-  background-image: url(image/box.png);
-}
-
-menu.dropdown dd.mylist {
-  background-image: url(image/heart.png);
-}
-
-menu.dropdown dd.message {
-  background-image: url(image/mail.png);
-}
-
-menu.dropdown dd.myprofile {
-  background-image: url(image/card-address.png);
-}
-
-menu.dropdown dt.config {
-  background-image: url(image/gear.png);
-}
-
-menu.dropdown dd.account-config {
-  background-image: url(image/user.png);
-}
-
-menu.dropdown dd.profile-config {
-  background-image: url(image/card--pencil.png);
-}
-
-menu.dropdown dd.notify-config {
-  background-image: url(image/bell.png);
-}
-
-menu.dropdown dd.service-config {
-  background-image: url(image/chain.png);
-}
-
-menu.dropdown dd.god {
-  background-image: url(image/wrench.png);
-}
-
-menu.dropdown dd.logout {
-  background-image: url(image/door.png);
-}
-
-menu.dropdown dt.separator {
+menu.dropdown .separator {
   margin: 0px;
   padding: 0px;
 }

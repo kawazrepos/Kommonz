@@ -1,0 +1,37 @@
+{% extends "../twocolumn.html" %}
+
+{% block head %}
+  {{ block.super }}
+  <link media="all" rel="stylesheet" href="/css/dashboard.css" type="text/css" />
+{% endblock %}
+
+{% block sidebar %}
+
+<section class="user-info">
+  <img src="/{{ user.profile.icon.large }}" class="usericon large">
+  <span class="username">{{ user.username }}</span>
+</section>
+
+<menu id="dashboard-action">
+  <dt class="dashboard">ダッシュボード</dt>
+  <dt class="activity">アクティビティ</dt>
+  <dt class="material active"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></dt>
+  {% for material in user.materials.all %}
+  <dd><a href="{{ material.get_absolute_url }}">{{ material.label }}</a></dd>
+  {% empty %}
+  <dd class="caption">素材を投稿していません</dd>
+  {% endfor %}
+  <dt class="mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></dt>
+  {% for list in user.lists.all %}
+  <dd><a href="{{ list.get_absolute_url }}">{{ list.label }}</a></dd>
+  {% empty %}
+  <dd class="caption">リストを作成していません</dd>
+  {% endfor %}
+  <dt class="message"><a href="{% reverse 'messages_message_list' %}">メッセージ</a></dt>
+  <dt class="config">設定</dt>
+  <dd class="account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></dd>
+  <dd class="profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></dd>
+  <dd class="notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></dd>
+  <dd class="service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></dd>
+</menu>
+{% endblock %}
