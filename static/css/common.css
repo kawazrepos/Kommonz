@@ -15,9 +15,14 @@ body {
 }
 
 h1 {
+  font-size: 24px;
+  margin: 15px auto 25px;
 }
 
 h2 {
+  font-size: 16px;
+  margin: 5px auto;
+  margin-left: 5px;
 }
 
 h3 {

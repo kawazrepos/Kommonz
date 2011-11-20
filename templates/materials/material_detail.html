@@ -9,45 +9,52 @@
 
 {% block sidebar %}
 <a href="" class="confirm-button blue-button download-button">ダウンロード</a>
-<h2>{{ object.label }}</h2>
-<dl>
-  <dt>投稿者</dt>
-  <dd>
-    <img src="/{{ object.author.profile.icon.middle }}"><a href="">{{ object.author.username }}</a>さん
-  </dd>
-  <dt>サイズ</dt>
-  <dd>{{ object.size }}</dd>
-  <dt>ファイル形式</dt>
-  <dd>{{ object.mimetype }}</dd>
-  <dt>ダウンロード回数</dt>
-  <dd>{{ object.download }}</dd>
-  <dt>投稿日</dt>
-  <dd> {{ object.created_at }}</dd>
-  <dt>最終変更日</dt>
-  <dd>{{ object.updated_at }}</dd>
-</dl>
-<h2>カテゴリ</h2>
-{{ object.category }}
-<h2>タグ</h2>
-<h2>ライセンス</h2>
-{{ object.license }}
-<h2>レーティング</h2>
-{% if object.keros %}
-  {% for kero in object.keros.all %}
-    {{ kero }}
-  {% endfor %}
-{% endif %}
+<section class="material-info">
+  <h2>{{ object.label }}</h2>
+  <dl>
+    <dt>投稿者</dt>
+    <dd class="author">
+      <img class="usericon middle" src="/{{ object.author.profile.icon.middle }}">
+      <span class="username"><a href="">{{ object.author.username }}</a>さん</span>
+    </dd>
+    <dt>ダウンロード回数</dt>
+    <dd>{{ object.download }}</dd>
+    <dt>カテゴリ</dt>
+    <dd>{{ object.category }}</dd>
+    <dt>ライセンス</dt>
+    <dd>{{ object.license }}</dd>
+    <dt>レーティング</dt>
+    <dd>
+    <ul>
+    {% if object.keros %}
+      {% for kero in object.keros.all %}
+        <li class="kero-icon">{{ kero }}</li>
+      {% endfor %}
+    {% else %}
+        <li class="kero-icon"></li>
+    {% endif %}
+    </ul>
+    </dd>
+    <dt>サイズ</dt>
+    <dd>{{ object.size }}</dd>
+    <dt>ファイル形式</dt>
+    <dd>{{ object.mimetype }}</dd>
+    <dt>投稿日</dt>
+    <dd> {{ object.created_at }}</dd>
+    <dt>最終変更日</dt>
+    <dd>{{ object.updated_at }}</dd>
+  </dl>
+ </section>
 
-<h2>操作</h2>
-<menu>
-  <li><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></li>
-  <li><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">この素材を通報する</a></li>
-  <li>マイリストに追加</li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-</menu>
+<section class="material-action">
+  <menu>
+    <li class="edit">編集</li>
+    <li class="delete">削除</li>
+    <li class="mylist">マイリストに追加</li>
+    <li class="message"><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></li>
+    <li class="report"><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">通報する</a></li>
+  </menu>
+</section>
 {% endblock %}
 
 {% block main %}
