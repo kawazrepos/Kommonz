@@ -20,14 +20,30 @@ class SearchResultView(ListView):
     template_name='searches/search_result.html'
     
     def get_context_data(self, **kwargs):
+        object_list    = Material.objects.order_by() # empty ordering to make fast
+        context        = super(SearchResultView, self).get_context_data(**kwargs)
+        
+        # matches
         category_id    = self.request.GET.get('category_id', None)
         search_keyword = self.request.GET.get('search_keyword', None)
+        
+        # display ways
         display_number = self.request.GET.get('display_number', None)
         page_number    = self.request.GET.get('page_number', None)
         sort           = self.request.GET.get('sort', None)
         order          = self.request.GET.get('order', None)
-        object_list    = Material.objects.order_by() # empty ordering to make fast
-        context        = super(SearchResultView, self).get_context_data(**kwargs)
+        
+        # thresholds
+        # usage:
+        # searches/?download_number=500o
+        # over 500 downloads will be displayed
+        # searches/?download_number=500b
+        # below 500 downloads will be displayed
+        
+        image_size      = self.request.GET.get('image_size', None)
+        audio_length    = self.request.GET.get('audio_length', None)
+        download_number = self.request.GET.get('download_number', None)
+        
         
         # making query
         if category_id:
@@ -40,6 +56,23 @@ class SearchResultView(ListView):
         if search_keyword:
             object_list = object_list.filter(label__contains=search_keyword)
             
+        if isinstance(download_number, basestring):
+            tail = ''
+            if download_number[-1] == u'o':
+                download_number = download_number[:-1]
+                tail = 'o'
+            elif download_number[-1] == u'b':
+                download_number = download_number[:-1]
+                tail = 'b'
+            print download_number + ':' + str(download_number.isdigit())
+            
+            if download_number.isdigit():
+                if tail == 'b':
+                    object_list = object_list.filter(download__lte=int(download_number))
+                else:
+                    object_list = object_list.filter(download__gte=int(download_number))
+            
+        
         # ordering
         object_list = self._get_ordered_object_list(object_list, sort, order)
                 

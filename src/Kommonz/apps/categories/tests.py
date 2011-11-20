@@ -56,7 +56,7 @@ class TestCategoryManager(object):
         Tests manager can get a category's dict tree.
         """
         map_category = Category.objects.get(pk=self.category6.pk)
-        map_dict = map_category.get_children_tree(map_category)
+        map_dict = map_category.get_children_tree()
         eq_(map_dict.get('Town'), {})
         eq_(map_dict.get('Dungeon'), {'Forest' : {}})
         
@@ -65,7 +65,7 @@ class TestCategoryManager(object):
         Tests manager can get a category's children json.
         """
         map_category = Category.objects.get(pk=self.category6.pk)
-        map_json = map_category.get_children_json(map_category)
+        map_json = map_category.get_children_json()
         print map_json
         #not yet
      

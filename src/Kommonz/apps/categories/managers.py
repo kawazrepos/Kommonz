@@ -19,7 +19,7 @@ class CategoryManager(models.Manager):
         except ObjectDoesNotExist:
             category = Category.objects.create(label=model_ct.name)
             return category
-
+    
     
     def get_children(self, category):
         from models import Category

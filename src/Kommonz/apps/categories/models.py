@@ -28,15 +28,23 @@ class Category(models.Model):
     def get_absolute_url(self):
         return ('categories_category_detail', (), { 'pk' : self.pk })
     
-    def get_children_tree(self, category):
+    def get_children_tree(self):
         def _get_dict(category):
             child_categories = {}
             for child in category.children.iterator():
                 child_categories.update({child.label : _get_dict(child)})
             return child_categories
-        result = _get_dict(category)
+        result = _get_dict(self)
         return result
         
-    def get_children_json(self, category):
-        tree_dict = self.get_children_tree(category)
+    def get_children_json(self):
+        tree_dict = self.get_children_tree()
         return simplejson.dumps(tree_dict)
+    
+    def get_root_category(self):
+        def _get_root(category):
+            if category.parent:
+                self.get_root_category(category.parent)
+            else:
+                return category
+        return _get_root(self)
