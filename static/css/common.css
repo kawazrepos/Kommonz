@@ -14,6 +14,18 @@ body {
   background: #fefefe;
 }
 
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+code {
+}
+
 .usericon {
   margin: 2px 4px 0px;
   display: inline-block;
@@ -40,6 +52,7 @@ body {
 }
 
 .confirm-button {
+  color: #efefef;
   font-size: large;
   text-align: center;
   font-weight: bold;
