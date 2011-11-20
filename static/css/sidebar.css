@@ -1,0 +1,12 @@
+#sidebar {
+  background: red;
+  float: left;
+  width: 350px;
+  display: block;
+}
+
+#main {
+  float: right;
+  width: 730px;
+  display: block;
+}

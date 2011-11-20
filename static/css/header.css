@@ -42,37 +42,3 @@
   float: left;
   margin: 4px 3px;
 }
-
-#notification_dropdown_list #notification_timeline,
-#notification_dropdown_list #notification_timeline_title,
-#notification_dropdown_list #notification_timeline_inner {
-  background-color: white;
-  width: 500px;
-  height: 300px;
-  z-index: 100;
-  position: absolute;
-  top: -999em;
-  left: -1px;
-}
-#notification_dropdown_list:hover #notification_timeline{
-  background-color: rgba(255, 255, 255, 0.0);
-  top: 15px;
-}
-#notification_dropdown_list:hover #notification_timeline_title{
-  background-color: rgba(255, 255, 255, 0.7);
-  top: 0px;
-  font-size:13px;
-  margin: 10px;
-  padding-top:10px;
-  padding-left:10px;
-}
-#notification_dropdown_list:hover #notification_timeline_inner {
-  background-color: rgba(255, 255, 255, 0.7);
-  overflow: scroll;
-  top: 30px;
-  margin: 10px;
-  padding:10px;
-  line-height: 150%;
-}
-#page_header #breadcrumbs {}
-/* -- end of page header -- */

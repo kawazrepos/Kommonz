@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "twocolumn.html" %}
 {% load codemirror %}
 {% block head %}
   {{ block.super }}
@@ -7,7 +7,10 @@
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
 
-{% block content%}
+{% block sidebar %}
+{% endblock %}
+
+{% block main %}
 <section id="detail_main">
     <h1>{{ object.label }}</h1>
     <h2>{{ object.author.username }}</h2>
