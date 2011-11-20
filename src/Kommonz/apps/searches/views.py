@@ -4,8 +4,6 @@
 # Date:          2011/11/04
 #
 from django.core.paginator import Paginator
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
 from apps.categories.models import Category
@@ -26,14 +24,26 @@ class SearchResultView(ListView):
         search_keyword = self.request.GET.get('search_keyword', None)
         display_number = self.request.GET.get('display_number', None)
         page_number    = self.request.GET.get('page_number', None)
-        object_list = Material.objects
-        context = super(SearchResultView, self).get_context_data(**kwargs)
+        sort           = self.request.GET.get('sort', None)
+        order          = self.request.GET.get('order', None)
+        object_list    = Material.objects.order_by() # empty ordering to make fast
+        context        = super(SearchResultView, self).get_context_data(**kwargs)
         
+        # making query
         if category_id:
-            object_list = object_list.filter(category=Category.objects.get(id=category_id))
+            try:
+                category=Category.objects.get(id=category_id)
+                object_list = object_list.filter(category=category)
+            except Category.DoesNotExist:
+                pass
+                
         if search_keyword:
             object_list = object_list.filter(label__contains=search_keyword)
             
+        # ordering
+        object_list = self._get_ordered_object_list(object_list, sort, order)
+                
+        # display and paginate
         if not isinstance(display_number, basestring) or not display_number.isdigit():
             display_number = 3
         else:
@@ -47,7 +57,27 @@ class SearchResultView(ListView):
             if page_number > paginator.page_range[-1]:
                 page_number = paginator.page_range[-1]
 
+        # making context
         context['object_list'] = paginator.page(page_number).object_list
         context['category_list'] = Category.objects.all()
         return context
     
+    
+    def _get_ordered_object_list(self, object_list, sort, order):
+        sorting = ""
+        
+        if sort == 'pv':
+            sorting = 'pv'
+        elif sort == 'download':
+            sorting = 'download'
+        elif sort == 'created_at':
+            sorting = 'created_at'
+        elif sort == 'updated_at':
+            sorting = 'updated_at'
+        else:
+            sorting = 'pk'
+            
+        if order == 'd':
+            sorting = '-' + sorting
+        
+        return object_list.order_by(sorting)
