@@ -11,7 +11,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
   margin: 0;
   padding: 2px 0px;
-  border-bottom: solid 1px gray;
+  border-bottom: solid 2px #666;
   position: absolute;
   top: 0;
   left: 0;
@@ -19,26 +19,109 @@
   height: 36px;
 }
 
-#header * {
+#header {
   color: #efefef;
 }
 
-.upload-button {
-  color: #80A9DB;
+.header-button {
+  color: #efefef;
   text-decoration: none;
-  margin: auto 15px auto 3px;
+  -webkit-box-shadow: 1px 1px 2px #333;
+  -moz-box-shadow: 1px 1px 2px #333;
+  margin: -3px 15px -2px 3px;
+  padding-top: 5px;
   width: 128px;
-  height: 24px;
+  height: 28px;
 }
 
 #header-menu {
   float: right;
 }
-#header-menu ul {
+#header-menu > ul {
   position: relative;
   float: left;
 }
-#header-menu li {
+#header-menu > ul > li {
   float: left;
   margin: 4px 3px;
+}
+
+menu.dropdown {
+  color: #333;
+  background: #fefefe;
+  border: solid 1px #666;
+  padding: 5px;
+  top: 42px;
+  width: 150px;
+  height: auto;
+  display: block;
+  position: absolute;
+}
+
+menu.dropdown dt {
+  background: 0 3px no-repeat;
+  font-weight: bold;
+  padding: 5px 0 8px 18px;
+  border-bottom: dotted 1px #333;
+}
+
+menu.dropdown dd {
+  background: 0 3px no-repeat;
+  margin: 3px 0 3px 5px;
+  padding: 5px 0 5px 20px;
+}
+
+
+/* ToDo CSS Sprite */
+menu.dropdown dt.dashboard {
+  background-image: url(image/block.png);
+}
+
+menu.dropdown dd.material {
+  background-image: url(image/box.png);
+}
+
+menu.dropdown dd.mylist {
+  background-image: url(image/heart.png);
+}
+
+menu.dropdown dd.message {
+  background-image: url(image/mail.png);
+}
+
+menu.dropdown dd.myprofile {
+  background-image: url(image/card-address.png);
+}
+
+menu.dropdown dt.config {
+  background-image: url(image/gear.png);
+}
+
+menu.dropdown dd.account-config {
+  background-image: url(image/user.png);
+}
+
+menu.dropdown dd.profile-config {
+  background-image: url(image/card--pencil.png);
+}
+
+menu.dropdown dd.notify-config {
+  background-image: url(image/bell.png);
+}
+
+menu.dropdown dd.service-config {
+  background-image: url(image/chain.png);
+}
+
+menu.dropdown dd.god {
+  background-image: url(image/wrench.png);
+}
+
+menu.dropdown dd.logout {
+  background-image: url(image/door.png);
+}
+
+menu.dropdown dt.separator {
+  margin: 0px;
+  padding: 0px;
 }
