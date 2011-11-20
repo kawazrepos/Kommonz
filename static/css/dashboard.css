@@ -19,6 +19,10 @@ menu#dashboard-action {
   margin: 5px 0px 5px 5px;
 }
 
+menu#dashboard-action a {
+  color: #222;
+}
+
 menu#dashboard-action dt, menu#dashboard-action dd {
   background-position: 5px 8px;
   background-repeat: no-repeat;

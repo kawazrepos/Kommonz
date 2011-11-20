@@ -10,7 +10,6 @@
   background: linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
   margin: 0;
-  padding: 2px 0px;
   border-bottom: solid 2px #666;
   position: absolute;
   top: 0;
@@ -28,51 +27,77 @@
   text-decoration: none;
   -webkit-box-shadow: 1px 1px 2px #333;
   -moz-box-shadow: 1px 1px 2px #333;
-  margin: -2px 15px 0px 3px;
+  margin: 0px 15px 0px 3px;
   padding-top: 5px;
   width: 128px;
-  height: 28px;
+  height: 24px;
+}
+
+.header-button:hover {
+  text-decoration: none;
 }
 
 #header-menu {
+}
+#header-menu {
   float: right;
-}
-#header-menu > ul {
   position: relative;
-  float: left;
 }
-#header-menu > ul > li {
+#header-menu li {
+  border-left: solid 1px #333;
   float: left;
-  margin: 4px 3px;
+  display: block;
 }
 
-menu.dropdown {
+#header-menu li.header-dropdown-section {
+  padding-top: 4px;
+  height: 32px;
+}
+
+#header-menu li.header-dropdown-section:hover {
+  background: #666;
+}
+
+#header-menu li.header-button-section {
+  padding: 3px 10px 0 10px;
+  height: 33px;
+}
+
+menu#dropdown {
   color: #333;
   background: #fefefe;
   border: solid 1px #666;
   padding: 5px;
-  top: 42px;
+  top: 36px;
   width: 150px;
   height: auto;
   display: block;
   position: absolute;
+  box-shadow: 1px 2px 1px #999;
+  -moz-box-shadow: 1px 2px 1px #999;
+  -webkit-box-shadow: 1px 2px 1px #999;
 }
 
+menu#dropdown a {
+  color: #222;
+}
 
-menu.dropdown dd {
-  background: 0 3px no-repeat;
+menu#dropdown dd {
+  background-position: 0 3px;
+  background-repeat: no-repeat;
   margin: 3px 0 3px 5px;
   padding: 5px 0 5px 20px;
 }
 
-menu.dropdown dt {
-  background: 0 3px no-repeat;
+menu#dropdown dt {
+  background-position: 0 3px;
+  background-repeat: no-repeat;
   font-weight: bold;
   padding: 5px 0 8px 18px;
   border-bottom: dotted 1px #333;
 }
 
-menu.dropdown .separator {
+menu#dropdown .separator {
   margin: 0px;
   padding: 0px;
 }

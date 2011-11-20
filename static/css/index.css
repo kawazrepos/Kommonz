@@ -35,27 +35,20 @@
   display: inline-block;
 }
 
-#search-category div.category-dropdown-current {
+#search-category .category-dropdown-current {
   color: #222;
-  text-align: left;
+  font-size: large;
   background: #fefefe;
-  width: 119px;
-  height: 100%;
+  border-width: 0px;
+  padding-left: 10px;
+  width: 109px;
+  height: 48px;
   float: left;
-}
-
-#search-category div.category-dropdown-current span {
-  top: 20px;
-  left: 10px;
-  width: 90px;
-  height: 15px;
-  overflow: hidden;
-  position: relative;
   display: block;
 }
 
 #search-category span.category-dropdown-cursor {
-  color: #222;
+  color: #444;
   padding: 18px 0;
   border-left: solid #ccc 1px;
   width: 20px;
