@@ -16,11 +16,10 @@
       <section id="search">
         <form method="get" action="{% reverse 'searches_result' %}">
             <menu id="search-category">
-              <select id="category" style="display: none;" name="category_id">
-                {% for category in object_list %}
-                <option value="{{ category.id }}">{{ category.label }}</option>
-                {% endfor %}
-              </select>
+              <div class="category-dropdown-current">
+                <span contenteditable="true">全て</span>
+              </div>
+              <span class="category-dropdown-cursor">▼</span>
             </menu>
             <input id="search-query" type="text" name="search-query">
             <input id="search-button" class="confirm-button green-button" value="検索" type="submit">
