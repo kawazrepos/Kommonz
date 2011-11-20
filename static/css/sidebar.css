@@ -1,0 +1,91 @@
+#content {
+  height: 100%;
+  overflow: hidden;
+}
+
+#sidebar {
+  padding: 20px;
+  margin-bottom: -32767px;
+  padding-bottom: 32767px;
+  width: 210px;
+  display: block;
+  float: left;
+}
+
+#sidebar h2 {
+  margin-bottom: 15px;
+  margin-left: 0;
+}
+
+#sidebar dt {
+  font-weight: bold;
+  margin-left: 5px;
+  padding-bottom: 3px;
+  border-bottom: solid 1px #ccc;
+}
+
+#sidebar dd {
+  margin-left: 10px;
+  padding: 10px 10px 15px;
+}
+
+#sidebar dd.author .usericon {
+  display: inline-block;
+}
+
+#sidebar dd.author .username {
+  margin: 5px 0 3px;
+  display: block;
+}
+
+#sidebar section.material-action menu {
+  margin-left: 10px;
+}
+
+#sidebar section.material-action menu li {
+  background: 0 3px no-repeat;
+  padding: 5px 0px 8px 22px;
+}
+
+#sidebar section.material-action menu li.edit {
+  background-image: url(image/pencil.png);
+}
+
+#sidebar section.material-action menu li.delete {
+  background-image: url(image/bomb.png);
+}
+
+#sidebar section.material-action menu li.mylist {
+  background-image: url(image/heart--plus.png);
+}
+
+#sidebar section.material-action menu li.message {
+  background-image: url(image/mail--arrow.png);
+}
+
+#sidebar section.material-action menu li.report {
+  background-image: url(image/exclamation-red.png);
+}
+
+
+#main {
+  background: #f6f6f6;
+  margin-bottom: -32767px;
+  padding: 20px;
+  padding-bottom: 32767px;
+  border: solid 1px #ccc;
+  float: right;
+  width: 788px;
+  display: block;
+}
+
+.download-button {
+  color: #fefefe;
+  text-decoration: none;
+  margin: 20px auto;
+  padding: 0;
+  padding-top: 20px;
+  width: 200px;
+  height: 40px;
+  display: block;
+}

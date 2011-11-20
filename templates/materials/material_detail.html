@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "twocolumn.html" %}
 {% load codemirror %}
 {% block head %}
   {{ block.super }}
@@ -7,33 +7,67 @@
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
 
-{% block content%}
+{% block sidebar %}
+<a href="" class="confirm-button blue-button download-button">ダウンロード</a>
+<section class="material-info">
+  <h2>{{ object.label }}</h2>
+  <dl>
+    <dt>投稿者</dt>
+    <dd class="author">
+      <img class="usericon middle" src="/{{ object.author.profile.icon.middle }}">
+      <span class="username"><a href="">{{ object.author.username }}</a>さん</span>
+    </dd>
+    <dt>ダウンロード回数</dt>
+    <dd>{{ object.download }}</dd>
+    <dt>カテゴリ</dt>
+    <dd>{{ object.category }}</dd>
+    <dt>ライセンス</dt>
+    <dd>{{ object.license }}</dd>
+    <dt>レーティング</dt>
+    <dd>
+    <ul>
+    {% if object.keros %}
+      {% for kero in object.keros.all %}
+        <li class="kero-icon">{{ kero }}</li>
+      {% endfor %}
+    {% else %}
+        <li class="kero-icon"></li>
+    {% endif %}
+    </ul>
+    </dd>
+    <dt>サイズ</dt>
+    <dd>{{ object.size }}</dd>
+    <dt>ファイル形式</dt>
+    <dd>{{ object.mimetype }}</dd>
+    <dt>投稿日</dt>
+    <dd> {{ object.created_at }}</dd>
+    <dt>最終変更日</dt>
+    <dd>{{ object.updated_at }}</dd>
+  </dl>
+ </section>
+
+<section class="material-action">
+  <menu>
+    <li class="edit">編集</li>
+    <li class="delete">削除</li>
+    <li class="mylist">マイリストに追加</li>
+    <li class="message"><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></li>
+    <li class="report"><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">通報する</a></li>
+  </menu>
+</section>
+{% endblock %}
+
+{% block main %}
 <section id="detail_main">
+  <article>
     <h1>{{ object.label }}</h1>
-    <h2>{{ object.author.username }}</h2>
-    <p>カテゴリ：{{ object.category }}</p>
-    <p>閲覧回数：{{ object.pv }}　ダウンロード数：{{ object.download }}</p>
-    <p>作成日時：{{ object.created_at }}</p>
-    <p>更新日時：{{ object.updated_at }}</p>
-    <p>{{ object.description }}</p>
-    <div class="display">
-        <img src="{{ MEDIA_URL }}{{ object.thumbnail }}">
-        </div>
-    <p>ライセンス：{{ object.license }}</p>
-    <p>クリエイティブ・コモンズ：{{ object.creativecommons }}</p>
-    <p>レーティング：
-        {% if object.keros %}
-            {% for kero in object.keros.all %}
-                {{ kero }}
-            {% endfor %}
-        {% endif %}
-    </p>
-    <p>MIMETYPE：{{ object.mimetype }}</p>
+    <img src="/{{ object.thumbnail }}">
     {% if object.body %}
       {% render_codemirror object %}
     {% endif %}
-    <p><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></p>
-    <p><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">この素材を通報する</a></p>
-
-</section>
+    <details>
+      {{ object.description }}
+    </details>
+  </article>
+  </section>
 {% endblock %}
