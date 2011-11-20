@@ -122,6 +122,10 @@ class Material(models.Model):
         except:
             type = None
         return type
+
+    @property
+    def size(self):
+        return self.file.size
     
     @property
     def model(self):

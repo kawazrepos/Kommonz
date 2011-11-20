@@ -5,4 +5,4 @@ from django.template.base import add_to_builtins
 add_to_builtins('apps.notifications.templatetags.notifications')
 add_to_builtins('reversetag.templatetags.reversetag')
 add_to_builtins('object_permission.templatetags.object_permission_tags')
-
+add_to_builtins('templatetags.templatetags.sizify')
