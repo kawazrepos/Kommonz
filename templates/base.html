@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/html5reset.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/lib.css" type="text/css">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/common.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/header.css" type="text/css">
   <!--[if lte IE 8]>
     <script src="{{ MEDIA_URL }}javascript/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -17,63 +19,67 @@
   {% endblock %}
 </head>
 <body>
-  <header id="page_header" class="clearfix ui-widget-header">
-    <section id="page_header_menu">
-      {% if user.is_authenticated %}
-      <section id="welcome">
-        ようこそ{{ user.username }}さん
-      </section>
-      <ul>
-        <li id="notification_dropdown_list">
-          <a href="{% reverse 'notifications_notification_list' %}">通知：{% notification_count %}件</a>
-          <a id="notification_dropdown_mark">▼</a>
-          <section id="notification_timeline">
-            <h1 id="notification_timeline_title">通知リスト</h1>
-            <ul id="notification_timeline_inner">{% notification_list %}</ul>
-          </section>
-        </li>
-        <li><a href="{% reverse 'materials_material_file_create' %}">アップロード</a></li>
-        <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
-        <li><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
-        <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
-        <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
-        {% if user.is_staff %}
-        <li><a href="{% reverse 'control_main' %}">神ページ</a></li>
+  <div id="content-wrapper">
+    <header id="header">
+      <section id="header-menu">
+        {% if user.is_authenticated %}
+        <div id="notifications" class="dropdown" style="display: none;">
+            <a href="{% reverse 'notifications_notification_list' %}">通知：{% notification_count %}件</a>
+            <a id="notification_dropdown_mark">▼</a>
+            <section id="notification_timeline">
+              <h1 id="notification_timeline_title">通知リスト</h1>
+              <ul id="notification_timeline_inner">{% notification_list %}</ul>
+            </section>
+        </div>
+        <menu id="mymenus" class="dropdown">
+            <dt class="dashboard">ダッシュボード</dt>
+            <dd class="material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></dd>
+            <dd class="mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></dd>
+            <dd class="message"><a href="{% reverse 'messages_message_list' %}">メッセージ</a></dd>
+            <dd class="myprofile"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></dd>
+            <dt class="config">設定</dt>
+            <dd class="account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></dd>
+            <dd class="profile-config"><a href="{% reverse 'auth_user_update' %}">プロフィール設定</a></dd>
+            <dd class="notify-config"><a href="{% reverse 'auth_user_update' %}">通知設定</a></dd>
+            <dd class="service-config"><a href="{% reverse 'auth_user_update' %}">外部サービス設定</a></dd>
+            {% if user.is_staff %}
+            <dt class="separator"></dt>
+            <dd class="god"><a href="{% reverse 'control_main' %}">神ページ</a></dd>
+            {% endif %}
+            <dt class="separator"></dt>
+            <dd class="logout"><a href="{% reverse 'registration_logout' %}">ログアウト</a></dd>
+        </menu>
+        <ul>
+          <li><img src="{{ user.profile.icon.small }}" class="usericon small"></li>
+          <li id="notification_dropdown_list"></li>
+          <li><a href="{% reverse 'materials_material_file_create' %}" class="confirm-button blue-button header-button">アップロード</a></li>
+        </ul>
+        {% else %}
+        <menu>
+          <li><a href="{% reverse 'registration_index' %}" class="confirm-button blue-button header-button">ログイン</a></li>
+        </menu>
         {% endif %}
-      </ul>
-      {% else %}
-      <ul>
-        <li><a href="{% reverse 'registration_index' %}">ログイン</a></li>
-      </ul>
-      {% endif %}
-    </section><!-- end of header_menu-->
-    <nav id="breadcrumbs">
-      <ul>
-        {% block breadcrumbs %}
-        {% endblock %}
-      </ul>
-    </nav>
-  </header>
-  {% block content_all %}
-  <section id="content" class="ui-corner-all">
-    <header id="content_header" class="clearfix">
-      <section id="logo"><a href="{% reverse 'index' %}"><img src="{{ MEDIA_URL }}image/style/kawazhead.jpg"></a></section>
-      <ul>
-        <li><a href="{% reverse 'index' %}">素材検索(index)</a></li>
-        <li><a href="{% reverse 'materials_material_list' %}">新着素材一覧</a></li>
-        <li>Kommonzについて</li>
-        <li><a href="{% reverse 'categories_category_list' %}">カテゴリ</a></li>
-      </ul>
+      </section><!-- end of header_menu-->
+      <nav id="breadcrumbs">
+        <ul>
+          {% block breadcrumbs %}
+          {% endblock %}
+        </ul>
+      </nav>
     </header>
-    <section id="content_main">
-      {% block content %}
-      {% endblock %}
-    </section><!-- end of content_main-->
-  </section><!-- end of content-->
-  {% endblock %}
-  <footer id="page_footer">
-      {% block page_footer %}
-      {% endblock %}
+    <section id="content" class="clearfix">
+    {% block content %}
+    {% endblock %}
+    </section>
+  </div>
+  <footer id="footer">
+    <section id="footer-content">
+    {% block footer %}
+    {% endblock %}
+    </section>
+    <section id="footer-copyright">
+      <address>2009-2012 www.kawaz.org</address>
+    </section>
   </footer>
 </body>
 </html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}
+  {{ block.super }}
+  <link media="all" rel="stylesheet" href="/css/sidebar.css" type="text/css" />
+{% endblock %}
+
+
+{% block content %}
+  <aside id="sidebar">
+  {% block sidebar %}
+  {% endblock %}
+  </aside>
+  <section id="main">
+  {% block main %}
+  {% endblock %}
+  </section>
+{% endblock %}

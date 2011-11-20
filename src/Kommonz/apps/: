@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-#index_title{
+#index-title{
     text-align: center;
 }
 #index_search{
