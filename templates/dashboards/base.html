@@ -17,7 +17,7 @@
   <dt class="activity">アクティビティ</dt>
   <dt class="material active"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></dt>
   {% for material in user.materials.all %}
-  <dd><a href="{{ material.get_absolute_url }}">{{ material.label }}</a></dd>
+  <dd>{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}">{{ material.label }}</a></dd>
   {% empty %}
   <dd class="caption">素材を投稿していません</dd>
   {% endfor %}

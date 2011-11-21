@@ -11,7 +11,7 @@
 {% block sidebar %}
 <a href="{% reverse 'materials_material_download' object.pk %}" class="confirm-button blue-button download-button">ダウンロード</a>
 <section class="material-info">
-  <h2>{{ object.label }}</h2>
+  <h2>{% render_mtimg for object %}{{ object.label }}</h2>
   <dl>
     <dt>投稿者</dt>
     <dd class="author">
@@ -61,7 +61,7 @@
 {% block main %}
 <section id="detail_main">
   <article>
-    <h1>{{ object.label }}</h1>
+    <h1>{% render_mtimg for object %}{{ object.label }}</h1>
     <img src="/{{ object.thumbnail }}">
     {% if object.body %}
       {% render_codemirror object %}

@@ -12,11 +12,12 @@ body {
 }
 
 a {
-  color: #3388ff;
+  color: #4183c4;
   text-decoration: none;
 }
 
 a:hover {
+  color: #3388ff;
   text-decoration: underline;
 }
 
@@ -94,6 +95,10 @@ code {
   background: -ms-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
   background: linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
+}
+
+.blue-button:hover {
+  color: #dedede;
 }
 
 .blue-button:active {

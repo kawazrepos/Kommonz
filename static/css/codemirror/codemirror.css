@@ -1,6 +1,10 @@
 .CodeMirror {
+  background: #fefefe;
+  border: solid 1px #ccc;
   line-height: 1em;
   font-family: monospace;
+  width: 100%;
+  overflow: hidden;
 }
 
 .CodeMirror-scroll {
