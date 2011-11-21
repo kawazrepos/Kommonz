@@ -5,8 +5,8 @@
 
 {% block main %}
 <h1>ユーザー：{{ request.user.username }}のプロフィール設定</h1>
-<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="設定完了">
+<form class="uniForm" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+    {{ form|as_uni_form }}
+    <input type="submit" value="保存">
 </form> 
 {% endblock %}
