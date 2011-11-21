@@ -1,3 +1,7 @@
 .fileupload-content {
   border-style: none;
 }
+
+.fileupload-content, .ui-widget-content, .ui-corner-bottom {
+  border: none 0px #fff !important;
+}

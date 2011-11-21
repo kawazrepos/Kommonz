@@ -169,6 +169,7 @@ INSTALLED_APPS = (
     'compress',                     # JavaScript/CSS compress library
     'reversetag',                   # Useful templatetag library
     'pagination',                   # Useful paginatin library
+    'uni_form',
     # Github libraries
     'qwert',                        # Useful snippet collection library
     'mfw',                          # Django mobile framework library
