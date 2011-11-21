@@ -94,16 +94,16 @@ class MaterialFileCreateView(CreateView):
         return MaterialFileForm
 
     @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MaterialFileCreateView, self).dispatch(*args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MaterialFileCreateView, self).dispatch(request *args, **kwargs)
 
 class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
     
     @method_decorator(permission_required('apps.materials.change_material', Material))
-    def dispatch(self, *args, **kwargs):
-        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MaterialUpdateView, self).dispatch(request, *args, **kwargs)
 
 class MaterialInlineUpdateView(MaterialUpdateView):
     template_name = 'materials/material_inline_form.html'
@@ -113,7 +113,7 @@ class MaterialInlineUpdateView(MaterialUpdateView):
     
     @method_decorator(csrf_exempt)    
     @method_decorator(permission_required('apps.materials.change_material', Material))
-    def dispatch(self, *args, **kwargs):
-        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MaterialUpdateView, self).dispatch(request, *args, **kwargs)
 
 

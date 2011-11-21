@@ -192,7 +192,6 @@ class Kero(models.Model):
     def __unicode__(self):
         return self.label
 
-
 @receiver(pre_delete, sender=Material)
 def delete_material_file(sender, instance, **kwargs):
     import shutil

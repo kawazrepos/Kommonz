@@ -9,7 +9,7 @@
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
 
 {% block sidebar %}
-<a href="" class="confirm-button blue-button download-button">ダウンロード</a>
+<a href="{% reverse 'materials_material_download' object.pk %}" class="confirm-button blue-button download-button">ダウンロード</a>
 <section class="material-info">
   <h2>{{ object.label }}</h2>
   <dl>

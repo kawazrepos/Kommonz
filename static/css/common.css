@@ -81,6 +81,10 @@ code {
   cursor: pointer;
 }
 
+.confirm-button:hover {
+  text-decoration: none;
+}
+
 .blue-button {
   background: rgb(73,155,234);
   background: -moz-linear-gradient(top,  rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%);
