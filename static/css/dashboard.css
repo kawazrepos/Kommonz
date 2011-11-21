@@ -19,7 +19,7 @@ menu#dashboard-action {
   margin: 5px 0px 5px 5px;
 }
 
-menu#dashboard-action a {
+menu#dashboard-action dt a, menu#dashboard-action dd.menu-list a {
   color: #222;
 }
 
@@ -43,6 +43,10 @@ menu#dashboard-action dd {
 menu#dashboard-action dd.caption {
   color: #999;
   font-size: small;
+  padding-left: 20px;
+}
+
+menu#dashboard-action dd.material-list {
   padding-left: 20px;
 }
 
