@@ -5,6 +5,7 @@
   {% include "library.html" %}
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/uploader/style.css" type="text/css">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/uploader/uploader.css" type="text/css">
   <link media="all" rel="stylesheet" href="{{ MEDIA_URL }}css/uploader/jquery.fileupload-ui.css" type="text/css" />
   <script src="{{ MEDIA_URL }}javascript/jquery.tmpl.min.js" type="text/javascript"></script>
   <script src="{{ MEDIA_URL }}javascript/uploader/jquery.iframe-transport.js" type="text/javascript"></script>
@@ -19,7 +20,7 @@
     <div class="fileupload-buttonbar">
       {% csrf_token %}
       <label class="fileinput-button">
-        <span>Add files...</span>
+        <span>ファイルを追加</span>
         {{ form.file }}
       </label>
     </div>

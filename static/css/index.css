@@ -51,10 +51,11 @@
   color: #444;
   padding: 18px 0;
   border-left: solid #ccc 1px;
-  width: 20px;
+  width: 19px;
   float: right;
   display: block;
   position: relative;
+  cursor: pointer;
 }
 
 #search-query {
