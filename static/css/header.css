@@ -43,7 +43,7 @@
   float: right;
   position: relative;
 }
-#header-menu li {
+#header-menu > li {
   border-left: solid 1px #333;
   float: left;
   display: block;
@@ -76,28 +76,24 @@ menu#dropdown {
   box-shadow: 1px 2px 1px #999;
   -moz-box-shadow: 1px 2px 1px #999;
   -webkit-box-shadow: 1px 2px 1px #999;
+  z-index: 9999;
 }
 
 menu#dropdown a {
   color: #222;
 }
 
-menu#dropdown dd {
+menu#dropdown li.dropdown-item {
   background-position: 0 3px;
   background-repeat: no-repeat;
   margin: 3px 0 3px 5px;
   padding: 5px 0 5px 20px;
 }
 
-menu#dropdown dt {
+menu#dropdown li.dropdown-header {
   background-position: 0 3px;
   background-repeat: no-repeat;
   font-weight: bold;
   padding: 5px 0 8px 18px;
   border-bottom: dotted 1px #333;
-}
-
-menu#dropdown .separator {
-  margin: 0px;
-  padding: 0px;
 }

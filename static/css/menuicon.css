@@ -1,52 +1,52 @@
 /* ToDo CSS Sprite */
-menu dt.dashboard {
+menu .dashboard {
   background-image: url(image/dashboard.png);
 }
 
-menu dt.activity {
+menu .activity {
   background-image: url(image/clock-frame.png);
 }
 
-menu dt.material, menu dd.material {
+menu .material {
   background-image: url(image/box.png);
 }
 
-menu dt.mylist, menu dd.mylist {
+menu .mylist {
   background-image: url(image/heart.png);
 }
 
-menu dt.message, menu dd.message {
+menu .message {
   background-image: url(image/mail.png);
 }
 
-menu dd.myprofile {
+menu .myprofile {
   background-image: url(image/card-address.png);
 }
 
-menu dt.config {
+menu .config {
   background-image: url(image/gear.png);
 }
 
-menu dd.account-config {
+menu .account-config {
   background-image: url(image/user.png);
 }
 
-menu dd.profile-config {
+menu .profile-config {
   background-image: url(image/card--pencil.png);
 }
 
-menu dd.notify-config {
+menu .notify-config {
   background-image: url(image/bell.png);
 }
 
-menu dd.service-config {
+menu .service-config {
   background-image: url(image/chain.png);
 }
 
-menu dd.god {
+menu .god {
   background-image: url(image/wrench.png);
 }
 
-menu dd.logout {
+menu .logout {
   background-image: url(image/door.png);
 }

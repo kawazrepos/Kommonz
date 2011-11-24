@@ -16,22 +16,20 @@
         <li class="header-dropdown-section">
           <img src="/{{ user.profile.icon.small }}" class="usericon small">
           <menu id="dropdown" style="display: none;">
-            <dt class="dashboard">ダッシュボード</dt>
-            <dd class="material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></dd>
-            <dd class="mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></dd>
-            <dd class="message"><a href="{% reverse 'messages_message_list' %}">メッセージ</a></dd>
-            <dd class="myprofile"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></dd>
-            <dt class="config">設定</dt>
-            <dd class="account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></dd>
-            <dd class="profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></dd>
-            <dd class="notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></dd>
-            <dd class="service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></dd>
+            <li class="dropdown-header dashboard">ダッシュボード</li>
+            <li class="dropdown-item myprofile"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
+            <li class="dropdown-item material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></li>
+            <li class="dropdown-item mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></li>
+            <li class="dropdown-item message"><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
+            <li class="dropdown-header config">設定</li>
+            <li class="dropdown-item account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></li>
+            <li class="dropdown-item profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></li>
+            <li class="dropdown-item notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></li>
+            <li class="dropdown-item service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></li>
             {% if user.is_staff %}
-            <dt class="separator"></dt>
-            <dd class="god"><a href="{% reverse 'control_main' %}">神ページ</a></dd>
+            <li class="dropdown-item god"><a href="{% reverse 'control_main' %}">神ページ</a></li>
             {% endif %}
-            <dt class="separator"></dt>
-            <dd class="logout"><a href="{% reverse 'registration_logout' %}">ログアウト</a></dd>
+            <li class="dropdown-item logout"><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
           </menu>
         </li>
         <li class="header-button-section"><a href="{% reverse 'materials_material_file_create' %}" class="upload-button confirm-button blue-button header-button">アップロード</a></li>
