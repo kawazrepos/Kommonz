@@ -98,7 +98,6 @@ class Material(models.Model):
         return '%s(%s)' % (self.label, self.file.name)
     
     def clean(self):
-        print "clean"
         if not self.category:
             self.category = Category.objects.get_filetype_category(self.file.name)
         return super(Material, self).clean()
@@ -144,6 +143,10 @@ class Material(models.Model):
     @property
     def extension(self):
       return os.path.splitext(self.file.name)[1][1:]
+
+    @property
+    def filename(self):
+        return self.file.name
     
     def save(self, *args, **kwargs):
         from utils.filetypes import get_file_model

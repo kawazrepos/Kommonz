@@ -1,9 +1,9 @@
 {% extends "twocolumn.html" %}
-{% load codemirror %}
+{% load preview %}
 {% block head %}
   {{ block.super }}
   <link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
-  {% render_codemirror_head %}
+  {% render_material_preview_head for object %}
 {% endblock %}
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
@@ -63,12 +63,10 @@
   <article>
     <h1>{% render_mtimg for object %}{{ object.label }}</h1>
     <img src="/{{ object.thumbnail }}">
-    {% if object.body %}
-      {% render_codemirror object %}
-    {% endif %}
-    <details>
+    <section>
       {{ object.description }}
-    </details>
+    </section>
+  {% render_material_preview for object %}
   </article>
   </section>
 {% endblock %}

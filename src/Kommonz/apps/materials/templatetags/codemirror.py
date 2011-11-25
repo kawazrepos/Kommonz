@@ -33,11 +33,10 @@ class RenderCodeMirrorNode(template.Node):
             syntax = getattr(code, 'syntax', 'undefined')
         syntax = syntax.lower()
         context.push()
-        import random
         html = render_to_string("codemirror/code.html", {
             'body' : body,
             'syntax' : syntax,
-            'cls' : 'codemirror%d' % random.randint(0, 100000000)
+            'cls' : 'codemirror'
         })
         context.pop()
         return html
@@ -59,14 +58,17 @@ def render_codemirror(parser, token):
     """
     Render code on Codemirror
         Syntax:
-            {% render_codemirror code %}
-            {% render_codemirror code as syntax %}
+            {% render_codemirror for <code> %}
+            {% render_codemirror for <code> as <syntax> %}
     """
     bits = token.split_contents()
-    if len(bits) == 2:
-        return RenderCodeMirrorNode(bits[1])
-    elif len(bits) == 4:
-        if not bits[2] == "as":
-            raise TemplateSyntaxError("""Third argument must be 'as'.""")
+    if len(bits) > 2:
+        if not bits[1] == "for":
+            raise TemplateSyntaxError("""Second argument must be 'for'.""")
+    if len(bits) == 3:
+        return RenderCodeMirrorNode(bits[2])
+    elif len(bits) == 5:
+        if not bits[3] == "as":
+            raise TemplateSyntaxError("""Fourth argument must be 'as'.""")
         return RenderCodeMirrorNode(bits[1], bits[3])
-    raise TemplateSyntaxError("""%s tag must be '{% render_codemirror code %}' or '{% render_codemirror code as syntax %}'""")
+    raise TemplateSyntaxError("""%s tag must be '{% render_codemirror for code %}' or '{% render_codemirror for code as syntax %}'""")
