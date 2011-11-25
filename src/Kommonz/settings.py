@@ -174,6 +174,10 @@ INSTALLED_APPS = (
     'qwert',                        # Useful snippet collection library
     'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
+    # Kommonz
+    'Kommonz.autocmd',
+    'Kommonz.templatetags',
+    'Kommonz.utils',
     # Kommonz apps
     'Kommonz.apps.auth',
     'Kommonz.apps.categories',

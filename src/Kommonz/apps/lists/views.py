@@ -1,7 +1,7 @@
 # Create your views here.
 from django.views.generic import CreateView, DetailView, ListView, TemplateView
 from django.shortcuts import render_to_response
-from lists.models import List, ListInfo
+from models import List, ListInfo
 from apps.materials.models import Material
 
 class ListDetailView(DetailView):
