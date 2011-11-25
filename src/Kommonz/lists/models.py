@@ -16,7 +16,7 @@ ORDER_STATES =(
     ('downloads_times',          _('downloads times')),
     ('material_upload_date',     _('material upload date')),
     ('author',                   _('auther')),
-    ('-created_date',            _('-add date')),
+    ('-listinfo__add_date',      _('listinfo__add_date')),
     ('-download_times',          _('-downloadb times')),
     ('-material_upload_date',    _('-material upload date')),
     ('-author',                  _('-author')),
