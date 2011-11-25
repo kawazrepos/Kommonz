@@ -1,0 +1,66 @@
+section.user-info {
+  display: block;
+  position: relative;
+}
+
+section.user-info img {
+  margin: 0 auto;
+  display: block;
+}
+
+section.user-info span {
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px 0;
+  display: block;
+}
+
+menu#dashboard-action {
+  margin: 5px 0px 5px 5px;
+  border-bottom: solid 1px #ccc;
+}
+
+menu#dashboard-action hr {
+  margin: 0;
+}
+
+menu#dashboard-action h1 {
+  font-size: 13px;
+  background-position: 0px 5px;
+  background-repeat: no-repeat;
+  margin: 5px 0 5px 0;
+  padding: 5px 0px 5px 20px;
+}
+
+menu#dashboard-action h1 a, menu#dashboard-action li.menu-list a {
+  color: #222;
+}
+
+menu#dashboard-action li {
+  background-position: 5px 8px;
+  background-repeat: no-repeat;
+  border-top: solid 1px #ccc;
+  border-collapse: collapse;
+}
+
+menu#dashboard-action menu.submenu li {
+  background-position: 20px 8px;
+  padding: 10px 0 10px 20px;
+}
+
+menu#dashboard-action li.caption {
+  color: #999;
+  font-size: small;
+}
+
+menu#dashboard-action li.material-list {
+}
+
+menu#dashboard-action menu.submenu li.menu-list {
+  padding-left: 40px;
+}
+
+menu#dashboard-action .active {
+  background-color: #f6f6f6;
+  font-weight: bold;
+}

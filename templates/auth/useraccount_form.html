@@ -1,0 +1,32 @@
+{% extends "dashboards/base.html" %}
+
+{% block title %}{{ request.user.username }}のアカウント設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ request.user.username }}のアカウント設定{% endblock %}
+
+{% block main %}
+<h1>{{ request.user.username }}のアカウント設定</h1>
+<h2>現在関連付けているアカウント</h2>
+<ul>
+{% for account in associated_accounts %}
+  <li>{{ account.provider }}　<a href="{% reverse 'socialauth_disconnect' account.provider %}">解除</a></li>
+{% endfor %}
+</ul>
+<h2>関連付け可能なアカウント</h2>
+<ul>
+  <li>
+    <a href="{% reverse 'socialauth_associate_begin' 'twitter' %}">Twitterと関連付ける</a>
+  </li>
+  <li>
+    <a href="{% reverse 'socialauth_associate_begin' 'google-oauth2' %}">Googleと関連付ける</a>
+  </li>
+  <li>
+   <a href="{% reverse 'socialauth_associate_begin' 'hatena' %}">はてなと関連付ける</a>
+  </li>
+  <li>
+  <a href="{% reverse 'socialauth_associate_begin' 'dropbox' %}">Dropboxと関連付ける</a>
+  </li>
+  <li>
+  <a href="{% reverse 'socialauth_associate_begin' 'github' %}">githubと関連付ける</a>
+  </li>
+</ul>
+{% endblock %}

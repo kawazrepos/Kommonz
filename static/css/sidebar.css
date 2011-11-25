@@ -1,0 +1,37 @@
+#content {
+  height: 100%;
+}
+
+#sidebar {
+  padding: 20px;
+  width: 210px;
+  display: block;
+  float: left;
+}
+
+#sidebar h2 {
+  margin-bottom: 15px;
+  margin-left: 0;
+}
+
+#sidebar dt {
+  font-weight: bold;
+  margin-left: 5px;
+  padding-bottom: 3px;
+  border-bottom: solid 1px #ccc;
+}
+
+#sidebar dd {
+  margin-left: 10px;
+  padding: 10px 10px 15px;
+}
+
+#main {
+  background: #f6f6f6;
+  padding: 20px;
+  border: solid 1px #ccc;
+  float: right;
+  width: 788px;
+  display: block;
+}
+

@@ -1,0 +1,12 @@
+{% extends "dashboards/base.html" %}
+
+{% block title %}{{ request.user.username }}の設定{% endblock %}
+{% block breadcrumbs %}Kommonz > {{ request.user.username }}のオプション設定{% endblock %}
+
+{% block main %}
+<h1>ユーザー：{{ request.user.username }}のオプション設定</h1>
+<form class="uniForm" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+    {{ form|as_uni_form }}
+    <input type="submit" value="保存">
+</form> 
+{% endblock %}

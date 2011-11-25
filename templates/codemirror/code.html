@@ -1,0 +1,13 @@
+<script type="text/javascript" src="/javascript/codemirror/mode/{{ syntax }}/{{ syntax }}.js"></script>
+<script type="text/javascript">
+$(function(){
+   var myCodeMirror = CodeMirror.fromTextArea($("#code_mirror").get(0), {
+      mode : { name : "{{ syntax }}" },
+      readOnly : true,
+      theme : 'eclipse'
+    });
+});
+</script>
+<textarea style="overflow: visible;" id="code_mirror">
+  {{ body }}
+</textarea>

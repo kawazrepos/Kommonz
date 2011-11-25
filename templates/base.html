@@ -4,71 +4,61 @@
 <head>
   <meta charset="UTF-8">
   <title>Kommonz - {% block title %}{% endblock %}</title>
-  <script src="{{ MEDIA_URL }}javascript/jquery-1.6.4.min.js" type="text/javascript"></script>
-  <script src="{{ MEDIA_URL }}javascript/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/html5reset.css" type="text/css">
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/lib.css" type="text/css">
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/jqueryui/1.8.14/themes/base/jquery.ui.all.css" id="theme">
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css">
-  <!--[if lte IE 8]>
-    <script src="{{ MEDIA_URL }}javascript/html5.js" type="text/javascript"></script>
-  <![endif]-->
+  {% include "library.html" %}
   {% block head %}
   {% endblock %}
 </head>
 <body>
-  <header id="page_header" class="clearfix ui-widget-header">
-    <section id="page_header_menu">
+  <div id="content-wrapper">
+    <header id="header">
       {% if user.is_authenticated %}
-      <section id="welcome">
-        ようこそ{{ user.username }}さん
-      </section>
-      <ul>
-        <li id="notification_dropdown_list">
-          <a href="{% reverse 'notifications_notification_list' %}">通知：{% notification_count %}件</a>
-          <a id="notification_dropdown_mark">▼</a>
-          <section id="notification_timeline">
-            <h1 id="notification_timeline_title">通知リスト</h1>
-            <ul id="notification_timeline_inner">{% notification_list %}</ul>
-          </section>
+      <menu id="header-menu">
+        <li class="header-dropdown-section">
+          <img src="/{{ user.profile.icon.small }}" class="usericon small">
+          <menu id="dropdown" style="display: none;">
+            <li class="dropdown-header dashboard">ダッシュボード</li>
+            <li class="dropdown-item myprofile"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
+            <li class="dropdown-item material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></li>
+            <li class="dropdown-item mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></li>
+            <li class="dropdown-item message"><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
+            <li class="dropdown-header config">設定</li>
+            <li class="dropdown-item account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></li>
+            <li class="dropdown-item profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></li>
+            <li class="dropdown-item notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></li>
+            <li class="dropdown-item service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></li>
+            {% if user.is_staff %}
+            <li class="dropdown-item god"><a href="{% reverse 'control_main' %}">神ページ</a></li>
+            {% endif %}
+            <li class="dropdown-item logout"><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
+          </menu>
         </li>
-        <li><a href="{% reverse 'materials_material_file_create' %}">アップロード</a></li>
-        <li><a href="{% reverse 'messages_message_list' %}">メッセージ</a></li>
-        <li><a href="{% reverse 'auth_user_detail' slug=request.user.username %}">アカウント管理</a></li>
-        <li><a href="{% reverse 'auth_user_update' %}">設定</a></li>
-        <li><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
-        {% if user.is_staff %}
-        <li><a href="/admin">神ページ</a></li>
-        {% endif %}
-      </ul>
+        <li class="header-button-section"><a href="{% reverse 'materials_material_file_create' %}" class="upload-button confirm-button blue-button header-button">アップロード</a></li>
+      </menu>
       {% else %}
-      <ul>
-        <li><a href="{% reverse 'registration_index' %}">ログイン</a></li>
-      </ul>
+      <menu id="header-menu">
+        <li class="header-button-section"><a href="{% reverse 'registration_index' %}" class="confirm-button blue-button header-button">ログイン</a></li>
+      </menu>
       {% endif %}
-    </section><!-- end of header_menu-->
-    <nav id="breadcrumbs">
-      <ul>
-        {% block breadcrumbs %}
-        {% endblock %}
-      </ul>
-    </nav>
-  </header>
-  <section id="content" class="ui-corner-all">
-    <header id="content_header" class="clearfix">
-      <section id="logo"><!--<img src="kommonzlogo.png">--></section>
-      <ul>
-        <li><a href="{% reverse 'index' %}">素材検索(index)</a></li>
-        <li><a href="{% reverse 'materials_material_list' %}">新着素材一覧</a></li>
-        <li>Kommonzについて</li>
-        <li>項目４</li>
-      </ul>
+      <nav id="breadcrumbs">
+        <ul>
+          {% block breadcrumbs %}
+          {% endblock %}
+        </ul>
+      </nav>
     </header>
-    <section id="content_main">
-      {% block content %}
-      {% endblock %}
-    </section><!-- end of content_main-->
-  </section><!-- end of content-->
-  <footer id="page_footer"></footer>
+    <section id="content">
+    {% block content %}
+    {% endblock %}
+    </section>
+  </div>
+  <footer id="footer">
+    <section id="footer-content">
+    {% block footer %}
+    {% endblock %}
+    </section>
+    <section id="footer-copyright">
+      <address>2009-2012 www.kawaz.org</address>
+    </section>
+  </footer>
 </body>
 </html>

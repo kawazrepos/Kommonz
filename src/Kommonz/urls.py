@@ -1,18 +1,23 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+from apps.index.views import IndexView
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/doc/',           include('django.contrib.admindocs.urls'),         name='admin_doc'),
     url(r'^admin/',               include(admin.site.urls),                         name='admin'),
-    url(r'^registration/',        include('Kommonz.registration.urls')),
-    url(r'^materials/',           include('Kommonz.materials.urls')),
-    url(r'^messages/',            include('Kommonz.messages.urls')),
-    url(r'^lists/',               include('Kommonz.lists.urls')),
-    url(r'^notifications/',       include('Kommonz.notifications.urls')),
-    url(r'^users/',               include('Kommonz.auth.urls')),
-    url(r'^$',                    TemplateView.as_view(template_name='index.html'), name='index')
+    url(r'^control/',             include('Kommonz.apps.control.urls')),
+    url(r'^categories/',          include('Kommonz.apps.categories.urls')),
+    url(r'^lists/',               include('Kommonz.apps.lists.urls')),
+    url(r'^registration/',        include('Kommonz.apps.registration.urls')),
+    url(r'^materials/',           include('Kommonz.apps.materials.urls')),
+    url(r'^messages/',            include('Kommonz.apps.messages.urls')),
+    url(r'^notifications/',       include('Kommonz.apps.notifications.urls')),
+    url(r'^reports/',             include('Kommonz.apps.reports.urls')),
+    url(r'^searches/',            include('Kommonz.apps.searches.urls')),
+    url(r'^users/',               include('Kommonz.apps.auth.urls')),
+    url(r'^$',                    IndexView.as_view(),                              name='index')
 )
 
 from django.conf import settings

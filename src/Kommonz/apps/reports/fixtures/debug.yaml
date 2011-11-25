@@ -1,0 +1,15 @@
+- model: reports.reason
+  pk: 1
+  fields:
+    label: 通報理由１
+    description: 説明１
+- model: reports.reason
+  pk: 2
+  fields:
+    label: 通報理由２
+    description: 説明２
+- model: reports.reason
+  pk: 3
+  fields:
+    label: 通報理由３
+    description: 説明３

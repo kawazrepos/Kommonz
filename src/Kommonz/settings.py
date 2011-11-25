@@ -169,18 +169,30 @@ INSTALLED_APPS = (
     'compress',                     # JavaScript/CSS compress library
     'reversetag',                   # Useful templatetag library
     'pagination',                   # Useful paginatin library
+    'uni_form',
     # Github libraries
     'qwert',                        # Useful snippet collection library
     'mfw',                          # Django mobile framework library
     'object_permission',            # Object permission library
-    # Kommonz
-    'Kommonz.auth',
-    'Kommonz.autocmd',
-    'Kommonz.materials',
-    'Kommonz.messages',
-    'Kommonz.lists',
-    'Kommonz.notifications',
-    'Kommonz.reports'
+    # Kommonz apps
+    'Kommonz.apps.auth',
+    'Kommonz.apps.categories',
+    'Kommonz.apps.licenses',
+    'Kommonz.apps.lists',
+    'Kommonz.apps.materials',
+    'Kommonz.apps.messages',
+    'Kommonz.apps.notifications',
+    'Kommonz.apps.reports',
+    'Kommonz.apps.searches',
+    # Kommonz materials
+    'Kommonz.apps.materials.applications',
+    'Kommonz.apps.materials.audios',
+    'Kommonz.apps.materials.cgmodels',
+    'Kommonz.apps.materials.codes',
+    'Kommonz.apps.materials.images',
+    'Kommonz.apps.materials.movies',
+    'Kommonz.apps.materials.packages',
+    'Kommonz.apps.materials.texts'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -198,7 +210,7 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.github.GithubBackend',
 #    'social_auth.backends.contrib.dropbox.DropboxBackend', # not available on django-social-auth stable version yet.
     'social_auth.backends.OpenIDBackend',
-    'registration.backends.hatena.HatenaBackend',
+    'apps.registration.backends.hatena.HatenaBackend',
     'django.contrib.auth.backends.ModelBackend',
     'object_permission.backends.ObjectPermBackend',
 )
@@ -208,7 +220,7 @@ AUTH_PROFILE_MODULE = 'auth.UserProfile'
 #
 # SocialAuth Setting
 #
-SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'hatena', 'dropbox',)
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'github', 'dropbox', 'hatena',)
 
 from django.utils.functional import lazy
 from django.core.urlresolvers import reverse
@@ -219,18 +231,20 @@ LOGIN_REDIRECT_URL  = "/"
 LOGIN_URL           = lazy_reverse('registration_index')
 LOGOUT_URL          = lazy_reverse('registration_logout')
 
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = lazy_reverse('auth_user_welcome')
-SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
-SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = '/account-disconnected-redirect-url/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL        = lazy_reverse('registration_welcome')
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = lazy_reverse('auth_useraccount_update')
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL      = lazy_reverse('auth_useraccount_update')
 SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 
-SOCIAL_AUTH_IMPORT_BACKENDS = ('registration.backends', )
+SOCIAL_AUTH_IMPORT_BACKENDS = ('apps.registration.backends', )
 
 #
 # Testing configuration via nose.
 #
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-v', '-d']
+TEST_TEMPORARY_FILE_DIR = os.path.join(ROOT, "static/test/temporary")
+TEST_FIXTURE_FILE_DIR = os.path.join(ROOT, "static/test/fixtures")
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

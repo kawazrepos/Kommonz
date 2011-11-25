@@ -1,9 +1,9 @@
-{% extends "messages/message_base.html" %}
+{% extends "dashboards/base.html" %}
 
 {% block title %}送信箱{% endblock %}
 {% block breadcrumbs %}Kommonz > メッセージ > 送信箱{% endblock %}
 
-{% block message_content %}
+{% block main %}
 <h1>送信箱</h1>
 {% if outbox_object_list %}
     {% for object in outbox_object_list %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}カテゴリ一覧{% endblock %}
+{% block breadcrumbs %}Kommonz > カテゴリ{% endblock %}
+
+{% block content %}
+<h1>カテゴリ一覧</h1>
+{% if object_list %}
+    {% for object in object_list %}
+         <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
+    {% endfor %}
+{% endif %}
+{% endblock %}

@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "dashboards/base.html" %}
 {% block title %}メッセージ作成{% endblock %}
-{% block content %}
+{% block main %}
 <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="送信">

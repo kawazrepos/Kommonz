@@ -1,0 +1,48 @@
+{% extends "../twocolumn.html" %}
+
+{% block head %}
+  {{ block.super }}
+  <link media="all" rel="stylesheet" href="/css/dashboard.css" type="text/css" />
+{% endblock %}
+
+{% block sidebar %}
+
+<section class="user-info">
+  <img src="/{{ user.profile.icon.large }}" class="usericon large">
+  <span class="username">{{ user.username }}</span>
+</section>
+
+<menu id="dashboard-action">
+  <li><h1 class="dashboard">ダッシュボード</h1></li>
+  <li><h1 class="activity">アクティビティ</h1></li>
+  <li>
+    <h1 class="material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></h1>
+    <menu class="submenu">
+      {% for material in user.materials.all %}
+      <li class="material-list">{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}">{{ material.label }}</a></li>
+      {% empty %}
+      <li class="caption">素材を投稿していません</li>
+      {% endfor %}
+    </menu>
+  </li>
+  <li>
+    <h1 class="mylist"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイリスト</a></h1>
+    <menu class="submenu">
+      {% for list in user.lists.all %}
+      <li><a href="{{ list.get_absolute_url }}">{{ list.label }}</a></li>
+      {% empty %}
+      <li class="caption">リストを作成していません</li>
+      {% endfor %}
+    </menu>
+  </li>
+  <li>
+    <h1 class="config">設定</h1>
+    <menu class="submenu">
+      <li class="menu-list account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></li>
+      <li class="menu-list profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></li>
+      <li class="menu-list notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></li>
+      <li class="menu-list service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></li>
+    </menu>
+  </li<
+</menu>
+{% endblock %}

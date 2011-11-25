@@ -29,4 +29,6 @@ local_site.py
 
 # Kommonz
 /static/storage/
+/static/test/temporary/*
 /static/coffeescript/*.js
+!jquery.tmpl.min.js

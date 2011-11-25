@@ -1,5 +1,68 @@
 {% extends "base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}index{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/index.css" type="text/css">
+  <!-- REQUIRED SCRIPTS AND STYLES -->
+{% endblock %}
 {% block content %}
-<h1>トップページ</h1>
+  <header id="content-header">
+      <section id="logo"><a href="{% reverse 'index' %}"><img src="{{ MEDIA_URL }}image/style/kawazhead.jpg"></a></section>
+  </header>
+    <section id="content-left">
+      {% block left %}
+      {% endblock %}
+    </section>
+    <section id="content-main">
+      <section id="search">
+        <form method="get" action="{% reverse 'searches_result' %}">
+            <menu id="search-category">
+              <input type="text" class="category-dropdown-current" value="全て">
+              <span class="category-dropdown-cursor">▼</span>
+            </menu>
+            <input id="search-query" type="text" name="search-query">
+            <input id="search-button" class="confirm-button green-button" value="検索" type="submit">
+        </form>
+      </section>
+  </section><!-- end of content-->
+{% endblock %}
+
+{% block footer %}
+<div id="footer-menus">
+    <section id="footer-left" class="footer-box">
+      <nav class="footer-menu">
+        <h2>最新の素材</h2>
+        <ul>
+          {% for material in latest_materials %}
+          <li>{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}" alt="{{ material.label }}">{{ material.label }}</a></li>
+          {% empty %}
+          <li>まだ素材がうｐされていないっぽいです……</li>
+          {% endfor %}
+          <li><a href="{% reverse 'materials_material_list' %}">もっと見る</a></li>
+        </ul>
+      </nav>
+    </section>
+    <section id="footer-center" class="footer-box">
+      <nav class="footer-menu">
+        <h2>Kommonzって何？</h2>
+        <ul>
+          <li>利用規約</li>
+          <li>プライバシーポリシー</li>
+          <li>ヘルプ</li>
+        </ul>
+      </nav>
+    </section>
+    <section id="footer-right" class="footer-box">
+      <nav class="footer-menu">
+      <h2>もっとKommonz</h2>
+        <ul>
+          <li>運営ブログ</li>
+          <li>Twitter bot</li>
+          <li>障害情報</li>
+          <li>かわずたん日記</li>
+          <li>Documentation</li>
+          <li>札幌ゲーム制作者コミュニティ Kawaz</li>
+        </ul>
+      </nav>
+    </section>
+</div>
 {% endblock %}

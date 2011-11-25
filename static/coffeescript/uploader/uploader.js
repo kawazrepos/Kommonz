@@ -7,24 +7,29 @@ $(function() {
     autoUpload: true,
     maxNumberOfFiles: 1,
     send: function(event, response) {
-      var $infoForm, form_url;
+      var $infoForm, filename, form_url, validate_url;
       form_url = $infoForms.attr('form-url');
+      validate_url = $infoForms.attr('validate-url');
+      filename = response.files[0].name;
       $infoForm = $('<div>').addClass('material-info-form');
-      $infoForm.load(form_url, function(data) {
-        var $form;
+      $infoForm.load("" + form_url + "?filename=" + filename, function(data) {
+        var $form, $syntax;
         $form = $(this).find('form');
         $form.attr('action', form_url);
         $form.find('#id__file').val(file_id);
         if (!file_id) {
           $form.find("input[type='submit']").hide();
         }
-        $form.find('#id_label').val(response.files[0].fileName);
+        $form.find('#id_label').val(filename);
+        $syntax = $form.find('#id_syntax');
+        if ($syntax && filename.match(/\.(.*?)$/)) {
+          $syntax.val(RegExp.$1);
+        }
         $form.submit(function() {
-          $.post(form_url, $form.serialize(), function(data) {
+          $.post(validate_url, $form.serialize(), function(data) {
             var $e, field, value, values, _ref, _results;
-            console.log(data);
             if (data['status'] === 'success') {
-              return location.href = location.href.split('/').slice(0, 3).join('/') + data['url'];
+              return $form.get(0).submit();
             } else if (data['status'] === 'error') {
               _ref = data['errors'];
               _results = [];

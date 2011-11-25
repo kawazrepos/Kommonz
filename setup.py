@@ -58,6 +58,7 @@ setup(
     install_requires=[
         'setuptools',
         'setuptools-git',
+        'PIL',
         'dateutils',
         'docutils',
         'pyyaml',
@@ -72,5 +73,7 @@ setup(
         'django-object-permission',
         'django-social-auth',
         'django-nose',
+        'django-uni-form',
+        'django-piston',
     ],
 )

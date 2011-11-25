@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/css/jPlayer/not.the.skin.css">
+<link rel="stylesheet" href="/css/jPlayer/circle.player.css">
+<script type="text/javascript" src="/javascript/jPlayer/jquery.transform.js"></script>
+<script type="text/javascript" src="/javascript/jPlayer/jquery.grab.js"></script>
+<script type="text/javascript" src="/javascript/jPlayer/jquery.jplayer.js"></script>
+<script type="text/javascript" src="/javascript/jPlayer/mod.csstransforms.min.js"></script>
+<script type="text/javascript" src="/javascript/jPlayer/circle.player.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".jPlayer").jPlayer({
+      ready: function () {
+        $(this).jPlayer("setMedia", {
+          "{{ material.extension }}" : "{% reverse 'materials_material_preview' material.pk %}",
+        });
+      },
+      swfPath: "/javascript/jPlayer",
+      supplied: "{{ material.extension }}",
+      cssSelectorAncestor : ".jPlayer-container"
+    });
+  });
+</script>
