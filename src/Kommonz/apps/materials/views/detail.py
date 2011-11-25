@@ -12,6 +12,7 @@ from django.views.decorators.cache import never_cache
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from ..models import Material
+from streaming import StreamingResponseMixin
 
 class MaterialBaseDetailView(BaseDetailView):
     def get_object(self, queryset=None):
@@ -75,3 +76,6 @@ class MaterialDownloadView(AttachmentResponseMixin, MaterialBaseDetailView):
         self.object.download += 1
         self.object.save()
         return super(MaterialDownloadView, self).get(request, *args, **kwargs)
+
+class MaterialPreviewView(StreamingResponseMixin, MaterialBaseDetailView):
+    model = Material

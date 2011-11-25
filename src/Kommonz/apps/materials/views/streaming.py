@@ -22,3 +22,16 @@ class StreamingHttpResponse(HttpResponse):
         pass
 
     content = property(_get_content, _set_content)
+
+class StreamingResponseMixin(object):
+    """
+    A Mixin that can be used to render file streaming.
+    """
+    response_class = StreamingHttpResponse
+    
+    def render_to_response(self, context, **response_kwargs):
+        object = context['object']
+        response = self.response_class(object.file)
+        response['Content-Type'] = object.mimetype
+        response['Content-Length'] = object.file.size
+        return response

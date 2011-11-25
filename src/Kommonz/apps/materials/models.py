@@ -123,6 +123,11 @@ class Material(models.Model):
         return type
 
     @property
+    def filetype(self):
+        from utils.filetypes import guess
+        return guess(self.file.name)
+
+    @property
     def size(self):
         return self.file.size
     
