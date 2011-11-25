@@ -20,10 +20,13 @@ class RenderMaterialPreviewBaseNode(template.Node):
         filename = material.file.name
         type = guess(filename)
         context.push()
-        html = render_to_string(
-                os.path.join(self.template_path, "%s.html" % type), {
-                    'material' : material
-        })
+        try:
+            html = render_to_string(
+                    os.path.join(self.template_path, "%s.html" % type), {
+                        'material' : material
+            })
+        except:
+            html = ''
         context.pop()
         return html
         
