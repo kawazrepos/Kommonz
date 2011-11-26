@@ -36,7 +36,15 @@ def upload_material(file, username='hogehoge', password='password', **kwargs):
 class TestMaterialUtils(object):
     def test_suitable_model_code(self):
         """
-        Tests get suitable type from sourcecode.
+        Tests get suitable type from javascript source code.
+        """
+        from apps.materials.codes.models import Code
+        cls = Material.objects.get_file_model('file.js')
+        eq_(cls, Code)
+
+    def test_suitable_model_code2(self):
+        """
+        Tests get suitable type from source code.
         """
         from apps.materials.codes.models import Code
         cls = Material.objects.get_file_model('file.py')
