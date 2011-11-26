@@ -43,7 +43,9 @@ class Code(Material):
         return guess_syntax(self.file.name)
 
 def set_body(sender, instance, **kwargs):
-    code = open(instance.file.path)
-    instance.body = code.read()
+    from utils.encoding import to_utf8
+    code = open(instance.file.path, 'ra')
+    body = code.read()
+    instance.body = to_utf8(body)
     code.close()
 pre_save.connect(set_body, sender=Code)
