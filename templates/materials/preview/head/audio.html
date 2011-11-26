@@ -10,7 +10,7 @@
     $(".jPlayer").jPlayer({
       ready: function () {
         $(this).jPlayer("setMedia", {
-          "{{ material.extension }}" : "{% reverse 'materials_material_download' material.pk %}",
+          "{{ material.extension }}" : "{% reverse 'materials_material_preview' material.pk %}",
         });
       },
       swfPath: "/javascript/jPlayer",
