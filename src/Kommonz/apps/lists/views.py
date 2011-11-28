@@ -1,43 +1,38 @@
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, ListView, TemplateView
+from django.views.generic.edit import ModelFormMixin
 from django.shortcuts import render_to_response
+from django.utils.decorators import method_decorator
 from models import List, ListInfo
 from apps.materials.models import Material
 
 class ListDetailView(DetailView):
     model = List
-    def get_context_data(self, **kwargs):
-        context = super(ListDetailView, self).get_context_data(**kwargs)
-        print context.__dict__
-        List_ordered_by_add_at(context.object)
-        context['ordered_list'] = List_ordered_by_add_at(context.object)
-        return context
 
 class ListListView(ListView):
     model = List
-    def get_context_data(self, **kwargs):
-        context = super(ListListView, self).get_context_data(**kwargs)
-        return context
 
-def List_ordered_by_add_at(instance):
-    order = instance.order
-    sorting = ""
-    if order == 'listinfo__add_date':
-        sorting = "listinfo__add_date"
-    elif order == 'downloads_times':
-        sorting = 'downloads_times'
-    elif order == 'material_upload_date':
-        sorting = 'material_upload_date'
-    elif order == 'author':
-        sorting = 'author'
-    elif order == '-listinfo__add_date':
-        sorting = '-listinfo__add_date'
-    elif order == '-download_times':
-        sorting = '-download_times'
-    elif order == '-material_upload_date':
-        sorting = '-material_upload_date'
-    else: 
-        sorting = '-author'
-        
-    ordered_list = List.objects.all().order_by(sorting)
-    return ordered_list
+class ListCreateView(CreateView):
+    model = List
+    def form_valid(self, form):
+        self.object = List.objects.create(
+            label=form.cleaned_data.get('label', ''),
+            author=self.request.user,
+            pub_state=form.cleaned_data['pub_state'],
+            order=form.cleaned_data['order'],
+            description=form.cleaned_data.get('description', '')
+        )
+        for material in form.cleaned_data.get('materials', []):
+            try:
+                info = ListInfo.objects.create(
+                    list=self.object,
+                    material=Material.objects.get(pk=material)
+                )
+            except:
+                pass
+        return super(ModelFormMixin, self).form_valid(form)
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ListCreateView, self).dispatch(*args, **kwargs)

@@ -2,8 +2,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
-from apps.materials.models import Material
 from qwert.middleware.threadlocals import request as get_request
+from apps.materials.models import Material
 
 PUB_STATES = (
     ('public',      _('outer publicity')),
@@ -21,18 +21,21 @@ ORDER_STATES =(
     ('-author',                  _('-author')),
 )
 
-
 class List(models.Model):
+    # required
     label             = models.CharField(_('title'), max_length=64)
-    author            = models.ForeignKey(User, verbose_name=_('author'),related_name="lists")
-    materials         = models.ManyToManyField(Material, through='ListInfo')
-    pub_state         = models.CharField(_('public configration'),max_length=10,choices=PUB_STATES, default="public",)
-    created_at        = models.DateTimeField(_('create at'), auto_now_add=True)
-    order             = models.CharField(_('order'),choices=ORDER_STATES,default="created_date", max_length=64)
+    pub_state         = models.CharField(_('public configration'), max_length=10, choices=PUB_STATES, default="public",)
+    order             = models.CharField(_('order'), choices=ORDER_STATES, default="created_date", max_length=64)
+    # not required
     description       = models.CharField(_('introduce comment'), max_length=100)
+    # not editable
+    author            = models.ForeignKey(User, verbose_name=_('author'), related_name="lists", editable=False)
+    created_at        = models.DateTimeField(_('create at'), auto_now_add=True)
+    materials         = models.ManyToManyField(Material, through='ListInfo', editable=False)
     
     class Meta:
         ordering            = ['-created_at']
+        unique_together     = ('author', 'label')
         verbose_name        = _('list')
         verbose_name_plural = _('lists')
     
@@ -56,9 +59,3 @@ class ListInfo(models.Model):
     
     def __unicode__(self):
         return self.material.label
-        
-
-
-
-
-
