@@ -4,8 +4,10 @@
 # Date:            2010/11/28
 # Modifier:      giginet
 #
+import os
 import mimetypes
 from ..models import Material
+from syntaxes import SYNTAXES
 
 IMAGE = (
     'image/bmp',
@@ -77,6 +79,10 @@ TYPES = (
     ('code',        CODE)
 )
 def guess(filename):
+    fileext = os.path.splitext(filename)[1]
+    for ext, syntax in SYNTAXES:
+        if ext == fileext[1:]:
+            return 'code'
     mimetypes.init()
     try:
         type = mimetypes.guess_type(filename)[0]
