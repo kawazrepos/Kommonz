@@ -11,7 +11,6 @@ from social_auth.models import UserSocialAuth
 class UserProfileDetailView(DetailView):
     model = UserProfile
 
-
 class UserUpdateView(UpdateView):
     model       = User
     form_class  = UserUpdateForm
