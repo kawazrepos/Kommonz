@@ -21,6 +21,9 @@ ORDER_STATES =(
     ('-author',                  _('-author')),
 )
 
+class ListManager(models.Manager):
+    pass
+
 class List(models.Model):
     # required
     label             = models.CharField(_('title'), max_length=64)
@@ -32,6 +35,8 @@ class List(models.Model):
     author            = models.ForeignKey(User, verbose_name=_('author'), related_name="lists", editable=False)
     created_at        = models.DateTimeField(_('create at'), auto_now_add=True)
     materials         = models.ManyToManyField(Material, through='ListInfo', editable=False)
+
+    objects           = ListManager()
     
     class Meta:
         ordering            = ['-created_at']
