@@ -1,6 +1,6 @@
 # Create your views here.
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, DetailView, ListView, TemplateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import ModelFormMixin
 from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
@@ -36,3 +36,12 @@ class ListCreateView(CreateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ListCreateView, self).dispatch(*args, **kwargs)
+
+class ListAddView(UpdateView):
+    model = List
+
+class ListRemoveView(UpdateView):
+    model = List
+
+class ListDeleteView(DeleteView):
+    model = List
