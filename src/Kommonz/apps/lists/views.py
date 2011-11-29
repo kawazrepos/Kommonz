@@ -8,17 +8,29 @@ from utils.decorators import view_class_decorator
 from apps.materials.models import Material
 
 class ListDetailView(DetailView):
+    """
+    A View of list detail page.
+    """
     model = List
 
 class ListListView(ListView):
+    """
+    A View of own 'lists' list page.
+    """
     model = List
 
 @view_class_decorator(login_required)
 class ListCreateView(CreateView):
+    """
+    A View of list creation.
+    """
     model = List
 
 @view_class_decorator(login_required)
 class ListAddView(UpdateView):
+    """
+    A View of adding material to list.
+    """
     model = List
 
     def post(self, request, *args, **kwargs):
@@ -34,6 +46,9 @@ class ListAddView(UpdateView):
 
 @view_class_decorator(login_required)
 class ListRemoveView(UpdateView):
+    """
+    A View of removing materials from list.
+    """
     model = List
 
     def post(self, request, *args, **kwargs):
@@ -47,4 +62,7 @@ class ListRemoveView(UpdateView):
 
 @view_class_decorator(login_required)
 class ListDeleteView(DeleteView):
+    """
+    A View of list deletion.
+    """
     model = List
