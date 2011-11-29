@@ -3,20 +3,21 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import ModelFormMixin
 from django.shortcuts import render_to_response
-from models import List, ListInfo
+from object_permission.decorators import permission_required
 from utils.decorators import view_class_decorator
 from apps.materials.models import Material
+from models import List, ListInfo
 
 class ListDetailView(DetailView):
     """
-    A View of list detail page.
+    A View for list detail page.
     """
     model = List
 
 @view_class_decorator(login_required)
 class ListListView(ListView):
     """
-    A View of own 'lists' list page.
+    A View for own 'lists' list page.
     """
     model = List
 
@@ -27,14 +28,14 @@ class ListListView(ListView):
 @view_class_decorator(login_required)
 class ListCreateView(CreateView):
     """
-    A View of list creation.
+    A View for list creation.
     """
     model = List
 
-@view_class_decorator(login_required)
+@view_class_decorator(permission_required('lists.change_list'))
 class ListAddView(UpdateView):
     """
-    A View of adding material to list.
+    A View for adding material to list.
     """
     model = List
 
@@ -49,10 +50,10 @@ class ListAddView(UpdateView):
         )
         return super(ListAddlView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(login_required)
+@view_class_decorator(permission_required('lists.change_list'))
 class ListRemoveView(UpdateView):
     """
-    A View of removing materials from list.
+    A View for removing materials from list.
     """
     model = List
 
@@ -65,9 +66,16 @@ class ListRemoveView(UpdateView):
             info = ListInfo.objects.get(material=material, list=self.object)
         return super(ListAddlView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(login_required)
+@view_class_decorator(permission_required('lists.change_list'))
+class ListUpdateView(UpdateView):
+    """
+    A View for list updating.
+    """
+    model = List
+
+@view_class_decorator(permission_required('lists.delete_list'))
 class ListDeleteView(DeleteView):
     """
-    A View of list deletion.
+    A View for list deletion.
     """
     model = List

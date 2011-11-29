@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 from qwert.middleware.threadlocals import request as get_request
+from object_permission.mediators import ObjectPermissionMediator as Mediator
 from apps.materials.models import Material
 
 PUB_STATES = (
@@ -59,6 +60,15 @@ class List(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('lists_list_detail', (), { 'pk' : self.pk })
+
+    def modify_object_permission(self, mediator, created):
+        mediator.manager(self, self.author)
+        if self.pub_state == 'public':
+            mediator.viewer(self, None)
+            mediator.viewer(self, 'anonymous')
+        elif self.pub_state == 'private':
+            mediator.reject(self, None)
+            mediator.reject(self, 'anonymous')
     
 class ListInfo(models.Model):
     """

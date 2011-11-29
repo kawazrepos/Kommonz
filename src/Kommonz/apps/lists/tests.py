@@ -17,7 +17,6 @@ class TestListCreate(object):
         except:
             self.user2 = User.objects.get(username='kawaztan2')
 
-
     def test_create_list(self):
         """
         Tests user can create list from view.
@@ -75,8 +74,17 @@ class TestListCreate(object):
         })
         eq_(count + 2, List.objects.count(), "user can't create duplicate named lists.")
 
-
 class TestListManage(object):
+    def setup(self):
+        try:
+            self.user = User.objects.create_user(username='kawaztan', password='password', email="test@test.com")
+        except:
+            self.user = User.objects.get(username='kawaztan')
+        try:
+            self.user2 = User.objects.create_user(username='kawaztan2', password='password', email="test@test.com")
+        except:
+            self.user2 = User.objects.get(username='kawaztan2')
+
     def test_add_material(self):
         """
         Tests user can add material from view.
