@@ -32,12 +32,12 @@ class List(models.Model):
     pub_state         = models.CharField(_('publicity'), max_length=10, choices=PUB_STATES, default="public",)
     order             = models.CharField(_('order'), choices=ORDER_STATES, default="created_date", max_length=64)
     # not required
-    description       = models.TextField(_('description'))
+    description       = models.TextField(_('description'), null=True, blank=True)
     # not editable
     author            = models.ForeignKey(User, verbose_name=_('author'), related_name="lists", editable=False)
+    materials         = models.ManyToManyField(Material, through='ListInfo', editable=False)
     created_at        = models.DateTimeField(_('created at'), auto_now_add=True)
     updated_at        = models.DateTimeField(_('updated at'), auto_now=True)
-    materials         = models.ManyToManyField(Material, through='ListInfo', editable=False)
 
     objects           = ListManager()
     

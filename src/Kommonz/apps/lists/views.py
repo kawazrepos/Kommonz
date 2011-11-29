@@ -13,11 +13,16 @@ class ListDetailView(DetailView):
     """
     model = List
 
+@view_class_decorator(login_required)
 class ListListView(ListView):
     """
     A View of own 'lists' list page.
     """
     model = List
+
+    def get_queryset(self):
+        qs = super(ListListView, self).get_queryset()
+        return qs.filter(author=self.request.user)
 
 @view_class_decorator(login_required)
 class ListCreateView(CreateView):
