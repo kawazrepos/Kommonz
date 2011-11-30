@@ -16,6 +16,18 @@ class ListDetailView(DetailView):
     """
     model = List
 
+    def get_queryset(self):
+        """
+        If the view recives 'order' as GET parameter.
+        Returns an ordered QuerySet.
+        """
+        order = self.request.GET.get('order', None)
+        qs = super(ListDetailView, self).get_queryset()
+        from models import ORDER_STATES
+        if order and order in dict(ORDER_STATES).values():
+            qs.order_by(order)
+        return qs
+
 @view_class_decorator(login_required)
 class ListListView(ListView):
     """

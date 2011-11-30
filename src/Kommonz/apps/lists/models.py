@@ -21,9 +21,6 @@ ORDER_STATES =(
     ('author__pk',               _('Author')),
 )
 
-class ListManager(models.Manager):
-    pass
-
 class List(models.Model):
     """
     A Model for Material collection.
@@ -39,8 +36,6 @@ class List(models.Model):
     _materials        = models.ManyToManyField(Material, through='ListInfo', editable=False)
     created_at        = models.DateTimeField(_('created at'), auto_now_add=True)
     updated_at        = models.DateTimeField(_('updated at'), auto_now=True)
-
-    objects           = ListManager()
     
     class Meta:
         ordering            = ['-created_at']
