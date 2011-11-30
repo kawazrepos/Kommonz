@@ -1,8 +1,9 @@
 # Create your views here.
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render_to_response
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import ModelFormMixin
-from django.shortcuts import render_to_response
 from object_permission.decorators import permission_required
 from utils.decorators import view_class_decorator
 from apps.materials.models import Material
@@ -66,16 +67,19 @@ class ListRemoveView(UpdateView):
             info = ListInfo.objects.get(material=material, list=self.object)
         return super(ListAddlView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(permission_required('lists.change_list'))
+@view_class_decorator(permission_required('lists.change_list', List))
 class ListUpdateView(UpdateView):
     """
     A View for list updating.
     """
     model = List
 
-@view_class_decorator(permission_required('lists.delete_list'))
+@view_class_decorator(permission_required('lists.delete_list', List))
 class ListDeleteView(DeleteView):
     """
     A View for list deletion.
     """
     model = List
+
+    def get_success_url(self):
+        return reverse('lists_list_list')

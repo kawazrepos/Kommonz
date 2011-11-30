@@ -84,6 +84,15 @@ class TestListManage(object):
             self.user2 = User.objects.create_user(username='kawaztan2', password='password', email="test@test.com")
         except:
             self.user2 = User.objects.get(username='kawaztan2')
+        self.c = Client()
+        self.c.login(username='kawaztan', password='password')
+        self.ls = List.objects.get_or_create(
+                label='ham',
+                pub_state='public',
+                order='download',
+                description='desc',
+                author=self.user
+        )[0]
 
     def test_add_material(self):
         """
@@ -99,16 +108,36 @@ class TestListManage(object):
         """
         Tests user can update list from view.
         """
+        response = self.c.post(reverse('lists_list_update', args=[self.ls.pk]), {
+            'label' : 'spam',
+            'pub_state' : self.ls.pub_state,
+            'order' : self.ls.order
+        })
+        self.ls = List.objects.get(pk=self.ls.pk)
+        eq_(self.ls.label, 'spam')
 
     def test_delete_list(self):
         """
         Tests user can delete list from view.
         """
+        count = List.objects.count()
+        self.c.post(reverse('lists_list_delete', args=[self.ls.pk]))
+        eq_(List.objects.count(), count - 1)
 
     def test_list_manage_permission(self):
         """
         Tests list owner only can manage lists.
         """
+        self.c.logout()
+        response = self.c.post(reverse('lists_list_update', args=[self.ls.pk]), {
+            'label' : 'spamspam',
+            'pub_state' : self.ls.pub_state,
+            'order' : self.ls.order
+        })
+        print response
+        self.ls = List.objects.get(pk=self.ls.pk)
+        eq_(self.ls.label, 'ham')
+
 
 class TestListPublicity(object):
     def test_list_public(self):

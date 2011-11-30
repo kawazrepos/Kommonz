@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from views import ListDetailView, ListListView, ListCreateView, ListDeleteView, ListAddView, ListRemoveView
+from views import ListDetailView, ListListView, ListCreateView, ListDeleteView, ListAddView, ListRemoveView, ListUpdateView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$',        ListDetailView.as_view(),   name='lists_list_detail'),
     url(r'^(?P<pk>\d+)/add/$',    ListAddView.as_view(),      name='lists_list_add'),
     url(r'^(?P<pk>\d+)/remove/$', ListRemoveView.as_view(),   name='lists_list_remove'),
+    url(r'^(?P<pk>\d+)/update/$', ListUpdateView.as_view(),   name='lists_list_update'),
     url(r'^(?P<pk>\d+)/delete/$', ListDeleteView.as_view(),   name='lists_list_delete'),
     url(r'^create/$',             ListCreateView.as_view(),   name='lists_list_create'),
 )
