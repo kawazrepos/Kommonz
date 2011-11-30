@@ -12,61 +12,66 @@
 <a href="{% reverse 'materials_material_download' object.pk %}" class="confirm-button blue-button download-button">ダウンロード</a>
 <section class="material-info">
   <h2>{% render_mtimg for object %}{{ object.label }}</h2>
-  <dl>
+  <dl class="material-information">
     <dt>投稿者</dt>
     <dd class="author">
       <img class="usericon middle" src="/{{ object.author.profile.icon.middle }}">
       <span class="username"><a href="">{{ object.author.username }}</a>さん</span>
     </dd>
-    <dt>ダウンロード回数</dt>
-    <dd>{{ object.download }}</dd>
     <dt>カテゴリ</dt>
     <dd>{{ object.category }}</dd>
     <dt>ライセンス</dt>
-    <dd>{{ object.license }}</dd>
-    <dt>レーティング</dt>
     <dd>
-    <ul>
-    {% if object.keros %}
+      {{ object.license }}
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
+    </dd>
+    <dt>レーティング</dt>
+    <dd class="material-">
+      <ul>
       {% for kero in object.keros.all %}
         <li class="kero-icon">{{ kero }}</li>
+      {% empty %}
+        <li class="kero-icon">なし</li>
       {% endfor %}
-    {% else %}
-        <li class="kero-icon"></li>
-    {% endif %}
-    </ul>
+      </ul>
     </dd>
-    <dt>サイズ</dt>
-    <dd>{{ object.size|sizify }}</dd>
-    <dt>ファイル形式</dt>
-    <dd>{{ object.mimetype }}</dd>
-    <dt>投稿日</dt>
-    <dd> {{ object.created_at }}</dd>
-    <dt>最終変更日</dt>
-    <dd>{{ object.updated_at }}</dd>
+    <dt>ダウンロード回数</dt>
+    <dd>{{ object.download }}</dd>
   </dl>
  </section>
 
+{% if user.is_authenticated %}
 <section class="material-action">
   <menu>
+    {% if user.pk == object.author.pk %}
     <li class="edit">編集</li>
     <li class="delete">削除</li>
+    {% endif %}
     <li class="mylist">マイリストに追加</li>
     <li class="message"><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></li>
     <li class="report"><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">通報する</a></li>
   </menu>
 </section>
+{% endif %}
 {% endblock %}
 
 {% block main %}
-<section id="detail_main">
+<section id="detail-main">
   <article>
     <h1>{% render_mtimg for object %}{{ object.label }}</h1>
     <img src="/{{ object.thumbnail }}">
-    <section>
+    <section class="material-detail">
       {{ object.description }}
     </section>
   {% render_material_preview for object %}
   </article>
+  <ul class="material-subinformation">
+    <li> {{ object.created_at|date:"Y/m/d H:i:s" }}</li>
+    <li>|</li>
+    <li>{{ object.size|sizify }}</li>
+    <li>|</li>
+    <li>{{ object.mimetype }}</li>
+  </ul>
+
   </section>
 {% endblock %}

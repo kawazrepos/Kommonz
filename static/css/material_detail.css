@@ -36,7 +36,19 @@
   background-image: url(image/exclamation-red.png);
 }
 
+ul.material-subinformation {
+  margin: 20px auto 5px;
+}
+
+ul.material-subinformation li {
+  color: #666;
+  font-size: 8px;
+  padding: auto 5px;
+  display: inline;
+}
+
 .download-button {
+  vertical-align: middle;
   text-decoration: none;
   margin: 20px auto;
   padding: 0;
@@ -44,4 +56,11 @@
   width: 200px;
   height: 40px;
   display: block;
+}
+
+section.material-detail {
+  background: #fefefe;
+  margin: 10px 0px 10px;
+  padding: 20px 10px 20px 10px;
+  border: solid 1px #ccc;
 }

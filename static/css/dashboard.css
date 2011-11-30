@@ -1,6 +1,26 @@
 section.user-info {
+  background-color: #fff;
+  margin: 0 auto 20px;
+  padding: 30px 30px 10px;
+  width: 100px;
   display: block;
   position: relative;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  transform: rotate(-5deg);
+  -moz-transform: rotate(-5deg);
+  -webkit-transform: rotate(-5deg);
+}
+
+section.user-info div.user-pin {
+  background: url(image/pin.png) 0 0 no-repeat;
+  width: 16px;
+  height: 13px;
+  top: 5px;
+  left: 75px;
+  display: block;
+  position: absolute;
 }
 
 section.user-info img {
@@ -9,8 +29,11 @@ section.user-info img {
 }
 
 section.user-info span {
+  color: #666;
+  font-family: "Marker Felt";
+  font-size: large;
   text-align: center;
-  margin: 0 auto;
+  margin: 5px auto;
   padding: 5px 0;
   display: block;
 }
