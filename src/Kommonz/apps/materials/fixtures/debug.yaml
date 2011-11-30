@@ -1,11 +1,45 @@
 - model: materials.materialfile
   pk: 1
   fields:
-    file: fixtures/images/kawaz.png
+    file: fixtures/kawaztan2.png
+- model: materials.material
+  pk: 1
+  fields:
+    label: kawaztan.png
+    _file: 1
+    description: かわずたん！
+    author: 1
+    ip: 127.0.0.1
+    category: 1
 - model: materials.image
   pk: 1
   fields:
-    label: test
+    label: kawaztan.png
     _file: 1
+    description: かわずたん！
     author: 1
     ip: 127.0.0.1
+    category: 1
+- model: materials.materialfile
+  pk: 2
+  fields:
+    file: fixtures/tutorial_game.js
+- model: materials.material
+  pk: 2
+  fields:
+    label: tutorial_game.js
+    _file: 2
+    description: サンプルゲーム
+    author: 1
+    ip: 127.0.0.1
+    category: 1
+- model: materials.code
+  pk: 2
+  fields:
+    label: tutorial_game.js
+    _file: 2
+    description: サンプルゲーム
+    author: 1
+    ip: 127.0.0.1
+    category: 1
+    syntax: javascript

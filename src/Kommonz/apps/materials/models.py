@@ -129,7 +129,10 @@ class Material(models.Model):
 
     @property
     def size(self):
-        return self.file.size
+        try:
+            return self.file.size
+        except:
+            return 0
     
     @property
     def model(self):
@@ -177,7 +180,6 @@ class Material(models.Model):
         mediator.manager(self, self.author)
         # ToDo collaborators
         # map(lambda user: mediator.editor(self, user), self.collaborators)
-        
         
 class Kero(models.Model):
     u"""

@@ -32,7 +32,8 @@ class ThumbnailField(ImageField):
                 if 'fixtures' in filename:
                     if not os.path.exists(os.path.dirname(dst_fullpath)):
                         os.makedirs(os.path.dirname(dst_fullpath))
-                        shutil.copyfile(filename, dst_fullpath)
+                        if os.path.exists(filename):
+                            shutil.copyfile(filename, dst_fullpath)
                 elif os.path.exists(filename):
                     os.rename(filename, dst_fullpath)
                 create_thumbnail(dst_fullpath, dst_fullpath, self.thumbnail_size_patterns)
