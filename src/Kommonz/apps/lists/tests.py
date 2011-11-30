@@ -134,10 +134,8 @@ class TestListManage(object):
             'pub_state' : self.ls.pub_state,
             'order' : self.ls.order
         })
-        print response
         self.ls = List.objects.get(pk=self.ls.pk)
         eq_(self.ls.label, 'ham')
-
 
 class TestListPublicity(object):
     def setup(self):
@@ -163,6 +161,49 @@ class TestListPublicity(object):
         """
         Tests anonymous user can see public list
         """
+        self.c.logout()
+        response = self.c.get(reverse('lists_list_detail', args=[self.ls.pk]))
+        eq_(response.status_code, 200)
+        
+    def test_list_private(self):
+        """
+        Tests other user can't see private list
+        """
+        ls2 = List.objects.get_or_create(
+                label='hamhamspam',
+                pub_state='private',
+                order='download',
+                description='desc',
+                author=self.user
+        )[0]
+        self.c.login(username='kawaztan2', password='password')
+        response = self.c.get(reverse('lists_list_detail', args=[ls2.pk]))
+        eq_(response.status_code, 403)
+        
+class TestListList(object):
+    def setup(self):
+        try:
+            self.user = User.objects.create_user(username='kawaztan', password='password', email="test@test.com")
+        except:
+            self.user = User.objects.get(username='kawaztan')
+        try:
+            self.user2 = User.objects.create_user(username='kawaztan2', password='password', email="test@test.com")
+        except:
+            self.user2 = User.objects.get(username='kawaztan2')
+        self.c = Client()
+        self.c.login(username='kawaztan', password='password')
+        self.ls = List.objects.get_or_create(
+                label='ham',
+                pub_state='public',
+                order='download',
+                description='desc',
+                author=self.user
+        )[0]
+
+    def test_list_view(self):
+        """
+        Tests authenticated user can get own lists list.
+        """
         self.c.login(username='kawaztan2', password='password')
         ls2 = List.objects.create(
             label='hamham',
@@ -175,24 +216,13 @@ class TestListPublicity(object):
         list_list = response.context['object_list']
         eq_(list_list.count(), count)
 
-    def test_list_private(self):
-        """
-        Tests other user can't see private list
-        """
-        self.c.logout()
-        response = self.c.get(reverse('lists_list_list'))
-        ok_(not hasattr(response.context, 'object_list'))
-
-class TestListList(object):
-    def test_list_view(self):
-        """
-        Tests authenticated user can get own lists list.
-        """
-
     def test_anonymous_list(self):
         """
         Tests anonymous user can't get lists list.
         """
+        self.c.logout()
+        response = self.c.get(reverse('lists_list_list'))
+        ok_(not hasattr(response.context, 'object_list'))
 
 class TestListOrder(object):
     def test_order_by_added_ascending(self):

@@ -9,6 +9,7 @@ from utils.decorators import view_class_decorator
 from apps.materials.models import Material
 from models import List, ListInfo
 
+@view_class_decorator(permission_required('lists.view_list', List))
 class ListDetailView(DetailView):
     """
     A View for list detail page.
