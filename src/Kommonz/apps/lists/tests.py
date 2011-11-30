@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
 from nose.tools import *
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.test.client import Client
+from apps.materials.tests import upload_material
 from models import List
 
 class TestListCreate(object):
@@ -93,16 +96,34 @@ class TestListManage(object):
                 description='desc',
                 author=self.user
         )[0]
+        f = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawaztan.png'), 'rb')
+        self.material = upload_material(f,
+                label="kawaztan.png",
+                description="Kawaz tan is so cute.",
+        )
 
     def test_add_material(self):
         """
         Tests user can add material from view.
         """
+        self.c.post(reverse('lists_list_add', args=[self.ls.pk]), {
+            'material' : self.material.pk
+        })
+        eq_(self.ls.materials.count(), 1)
 
     def test_remove_material(self):
         """
         Tests user can remove material from view.
         """
+        self.c.post(reverse('lists_list_add', args=[self.ls.pk]), {
+            'material' : self.material.pk
+        })
+
+        self.c.post(reverse('lists_list_remove', args=[self.ls.pk]), {
+            'materials' : [self.material.pk,]
+        })
+        eq_(self.ls.materials.count(), 0)
+
     
     def test_update_list(self):
         """
@@ -224,6 +245,7 @@ class TestListList(object):
         response = self.c.get(reverse('lists_list_list'))
         ok_(not hasattr(response.context, 'object_list'))
 
+@nottest
 class TestListOrder(object):
     def test_order_by_added_ascending(self):
         """
@@ -260,6 +282,7 @@ class TestListOrder(object):
         Tests list shows materials ordered by author.
         """
 
+@nottest
 class TestZipView(object):
     def test_zip_view(self):
         """

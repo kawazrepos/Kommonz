@@ -36,7 +36,7 @@ class List(models.Model):
     description       = models.TextField(_('description'), null=True, blank=True)
     # not editable
     author            = models.ForeignKey(User, verbose_name=_('author'), related_name="lists", editable=False)
-    materials         = models.ManyToManyField(Material, through='ListInfo', editable=False)
+    _materials        = models.ManyToManyField(Material, through='ListInfo', editable=False)
     created_at        = models.DateTimeField(_('created at'), auto_now_add=True)
     updated_at        = models.DateTimeField(_('updated at'), auto_now=True)
 
@@ -57,6 +57,13 @@ class List(models.Model):
             self.author = getattr(request, 'user', User.objects.get(pk=1))
         super(List, self).save(*args, **kwargs)
     
+    @property
+    def materials(self):
+        """
+        Returns a QuerySet ordered by 'order' field value.
+        """
+        return self._materials.order_by(self.order)
+
     @models.permalink
     def get_absolute_url(self):
         return ('lists_list_detail', (), { 'pk' : self.pk })
@@ -81,6 +88,7 @@ class ListInfo(models.Model):
     
     class Meta:
         ordering            = ['-created_at']
+        unique_together     = ('list', 'material')
         verbose_name        = _('list_info')
         verbose_name_plural = _('list_infos')
     

@@ -34,28 +34,36 @@ class ListCreateView(CreateView):
     """
     model = List
 
-@view_class_decorator(permission_required('lists.change_list'))
+@view_class_decorator(permission_required('lists.change_list', List))
 class ListAddView(UpdateView):
     """
     A View for adding material to list.
+    Post :
+        material : a pk of adding material.
+        comment  : comment.
     """
     model = List
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        material = request.POST.get('material', None)
-        comment = request.POST.get('comment', '')
-        info = ListInfo.objects.create(
-            list=self.object,
-            material=material,
-            comment=comment
-        )
-        return super(ListAddlView, self).post(request, *args, **kwargs)
+        try:
+            material = Material.objects.get(pk=request.POST.get('material', None))
+            comment = request.POST.get('comment', '')
+            info = ListInfo.objects.create(
+                list=self.object,
+                material=material,
+                comment=comment
+            )
+        except:
+            pass
+        return super(ListAddView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(permission_required('lists.change_list'))
+@view_class_decorator(permission_required('lists.change_list', List))
 class ListRemoveView(UpdateView):
     """
     A View for removing materials from list.
+    Post :
+        materials : a tuple contains pks of removing materials.
     """
     model = List
 
@@ -64,9 +72,9 @@ class ListRemoveView(UpdateView):
         material_pks = request.POST.get('materials', [])
         materials = [Material.objects.get(pk=pk) for pk in material_pks]
         for material in materials:
-            list.materials.remove(material)
             info = ListInfo.objects.get(material=material, list=self.object)
-        return super(ListAddlView, self).post(request, *args, **kwargs)
+            info.delete()
+        return super(ListRemoveView, self).post(request, *args, **kwargs)
 
 @view_class_decorator(permission_required('lists.change_list', List))
 class ListUpdateView(UpdateView):
