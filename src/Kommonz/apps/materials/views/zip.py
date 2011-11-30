@@ -6,6 +6,7 @@
 import os
 import zipfile
 import exceptions
+import datetime
 from cStringIO import StringIO
 from django.http import HttpResponse, Http404
 from django.views.generic.base import TemplateResponseMixin
@@ -38,8 +39,8 @@ class MultipleZipResponseMixin(object):
         """
         files = self.get_files()
         extras = self.get_extra_files()
-        pathes = files + extras
-        temp = self._create_zip(pathes)
+        files = files + extras
+        temp = self._create_zip(files)
         response = self.response_class(
                 filename=self.get_archive_name(), 
                 archive=temp
@@ -49,32 +50,32 @@ class MultipleZipResponseMixin(object):
 
     def get_files(self):
         """
-        Returns a list with file pathes.
+        Returns a list contains files.
+        Files will be closed automatically.
         """
         raise exceptions.NotImplementedError('get_files is not implemented.')
 
     def get_extra_files(self):
         """
-        Returns a list with extra file pathes.
+        Returns a list contains extra files.
+        Files will be closed automatically.
         """
         return []
 
     def get_archive_name(self):
         """
-        Returns archive name.
+        Returns an archive name.
         """
-        return "test.zip"
+        return "%s.zip" % datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 
-    def _create_zip(self, pathes):
+    def _create_zip(self, files):
         """
-        Create temporary zip archive via the given pathes list.
+        Create temporary zip archive via the given files list.
         Returns created file.
         """
         temp = StringIO()
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-        for path in pathes:
-            filename = os.path.basename(path)
-            file = open(path, 'r')
+        for file in files:
             archive.writestr(filename, file.read())
             file.close()
         archive.close()
@@ -86,7 +87,7 @@ class MultipleMaterialZipResponseMixin(MultipleZipResponseMixin):
         for material in qs:
             if not isinstance(material, Material):
                 raise exceptions.TypeError('MultipleZipResponseMixin only takes apps.materials.Material')
-        return [material.file.path for material in qs]
+        return [open(material.file.path, 'r') for material in qs]
 
 class MaterialZipView(MultipleMaterialZipResponseMixin, BaseListView):
     """

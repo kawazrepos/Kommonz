@@ -1,12 +1,13 @@
 # Create your views here.
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import ModelFormMixin
 from object_permission.decorators import permission_required
 from utils.decorators import view_class_decorator
 from apps.materials.models import Material
+from apps.materials.views.zip import MaterialZipView
 from models import List, ListInfo
 
 @view_class_decorator(permission_required('lists.view_list', List))
@@ -104,3 +105,15 @@ class ListDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('lists_list_list')
+
+@view_class_decorator(permission_required('lists.view_list', List))
+class ListZipView(MaterialZipView):
+    def get(self, request, *args, **kwargs):
+        self.list_pk = kwargs.pop('pk', None)
+        return super(ListZipView, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        list = get_object_or_404(List, pk=self.list_pk)
+        if list:
+            return list.materials
+        return Material.objects.none()
