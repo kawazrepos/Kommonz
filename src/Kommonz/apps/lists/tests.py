@@ -140,15 +140,48 @@ class TestListManage(object):
 
 
 class TestListPublicity(object):
+    def setup(self):
+        try:
+            self.user = User.objects.create_user(username='kawaztan', password='password', email="test@test.com")
+        except:
+            self.user = User.objects.get(username='kawaztan')
+        try:
+            self.user2 = User.objects.create_user(username='kawaztan2', password='password', email="test@test.com")
+        except:
+            self.user2 = User.objects.get(username='kawaztan2')
+        self.c = Client()
+        self.c.login(username='kawaztan', password='password')
+        self.ls = List.objects.get_or_create(
+                label='ham',
+                pub_state='public',
+                order='download',
+                description='desc',
+                author=self.user
+        )[0]
+
     def test_list_public(self):
         """
         Tests anonymous user can see public list
         """
+        self.c.login(username='kawaztan2', password='password')
+        ls2 = List.objects.create(
+            label='hamham',
+            pub_state='public',
+            order='download',
+            author=self.user2
+        )
+        count = List.objects.filter(author=self.user2).count()
+        response = self.c.get(reverse('lists_list_list'))
+        list_list = response.context['object_list']
+        eq_(list_list.count(), count)
 
     def test_list_private(self):
         """
         Tests other user can't see private list
         """
+        self.c.logout()
+        response = self.c.get(reverse('lists_list_list'))
+        ok_(not hasattr(response.context, 'object_list'))
 
 class TestListList(object):
     def test_list_view(self):
