@@ -1,17 +1,33 @@
-{% extends "base.html" %}
+{% extends "dashboards/base.html" %}
 
-{% block content %}
+{% block main %}
 
 {% if object %}
     <h1>{{ object.label }}</h1>
-    
+   
+    <form method="get" class="uniForm">
+        <p>
+        <select name="order">
+        <option value="listinfo__created_at">リスト追加日時順</option>
+        <option value="-listinfo__created_at">-リスト追加日時順</option>
+        <option value="download">ダウンロード回数順</option>
+        <option value="-download">-ダウンロード回数順</option>
+        <option value="created_at">素材作成日時順</option>
+        <option value="-created_at">-素材作成日時順</option>
+        <option value="author__pk">作成者順</option>
+        </select>
+        </p>
+
+        <p><input type="submit" value="並べ替える"></p>
+    </form>    
+
     <ul>
         <p>投稿者：{{ object.author }}</p>
         <p>公開状況：{{ object.pub_state }}</p>
         <p>公開日時：{{ object.created_at }}</p>
         <p>紹介文：{{ object.description }}</p>
         {{ object.materials }}
-        {% for material in object.materials.all %}
+        {% for material in materials.all %}
            <p> {{ material.label }}test</p>
         {% endfor %}
     </ul>

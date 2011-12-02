@@ -1,1 +1,12 @@
+{% extends "dashboards/base.html" %}
 
+{% block main %}
+
+
+<form method="post" action="" class= "uniForm" >
+{{ form|as_uni_form }}
+<p><input type="submit" value="追加"></p>
+</form>
+
+
+{% endblock %}
