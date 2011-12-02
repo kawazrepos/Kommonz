@@ -17,18 +17,20 @@ class ListDetailView(DetailView):
     """
     model = List
 
-    def get_queryset(self):
+    def get_context_data(self, **kwargs):
         """
-        If the view recives 'order' as GET parameter.
-        Returns an ordered QuerySet.
+        Set materials as context.
+        If the view recives 'order' as GET parameter, 
+        materials will be ordered by that.
         """
         order = self.request.GET.get('order', None)
-        qs = super(ListDetailView, self).get_queryset()
+        context = super(ListDetailView, self).get_context_data(**kwargs)
+        context['materials'] = self.object.materials
         from models import ORDER_STATES
-        if order and order in dict(ORDER_STATES).values():
-            qs.order_by(order)
-        return qs
-
+        if order and order in dict(ORDER_STATES):
+            context['materials'].order_by(order)
+        return context
+        
 @view_class_decorator(login_required)
 class ListListView(ListView):
     """
@@ -83,7 +85,10 @@ class ListRemoveView(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         material_pks = request.POST.get('materials', [])
-        materials = [Material.objects.get(pk=pk) for pk in material_pks]
+        try:
+            materials = [Material.objects.get(pk=pk) for pk in material_pks]
+        except:
+            materials = []
         for material in materials:
             info = ListInfo.objects.get(material=material, list=self.object)
             info.delete()
