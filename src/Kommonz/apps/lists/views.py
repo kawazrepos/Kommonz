@@ -9,6 +9,7 @@ from utils.decorators import view_class_decorator
 from apps.materials.models import Material
 from apps.materials.views.zip import MaterialZipView
 from models import List, ListInfo
+from forms import ListOrderForm
 
 @view_class_decorator(permission_required('lists.view_list', List))
 class ListDetailView(DetailView):
@@ -22,13 +23,15 @@ class ListDetailView(DetailView):
         Set materials as context.
         If the view recives 'order' as GET parameter, 
         materials will be ordered by that.
+        And ListOrderForm instance as order_form
         """
         order = self.request.GET.get('order', None)
         context = super(ListDetailView, self).get_context_data(**kwargs)
         context['materials'] = self.object.materials
         from models import ORDER_STATES
         if order and order in dict(ORDER_STATES):
-            context['materials'].order_by(order)
+            context['materials'] = context['materials'].order_by(order)
+        context['order_form'] = ListOrderForm()
         return context
         
 @view_class_decorator(login_required)
