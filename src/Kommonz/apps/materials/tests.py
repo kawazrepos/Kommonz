@@ -28,6 +28,9 @@ def upload_material(file, username='hogehoge', password='password', **kwargs):
     file_pk = simplejson.loads(response.content)[0]['id']
 
     kwargs.update({'_file' : file_pk})
+    if not kwargs.has_key('category'):
+        category, created = Category.objects.get_or_create(label='TestCategory')
+        kwargs['category'] = category.pk
     response = c.post(reverse('materials_material_create'), kwargs)
     match = re.search(r'(?P<pk>\d+)/$', response['Location'])
     pk = match.groupdict()['pk']
