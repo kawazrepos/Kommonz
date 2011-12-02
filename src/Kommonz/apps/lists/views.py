@@ -50,27 +50,25 @@ class ListCreateView(CreateView):
     model = List
 
 @view_class_decorator(permission_required('lists.change_list', List))
-class ListAddView(UpdateView):
+class ListAddView(CreateView):
     """
     A View for adding material to list.
     Post :
         material : a pk of adding material.
         comment  : comment.
     """
-    model = List
+    model = ListInfo
+
+    def get(self, request, *args, **kwargs):
+        get_object_or_404(List, pk=kwargs.get('pk'))
+        return super(ListAddView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        try:
-            material = Material.objects.get(pk=request.POST.get('material', None))
-            comment = request.POST.get('comment', '')
-            info = ListInfo.objects.create(
-                list=self.object,
-                material=material,
-                comment=comment
-            )
-        except:
-            pass
+        list = get_object_or_404(List, pk=kwargs.get('pk'))
+        post = request.POST.copy()
+        post['list'] = kwargs['pk']
+        request.POST = post
+        print request.POST
         return super(ListAddView, self).post(request, *args, **kwargs)
 
 @view_class_decorator(permission_required('lists.change_list', List))

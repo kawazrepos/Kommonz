@@ -79,7 +79,7 @@ class ListInfo(models.Model):
     list         = models.ForeignKey(List)
     material     = models.ForeignKey(Material, related_name='listinfo')
     created_at   = models.DateTimeField(_('Add Date'), auto_now_add=True)
-    comment      = models.CharField(_('Comment'), max_length=128)
+    comment      = models.CharField(_('Comment'), max_length=128, null=True, blank=True)
     
     class Meta:
         ordering            = ['-created_at']
@@ -89,3 +89,7 @@ class ListInfo(models.Model):
     
     def __unicode__(self):
         return self.material.label
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('lists_list_detail', (), { 'pk' : self.list.pk })
