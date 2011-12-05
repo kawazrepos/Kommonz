@@ -62,6 +62,7 @@ setup(
         'dateutils',
         'docutils',
         'pyyaml',
+        'pykf',
         'nose',
         'bpmappers',
         'django>=1.3',
