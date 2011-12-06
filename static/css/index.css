@@ -24,7 +24,9 @@
   border-collapse: collapse;
 }
 
-#search-category {
+#id_category {
+  font-size: large;
+  text-align: center;
   background: #eeeeee;
   margin: 0;
   padding: 0;
@@ -33,6 +35,10 @@
   width: 140px;
   height: 50px;
   display: inline-block;
+}
+
+#id_category > option {
+  font-size: large;
 }
 
 #search-category .category-dropdown-current {
@@ -58,7 +64,7 @@
   cursor: pointer;
 }
 
-#search-query {
+#id_q {
   font-size: large;
   background: #fff url(image/magnifier.png) 10px 13px no-repeat;
   margin: 0;
@@ -73,7 +79,7 @@
   display: inline-block;
 }
 
-#search-query:focus {
+#id_q:focus {
   border: solid rgb(169, 219, 128) 1px;
 }
 

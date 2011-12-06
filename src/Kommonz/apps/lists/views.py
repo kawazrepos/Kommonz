@@ -74,7 +74,7 @@ class ListAddView(CreateView):
         print request.POST
         return super(ListAddView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(permission_required('lists.change_list', List))
+@view_class_decorator(permssion_required('lists.change_list', List))
 class ListRemoveView(UpdateView):
     """
     A View for removing materials from list.
