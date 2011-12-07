@@ -1,116 +1,61 @@
 # -*- coding: utf-8 -*-
 #
 # Author:        tohhy
+# Modifier:      giginet
 # Date:          2011/11/04
 #
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.views.generic.list import ListView
 
 from apps.categories.models import Category
 from apps.materials.models import Material
-
-
-class SearchIndexView(ListView):
-    model = Category
-    template_name='index2.html'
-    
+from forms import ExtendSearchForm, SORTS
 
 class SearchResultView(ListView):
+    """
+    A View for search result.
+    """
     model = Material
-    template_name='searches/search_result.html'
+    template_name = 'searches/search_result.html'
     
-    def get_context_data(self, **kwargs):
-        object_list    = Material.objects.order_by() # empty ordering to make fast
-        context        = super(SearchResultView, self).get_context_data(**kwargs)
-        
-        # matches
-        category_id    = self.request.GET.get('category_id', None)
-        search_keyword = self.request.GET.get('search_keyword', None)
-        
-        # display ways
-        display_number = self.request.GET.get('display_number', None)
-        page_number    = self.request.GET.get('page_number', None)
-        sort           = self.request.GET.get('sort', None)
-        order          = self.request.GET.get('order', None)
-        
-        # thresholds
-        # usage:
-        # searches/?download_number=500o
-        # over 500 downloads will be displayed
-        # searches/?download_number=500b
-        # below 500 downloads will be displayed
-        
-        image_size      = self.request.GET.get('image_size', None)
-        audio_length    = self.request.GET.get('audio_length', None)
-        download_number = self.request.GET.get('download_number', None)
-        
-        
-        # making query
-        if category_id:
+    def get_queryset(self):
+        """
+        Get filtered queryset by GET parametors.
+        """
+        qs = super(SearchResultView, self).get_queryset()
+        params = dict(self.request.GET.copy())
+        queries = []
+        if 'q' in params:
+            q = params['q'][0]
+            queries.append(Q(label__contains=q))
+            queries.append(Q(description__contains=q))
+        if 'category' in params:
             try:
-                category=Category.objects.get(id=category_id)
-                object_list = object_list.filter(category=category)
-            except Category.DoesNotExist:
+                category = Category.objects.get(pk=params['category'])
+                queries.append(Q(category=category))
+            except:
                 pass
-                
-        if search_keyword:
-            object_list = object_list.filter(label__contains=search_keyword)
-            
-        if isinstance(download_number, basestring):
-            tail = ''
-            if download_number[-1] == u'o':
-                download_number = download_number[:-1]
-                tail = 'o'
-            elif download_number[-1] == u'b':
-                download_number = download_number[:-1]
-                tail = 'b'
-            print download_number + ':' + str(download_number.isdigit())
-            
-            if download_number.isdigit():
-                if tail == 'b':
-                    object_list = object_list.filter(download__lte=int(download_number))
-                else:
-                    object_list = object_list.filter(download__gte=int(download_number))
-            
-        
-        # ordering
-        object_list = self._get_ordered_object_list(object_list, sort, order)
-                
-        # display and paginate
-        if not isinstance(display_number, basestring) or not display_number.isdigit():
-            display_number = 3
-        else:
-            display_number = int(display_number)
-        paginator = Paginator(object_list, display_number)
-        
-        if not isinstance(page_number, basestring) or not page_number.isdigit():
-            page_number = 1
-        else:
-            page_number = int(page_number)
-            if page_number > paginator.page_range[-1]:
-                page_number = paginator.page_range[-1]
+        if queries:
+            query = reduce(lambda a, b : a | b, queries)
+            qs = qs.filter(query)
+        if 'order' in params and 'sort' in params and params['sort'] in dict(SORTS):
+            sort = params['sort']
+            if 'order' == 'd':
+                sort = '-%s' % sort
+            qs = qs.order_by(sort)
+        return qs
 
-        # making context
-        context['object_list'] = paginator.page(page_number).object_list
-        context['category_list'] = Category.objects.all()
+    def get_context_data(self, **kwargs):
+        """
+        Add ExtendSearchForm instance to context.
+        """
+        context = super(SearchResultView, self).get_context_data(**kwargs)
+        context['form'] = ExtendSearchForm(self.request.GET.get('q', ''))
+        limit = self.request.GET.get('limit', '20')
+        limit = int(limit) if limit.isdigit() else 20
+        paginator = Paginator(context['object_list'], limit)
+        n = self.request.GET.get('n', '1')
+        context['object_list'] = paginator.page(n).object_list
+        context['paginator'] = paginator
         return context
-    
-    
-    def _get_ordered_object_list(self, object_list, sort, order):
-        sorting = ""
-        
-        if sort == 'pv':
-            sorting = 'pv'
-        elif sort == 'download':
-            sorting = 'download'
-        elif sort == 'created_at':
-            sorting = 'created_at'
-        elif sort == 'updated_at':
-            sorting = 'updated_at'
-        else:
-            sorting = 'pk'
-            
-        if order == 'd':
-            sorting = '-' + sorting
-        
-        return object_list.order_by(sorting)
