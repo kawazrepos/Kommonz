@@ -5,7 +5,7 @@
 {% if object %}
     <h1>{{ object.label }}</h1>
    
-    <form method="get" class="uniForm">
+    <form method="get" action= class="uniForm">
       {{ order_form|as_uni_form }}
       <p><input type="submit" value="並べ替える"></p>
     </form>    
@@ -20,7 +20,7 @@
           <form method="post" class="uniForm">
           <p>
               {{ material.label }} : 
-              <input type="checkbox" name="{{material.id}}" value="">
+              <input type="checkbox" name={{ "%(material.id)" }} value="">
               {{ material.thumnail }}
               
           </p>
