@@ -1,17 +1,20 @@
-{% extends "base.html" %}
+{% extends "dashboards/base.html" %}
 
-{% block content %}
+{% block main %}
 
 {% if object_list %}
     <h1>MyList</h1>
 
     
     <ul>
+    <form method="post" class="uniForm">
     {% for list in object_list %}
-        <li><a href="/lists/{{ list.id }}/">{{ list.label }}</a></li>
+        <li><a href="/lists/{{ list.id }}/">{{ list.label }}</a>
+        <input type="checkbox" name={{ "%(list.id)" }} value=""></li>
     {% endfor %}
     </ul>
-    
+    <p><input type="submit" value="削除する"></p>
+    </form>
 {% else %}
     <h1>nothing</h1>
 {% endif %}
