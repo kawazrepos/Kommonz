@@ -32,15 +32,15 @@ class SearchResultView(ListView):
             queries.append(Q(description__contains=q))
         if 'category' in params:
             try:
-                category = Category.objects.get(pk=params['category'])
-                queries.append(Q(category=category))
+                category = Category.objects.get(pk=params['category'][0])
+                qs = qs.filter(category=category)
             except:
                 pass
         if queries:
             query = reduce(lambda a, b : a | b, queries)
             qs = qs.filter(query)
-        if 'order' in params and 'sort' in params and params['sort'] in dict(SORTS):
-            sort = params['sort']
+        if 'order' in params and 'sort' in params and params['sort'][0] in dict(SORTS):
+            sort = params['sort'][0]
             if 'order' == 'd':
                 sort = '-%s' % sort
             qs = qs.order_by(sort)
@@ -58,4 +58,5 @@ class SearchResultView(ListView):
         n = self.request.GET.get('n', '1')
         context['object_list'] = paginator.page(n).object_list
         context['paginator'] = paginator
+        context['query'] = self.request.GET.get('q', '')
         return context
