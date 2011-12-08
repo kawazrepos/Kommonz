@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block title %}デザイン案1{% endblock %}
+
+{% block head %}
+  {{ block.super }}
+  <link media="all" rel="stylesheet" href="/css/search.css" type="text/css" />
+{% endblock %}
+
 {% block content %}
 <section id="search_result_form">
 <form id="index_search_form" method="get" action="{% reverse 'searches_result' %}" enctype="multipart/form-data">
@@ -8,13 +14,18 @@
 </form>
 </section>
 <hr>
-<section id="search_result">
+<section>
   <h1>{{ query }}の検索結果</h1>
   <p>{{ object_list.count }}件</p>
   {% if object_list.count != 0 %}
-  <ul>
+  <ul class="search-results">
   {% for object in object_list %}
-    <li><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></li>
+    <li class="search-material">
+      <header></header>
+      <section>
+      </section>
+      <footer><a href="{{ object.get_absolute_url }}">{% render_mtimg for object %}<cite>{{ object.label }}</cite></a></footer>
+    </li>
   {% endfor %}
   </ul>
   {% else %}
