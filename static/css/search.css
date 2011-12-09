@@ -1,0 +1,27 @@
+ul.search-results {
+  margin: 16px;
+  width: 1058px;
+}
+
+li.search-material {
+  margin: 5px 0 5px 13px;
+  border: solid 1px #e5e5e5;
+  width: 196px;
+  height: 196px;
+  display: block;
+  float: left;
+  position: relative;
+  box-shadow: 1px 1px 3px #666;
+  -moz-box-shadow: 1px 1px 3px #666;
+  -webkit-box-shadow: 1px 1px 3px #666;
+}
+
+li.search-material footer {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 196px;
+  height: 24px;
+  bottom: 0;
+  position: absolute;
+}

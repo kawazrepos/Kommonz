@@ -52,7 +52,6 @@ class MaterialFile(models.Model):
     def extension(self):
       return os.path.splitext(self.file.name)[1][1:]
 
-
 class Material(models.Model):
     u"""
     abstract model of whole materials.

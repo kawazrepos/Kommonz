@@ -14,7 +14,7 @@
       {% if user.is_authenticated %}
       <menu id="header-menu">
         <li class="header-dropdown-section">
-          <img src="/{{ user.profile.icon.small }}" class="usericon small">
+          <img src="/{{ user.profile.icon.middle }}" class="usericon middle">
           <menu id="dropdown" style="display: none;">
             <li class="dropdown-header dashboard">ダッシュボード</li>
             <li class="dropdown-item myprofile"><a href="{% reverse 'auth_user_detail' pk=request.user.id %}">マイプロフィール</a></li>
