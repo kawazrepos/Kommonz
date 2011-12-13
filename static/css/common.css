@@ -1,12 +1,12 @@
 @charset "UTF-8";
-li {
-  list-style-type: none; }
-
 body, textarea {
   font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
 
 input, select {
   font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
+
+* {
+  text-height: 150%; }
 
 body {
   color: #333333;
@@ -36,11 +36,18 @@ h2 {
   margin: 5px auto;
   margin-left: 5px; }
 
+p {
+  text-height: 150%;
+  margin: 5px 15px 10px; }
+
 hr {
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+
+li {
+  list-style-type: none; }
 
 .avatar, .small, .middle, .large, .huge {
   margin: 2px 4px 0px;

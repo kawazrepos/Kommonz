@@ -1,8 +1,21 @@
-{% extends "base.html" %}
+{% extends "dashboards/base.html" %}
 
-{% block title %}新規登録が完了しました{% endblock %}
+{% block title %}Welcome to Kommonz!{% endblock %}
 
-{% block content%}
-<p>新規登録が完了しました。</p>
-<p><a href="{% reverse 'auth_user_update' %}">ユーザ設定ページへ</a></p>
+{% block main %}
+<h1>ようこそ {{ user.username }}さん！</h1>
+<p>
+  Kommonzへようこそ！
+</p>
+
+<p>
+  まずは<b><a href="{% reverse 'auth_user_update' %}">プロフィール設定ページ</a></b>からプロフィールを設定してみましょう。
+</p>
+<p>
+  このページはあなたのダッシュボードです。
+  このページには、右上のアイコンにホバーしたときに出るメニューから、いつでも来ることができます。
+</p>
+
+
+<p></p>
 {% endblock %}
