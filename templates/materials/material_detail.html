@@ -59,7 +59,7 @@
 <section id="detail-main">
   <article>
     <h1>{% render_mtimg for object %}{{ object.label }}</h1>
-    <img src="/{{ object.thumbnail }}">
+    {{ object.test }}
     <section class="material-detail">
       {{ object.description }}
     </section>

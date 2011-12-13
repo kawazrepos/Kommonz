@@ -7,7 +7,6 @@ import os, shutil
 from django.db.models.fields.files import ImageField
 from django.db.models import signals
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage
 from widgets import DelAdminFileWidget
 from forms import ThumbnailFormField
 from exceptions import DuplicatePatterNameException
@@ -23,7 +22,7 @@ class ThumbnailField(ImageField):
         '''
         Renames the image, and calls methods to resize and create the thumbnail
         '''
-        if getattr(instance, self.name):
+        if hasattr(instance, self.name):
             filename = getattr(instance, self.name).path
             ext = os.path.splitext(filename)[1].lower().replace('jpg', 'jpeg')
             dst = self.generate_filename(instance, '%s_%s%s' % (self.name, instance._get_pk_val(), ext))
@@ -46,14 +45,14 @@ class ThumbnailField(ImageField):
         Thumbnail attribute will be of the same class of original image, so
         "path", "url"... properties can be used
         '''
-        if getattr(instance, self.name):
-            filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
+        if hasattr(instance, self.name):
+            dirname, filename = os.path.split(getattr(instance, self.name).name)
             for pattern_name, pattern_size in self.thumbnail_size_patterns.iteritems():
                 if hasattr(getattr(instance, self.name), pattern_name):
                     raise DuplicatePatterNameException(pattern_name)
                 thumbnail_filename = get_thumbnail_filename(filename, pattern_name)
-                thumbnail_type = self.attr_class(instance, self, thumbnail_filename)
-                setattr(getattr(instance, self.name), pattern_name, thumbnail_type)
+                thumbnail = self.attr_class(instance, self, os.path.join(dirname, 'thumbnail', thumbnail_filename))
+                setattr(getattr(instance, self.name), pattern_name, thumbnail)
 
     def formfield(self, **kwargs):
         '''
