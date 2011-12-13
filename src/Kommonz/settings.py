@@ -4,6 +4,7 @@
 # Load pre local_settings
 import os
 import sys
+from utils import lazy_reverse
 
 try:
     from local_site import *
@@ -218,10 +219,6 @@ AUTH_PROFILE_MODULE = 'auth.UserProfile'
 # SocialAuth Setting
 #
 SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter', 'google-oauth2', 'github', 'dropbox', 'hatena',)
-
-from django.utils.functional import lazy
-from django.core.urlresolvers import reverse
-lazy_reverse = lambda name=None, *args : lazy(reverse, str)(name, args=args)
 
 LOGIN_ERROR_URL     = lazy_reverse('registration_error')
 LOGIN_REDIRECT_URL  = "/"

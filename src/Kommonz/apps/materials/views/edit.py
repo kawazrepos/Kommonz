@@ -1,8 +1,10 @@
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 from object_permission.decorators import permission_required
 
+from utils import lazy_reverse
 from utils.views import JSONResponse
 from utils.decorators import view_class_decorator
 
@@ -119,3 +121,12 @@ class MaterialUpdateView(UpdateView):
 
     def get_form_class(self):
         return MaterialUpdateForm
+
+@view_class_decorator(permission_required('materials.delete_material', Material))
+class MaterialDeleteView(DeleteView):
+    queryset = Material.objects.all()
+    success_url = lazy_reverse('materials_material_list')
+
+    @csrf_exempt
+    def post(self, *args, **kwargs):
+        return super(MaterialDeleteView, self).post(*args, **kwargs)

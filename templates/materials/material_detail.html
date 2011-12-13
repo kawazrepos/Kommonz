@@ -2,6 +2,16 @@
 {% load preview %}
 {% block head %}
   {{ block.super }}
+  <script type="text/javascript">
+    $(function(){
+        $('.delete').click(function(){
+          if(window.confirm("削除します。よろしいですか？")){
+            $(this).find('form').submit();
+            return false;
+          }
+        });
+    });
+  </script>
   <link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
   {% render_material_preview_head for object %}
 {% endblock %}
@@ -40,18 +50,23 @@
   </dl>
  </section>
 
-{% if user.is_authenticated %}
+ {% if user.is_authenticated %}
 <section class="material-action">
   <menu>
     {% if user.pk == object.author.pk %}
     <li class="edit"><a href="{% reverse 'materials_material_update' object.pk %}">編集</a></li>
-    <li class="delete">削除</li>
+    <li class="delete">
+      <a href="{% reverse 'materials_material_delete' object.pk %}">削除</a>
+      <form style="display : none;" action="{% reverse 'materials_material_delete' object.pk %}" method='POST'>{% csrf_token %}
+        <input type="submit">
+      </form>
+    </li>
     {% endif %}
     <li class="mylist">マイリストに追加</li>
     <li class="message"><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></li>
     <li class="report"><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">通報する</a></li>
   </menu>
-</section>
+ </section>
 {% endif %}
 {% endblock %}
 
