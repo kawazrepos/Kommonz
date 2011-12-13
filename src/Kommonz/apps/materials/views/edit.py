@@ -1,7 +1,7 @@
 from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
+from object_permission.decorators import permission_required
 
 from utils.views import JSONResponse
 from utils.decorators import view_class_decorator
@@ -91,15 +91,16 @@ class MaterialFileCreateView(CreateView):
     def get_form_class(self):
         return MaterialFileForm
 
-#@view_class_decorator(permission_required('materials.change_material', Material))
+@view_class_decorator(permission_required('materials.change_material', Material))
 class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
 
     def post(self, request, *args, **kwargs):
-        f = request.FILES.pop('file', [])[0]
+        f = request.FILES.pop('file', None)
         self.object = self.get_object()
         if f:
+            f = f[0]
             old_type = guess(self.get_object().file.name)
             new_type = guess(f.name)
             if not old_type == new_type:

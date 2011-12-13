@@ -44,7 +44,7 @@
 <section class="material-action">
   <menu>
     {% if user.pk == object.author.pk %}
-    <li class="edit">編集</li>
+    <li class="edit"><a href="{% reverse 'materials_material_update' object.pk %}">編集</a></li>
     <li class="delete">削除</li>
     {% endif %}
     <li class="mylist">マイリストに追加</li>

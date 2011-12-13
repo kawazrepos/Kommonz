@@ -23,7 +23,9 @@ class ThumbnailField(ImageField):
         Renames the image, and calls methods to resize and create the thumbnail
         '''
         if hasattr(instance, self.name):
-            filename = getattr(instance, self.name).path
+            file = getattr(instance, self.name)
+            if not file : return
+            filename = file.path
             ext = os.path.splitext(filename)[1].lower().replace('jpg', 'jpeg')
             dst = self.generate_filename(instance, '%s_%s%s' % (self.name, instance._get_pk_val(), ext))
             dst_fullpath = os.path.join(settings.MEDIA_ROOT, dst)
@@ -46,7 +48,9 @@ class ThumbnailField(ImageField):
         "path", "url"... properties can be used
         '''
         if hasattr(instance, self.name):
-            dirname, filename = os.path.split(getattr(instance, self.name).name)
+            file = getattr(instance, self.name)
+            if not file: return
+            dirname, filename = os.path.split(file.name)
             for pattern_name, pattern_size in self.thumbnail_size_patterns.iteritems():
                 if hasattr(getattr(instance, self.name), pattern_name):
                     raise DuplicatePatterNameException(pattern_name)

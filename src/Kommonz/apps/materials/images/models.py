@@ -16,6 +16,7 @@ class Image(Material):
     """
     
     objects = MaterialManager()
+    object_permission_suffix = '_material'
 
     class Meta:
         app_label           = 'materials'
