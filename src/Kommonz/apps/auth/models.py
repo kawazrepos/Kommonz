@@ -2,7 +2,7 @@ import os
 import shutil
 from django.contrib.auth.models import User, UserManager
 from django.db import models
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.models import ThumbnailField
@@ -10,7 +10,10 @@ from fields.thumbnailfield.models import ThumbnailField
 USER_ICON_PATH = os.path.join('storage', 'profiles')
 
 class UserProfile(models.Model):
-    def _get_icon_path(self, filename):
+    """
+    A model for User profile.
+    """
+    def _get_avatar_path(self, filename):
         path = os.path.join(USER_ICON_PATH, self.user.username)
         return os.path.join(path, filename)
     
@@ -32,7 +35,7 @@ class UserProfile(models.Model):
     description = models.TextField(_('Profile Text'), blank=False, null=True)
     
     # not required
-    icon         = ThumbnailField(_('Profile Icon'), upload_to=_get_icon_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS)
+    _avatar      = ThumbnailField(_('Profile Icon'), upload_to=_get_avatar_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS)
     sex          = models.CharField(_('Sex'), max_length=10, choices=SEX_TYPES, blank=True)
     birthday     = models.DateField(_('Birthday'), null=True, blank=True)
     place        = models.CharField(_('Location'), max_length=255, blank=True)
@@ -54,11 +57,16 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         return ('auth_user_detail', (), { 'pk' : self.id })
     
+    @property
+    def avatar(self):
+        if self._avatar:
+            return self._avatar
+        return "default"
 
-    def clean_up_icon(self):
-        icon_dir = os.path.dirname(self.icon.path)
-        if os.path.exists(icon_dir):
-            shutil.rmtree(icon_dir)
+    def clean_up_avatar(self):
+        avatar_dir = os.path.dirname(self._avatar.path)
+        if os.path.exists(avatar_dir):
+            shutil.rmtree(avatar_dir)
         
 class UserOption(models.Model):
     user = models.OneToOneField(User, related_name='option')

@@ -42,27 +42,27 @@ h3 {
 code {
 }
 
-.usericon {
+.avatar {
   margin: 2px 4px 0px;
   display: inline-block;
 }
 
-.usericon.small {
+.avatar.small {
   width: 24px;
   height: 24px;
 }
 
-.usericon.middle {
+.avatar.middle {
   width: 48px;
   height: 48px;
 }
 
-.usericon.large {
+.avatar.large {
   width: 96px;
   height: 96px;
 }
 
-.usericon.huge {
+.avatar.huge {
   width: 288px;
   height: 288px;
 }

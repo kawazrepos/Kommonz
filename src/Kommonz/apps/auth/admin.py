@@ -7,7 +7,7 @@ __date__ = '2011/10/09'
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'nickname', 'description', 'icon', 'sex', 'birthday', 'place', 'url',)
+    list_display = ('user', 'nickname', 'description', '_avatar', 'sex', 'birthday', 'place', 'url',)
 
 
 class UserOptionAdmin(admin.ModelAdmin):
