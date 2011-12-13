@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls.defaults import patterns, url, include
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 from django.utils.functional import lazy
 from django.views.generic import ListView
 from models import Material

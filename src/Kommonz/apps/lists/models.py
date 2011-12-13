@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 from qwert.middleware.threadlocals import request as get_request
-from object_permission.mediators import ObjectPermissionMediator as Mediator
 from apps.materials.models import Material
 
 PUB_STATES = (

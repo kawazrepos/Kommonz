@@ -1,19 +1,17 @@
-from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, UpdateView
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django import forms
-from utils.views import JSONResponse
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
 
-from object_permission.decorators import permission_required
+from utils.views import JSONResponse
+from utils.decorators import view_class_decorator
 
 from apps.categories.models import Category
 
 from ..models import Material, MaterialFile
-from ..forms import MaterialForm, MaterialFileForm
-from ..api.mappers import MaterialMapper, MaterialFileMapper
+from ..forms import MaterialFileForm, MaterialUpdateForm
+from ..api.mappers import MaterialFileMapper
+from ..utils.filetypes import guess
 
 def response_mimetype(request):
     if request.META.has_key('HTTP_ACCEPT') and "application/json" in request.META['HTTP_ACCEPT']:
@@ -23,7 +21,6 @@ def response_mimetype(request):
 
 def set_material_model(func):
     def _decorator(self, request, *args, **kwargs):
-        filename = None
         if request.META['REQUEST_METHOD'] == 'GET':
             self.filename = request.GET.get('filename', None)
         elif request.META['REQUEST_METHOD'] == 'POST':
@@ -79,6 +76,7 @@ class MaterialValidateView(MaterialCreateView):
         }
         return JSONResponse(response, {}, response_mimetype(self.request))
 
+@view_class_decorator(login_required)
 class MaterialFileCreateView(CreateView):
     model = MaterialFile
     template_name = 'materials/material_file_form.html'
@@ -93,27 +91,30 @@ class MaterialFileCreateView(CreateView):
     def get_form_class(self):
         return MaterialFileForm
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(MaterialFileCreateView, self).dispatch(*args, **kwargs)
-
+#@view_class_decorator(permission_required('materials.change_material', Material))
 class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
-    
-    @method_decorator(permission_required('apps.materials.change_material', Material))
-    def dispatch(self, *args, **kwargs):
-        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
 
-class MaterialInlineUpdateView(MaterialUpdateView):
-    template_name = 'materials/material_inline_form.html'
-    FORM_META_ARGS = {
-                      'exclude' : 'file'
-    }
-    
-    @method_decorator(csrf_exempt)    
-    @method_decorator(permission_required('apps.materials.change_material', Material))
-    def dispatch(self, *args, **kwargs):
-        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        f = request.FILES.pop('file', [])[0]
+        self.object = self.get_object()
+        if f:
+            old_type = guess(self.get_object().file.name)
+            new_type = guess(f.name)
+            if not old_type == new_type:
+                form = self.get_form_class()(**self.get_form_kwargs())
+                form.errors.update({'file' : [_('Material filetype must be same between old and new file.'), ]})
+                return self.render_to_response(self.get_context_data(form=form))
+            material_file = self.object._file
+            material_file.file = f
+            material_file.save()
+        return super(MaterialUpdateView, self).post(request, *args, **kwargs)
 
+    def get_form_kwargs(self):
+        kwargs = super(MaterialUpdateView, self).get_form_kwargs()
+        kwargs.update({'material' : self.object})
+        return kwargs
 
+    def get_form_class(self):
+        return MaterialUpdateForm

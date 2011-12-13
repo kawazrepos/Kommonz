@@ -1,15 +1,12 @@
-{% extends "base.html" %}
+{% extends "dashboards/base.html" %}
 {% load upload_tags %}
-
-{% block head %}
-{% endblock %}
 
 {% block title %}素材投稿{% endblock %}
 
-{% block content %}
-<form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="start">update</button>
+{% block main %}
+<form method="post" action="" enctype="multipart/form-data" class="uniForm">{% csrf_token %}
+  {{ form|as_uni_form }}
+  <input type="submit" value="更新" />
 </form>
 </div>
 {% endblock %}

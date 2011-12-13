@@ -1,9 +1,8 @@
 # Create your views here.
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
-from django.views.generic.edit import ModelFormMixin
 from object_permission.decorators import permission_required
 from utils.decorators import view_class_decorator
 from apps.materials.models import Material

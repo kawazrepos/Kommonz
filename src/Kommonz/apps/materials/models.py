@@ -7,6 +7,7 @@ import os
 import mimetypes
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
@@ -43,9 +44,18 @@ class MaterialFile(models.Model):
 
     def __unicode__(self):
         return self.file.name
-    
+
     def save(self, *args, **kwargs):
-       return super(MaterialFile, self).save(*args, **kwargs)
+        """
+        Validations user can't update file to another type.
+        """
+        if self.file:
+            from utils.filetypes import guess
+            new_type = guess(self.file.name)
+            old_type = guess(self.material.file.name)
+            if not new_type == old_type:
+                raise ValidationError(_('Material filetype must be same between old and new file.'))
+        return super(MaterialFile, self).save(*args, **kwargs)
 
     @property
     def extension(self):
@@ -153,7 +163,7 @@ class Material(models.Model):
     @property
     def filename(self):
         return self.file.name
-    
+
     def save(self, *args, **kwargs):
         from utils.filetypes import get_file_model
         cls = get_file_model(self.label)
@@ -176,8 +186,8 @@ class Material(models.Model):
     
     def modify_object_permission(self, mediator, created):
         mediator.manager(self, self.author)
-        # ToDo collaborators
-        # map(lambda user: mediator.editor(self, user), self.collaborators)
+        mediator.viewer(self, None)
+        mediator.viewer(self, 'anonymous')
         
 class Kero(models.Model):
     u"""

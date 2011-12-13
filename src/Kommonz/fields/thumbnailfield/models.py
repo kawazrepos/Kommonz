@@ -33,7 +33,7 @@ class ThumbnailField(ImageField):
                         os.makedirs(os.path.dirname(dst_fullpath))
                         if os.path.exists(filename):
                             shutil.copyfile(filename, dst_fullpath)
-                elif os.path.exists(filename):
+                elif os.path.exists(filename) and not os.path.exists(dst_fullpath):
                     os.rename(filename, dst_fullpath)
                 create_thumbnail(dst_fullpath, dst_fullpath, self.thumbnail_size_patterns)
                 setattr(instance, self.attname, dst)
