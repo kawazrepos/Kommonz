@@ -1,0 +1,50 @@
+.login {
+  width: 1080px;
+  margin: 0px auto;
+  overflow: hidden; }
+  .login h1 {
+    margin: 50px 1px 20px; }
+  .login h2 {
+    margin: 3px 5px 15px; }
+  .login p {
+    margin: 5px 15px 5px;
+    line-height: 150%; }
+  .login ul.services {
+    margin: 5px 15px 5px; }
+    .login ul.services .a {
+      display: inline-block; }
+    .login ul.services .serviceicon {
+      background-image: url(image/serviceicon.png);
+      background-repeat: no-repeat;
+      width: 16px;
+      height: 16px;
+      display: inline-block; }
+  .login .services li {
+    width: 200px;
+    height: 60px;
+    margin: 10px 3px;
+    display: inline-block;
+    position: relative; }
+  .login .services a {
+    text-align: center;
+    border: solid 1px #ccc;
+    margin: 0;
+    padding-top: 15px;
+    width: 100%;
+    height: 43px;
+    display: block; }
+  .login .services a:hover {
+    text-decoration: none;
+    border-color: #38F; }
+  .login .services .serviceicon {
+    margin: 3px 5px 0; }
+  .login .services .dropbox .serviceicon {
+    background-position: 0 0; }
+  .login .services .github .serviceicon {
+    background-position: 0 -21px; }
+  .login .services .google .serviceicon {
+    background-position: 0 -42px; }
+  .login .services .hatena .serviceicon {
+    background-position: 0 -63px; }
+  .login .services .twitter .serviceicon {
+    background-position: 0 -84px; }

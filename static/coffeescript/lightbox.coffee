@@ -1,6 +1,6 @@
 $ ->
-  $uploadButton = $('li.header-button-section a.upload-button')
-  $uploadButton.click (e) ->
+  $headerButton = $('li.header-button-section a')
+  $headerButton.click (e) ->
     url = $(@).attr 'href'
     $container = $('<div>').addClass('lightbox')
     $iframe = $('<iframe>')

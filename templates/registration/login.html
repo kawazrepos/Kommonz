@@ -1,21 +1,54 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>ログインページ</h2>
-<ul>
-  <li>
-    <a href="{% reverse 'socialauth_begin' 'twitter' %}">Twitterでログイン</a>
-  </li>
-  <li>
-    <a href="{% reverse 'socialauth_begin' 'google-oauth2' %}">Googleでログイン</a>
-  </li>
-  <li>
-   <a href="{% reverse 'socialauth_begin' 'hatena' %}">はてなでログイン</a>
-  </li>
-  <li>
-  <a href="{% reverse 'socialauth_begin' 'dropbox' %}">Dropboxでログイン</a>
-  </li>
-  <li>
-  <a href="{% reverse 'socialauth_begin' 'github' %}">githubでログイン</a>
-  </li>
-</ul>
+{% extends "rawbase.html" %}
+
+{% block head %}
+{{ block.super }}
+<link media="all" rel="stylesheet" href="/css/login.css" type="text/css" />
+{% endblock %}
+
+
+{% block body %}
+<section class="login">
+  <h1>ログイン</h1>
+  <h2>Kommonzへようこそ！</h2>
+  <p>
+    Kommonzに素材をアップロードするにはログインが必要です。
+    TwitterやGoogleなど、既にお持ちのアカウントでログインすることができます。
+  </p>
+  <p>
+    利用規約をご覧の後、ご利用ください。
+  </p>
+
+  <ul class="services">
+    <li class="twitter">
+      <a href="{% reverse 'socialauth_begin' 'twitter' %}" target="_parent">
+        <span class="serviceicon"></span>Twitterでログイン
+      </a>
+    </li>
+    <li class="google">
+      <a href="{% reverse 'socialauth_begin' 'google-oauth2' %}" target="_parent">
+        <span class="serviceicon"></span>Googleでログイン
+      </a>
+    </li>
+    <li class="hatena">
+      <a href="{% reverse 'socialauth_begin' 'hatena' %}" target="_parent">
+        <span class="serviceicon"></span>はてなでログイン
+      </a>
+    </li>
+    <li class="dropbox">
+      <a href="{% reverse 'socialauth_begin' 'dropbox' %}" target="_parent">
+        <span class="serviceicon"></span>Dropboxでログイン
+      </a>
+    </li>
+    <li class="github">
+      <a href="{% reverse 'socialauth_begin' 'github' %}" target="_parent">
+        <span class="serviceicon"></span>githubでログイン
+      </a>
+    </li>
+  </ul>
+  <hr />
+  <h2>過去にログインした方へ</h2>
+  <p>過去に一度でもログインした方が、過去のアカウントを引き続き利用する場合は、前回ログインに利用したサービスのアカウントでログインする必要があります。</p>
+  <p>また、ログイン後、右上のメニューから外部サービス設定を選び、ログインに利用した以外のアカウントを紐づけておくことで、次回以降、紐づけたアカウントを利用してログインすることも可能です。</p>
+</section>
+
 {% endblock %}
