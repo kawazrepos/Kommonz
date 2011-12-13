@@ -14,4 +14,4 @@ class UserProfileMapper(ModelMapper):
     
     class Meta:
         model  = UserProfile
-        fields = ('pk', 'user', 'nickname', 'icon',)
+        fields = ('pk', 'user', 'nickname', 'avatar',)

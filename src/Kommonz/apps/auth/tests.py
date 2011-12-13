@@ -3,7 +3,6 @@ from nose.tools import *
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.test import client
 from django.test.client import Client
 from models import UserProfile, UserOption
 
@@ -55,29 +54,28 @@ class TestUserThumbnail(object):
         Tests thumbnails are resized automatically when user profile was updated.
         """
         import os
-        from models import USER_ICON_PATH
         c = Client()
         ok_(c.login(username='kawaztan2', password='password'))
-        icon = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawaztan.png'), 'rb')
-        response = c.post(reverse('auth_userprofile_update'), {
+        avatar = open(os.path.join(settings.TEST_FIXTURE_FILE_DIR, 'kawaztan.png'), 'rb')
+        c.post(reverse('auth_userprofile_update'), {
             'nickname' : u'かわずたん',
             'description' : u'来てっ！',
-            'icon' : icon
+            '_avatar' : avatar
         })
         eq_(self.kawaz.profile.nickname, u'かわずたん')
-        ok_(self.kawaz.profile.icon.small)
-        small_icon = self.kawaz.profile.icon.small.path
-        ok_(os.path.exists(small_icon))
+        ok_(self.kawaz.profile._avatar.small)
+        small_avatar = self.kawaz.profile._avatar.small.path
+        ok_(os.path.exists(small_avatar))
 
     def test_thumbnail_deletion(self):
         """
-        Tests UserProfile.clean_up_icon works well.
+        Tests UserProfile.clean_up__avatar works well.
         """
         import os
         from models import USER_ICON_PATH
-        icon_dir = os.path.join(settings.ROOT, USER_ICON_PATH, self.kawaz.username)
-        self.kawaz.profile.clean_up_icon()
-        ok_(not os.path.exists(icon_dir))
+        avatar_dir = os.path.join(settings.ROOT, USER_ICON_PATH, self.kawaz.username)
+        self.kawaz.profile.clean_up_avatar()
+        ok_(not os.path.exists(avatar_dir))
 
     def teardown(self):
-        self.kawaz.profile.clean_up_icon()
+        self.kawaz.profile.clean_up_avatar()

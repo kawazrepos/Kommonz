@@ -6,7 +6,7 @@
 {% block content %}
 <section id="detail_main">
     <h1>{% if object.nickname %}{{ object.nickname }}{% else %}{{ object.user.username }}{% endif %}</h1>
-    <p><img src="{{ object.icon }}"></p>
+    <p><img src="{{ object.avatar.huge }}"></p>
     <p>UserName：{{ object.user.username }}</p>
     <p>プロフィール：{{ object.profile }}</p>
     <p>性別：{{ object.sex }}</p>
