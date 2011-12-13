@@ -3,11 +3,14 @@ import shutil
 from django.contrib.auth.models import User, UserManager
 from django.db import models
 from django.db.models.signals import post_save
+from django.db.models.fields.files import ImageFieldFile
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.models import ThumbnailField
 
+
 USER_ICON_PATH = os.path.join('storage', 'profiles')
+DEFAULT_ICON_PATH = os.path.join('image', 'default', 'avatar', 'avatar.png')
 
 class UserProfile(models.Model):
     """
@@ -22,7 +25,7 @@ class UserProfile(models.Model):
         ('woman', _('Woman'))
     )
     
-    THUMBNAIL_SIZE_PATTERNS = {
+    AVATAR_SIZE_PATTERNS = {
         'huge':     (288, 288, False),
         'large':    (96, 96, False),
         'middle':   (48, 48, False),
@@ -35,7 +38,7 @@ class UserProfile(models.Model):
     description = models.TextField(_('Profile Text'), blank=False, null=True)
     
     # not required
-    _avatar      = ThumbnailField(_('Profile Icon'), upload_to=_get_avatar_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS)
+    _avatar      = ThumbnailField(_('Profile Icon'), upload_to=_get_avatar_path, thumbnail_size_patterns=AVATAR_SIZE_PATTERNS)
     sex          = models.CharField(_('Sex'), max_length=10, choices=SEX_TYPES, blank=True)
     birthday     = models.DateField(_('Birthday'), null=True, blank=True)
     place        = models.CharField(_('Location'), max_length=255, blank=True)
@@ -59,9 +62,12 @@ class UserProfile(models.Model):
     
     @property
     def avatar(self):
+        """
+        Returns own avatar or default avatar.
+        """
         if self._avatar:
             return self._avatar
-        return "default"
+        return DefaultAvatarFile(self, self._avatar.field)
 
     def clean_up_avatar(self):
         avatar_dir = os.path.dirname(self._avatar.path)
@@ -93,3 +99,12 @@ def create_user_option(sender, instance, created, **kwargs):
     if created:
         UserOption.objects.get_or_create(user=instance)
 
+class DefaultAvatarFile(ImageFieldFile):
+    """
+    Default avatar Image class
+    """
+    def __init__(self, instance, field):
+        super(DefaultAvatarFile, self).__init__(instance, field, DEFAULT_ICON_PATH)
+        for pattern_name, pattern_size in UserProfile.AVATAR_SIZE_PATTERNS.iteritems():
+            path, ext = os.path.splitext(DEFAULT_ICON_PATH)
+            setattr(self, pattern_name, ImageFieldFile(instance, field, "%s.%s%s" % (path, pattern_name, ext)))
