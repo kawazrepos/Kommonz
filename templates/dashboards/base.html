@@ -9,7 +9,7 @@
 
 <section class="user-info">
   <div class="user-pin"></div>
-  <img src="/{{ user.profile.avatar.large }}" class="avatar large">
+  <a href="{% reverse 'auth_user_detail' user.pk %}"><img src="/{{ user.profile.avatar.large }}" class="avatar large"></a>
   <span class="username">{{ user.username }}</span>
 </section>
 

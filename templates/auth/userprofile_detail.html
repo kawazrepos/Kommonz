@@ -1,9 +1,9 @@
-{% extends "dashboards/base.html" %}
+{% extends "twocolumn.html" %}
 
 {% block title %}{{ object.user.username }}{% endblock %}
 {% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール{% endblock %}
 
-{% block content %}
+{% block main %}
 <section id="detail_main">
     <h1>{% if object.nickname %}{{ object.nickname }}{% else %}{{ object.user.username }}{% endif %}</h1>
     <p><img src="{{ object.avatar.huge }}"></p>

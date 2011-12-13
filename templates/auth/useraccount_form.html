@@ -1,10 +1,10 @@
 {% extends "dashboards/base.html" %}
 
-{% block title %}{{ request.user.username }}のアカウント設定{% endblock %}
-{% block breadcrumbs %}Kommonz > {{ request.user.username }}のアカウント設定{% endblock %}
+{% block title %}外部サービス設定{% endblock %}
+{% block breadcrumbs %}外部サービス設定{% endblock %}
 
 {% block main %}
-<h1>{{ request.user.username }}のアカウント設定</h1>
+<h1>外部サービス設定</h1>
 <h2>現在関連付けているアカウント</h2>
 <ul>
 {% for account in associated_accounts %}
