@@ -4,7 +4,7 @@ __version__ = '1.0.0'
 __date__ = '2011/10/10'
 
 from django.utils.translation import ugettext as _
-from django.db.models.fields.files import ImageFieldFile
+from django.db.models import signals
 from ..managers import MaterialManager
 from ..models import Material
 
@@ -12,6 +12,11 @@ class Image(Material):
     """
     Model for Image material.
     """
+    def __init__(self, *args, **kwargs):
+        super(Image, self).__init__(*args, **kwargs)
+        thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
+        signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Image)
+        signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Image)
     
     objects = MaterialManager()
     object_permission_suffix = '_material'
@@ -23,7 +28,9 @@ class Image(Material):
     
     def save(self, *args, **kwargs):
         if not self.thumbnail:
-            self.thumbnail = ImageFieldFile(self, self.thumbnail, self.file.name)
+            self.thumbnail = self.file.path
+            thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
+            signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Image)
+            signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Image)
         return super(Image, self).save(*args, **kwargs)
-    
 

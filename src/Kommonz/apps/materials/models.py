@@ -20,8 +20,8 @@ from managers import MaterialManager
 MATERIAL_FILE_PATH = os.path.join('storage', 'materials')
 
 class MaterialFile(models.Model):
-    u"""
-    model for file
+    """
+    A Model for material raw file.
     """
     def _get_file_path(self, filename):
         request = get_request()
@@ -52,17 +52,19 @@ class Material(models.Model):
     u"""
     abstract model of whole materials.
     """
-    
-    def _get_thumbnail_path(self, filename):
-        path = u'storage/materials/%s/thumbnails/' % self.author.username
-        return os.path.join(path, filename)
-    
+   
     THUMBNAIL_SIZE_PATTERNS = {
         'huge':     (288, 288, False),
         'large':    (96, 96, False),
         'middle':   (48, 48, False),
         'small':    (24, 24, False),
     }
+
+    def _get_thumbnail_path(self, filename):
+        path = os.path.dirname(self.file.name)
+        name, ext = os.path.splitext(filename)
+        thumbnail_name = default_storage.get_available_name('thumbnail%s' % ext)
+        return os.path.join(path, thumbnail_name)
     
     # required
     label       = models.CharField(_('Label'), max_length=128, null=False, blank=False)

@@ -76,11 +76,10 @@ class ThumbnailField(ImageField):
         dst_fullpath = os.path.join(settings.MEDIA_ROOT, dst)
         dst_dir = os.path.dirname(dst_fullpath)
         thumbnail_dir = self._get_thumbnail_dir(dst_fullpath)
-        if created or not os.path.normpath(os.path.abspath(fullpath)) == os.path.normpath(os.path.abspath(dst_fullpath)):
+        if created or not os.path.abspath(fullpath) == os.path.abspath(dst_fullpath):
             if not os.path.exists(dst_dir):
                 os.makedirs(dst_dir)
             if not os.path.exists(dst_fullpath):
-                print dst_fullpath
                 shutil.copy(fullpath, dst_fullpath)
             if not os.path.exists(thumbnail_dir):
                 os.mkdir(thumbnail_dir)
