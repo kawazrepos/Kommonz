@@ -3,8 +3,13 @@ __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/10'
 
+import os
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import ImageFormatter
+
+from django.conf import settings
 from django.db import models
-from django.db.models.signals import pre_save
 from django.utils.translation import ugettext as _
 from ..utils.syntaxes import SYNTAXES, guess_syntax
 from ..models import Material
@@ -34,6 +39,10 @@ class Code(Material):
         super(Code, self).clean()
 
     def save(self, *args, **kwargs):
+        self.body = self._encode_body()
+        path = self._get_thumbnail_path(os.path.basename(self.file.path))
+        thumbnail_path = "%s.png" % os.path.splitext(path)[0]
+        self.thumbnail = self._create_thumbnail(path=os.path.join(settings.MEDIA_ROOT, thumbnail_path))
         super(Code, self).save(*args, **kwargs)
 
     def _guess_syntax(self):
@@ -42,10 +51,32 @@ class Code(Material):
         """
         return guess_syntax(self.file.name)
 
-def set_body(sender, instance, **kwargs):
-    from utils.encoding import to_utf8
-    code = open(instance.file.path, 'ra')
-    body = code.read()
-    instance.body = to_utf8(body)
-    code.close()
-pre_save.connect(set_body, sender=Code)
+    def _encode_body(self):
+        """
+        Read file to encode to utf8 and set into 'body' field.
+        """
+        from utils.encoding import to_utf8
+        code = open(self.file.path, 'ra')
+        body = to_utf8(code.read())
+        code.close()
+        return body
+
+    def _create_thumbnail(self, path, syntax=None):
+        thumbnail_dir = os.path.dirname(path)
+        if not os.path.exists(thumbnail_dir):
+            os.makedirs(thumbnail_dir)
+        if not syntax:
+            syntax = self.extension
+        try:
+            lexer = get_lexer_by_name(syntax)
+        except:
+            lexer = get_lexer_by_name('text')
+        formatter = ImageFormatter(
+                font_size=16,
+                line_numbers=False
+        )
+        data = highlight(self.body, lexer, formatter)
+        file = open(path, 'wb')
+        file.write(data)
+        file.close()
+        return path
