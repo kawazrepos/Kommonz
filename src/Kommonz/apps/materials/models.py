@@ -64,7 +64,7 @@ class Material(models.Model):
         path = os.path.dirname(self.file.name)
         name, ext = os.path.splitext(filename)
         thumbnail_name = default_storage.get_available_name('thumbnail%s' % ext)
-        return os.path.join(path, thumbnail_name)
+        return os.path.join(path, 'thumbnails', thumbnail_name)
     
     # required
     label       = models.CharField(_('Label'), max_length=128, null=False, blank=False)
