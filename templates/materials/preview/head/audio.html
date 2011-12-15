@@ -7,15 +7,14 @@
 <script type="text/javascript" src="/javascript/jPlayer/circle.player.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $(".jPlayer").jPlayer({
-      ready: function () {
-        $(this).jPlayer("setMedia", {
-          "{{ material.extension }}" : "{% reverse 'materials_material_preview' material.pk %}",
-        });
-      },
-      swfPath: "/javascript/jPlayer",
-      supplied: "{{ material.extension }}",
-      cssSelectorAncestor : ".jPlayer-container"
+    var myCirclePlayer = new CirclePlayer('.jPlayer',
+    {
+      "{{ material.extension }}" : "{% reverse 'materials_material_preview' material.pk %}"
+    }, {
+      swfPath : "/javascript/jPlayer",
+      supplied : "{{ material.extension }}",
+      cssSelectorAncestor : ".jPlayer-container{{ material.pk }}",
+      wmode : 'window'
     });
   });
 </script>

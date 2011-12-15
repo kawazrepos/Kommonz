@@ -13,7 +13,7 @@ class Audio(Material):
         Model for Audio material.
     """
     
-    play_time = models.PositiveSmallIntegerField(_('Play Time'))
+    play_time = models.PositiveSmallIntegerField(_('Play Time'), editable=False, default=0)
     
     objects = MaterialManager()
 

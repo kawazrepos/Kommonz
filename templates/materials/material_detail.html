@@ -1,19 +1,19 @@
 {% extends "twocolumn.html" %}
 {% load preview %}
 {% block head %}
-  {{ block.super }}
-  <script type="text/javascript">
-    $(function(){
-        $('.delete').click(function(){
-          if(window.confirm("削除します。よろしいですか？")){
-            $(this).find('form').submit();
-            return false;
-          }
+{{ block.super }}
+<script type="text/javascript">
+  $(function(){
+      $('.delete').click(function(){
+        if(window.confirm("削除します。よろしいですか？")){
+        $(this).find('form').submit();
+        return false;
+        }
         });
-    });
-  </script>
-  <link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
-  {% render_material_preview_head for object %}
+      });
+</script>
+<link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
+{% render_material_preview_head for object %}
 {% endblock %}
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
@@ -25,32 +25,32 @@
   <dl class="material-information">
     <dt>投稿者</dt>
     <dd class="author">
-      <img class="avatar middle" src="/{{ object.author.profile.avatar.middle }}">
-      <span class="username"><a href="">{{ object.author.username }}</a>さん</span>
+    <img class="avatar middle" src="/{{ object.author.profile.avatar.middle }}">
+    <span class="username"><a href="">{{ object.author.username }}</a>さん</span>
     </dd>
     <dt>カテゴリ</dt>
     <dd>{{ object.category }}</dd>
     <dt>ライセンス</dt>
     <dd>
-      {{ object.license }}
-      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
+    {{ object.license }}
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
     </dd>
     <dt>レーティング</dt>
     <dd class="material-">
-      <ul>
+    <ul>
       {% for kero in object.keros.all %}
-        <li class="kero-icon">{{ kero }}</li>
+      <li class="kero-icon">{{ kero }}</li>
       {% empty %}
-        <li class="kero-icon">なし</li>
+      <li class="kero-icon">なし</li>
       {% endfor %}
-      </ul>
+    </ul>
     </dd>
     <dt>ダウンロード回数</dt>
     <dd>{{ object.download }}</dd>
   </dl>
- </section>
+</section>
 
- {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 <section class="material-action">
   <menu>
     {% if user.pk == object.author.pk %}
@@ -66,7 +66,7 @@
     <li class="message"><a href="{% reverse 'messages_message_create' %}?message_type=material_message&pk={{ object.pk }}">作者にメッセージを送る</a></li>
     <li class="report"><a href="{% reverse 'reports_report_create' %}?pk={{ object.pk }}">通報する</a></li>
   </menu>
- </section>
+</section>
 {% endif %}
 {% endblock %}
 
@@ -78,7 +78,7 @@
     <section class="material-detail">
       {{ object.description }}
     </section>
-  {% render_material_preview for object %}
+    {% render_material_preview for object %}
   </article>
   <ul class="material-subinformation">
     <li> {{ object.created_at|date:"Y/m/d H:i:s" }}</li>
@@ -87,6 +87,5 @@
     <li>|</li>
     <li>{{ object.mimetype }}</li>
   </ul>
-
-  </section>
+</section>
 {% endblock %}
