@@ -3,9 +3,7 @@ __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/10'
 
-import os
 from django.utils.translation import ugettext as _
-from fields.thumbnailfield.utils import create_thumbnail, convert_patterns_dict
 from django.db.models.fields.files import ImageFieldFile
 from ..managers import MaterialManager
 from ..models import Material
@@ -26,16 +24,6 @@ class Image(Material):
     def save(self, *args, **kwargs):
         if not self.thumbnail:
             self.thumbnail = ImageFieldFile(self, self.thumbnail, self.file.name)
-            self._create_thumbnail(self.thumbnail.path)
         return super(Image, self).save(*args, **kwargs)
     
-    def _create_thumbnail(self, filename):
-        """
-        Create thumbnail from image and return that's path.
-        """
-        # implement this
-        path, original_filename = os.path.split(filename)
-        thumbnail = os.path.join(path, "thumbnail", original_filename)
-        patterns = convert_patterns_dict(Material.THUMBNAIL_SIZE_PATTERNS)
-        create_thumbnail(filename, thumbnail, patterns)
-        return filename
+

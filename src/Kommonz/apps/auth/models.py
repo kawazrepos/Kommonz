@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.db.models.fields.files import ImageFieldFile
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
-from fields.thumbnailfield.models import ThumbnailField
+from fields.thumbnailfield.fields import ThumbnailField
 
 
 USER_ICON_PATH = os.path.join('storage', 'profiles')

@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _
 from qwert.middleware.threadlocals import request as get_request
 from apps.categories.models import Category
 
-from fields.thumbnailfield.models import ThumbnailField
+from fields.thumbnailfield.fields import ThumbnailField
 from managers import MaterialManager
 
 MATERIAL_FILE_PATH = os.path.join('storage', 'materials')
