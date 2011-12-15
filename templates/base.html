@@ -11,6 +11,11 @@
 <body>
   <div id="content-wrapper">
     <header id="header">
+      <h1 id="header-logo">
+        <a href="{% reverse 'index' %}" alt="index">
+          <img src="{{ MEDIA_URL }}image/style/headerlogo.png" width="224px" height="36px">
+        </a>
+      </h1>
       {% if user.is_authenticated %}
       <menu id="header-menu">
         <li class="header-dropdown-section">
