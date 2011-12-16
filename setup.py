@@ -64,6 +64,7 @@ setup(
         'pyyaml',
         'pykf',
         'nose',
+        'pygments',
         'bpmappers',
         'django>=1.3',
         'django-compress',
