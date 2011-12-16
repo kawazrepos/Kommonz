@@ -1,0 +1,58 @@
+@import "lib";
+
+#sidebar{
+  dd.author{
+    .usericon {
+      display: inline-block;
+    }
+    .username {
+      margin: 5px 0 3px;
+      display: block;
+    }
+  } 
+  section.material-action menu {
+    @include menu-icon-list;
+  }
+} 
+
+ul.material-subinformation {
+  margin: 20px auto 5px;
+  li {
+    color: #666;
+    font-size: 8px;
+    padding: auto 5px;
+    display: inline;
+  }
+}
+
+.download-button {
+  vertical-align: middle;
+  text-decoration: none;
+  margin: 20px auto;
+  padding: 0;
+  padding-top: 20px;
+  width: 200px;
+  height: 40px;
+  display: block;
+}
+
+section.material-detail {
+  background: #fefefe;
+  margin: 10px 0px 10px;
+  padding: 20px 10px 20px 10px;
+  border: solid 1px #ccc;
+}
+
+section.material-comment {
+  article {
+    background: #fefefe;
+    margin: 5px;
+    padding: 5px;
+    border: solid 1px #ccc;
+  }
+  img.comment-avatar {
+    float: left;
+    margin-right: 10px;
+  }
+} 
+ 

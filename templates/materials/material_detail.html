@@ -26,7 +26,7 @@
     <dt>投稿者</dt>
     <dd class="author">
     <img class="avatar middle" src="/{{ object.author.profile.avatar.middle }}">
-    <span class="username"><a href="">{{ object.author.username }}</a>さん</span>
+    <span class="username"><a href="{{ object.author.profile.get_absolute_url }}">{{ object.author.username }}</a>さん</span>
     </dd>
     <dt>カテゴリ</dt>
     <dd>{{ object.category }}</dd>
@@ -87,5 +87,18 @@
     <li>|</li>
     <li>{{ object.mimetype }}</li>
   </ul>
+  <section class="material-comment">
+    <h1>この素材へのコメント</h1>
+    {% for comment in object.comments.all %}
+      <article>
+        <p>
+          <img class="comment-avatar" src="/{{ comment.author.profile.avatar.middle }}">
+          <a href="{{ comment.author.profile.get_absolute_url }}">{{ comment.author.username }}</a>
+        </p>
+        <p>{{ comment.body }}</p>
+        <p>{{ comment.created_at }}</p>
+      </article>
+    {% endfor %}
+  </section>
 </section>
 {% endblock %}

@@ -1,45 +1,47 @@
+/* line 5, ../scss/material_detail.scss */
 #sidebar dd.author .usericon {
   display: inline-block;
 }
-
+/* line 8, ../scss/material_detail.scss */
 #sidebar dd.author .username {
   margin: 5px 0 3px;
   display: block;
 }
-
+/* line 13, ../scss/material_detail.scss */
 #sidebar section.material-action menu {
   margin-left: 10px;
 }
-
+/* line 4, ../scss/_lib.scss */
 #sidebar section.material-action menu li {
   background: 0 3px no-repeat;
   padding: 5px 0px 8px 22px;
 }
-
+/* line 8, ../scss/_lib.scss */
 #sidebar section.material-action menu li.edit {
   background-image: url(image/pencil.png);
 }
-
+/* line 9, ../scss/_lib.scss */
 #sidebar section.material-action menu li.delete {
   background-image: url(image/bomb.png);
 }
-
+/* line 10, ../scss/_lib.scss */
 #sidebar section.material-action menu li.mylist {
   background-image: url(image/heart--plus.png);
 }
-
+/* line 11, ../scss/_lib.scss */
 #sidebar section.material-action menu li.message {
   background-image: url(image/mail--arrow.png);
 }
-
+/* line 12, ../scss/_lib.scss */
 #sidebar section.material-action menu li.report {
   background-image: url(image/exclamation-red.png);
 }
 
+/* line 18, ../scss/material_detail.scss */
 ul.material-subinformation {
   margin: 20px auto 5px;
 }
-
+/* line 20, ../scss/material_detail.scss */
 ul.material-subinformation li {
   color: #666;
   font-size: 8px;
@@ -47,6 +49,7 @@ ul.material-subinformation li {
   display: inline;
 }
 
+/* line 28, ../scss/material_detail.scss */
 .download-button {
   vertical-align: middle;
   text-decoration: none;
@@ -58,9 +61,23 @@ ul.material-subinformation li {
   display: block;
 }
 
+/* line 39, ../scss/material_detail.scss */
 section.material-detail {
   background: #fefefe;
   margin: 10px 0px 10px;
   padding: 20px 10px 20px 10px;
   border: solid 1px #ccc;
+}
+
+/* line 47, ../scss/material_detail.scss */
+section.material-comment article {
+  background: #fefefe;
+  margin: 5px;
+  padding: 5px;
+  border: solid 1px #ccc;
+}
+/* line 53, ../scss/material_detail.scss */
+section.material-comment img.comment-avatar {
+  float: left;
+  margin-right: 10px;
 }

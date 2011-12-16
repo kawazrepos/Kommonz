@@ -1,0 +1,13 @@
+
+@mixin menu-icon-list {
+    margin-left: 10px;
+    li {
+      background: 0 3px no-repeat;
+      padding: 5px 0px 8px 22px;
+    }
+    li.edit    {background-image: url(image/pencil.png);}
+    li.delete  {background-image: url(image/bomb.png);}
+    li.mylist  {background-image: url(image/heart--plus.png);}
+    li.message {background-image: url(image/mail--arrow.png);}
+    li.report  {background-image: url(image/exclamation-red.png);}
+}
