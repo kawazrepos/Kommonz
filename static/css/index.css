@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+#content {
+    min-height: 600px;
+}
+
 #content-wrapper {
   background: #fefefe;
   margin-bottom: -250px;
@@ -123,7 +127,7 @@
 
 #footer-menus {
   margin: 0 auto;
-  padding: 0 auto 15px;
+  padding: 0 15px;
   width: 1080px;
 }
 

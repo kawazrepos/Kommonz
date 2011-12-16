@@ -7,9 +7,9 @@
 <h1>受信箱</h1>
 {% if inbox_object_list %}
     {% for object in inbox_object_list %}
-        {% if 'messages.view_message' of object %}
+        {% pif 'messages.view_message' of object %}
          <p>{% if not object.read %}*{% endif %}<a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
-        {% endif %}
+        {% endpif %}
     {% endfor %}
 {% endif %}
 {% endblock %}
