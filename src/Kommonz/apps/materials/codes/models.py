@@ -4,12 +4,14 @@ __version__ = '1.0.0'
 __date__ = '2011/10/10'
 
 import os
+from cStringIO import StringIO
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import ImageFormatter
 
 from django.conf import settings
 from django.db import models
+from django.db.models import signals
 from django.utils.translation import ugettext as _
 from ..utils.syntaxes import SYNTAXES, guess_syntax
 from ..models import Material
@@ -19,6 +21,10 @@ class Code(Material):
     """
     Model for Source Code material.
     """
+    def __init__(self, *args, **kwargs):
+        super(Code, self).__init__(*args, **kwargs)
+        thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
+        signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Code)
     
     syntax = models.CharField(_('Syntax'), max_length='32', choices=SYNTAXES)
     body   = models.TextField(_('Body'), editable=False)
@@ -42,7 +48,11 @@ class Code(Material):
         self.body = self._encode_body()
         path = self._get_thumbnail_path(os.path.basename(self.file.path))
         thumbnail_path = "%s.png" % os.path.splitext(path)[0]
-        self.thumbnail = self._create_thumbnail(path=os.path.join(settings.MEDIA_ROOT, thumbnail_path))
+        self._create_thumbnail(path=os.path.join(settings.MEDIA_ROOT, thumbnail_path))
+        self.thumbnail = thumbnail_path
+        thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
+        signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Code)
+        signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Code)
         super(Code, self).save(*args, **kwargs)
 
     def _guess_syntax(self):
@@ -72,11 +82,15 @@ class Code(Material):
         except:
             lexer = get_lexer_by_name('text')
         formatter = ImageFormatter(
-                font_size=16,
+                font_size=12,
                 line_numbers=False
         )
         data = highlight(self.body, lexer, formatter)
-        file = open(path, 'wb')
-        file.write(data)
-        file.close()
+        try:
+            from PIL import Image
+        except:
+            import Image
+        thumbnail = Image.open(StringIO(data))
+        thumbnail = thumbnail.crop((0, 0, 288, 288))
+        thumbnail.save(path)
         return path
