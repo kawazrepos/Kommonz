@@ -1,4 +1,5 @@
 {% extends "twocolumn.html" %}
+{% load comments %}
 {% load preview %}
 {% block head %}
 {{ block.super }}
@@ -88,17 +89,22 @@
     <li>{{ object.mimetype }}</li>
   </ul>
   <section class="material-comment">
-    <h1>この素材へのコメント</h1>
-    {% for comment in object.comments.all %}
+    <h1>この素材へのコメント</h1>    
+    {% get_comment_list for object as comment_list %}
+    {% for comment in comment_list %}
       <article>
         <p>
-          <img class="comment-avatar" src="/{{ comment.author.profile.avatar.middle }}">
-          <a href="{{ comment.author.profile.get_absolute_url }}">{{ comment.author.username }}</a>
+          <img class="comment-avatar" src="/{{ comment.user.profile.avatar.middle }}">
+          <a href="{{ comment.user.profile.get_absolute_url }}">{{ comment.user.username }}</a>
         </p>
-        <p>{{ comment.body }}</p>
-        <p>{{ comment.created_at }}</p>
+        <p>{{ comment.comment }}</p>
+        <time>{{ comment.submit_date }}</time>
       </article>
     {% endfor %}
+    <h1>コメントを書く</h1>
+    <div class="comment-form">
+      {% render_comment_form for object %}
+    </div>
   </section>
 </section>
 {% endblock %}

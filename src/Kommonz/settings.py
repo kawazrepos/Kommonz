@@ -151,6 +151,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'django.contrib.auth',
+    'django.contrib.comments',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -240,6 +241,12 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-v', '-d']
 TEST_TEMPORARY_FILE_DIR = os.path.join(ROOT, "static/test/temporary")
 TEST_FIXTURE_FILE_DIR = os.path.join(ROOT, "static/fixtures")
+
+#
+# django.contrib.comments
+#----------------------------------------------------------------------------
+COMMENTS_APP = 'Kommonz.apps.comments'
+COMMENTS_HIDE_REMOVED = False
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

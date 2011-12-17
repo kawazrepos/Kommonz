@@ -1,4 +1,12 @@
 
+
+@mixin comment-form-style {
+  input {
+    display: block;
+  }
+  #id_name {}
+}
+
 @mixin menu-icon-list {
     margin-left: 10px;
     li {

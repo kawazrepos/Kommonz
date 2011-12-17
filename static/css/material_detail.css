@@ -11,28 +11,28 @@
 #sidebar section.material-action menu {
   margin-left: 10px;
 }
-/* line 4, ../scss/_lib.scss */
+/* line 12, ../scss/_lib.scss */
 #sidebar section.material-action menu li {
   background: 0 3px no-repeat;
   padding: 5px 0px 8px 22px;
 }
-/* line 8, ../scss/_lib.scss */
+/* line 16, ../scss/_lib.scss */
 #sidebar section.material-action menu li.edit {
   background-image: url(image/pencil.png);
 }
-/* line 9, ../scss/_lib.scss */
+/* line 17, ../scss/_lib.scss */
 #sidebar section.material-action menu li.delete {
   background-image: url(image/bomb.png);
 }
-/* line 10, ../scss/_lib.scss */
+/* line 18, ../scss/_lib.scss */
 #sidebar section.material-action menu li.mylist {
   background-image: url(image/heart--plus.png);
 }
-/* line 11, ../scss/_lib.scss */
+/* line 19, ../scss/_lib.scss */
 #sidebar section.material-action menu li.message {
   background-image: url(image/mail--arrow.png);
 }
-/* line 12, ../scss/_lib.scss */
+/* line 20, ../scss/_lib.scss */
 #sidebar section.material-action menu li.report {
   background-image: url(image/exclamation-red.png);
 }
@@ -80,4 +80,12 @@ section.material-comment article {
 section.material-comment img.comment-avatar {
   float: left;
   margin-right: 10px;
+}
+/* line 57, ../scss/material_detail.scss */
+section.material-comment div.comment-form {
+  background: #fefefe;
+}
+/* line 4, ../scss/_lib.scss */
+section.material-comment div.comment-form form input {
+  display: block;
 }

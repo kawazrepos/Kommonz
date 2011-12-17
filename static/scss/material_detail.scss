@@ -54,5 +54,11 @@ section.material-comment {
     float: left;
     margin-right: 10px;
   }
+  div.comment-form {
+    background: #fefefe;
+    form {
+      @include comment-form-style;
+    }
+  }
 } 
  
