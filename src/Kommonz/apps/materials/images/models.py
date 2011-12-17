@@ -12,12 +12,6 @@ class Image(Material):
     """
     Model for Image material.
     """
-    def __init__(self, *args, **kwargs):
-        super(Image, self).__init__(*args, **kwargs)
-        thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
-        signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Image)
-        signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Image)
-    
     objects = MaterialManager()
     object_permission_suffix = '_material'
 
@@ -27,10 +21,7 @@ class Image(Material):
         verbose_name_plural = _('Images')
     
     def save(self, *args, **kwargs):
-        if not self.thumbnail:
-            self.thumbnail = self.file.path
-            thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
-            signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Image)
-            signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Image)
+        if not self._thumbnail:
+            self._thumbnail = self.file.path
+            signals.post_save.connect(self._thumbnail.field._create_thumbnails, sender=Image)
         return super(Image, self).save(*args, **kwargs)
-

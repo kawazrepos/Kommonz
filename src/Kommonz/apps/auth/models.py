@@ -8,7 +8,6 @@ from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
 from fields.thumbnailfield.fields import ThumbnailField
 
-
 USER_ICON_PATH = os.path.join('storage', 'profiles')
 DEFAULT_ICON_PATH = os.path.join('image', 'default', 'avatar', 'avatar.png')
 
@@ -51,7 +50,6 @@ class UserProfile(models.Model):
             return '%s(%s)' % (self.nickname, self.user.username)
         return self.user.username
     
-    
     class Meta:
         verbose_name        = _('User Profile')
         verbose_name_plural = _('User Profiles')
@@ -86,8 +84,6 @@ class UserOption(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('auth_useroption_update', (), {})
-
-# signal callbacks below
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
