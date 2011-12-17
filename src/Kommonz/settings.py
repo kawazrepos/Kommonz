@@ -164,8 +164,9 @@ INSTALLED_APPS = (
     'social_auth',                  # login with oAuth/OpenID library
     'compress',                     # JavaScript/CSS compress library
     'reversetag',                   # Useful templatetag library
-    'pagination',                   # Useful paginatin library
+    'pagination',                   # Useful pagination library
     'uni_form',
+    'universaltag',                 # Useful tagging library
     # Github libraries
     'qwert',                        # Useful snippet collection library
     'object_permission',            # Object permission library
