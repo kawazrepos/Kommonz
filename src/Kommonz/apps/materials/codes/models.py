@@ -42,13 +42,12 @@ class Code(Material):
 
     def save(self, *args, **kwargs):
         self.body = self._encode_body()
-        path = self._get_thumbnail_path(os.path.basename(self.file.path))
-        thumbnail_path = "%s.png" % os.path.splitext(path)[0]
-        self._create_thumbnail(path=os.path.join(settings.MEDIA_ROOT, thumbnail_path))
-        self._thumbnail = thumbnail_path
-        thumbnail_field = [field for field in self._meta.fields if field.name == '_thumbnail']
-        signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Code)
-        signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Code)
+        if not self._thumbnail:
+            path = self._get_thumbnail_path(os.path.basename(self.file.path))
+            thumbnail_path = "%s.png" % os.path.splitext(path)[0]
+            self._create_thumbnail(path=os.path.join(settings.MEDIA_ROOT, thumbnail_path))
+            self._thumbnail = thumbnail_path
+            signals.post_save.connect(self._thumbnail.field._create_thumbnails, sender=Code)
         super(Code, self).save(*args, **kwargs)
 
     def _guess_syntax(self):
