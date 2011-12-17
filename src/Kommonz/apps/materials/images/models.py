@@ -15,7 +15,6 @@ class Image(Material):
     def __init__(self, *args, **kwargs):
         super(Image, self).__init__(*args, **kwargs)
         thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
-        signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Image)
         signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Image)
     
     objects = MaterialManager()

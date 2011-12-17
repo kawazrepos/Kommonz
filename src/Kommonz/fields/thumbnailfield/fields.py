@@ -12,7 +12,8 @@ from widgets import DelAdminFileWidget
 from forms import ThumbnailFormField
 from exceptions import DuplicatePatterNameException
 
-THUMBNAILFIELD_THUMBNAIL_DIRNAME = getattr(settings, 'THUMBNAILFIELD_THUMBNAIL_DIR_NAME', 'thumbnails')
+THUMBNAILFIELD_THUMBNAIL_DIRNAME = getattr(settings, 'THUMBNAILFIELD_THUMBNAIL_DIR_NAME', '')
+THUMBNAILFIELD_THUMBNAIL_FILENAME = getattr(settings, 'THUMBNAILFIELD_THUMBNAIL_FILENAME', None)
 
 class ThumbnailField(ImageField):
     def __init__(self, *args, **kwargs):
@@ -64,15 +65,22 @@ class ThumbnailField(ImageField):
         signals.post_save.connect(self._create_thumbnails, sender=cls)
         signals.post_init.connect(self._set_thumbnails, sender=cls)
 
+    def _get_filename(self):
+        filename = THUMBNAILFIELD_THUMBNAIL_FILENAME
+        if not filename:
+            return self.name
+        return filename
+
     def _create_thumbnails(self, sender, instance, created, **kwargs):
         """
         Renames the image, and calls methods to resize and create the thumbnail
         """
+        filename = self._get_filename()
         file = getattr(instance, self.name, None)
         if not file: return
         fullpath = getattr(file, 'path', None)
         ext = os.path.splitext(fullpath)[1].lower().replace('jpg', 'jpeg')
-        dst = self.generate_filename(instance, '%s_%s%s' % (self.name, instance._get_pk_val(), ext))
+        dst = self.generate_filename(instance, '%s_%s%s' % (filename, instance._get_pk_val(), ext))
         dst_fullpath = os.path.join(settings.MEDIA_ROOT, dst)
         dst_dir = os.path.dirname(dst_fullpath)
         thumbnail_dir = self._get_thumbnail_dir(dst_fullpath)

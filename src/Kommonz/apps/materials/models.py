@@ -147,7 +147,7 @@ class Material(models.Model):
     
     @property
     def extension(self):
-      return os.path.splitext(self.file.name)[1][1:]
+      return os.path.splitext(self.file.name)[1][1:].lower()
 
     @property
     def filename(self):

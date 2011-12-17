@@ -82,6 +82,7 @@ class Code(Material):
         except:
             lexer = get_lexer_by_name('text')
         formatter = ImageFormatter(
+                style='vs',
                 font_size=12,
                 line_numbers=False
         )

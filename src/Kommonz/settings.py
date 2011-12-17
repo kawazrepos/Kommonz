@@ -233,6 +233,11 @@ SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 SOCIAL_AUTH_IMPORT_BACKENDS = ('apps.registration.backends', )
 
 #
+# ThumbnailField setting
+#
+THUMBNAILFIELD_THUMBNAIL_FILENAME = 'thumbnail'
+
+#
 # Testing configuration via nose.
 #
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
