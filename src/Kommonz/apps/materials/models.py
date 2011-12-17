@@ -8,6 +8,7 @@ import mimetypes
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from django.db import models
+from django.db.models.fields.files import ImageFieldFile
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
@@ -18,6 +19,7 @@ from fields.thumbnailfield.fields import ThumbnailField
 from managers import MaterialManager
 
 MATERIAL_FILE_PATH = os.path.join('storage', 'materials')
+DEFAULT_THUMBNAIL_PATH = os.path.join('image', 'default', 'material', '%s.png')
 
 class MaterialFile(models.Model):
     """
@@ -49,8 +51,8 @@ class MaterialFile(models.Model):
       return os.path.splitext(self.file.name)[1][1:]
 
 class Material(models.Model):
-    u"""
-    abstract model of whole materials.
+    """
+    A model for all materials.
     """
    
     THUMBNAIL_SIZE_PATTERNS = {
@@ -81,7 +83,7 @@ class Material(models.Model):
     pv          = models.PositiveIntegerField(_('Page View'), default=0, editable=False)
     download    = models.PositiveIntegerField(_('Download Count'), default=0, editable=False)
     ip          = models.IPAddressField(_('IP Address'), editable=False)
-    thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
+    _thumbnail   = ThumbnailField(_('Thumbnail'), upload_to=_get_thumbnail_path, thumbnail_size_patterns=THUMBNAIL_SIZE_PATTERNS, null=True, blank=True)
     
     objects     = MaterialManager()
     
@@ -102,16 +104,30 @@ class Material(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('materials_material_detail', (), {'pk': self.pk})
-    
-    def get_thumbnail_url(self):
-        return self.file.path
+
+    def _get_default_thumbnail_path(self):
+        return DEFAULT_THUMBNAIL_PATH % self.filetype
 
     @property
+    def thumbnail(self):
+        """
+        Returns thumbnail file to display.
+        """
+        return ThumbnailFile(self, self._thumbnail.field)
+    
+    @property
     def file(self):
+        """
+        Alias for MaterialFile.file
+        """
         return self._file.file
     
     @property
     def mimetype(self):
+        """
+        Returns mimetype of own file
+        Example : 'audio/wav'.
+        """
         try:
             mimetypes.init()
             type = mimetypes.guess_type(self.file.name)[0]
@@ -121,11 +137,18 @@ class Material(models.Model):
 
     @property
     def filetype(self):
+        """
+        Returns file type name like 
+        Example : 'audio'
+        """
         from utils.filetypes import guess
         return guess(self.file.name)
 
     @property
     def size(self):
+        """
+        Returns filesize(byte).
+        """
         try:
             return self.file.size
         except:
@@ -133,25 +156,28 @@ class Material(models.Model):
     
     @property
     def model(self):
+        """
+        Returns it's model class.
+        """
         from utils.filetypes import get_file_model
         return get_file_model(self.file.name)
     
     @property
-    def encoding(self):
-        try:
-            mimetypes.init()
-            encoding = mimetypes.guess_type(self.file.name)[1]
-        except:
-            encoding = None
-        return encoding
-    
-    @property
     def extension(self):
-      return os.path.splitext(self.file.name)[1][1:].lower()
+        """
+        Returns extension of own file.
+        It may not be include '.' and casted to lower case.
+        hoge.png #=> png
+        hoge.MP3 #=> mp3
+        """
+        return os.path.splitext(self.file.name)[1][1:].lower()
 
     @property
     def filename(self):
-        return self.file.name
+        """
+        Returns filename of own file.
+        """
+        return os.path.basename(self.file.name)
 
     def save(self, *args, **kwargs):
         from utils.filetypes import get_file_model
@@ -179,7 +205,7 @@ class Material(models.Model):
         mediator.viewer(self, 'anonymous')
         
 class Kero(models.Model):
-    u"""
+    """
     Kero is a rating system for Materials.
     """
     
@@ -204,3 +230,17 @@ def delete_material_file(sender, instance, **kwargs):
     import shutil
     if os.path.exists(os.path.dirname(instance.file.path)):
         shutil.rmtree(os.path.dirname(instance.file.path))
+
+class ThumbnailFile(ImageFieldFile):
+    """
+    Thumbnail Image class.
+    """
+    def __init__(self, instance, field):
+        if instance._thumbnail:
+            self.thumbnail = instance._thumbnail.name
+        else:
+            self.thumbnail = instance._get_default_thumbnail_path()
+        super(ImageFieldFile, self).__init__(instance, field, self.thumbnail)
+        for pattern_name, pattern_size in Material.THUMBNAIL_SIZE_PATTERNS.iteritems():
+            path, ext = os.path.splitext(self.thumbnail)
+            setattr(self, pattern_name, ImageFieldFile(instance, field, "%s.%s%s" % (path, pattern_name, ext)))

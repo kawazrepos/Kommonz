@@ -21,11 +21,6 @@ class Code(Material):
     """
     Model for Source Code material.
     """
-    def __init__(self, *args, **kwargs):
-        super(Code, self).__init__(*args, **kwargs)
-        thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
-        signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Code)
-    
     syntax = models.CharField(_('Syntax'), max_length='32', choices=SYNTAXES)
     body   = models.TextField(_('Body'), editable=False)
 
@@ -49,8 +44,8 @@ class Code(Material):
         path = self._get_thumbnail_path(os.path.basename(self.file.path))
         thumbnail_path = "%s.png" % os.path.splitext(path)[0]
         self._create_thumbnail(path=os.path.join(settings.MEDIA_ROOT, thumbnail_path))
-        self.thumbnail = thumbnail_path
-        thumbnail_field = [field for field in self._meta.fields if field.name == 'thumbnail']
+        self._thumbnail = thumbnail_path
+        thumbnail_field = [field for field in self._meta.fields if field.name == '_thumbnail']
         signals.post_save.connect(thumbnail_field[0]._create_thumbnails, sender=Code)
         signals.post_init.connect(thumbnail_field[0]._set_thumbnails, sender=Code)
         super(Code, self).save(*args, **kwargs)
