@@ -1,4 +1,6 @@
+@import "settings";
 @import "lib";
+
 
 #sidebar{
   dd.author{
@@ -37,28 +39,30 @@ ul.material-subinformation {
 }
 
 section.material-detail {
-  background: #fefefe;
+  background: $background-color;
   margin: 10px 0px 10px;
   padding: 20px 10px 20px 10px;
-  border: solid 1px #ccc;
+  border: solid 1px $border-color;
 }
 
 section.material-comment {
   article {
-    background: #fefefe;
+    background: $background-color;
     margin: 5px;
     padding: 5px;
-    border: solid 1px #ccc;
+    border: solid 1px $border-color;
   }
   img.comment-avatar {
     float: left;
     margin-right: 10px;
   }
   div.comment-form {
-    background: #fefefe;
+    background: $background-color;
+    border: solid 1px $border-color;
+    margin: 5px;
+    padding: 5px;
     form {
       @include comment-form-style;
     }
   }
-} 
- 
+}

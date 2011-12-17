@@ -1,10 +1,16 @@
 
 
 @mixin comment-form-style {
-  input {
+  label {
     display: block;
   }
-  #id_name {}
+  
+  textarea#id_comment {
+    display: block;
+    margin: 5px auto;
+    width: 700px;
+    height: 100px;
+  }
 }
 
 @mixin menu-icon-list {
