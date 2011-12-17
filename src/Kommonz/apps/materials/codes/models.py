@@ -8,6 +8,7 @@ from cStringIO import StringIO
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import ImageFormatter
+from pygments.styles import get_style_by_name
 
 from django.conf import settings
 from django.db import models
@@ -71,13 +72,14 @@ class Code(Material):
         if not os.path.exists(thumbnail_dir):
             os.makedirs(thumbnail_dir)
         if not syntax:
-            syntax = self.extension
+            syntax = self.syntax.lower()
         try:
             lexer = get_lexer_by_name(syntax)
         except:
             lexer = get_lexer_by_name('text')
+        style = get_style_by_name('vs')
         formatter = ImageFormatter(
-                style='vs',
+                style=style,
                 font_size=12,
                 line_numbers=False
         )
@@ -87,6 +89,8 @@ class Code(Material):
         except:
             import Image
         thumbnail = Image.open(StringIO(data))
-        thumbnail = thumbnail.crop((0, 0, 288, 288))
-        thumbnail.save(path)
+        background = Image.new('RGB', (288, 288), style.background_color)
+        thumbnail = thumbnail.crop((0, 0, min(288, thumbnail.size[0]), min(288, thumbnail.size[1])))
+        background.paste(thumbnail, (0, 0))
+        background.save(path)
         return path
