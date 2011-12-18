@@ -1,0 +1,462 @@
+@charset "utf-8";
+/* Color Settings */
+/* Size Settings */
+/* -- clearfix -- */
+/* line 18, ../scss/_lib.scss */
+.clear {
+  clear: both;
+}
+
+/* line 21, ../scss/_lib.scss */
+.clearfix {
+  min-height: 0;
+  display: block;
+}
+
+/* line 25, ../scss/_lib.scss */
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  font-size: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* -- end of clearfix -- */
+/* Common StyleSheets */
+/* line 2, ../scss/_common.scss */
+body, textarea {
+  font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+/* line 6, ../scss/_common.scss */
+input, select {
+  font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif;
+}
+
+/* line 10, ../scss/_common.scss */
+* {
+  text-height: 150%;
+}
+
+/* line 14, ../scss/_common.scss */
+body {
+  color: #333333;
+  font-size: 13px;
+  background: #fefefe;
+}
+
+/* line 20, ../scss/_common.scss */
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+/* line 25, ../scss/_common.scss */
+a:hover {
+  color: #3388ff;
+  text-decoration: underline;
+}
+
+/* line 30, ../scss/_common.scss */
+a:visited {
+  text-decoration: dotted;
+}
+
+/* line 34, ../scss/_common.scss */
+h1 {
+  font-size: 24px;
+  text-shadow: 0 1px 0 #fff;
+  -moz-text-shadow: 0 1px 0 #fff;
+  -webkit-text-shadow: 0 1px 0 #fff;
+  margin: 15px auto 25px;
+}
+
+/* line 42, ../scss/_common.scss */
+h2 {
+  font-size: 16px;
+  margin: 5px auto;
+  margin-left: 5px;
+}
+
+/* line 48, ../scss/_common.scss */
+p {
+  text-height: 150%;
+  margin: 5px 15px 10px;
+}
+
+/* line 54, ../scss/_common.scss */
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* line 61, ../scss/_common.scss */
+li {
+  list-style-type: none;
+}
+
+/* line 65, ../scss/_common.scss */
+.avatar, .small, .middle, .large, .huge {
+  margin: 2px 4px 0px;
+  display: inline-block;
+}
+
+/* line 70, ../scss/_common.scss */
+.small {
+  width: 24px;
+  height: 24px;
+}
+
+/* line 76, ../scss/_common.scss */
+.middle {
+  width: 48px;
+  height: 48px;
+}
+
+/* line 82, ../scss/_common.scss */
+.large {
+  width: 96px;
+  height: 96px;
+}
+
+/* line 88, ../scss/_common.scss */
+.huge {
+  width: 288px;
+  height: 288px;
+}
+
+/* line 94, ../scss/_common.scss */
+.confirm-button, .blue-button {
+  color: #efefef;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 -2px 2px #333333;
+  padding: auto;
+  border: solid 1px #999;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* line 109, ../scss/_common.scss */
+.confirm-button:hover, .blue-button:hover {
+  text-decoration: none;
+}
+
+/* line 113, ../scss/_common.scss */
+.blue-button {
+  background: #499bea;
+  background: -moz-linear-gradient(top, #499bea 0%, #207ce5 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #499bea), color-stop(100%, #207ce5));
+  background: -webkit-linear-gradient(top, #499bea 0%, #207ce5 100%);
+  background: -o-linear-gradient(top, #499bea 0%, #207ce5 100%);
+  background: -ms-linear-gradient(top, #499bea 0%, #207ce5 100%);
+  background: linear-gradient(top, #499bea 0%, #207ce5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
+}
+
+/* line 125, ../scss/_common.scss */
+.blue-button:hover {
+  color: #dedede;
+}
+
+/* line 129, ../scss/_common.scss */
+.blue-button:active {
+  color: #ccc;
+  background: #4f85bb;
+  background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
+  background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+  background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+  background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+  background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 );
+}
+
+/* line 141, ../scss/_common.scss */
+.green-button {
+  background: #cdeb8e;
+  background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdeb8e), color-stop(100%, #a5c956));
+  background: -webkit-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: -o-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: -ms-linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  background: linear-gradient(top, #cdeb8e 0%, #a5c956 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 );
+}
+
+/* line 153, ../scss/_common.scss */
+.lightbox {
+  background: #fefefe;
+  border: solid 2px #ccc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-box-shadow: 3px 3px 2px #333;
+  -webkit-box-shadow: 3px 3px 2px #333;
+  width: 80%;
+  height: 80%;
+  position: relative;
+}
+/* line 164, ../scss/_common.scss */
+.lightbox iframe {
+  width: 100%;
+  height: 100%;
+}
+/* line 168, ../scss/_common.scss */
+.lightbox div.close {
+  background: red;
+  top: 12px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+/* line 3, ../scss/_layout.scss */
+* {
+  margin: 0;
+}
+
+/* line 7, ../scss/_layout.scss */
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 12, ../scss/_layout.scss */
+#content-wrapper {
+  background: #fefefe;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 18, ../scss/_layout.scss */
+body > #content-wrapper {
+  min-height: 100%;
+  height: auto !important;
+}
+
+/* line 23, ../scss/_layout.scss */
+#content {
+  margin: -2px auto;
+  padding: 91px 0 70px;
+  width: 1080px;
+}
+
+/* line 29, ../scss/_layout.scss */
+#footer {
+  background: #fefefe;
+  margin-top: -50px;
+  width: 100%;
+  height: 50px;
+  position: relative;
+  clear: both;
+}
+/* line 36, ../scss/_layout.scss */
+#footer #footer-copyright {
+  padding: auto auto;
+  width: 100%;
+  height: 50px;
+  display: block;
+  bottom: 0;
+  position: absolute;
+}
+/* line 43, ../scss/_layout.scss */
+#footer #footer-copyright address {
+  color: #ababab;
+  font-size: small;
+  text-align: center;
+  padding-top: 18px;
+}
+
+/* -- page header -- */
+/* line 3, ../scss/_header.scss */
+#header {
+  font-weight: normal;
+  background: #f1f1f1;
+  margin: 0;
+  border-bottom: solid 1px #e5e5e5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+}
+
+/* line 15, ../scss/_header.scss */
+#header-logo {
+  margin: 17px 40px 17px;
+  width: 224px;
+  height: 36px;
+  display: inline-block;
+}
+
+/* line 22, ../scss/_header.scss */
+#breadcrumbs {
+  margin: 10px 0px 5px 15px;
+}
+
+/* line 26, ../scss/_header.scss */
+#breadcrumbs a {
+  color: #efefef;
+}
+
+/* line 30, ../scss/_header.scss */
+.header-button {
+  color: #efefef;
+  text-decoration: none;
+  -webkit-box-shadow: 1px 1px 2px #333;
+  -moz-box-shadow: 1px 1px 2px #333;
+  margin: 16px 15px 0px 3px;
+  padding-top: 5px;
+  width: 128px;
+  height: 24px;
+}
+
+/* line 41, ../scss/_header.scss */
+.header-button:hover {
+  text-decoration: none;
+}
+
+/* line 45, ../scss/_header.scss */
+#header-menu {
+  float: right;
+  position: relative;
+}
+/* line 48, ../scss/_header.scss */
+#header-menu > li {
+  float: left;
+  display: block;
+}
+/* line 52, ../scss/_header.scss */
+#header-menu li.header-dropdown-section {
+  padding-top: 10px;
+  height: 66px;
+}
+/* line 55, ../scss/_header.scss */
+#header-menu li.header-dropdown-section:hover {
+  background: #ccc;
+}
+/* line 59, ../scss/_header.scss */
+#header-menu li.header-button-section {
+  padding: 6px 10px 0 10px;
+  height: 68px;
+}
+
+/* line 65, ../scss/_header.scss */
+menu#dropdown {
+  color: #333;
+  background: #fefefe;
+  border: solid 1px #e5e5e5;
+  padding: 5px;
+  top: 71px;
+  width: 150px;
+  height: auto;
+  display: block;
+  position: absolute;
+  box-shadow: 1px 2px 1px #999;
+  -moz-box-shadow: 1px 2px 1px #999;
+  -webkit-box-shadow: 1px 2px 1px #999;
+  z-index: 9999;
+}
+/* line 79, ../scss/_header.scss */
+menu#dropdown a {
+  color: #222;
+}
+/* line 82, ../scss/_header.scss */
+menu#dropdown li.dropdown-item {
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  margin: 3px 0 3px 5px;
+  padding: 5px 0 5px 20px;
+}
+/* line 88, ../scss/_header.scss */
+menu#dropdown li.dropdown-header {
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  font-weight: bold;
+  padding: 5px 0 8px 18px;
+  border-bottom: dotted 1px #333;
+}
+
+/* line 1, ../scss/_menuicon.scss */
+menu {
+  /* ToDo CSS Sprite */
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .dashboard {
+  background-image: url(/image/sprite/menuicon/dashboard.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .activity {
+  background-image: url(/image/sprite/menuicon/activity.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .material {
+  background-image: url(/image/sprite/menuicon/material.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .mylist {
+  background-image: url(/image/sprite/menuicon/mylist.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .message {
+  background-image: url(/image/sprite/menuicon/message.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .myprofile {
+  background-image: url(/image/sprite/menuicon/myprofile.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .config {
+  background-image: url(/image/sprite/menuicon/config.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .account-config {
+  background-image: url(/image/sprite/menuicon/account-config.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .profile-config {
+  background-image: url(/image/sprite/menuicon/profile-config.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .option-config {
+  background-image: url(/image/sprite/menuicon/option-config.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .service-config {
+  background-image: url(/image/sprite/menuicon/service-config.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .god {
+  background-image: url(/image/sprite/menuicon/god.png);
+}
+/* line 4, ../scss/_menuicon.scss */
+menu .logout {
+  background-image: url(/image/sprite/menuicon/logout.png);
+}
+
+/* Page StyleSheets */
+/* line 2, ../scss/_flatpage.scss */
+#flatpage-wrapper {
+  border: solid 1px #cccccc;
+  background: #fefefe;
+  width: 900px;
+  margin: 10px auto;
+  padding: 10px;
+}
+/* line 8, ../scss/_flatpage.scss */
+#flatpage-wrapper div.content {
+  margin: 0 10px;
+}
