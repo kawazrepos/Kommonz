@@ -21,7 +21,7 @@ class SearchResultView(ListView):
     
     def get_queryset(self):
         """
-        Get filtered queryset by GET parametors.
+        Get filtered queryset by GET parameters.
         """
         qs = super(SearchResultView, self).get_queryset()
         params = dict(self.request.GET.copy())

@@ -35,13 +35,22 @@ class MaterialFile(models.Model):
         path = default_storage.get_available_name(path) # dirname will not duplicate.
         return os.path.join(path, filename)
     
-    file = models.FileField(_('File'), upload_to=_get_file_path)
+    file   = models.FileField(_('File'), upload_to=_get_file_path)
+    author = models.ForeignKey(User, verbose_name=_('author'), editable=False, related_name="materialfiles")
     
     class Meta:
         app_label           = 'materials'
         ordering            = ('-material__pk',)
         verbose_name        = _('MaterialFile')
         verbose_name_plural = _('MaterialFiles')
+
+    def save(self, *args, **kwargs):
+        request = get_request()
+        if request and request.user.is_authenticated():
+            self.author = request.user
+        else:
+            self.author = User.objects.get(pk=1)
+        super(MaterialFile, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.file.name

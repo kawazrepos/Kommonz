@@ -14,7 +14,7 @@ from packages.models import Package
 # base models
 
 class MaterialFileAdmin(admin.ModelAdmin):
-    list_display    = ('pk', 'file',)
+    list_display    = ('pk', 'file', 'material', 'author',)
 admin.site.register(MaterialFile, MaterialFileAdmin)
 
 class MaterialAdmin(admin.ModelAdmin):
