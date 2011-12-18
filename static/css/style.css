@@ -1,4 +1,120 @@
 @charset "utf-8";
+/* 
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com 
+Twitter: @rich_clark
+*/
+/* line 20, ../scss/_reset.scss */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/* line 30, ../scss/_reset.scss */
+body {
+  line-height: 1;
+}
+
+/* line 35, ../scss/_reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* line 39, ../scss/_reset.scss */
+nav ul {
+  list-style: none;
+}
+
+/* line 43, ../scss/_reset.scss */
+blockquote, q {
+  quotes: none;
+}
+
+/* line 48, ../scss/_reset.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* line 53, ../scss/_reset.scss */
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/* change colours to suit your needs */
+/* line 62, ../scss/_reset.scss */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+/* line 69, ../scss/_reset.scss */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* line 76, ../scss/_reset.scss */
+del {
+  text-decoration: line-through;
+}
+
+/* line 80, ../scss/_reset.scss */
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+/* line 85, ../scss/_reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+/* line 91, ../scss/_reset.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/* line 100, ../scss/_reset.scss */
+input, select {
+  vertical-align: middle;
+}
+
 /* Color Settings */
 /* Size Settings */
 /* -- clearfix -- */
@@ -445,6 +561,69 @@ menu .god {
 /* line 4, ../scss/_menuicon.scss */
 menu .logout {
   background-image: url(/image/sprite/menuicon/logout.png);
+}
+
+/* line 1, ../scss/_mtimg.scss */
+.mtimg {
+  background: url(image/mtimg.png) 0 0 no-repeat;
+  margin: auto 3px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+/* line 7, ../scss/_mtimg.scss */
+.mtimg.mt-application {
+  background-position: 0 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 8, ../scss/_mtimg.scss */
+.mtimg.mt-audio {
+  background-position: -21px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 9, ../scss/_mtimg.scss */
+.mtimg.mt-cgmodel {
+  background-position: -42px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 10, ../scss/_mtimg.scss */
+.mtimg.mt-code {
+  background-position: -63px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 11, ../scss/_mtimg.scss */
+.mtimg.mt-movie {
+  background-position: -84px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 12, ../scss/_mtimg.scss */
+.mtimg.mt-image {
+  background-position: -105px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 13, ../scss/_mtimg.scss */
+.mtimg.mt-material {
+  background-position: -126px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 14, ../scss/_mtimg.scss */
+.mtimg.mt-package {
+  background-position: -147px 0;
+  width: 16px;
+  height: 16px;
+}
+/* line 15, ../scss/_mtimg.scss */
+.mtimg.mt-text {
+  background-position: -168px 0;
+  width: 16px;
+  height: 16px;
 }
 
 /* Page StyleSheets */
