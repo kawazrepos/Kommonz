@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# Author:        tohhy
-# Modifier:      giginet
+# Author:        giginet
+# Modifier:      tohhy
 # Date:          2011/11/04
 #
 from django.core.paginator import Paginator
@@ -33,7 +33,12 @@ class SearchResultView(ListView):
         if 'category' in params:
             try:
                 category = Category.objects.get(pk=params['category'][0])
-                qs = qs.filter(category=category)
+                not_matched_categories = Category.objects.exclude(pk=category.pk)
+                children = Category.objects.get_children(category)
+                for child in children:
+                    not_matched_categories = not_matched_categories.exclude(pk=child.pk)
+                for not_matched_category in not_matched_categories:
+                    qs = qs.exclude(category=not_matched_category)
             except:
                 pass
         if queries:
@@ -45,6 +50,7 @@ class SearchResultView(ListView):
                 sort = '-%s' % sort
             qs = qs.order_by(sort)
         return qs
+
 
     def get_context_data(self, **kwargs):
         """
