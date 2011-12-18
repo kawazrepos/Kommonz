@@ -1,6 +1,11 @@
 @import "defines";
 @import "functions";
 
+$search-header: 28px;
+$search-section: 144px;
+$search-footer: 24px;
+$search-box: $search-header + $search-section + $search-footer;
+
 ul.search-results {
   margin: 16px;
   width: 1058px;
@@ -8,8 +13,8 @@ ul.search-results {
 
 li.search-material {
   margin: 5px 0 5px 13px;
-  width: 196px;
-  height: 196px;
+  width: $search-box;
+  height: $search-box;
   display: block;
   float: left;
   position: relative;
@@ -17,8 +22,8 @@ li.search-material {
   -moz-box-shadow: 1px 1px 3px #666;
   -webkit-box-shadow: 1px 1px 3px #666;
   header {
-    width: 100%;
-    height: 28px;
+    width: $search-box;
+    height: $search-header;
     right: 0px;
     display: block;
     menu {
@@ -35,7 +40,7 @@ li.search-material {
         display: inline-block;
         cursor: pointer;
         @include crossbrowser(box-shadow, 0.5px 0.5px 2px #222);
-        &:hover {
+        &:hover, &.open {
           color: $text-white;
           background: $link-hover;
           border-color: $link-hover;
@@ -46,8 +51,8 @@ li.search-material {
   section {
     text-align: center;
     figure {
-      width: 144px;
-      height: 144px;
+      width: $search-section;
+      height: $search-section;
       display: table-cell;
       text-align: center;
       vertical-align: middle;
@@ -57,8 +62,8 @@ li.search-material {
     text-align: center;
     margin: 0;
     padding: 0;
-    width: 196px;
-    height: 24px;
+    width: $search-box;
+    height: $search-footer;
     bottom: 0;
     position: absolute;
     .mtimg {
@@ -69,5 +74,30 @@ li.search-material {
         vertical-align: 4px;
       }
     }
+  }
+}
+
+article.material-info {
+  background: $background;
+  border: solid 0.5px $border;
+  padding: 8px;
+  @include crossbrowser(border-radius, 5px);
+  @include crossbrowser(box-shadow, 2px 2px 5px #666);
+  width: 200px;
+  height: auto;
+  min-height: $search-box;
+  top: $search-header + 2px;
+  left: 10px;
+  position: absolute;
+  display: none;
+  z-index: 999;
+  dt {
+    color: #999;
+    border-bottom: dotted 1px $border;
+    padding: 1px 0 5px 1px;
+  }
+  dd {
+    color: #666;
+    padding: 2px 0 8px 12px;
   }
 }

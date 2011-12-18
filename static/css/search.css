@@ -15,7 +15,7 @@ li.search-material {
   -moz-box-shadow: 1px 1px 3px #666;
   -webkit-box-shadow: 1px 1px 3px #666; }
   li.search-material header {
-    width: 100%;
+    width: 196px;
     height: 28px;
     right: 0px;
     display: block; }
@@ -34,7 +34,7 @@ li.search-material {
       box-shadow: 0.5px 0.5px 2px #222222;
       -moz-box-shadow: 0.5px 0.5px 2px #222222;
       -webkit-box-shadow: 0.5px 0.5px 2px #222222; }
-      li.search-material header menu li:hover {
+      li.search-material header menu li:hover, li.search-material header menu li.open {
         color: #dddddd;
         background: #3388ff;
         border-color: #3388ff; }
@@ -58,3 +58,29 @@ li.search-material {
       margin: 4px 2px 0; }
     li.search-material footer a cite {
       vertical-align: 4px; }
+
+article.material-info {
+  background: #fefefe;
+  border: solid 0.5px #cccccc;
+  padding: 8px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 2px 2px 5px #666666;
+  -moz-box-shadow: 2px 2px 5px #666666;
+  -webkit-box-shadow: 2px 2px 5px #666666;
+  width: 200px;
+  height: auto;
+  min-height: 196px;
+  top: 30px;
+  left: 10px;
+  position: absolute;
+  display: none;
+  z-index: 999; }
+  article.material-info dt {
+    color: #999;
+    border-bottom: dotted 1px #cccccc;
+    padding: 1px 0 5px 1px; }
+  article.material-info dd {
+    color: #666;
+    padding: 2px 0 8px 12px; }

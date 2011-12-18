@@ -3,6 +3,7 @@
 {% load preview %}
 {% block head %}
 {{ block.super }}
+{% render_universaltag_head %}
 <script type="text/javascript">
   $(function(){
       $('.delete').click(function(){
@@ -33,7 +34,6 @@
     <dd>{{ object.category }}</dd>
     <dt>タグ</dt>
     <dd>
-        {% render_universaltag_head %}
         {% render_universaltag_tags of object %}
     </dd>
     <dt>ライセンス</dt>
