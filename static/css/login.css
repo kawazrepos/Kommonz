@@ -39,12 +39,12 @@
   .login .services .serviceicon {
     margin: 3px 5px 0; }
   .login .services .dropbox .serviceicon {
-    background-position: 0px; }
+    background-position: 0 0px; }
   .login .services .github .serviceicon {
-    background-position: -21px; }
+    background-position: 0 -21px; }
   .login .services .google .serviceicon {
-    background-position: -42px; }
+    background-position: 0 -42px; }
   .login .services .hatena .serviceicon {
-    background-position: -63px; }
+    background-position: 0 -63px; }
   .login .services .twitter .serviceicon {
-    background-position: -84px; }
+    background-position: 0 -84px; }

@@ -52,7 +52,7 @@
     $i: 0;
     @each $service in dropbox, github, google, hatena, twitter {
       .#{$service} .serviceicon {
-        background-position: #{$i * -21}px;
+        background-position: 0 #{$i * -21}px;
       }
       $i: $i + 1;
     }

@@ -28,7 +28,7 @@
       </header>
       <section>
         <a href="{{ object.get_absolute_url }}">
-          <figure class="thumbnail large"><img src="{{ MEDIA_URL }}{{ object.thumbnail.large }}" width="144px" height="144px"></figure>
+          <figure class="thumbnail large"><img src="{{ MEDIA_URL }}{{ object.thumbnail.large }}" width="{{ object.thumbnail.large.width }}px" height="{{ object.thumbnail.large.height }}px"></figure>
         </a>
       </section>
       <footer>{% render_mtimg for object %}<a href="{{ object.get_absolute_url }}"><cite>{{ object.label }}</cite></a></footer>
