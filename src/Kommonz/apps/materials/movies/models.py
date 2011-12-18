@@ -11,15 +11,17 @@ from django.conf import settings
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
-from utils.ffmpeg import get_playtime
+from utils.ffmpeg import get_playtime, get_size
 from ..models import Material
 from ..managers import MaterialManager
 
 class Movie(Material):
     """
-        Model for Movie material.
+    Model for Movie material.
     """
     
+    width     = models.PositiveSmallIntegerField(_('Width'), editable=False, default=0)
+    height    = models.PositiveSmallIntegerField(_('Height'), editable=False, default=0)
     play_time = models.PositiveSmallIntegerField(_('Play Time'), editable=False, default=0)
 
     objects = MaterialManager()
@@ -43,8 +45,10 @@ class Movie(Material):
             if created:
                 self._thumbnail = thumbnail_path
                 signals.post_save.connect(self._thumbnail.field._create_thumbnails, sender=Movie)
-            if not self.play_time:
-                self.play_time = int(get_playtime(self.file.path))
+        if not self.play_time:
+            self.play_time = int(get_playtime(self.file.path))
+        if not self.width or not self.height:
+            self.width, self.height = get_size(self.file.path)
         super(Movie, self).save(*args, **kwargs)
 
     def _create_thumbnail(self, path, second=30):
@@ -66,8 +70,8 @@ class Movie(Material):
         kwargs = {
                 "sec" : second,
                 "movie" : tmp.name,
-                "width" : 288,
-                "height" : 288,
+                "width" : self.width,
+                "height" : self.height,
                 "output" : thumbnail.name
         }
         for sec in xrange(0, second, 10):
