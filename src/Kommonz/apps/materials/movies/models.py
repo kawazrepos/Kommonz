@@ -29,6 +29,12 @@ class Movie(Material):
         verbose_name        = _('Movie')
         verbose_name_plural = _('Movies')
 
+    @property
+    def media(self):
+        if self.extension == 'mp4':
+            return 'm4v'
+        return self.extension
+
     def save(self, *args, **kwargs):
         if not self._thumbnail:
             path = self._get_thumbnail_path(os.path.basename(self.file.path))
