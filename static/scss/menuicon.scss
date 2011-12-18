@@ -1,0 +1,8 @@
+menu {
+  /* ToDo CSS Sprite */
+  @each $menu in dashboard, activity, material, mylist, message, myprofile, config, account-config, profile-config, option-config, service-config, god, logout {
+    .#{$menu} {
+      background-image: url(/image/sprite/menuicon/#{$menu}.png);
+    }
+  }
+}

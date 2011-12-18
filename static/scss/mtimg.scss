@@ -1,0 +1,18 @@
+.mtimg {
+  background: url(image/mtimg.png) 0 0 no-repeat;
+  margin: auto 3px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  &.mt-application{ background-position: 0 0; width: 16px; height: 16px; } 
+  &.mt-audio{ background-position: -21px 0; width: 16px; height: 16px; } 
+  &.mt-cgmodel{ background-position: -42px 0; width: 16px; height: 16px; } 
+  &.mt-code{ background-position: -63px 0; width: 16px; height: 16px; } 
+  &.mt-movie{ background-position: -84px 0; width: 16px; height: 16px; } 
+  &.mt-image{ background-position: -105px 0; width: 16px; height: 16px; } 
+  &.mt-material{ background-position: -126px 0; width: 16px; height: 16px; } 
+  &.mt-package{ background-position: -147px 0; width: 16px; height: 16px; } 
+  &.mt-text{ background-position: -168px 0; width: 16px; height: 16px; } 
+}
+
+

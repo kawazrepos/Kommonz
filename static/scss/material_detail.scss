@@ -1,6 +1,5 @@
-@import "settings";
+@import "defines";
 @import "lib";
-
 
 #sidebar{
   dd.author{
@@ -11,11 +10,21 @@
       margin: 5px 0 3px;
       display: block;
     }
-  } 
-  section.material-action menu {
-    @include menu-icon-list;
   }
-} 
+  section.material-action menu {
+    margin-left: 10px;
+    li {
+      background: 0 3px no-repeat;
+      padding: 5px 0px 8px 22px;
+    }
+    @each $menu in edit-material, delete-material, add-mylist, messageto, report {
+      .#{$menu} {
+        // ToDo CSS Sprite
+        background-image: url(/image/sprite/material-detail/#{$menu}.png);
+      }
+    }
+  }
+}
 
 ul.material-subinformation {
   margin: 20px auto 5px;
@@ -39,26 +48,26 @@ ul.material-subinformation {
 }
 
 section.material-detail {
-  background: $background-color;
+  background: $background;
   margin: 10px 0px 10px;
   padding: 20px 10px 20px 10px;
-  border: solid 1px $border-color;
+  border: solid 1px $border;
 }
 
 section.material-comment {
   article {
-    background: $background-color;
+    background: $background;
     margin: 5px;
     padding: 5px;
-    border: solid 1px $border-color;
+    border: solid 1px $border;
   }
   img.comment-avatar {
     float: left;
     margin-right: 10px;
   }
   div.comment-form {
-    background: $background-color;
-    border: solid 1px $border-color;
+    background: $background;
+    border: solid 1px $border;
     margin: 5px;
     padding: 5px;
     form {

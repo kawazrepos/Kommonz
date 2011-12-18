@@ -29,7 +29,7 @@
             <li class="dropdown-header config">設定</li>
             <li class="dropdown-item account-config"><a href="{% reverse 'auth_user_update' %}">アカウント設定</a></li>
             <li class="dropdown-item profile-config"><a href="{% reverse 'auth_userprofile_update' %}">プロフィール設定</a></li>
-            <li class="dropdown-item notify-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></li>
+            <li class="dropdown-item option-config"><a href="{% reverse 'auth_useroption_update' %}">通知設定</a></li>
             <li class="dropdown-item service-config"><a href="{% reverse 'auth_useraccount_update' %}">外部サービス設定</a></li>
             {% if user.is_staff %}
             <li class="dropdown-item god"><a href="{% reverse 'control_main' %}">神ページ</a></li>

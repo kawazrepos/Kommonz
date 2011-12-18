@@ -1,42 +1,51 @@
-/* Color Settings */
-/* Size Settings */
+@charset "utf-8";
+@import "defines";
+
 * {
-  margin: 0; }
+  margin: 0;
+}
 
 html, body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
 #content-wrapper {
-  background: #fefefe;
+  background: $background;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
 body > #content-wrapper {
   min-height: 100%;
-  height: auto !important; }
+  height: auto !important;
+}
 
 #content {
   margin: -2px auto;
   padding: 91px 0 70px;
-  width: 1080px; }
+  width: 1080px;
+}
 
 #footer {
   background: #fefefe;
-  margin-top: -50px;
+  margin-top: -1 * $footer-height;
   width: 100%;
-  height: 50px;
+  height: $footer-height;
   position: relative;
-  clear: both; }
-  #footer #footer-copyright {
+  clear: both;
+  #footer-copyright {
     padding: auto auto;
     width: 100%;
-    height: 50px;
+    height: $footer-height;
     display: block;
     bottom: 0;
-    position: absolute; }
-    #footer #footer-copyright address {
+    position: absolute;
+    address {
       color: #ababab;
       font-size: small;
       text-align: center;
-      padding-top: 18px; }
+      padding-top: 18px;
+    }
+  }
+}

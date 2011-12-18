@@ -1,23 +1,30 @@
-body, textarea { font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
-input, select { font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
+@import "defines";
+
+body, textarea { 
+  font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; 
+}
+
+input, select { 
+  font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; 
+}
 
 * {
   text-height: 150%;
 }
 
 body {
-  color: #333333;
+  color: $text;
   font-size: 13px;
   background: #fefefe;
 }
 
 a {
-  color: #4183c4;
+  color: $link;
   text-decoration: none;
 }
 
 a:hover {
-  color: #3388ff;
+  color: $link-hover;
   text-decoration: underline;
 }
 

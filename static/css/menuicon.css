@@ -1,52 +1,28 @@
-/* ToDo CSS Sprite */
-menu .dashboard {
-  background-image: url(image/dashboard.png);
-}
-
-menu .activity {
-  background-image: url(image/clock-frame.png);
-}
-
-menu .material {
-  background-image: url(image/box.png);
-}
-
-menu .mylist {
-  background-image: url(image/heart.png);
-}
-
-menu .message {
-  background-image: url(image/mail.png);
-}
-
-menu .myprofile {
-  background-image: url(image/card-address.png);
-}
-
-menu .config {
-  background-image: url(image/gear.png);
-}
-
-menu .account-config {
-  background-image: url(image/user.png);
-}
-
-menu .profile-config {
-  background-image: url(image/card--pencil.png);
-}
-
-menu .notify-config {
-  background-image: url(image/bell.png);
-}
-
-menu .service-config {
-  background-image: url(image/chain.png);
-}
-
-menu .god {
-  background-image: url(image/wrench.png);
-}
-
-menu .logout {
-  background-image: url(image/door.png);
-}
+menu {
+  /* ToDo CSS Sprite */ }
+  menu .dashboard {
+    background-image: url(/image/sprite/menuicon/dashboard.png); }
+  menu .activity {
+    background-image: url(/image/sprite/menuicon/activity.png); }
+  menu .material {
+    background-image: url(/image/sprite/menuicon/material.png); }
+  menu .mylist {
+    background-image: url(/image/sprite/menuicon/mylist.png); }
+  menu .message {
+    background-image: url(/image/sprite/menuicon/message.png); }
+  menu .myprofile {
+    background-image: url(/image/sprite/menuicon/myprofile.png); }
+  menu .config {
+    background-image: url(/image/sprite/menuicon/config.png); }
+  menu .account-config {
+    background-image: url(/image/sprite/menuicon/account-config.png); }
+  menu .profile-config {
+    background-image: url(/image/sprite/menuicon/profile-config.png); }
+  menu .option-config {
+    background-image: url(/image/sprite/menuicon/option-config.png); }
+  menu .service-config {
+    background-image: url(/image/sprite/menuicon/service-config.png); }
+  menu .god {
+    background-image: url(/image/sprite/menuicon/god.png); }
+  menu .logout {
+    background-image: url(/image/sprite/menuicon/logout.png); }

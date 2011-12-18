@@ -1,55 +1,34 @@
-/* line 7, ../scss/material_detail.scss */
+/* Color Settings */
+/* Size Settings */
 #sidebar dd.author .usericon {
-  display: inline-block;
-}
-/* line 10, ../scss/material_detail.scss */
+  display: inline-block; }
 #sidebar dd.author .username {
   margin: 5px 0 3px;
-  display: block;
-}
-/* line 15, ../scss/material_detail.scss */
+  display: block; }
 #sidebar section.material-action menu {
-  margin-left: 10px;
-}
-/* line 18, ../scss/_lib.scss */
-#sidebar section.material-action menu li {
-  background: 0 3px no-repeat;
-  padding: 5px 0px 8px 22px;
-}
-/* line 22, ../scss/_lib.scss */
-#sidebar section.material-action menu li.edit {
-  background-image: url(image/pencil.png);
-}
-/* line 23, ../scss/_lib.scss */
-#sidebar section.material-action menu li.delete {
-  background-image: url(image/bomb.png);
-}
-/* line 24, ../scss/_lib.scss */
-#sidebar section.material-action menu li.mylist {
-  background-image: url(image/heart--plus.png);
-}
-/* line 25, ../scss/_lib.scss */
-#sidebar section.material-action menu li.message {
-  background-image: url(image/mail--arrow.png);
-}
-/* line 26, ../scss/_lib.scss */
-#sidebar section.material-action menu li.report {
-  background-image: url(image/exclamation-red.png);
-}
+  margin-left: 10px; }
+  #sidebar section.material-action menu li {
+    background: 0 3px no-repeat;
+    padding: 5px 0px 8px 22px; }
+  #sidebar section.material-action menu .edit-material {
+    background-image: url(/image/sprite/material-detail/edit-material.png); }
+  #sidebar section.material-action menu .delete-material {
+    background-image: url(/image/sprite/material-detail/delete-material.png); }
+  #sidebar section.material-action menu .add-mylist {
+    background-image: url(/image/sprite/material-detail/add-mylist.png); }
+  #sidebar section.material-action menu .messageto {
+    background-image: url(/image/sprite/material-detail/messageto.png); }
+  #sidebar section.material-action menu .report {
+    background-image: url(/image/sprite/material-detail/report.png); }
 
-/* line 20, ../scss/material_detail.scss */
 ul.material-subinformation {
-  margin: 20px auto 5px;
-}
-/* line 22, ../scss/material_detail.scss */
-ul.material-subinformation li {
-  color: #666;
-  font-size: 8px;
-  padding: 5px;
-  display: inline;
-}
+  margin: 20px auto 5px; }
+  ul.material-subinformation li {
+    color: #666;
+    font-size: 8px;
+    padding: 5px;
+    display: inline; }
 
-/* line 30, ../scss/material_detail.scss */
 .download-button {
   vertical-align: middle;
   text-decoration: none;
@@ -58,44 +37,31 @@ ul.material-subinformation li {
   padding-top: 20px;
   width: 200px;
   height: 40px;
-  display: block;
-}
+  display: block; }
 
-/* line 41, ../scss/material_detail.scss */
 section.material-detail {
   background: #fefefe;
   margin: 10px 0px 10px;
   padding: 20px 10px 20px 10px;
-  border: solid 1px #cccccc;
-}
+  border: solid 1px #cccccc; }
 
-/* line 49, ../scss/material_detail.scss */
 section.material-comment article {
   background: #fefefe;
   margin: 5px;
   padding: 5px;
-  border: solid 1px #cccccc;
-}
-/* line 55, ../scss/material_detail.scss */
+  border: solid 1px #cccccc; }
 section.material-comment img.comment-avatar {
   float: left;
-  margin-right: 10px;
-}
-/* line 59, ../scss/material_detail.scss */
+  margin-right: 10px; }
 section.material-comment div.comment-form {
   background: #fefefe;
   border: solid 1px #cccccc;
   margin: 5px;
-  padding: 5px;
-}
-/* line 4, ../scss/_lib.scss */
-section.material-comment div.comment-form form label {
-  display: block;
-}
-/* line 8, ../scss/_lib.scss */
-section.material-comment div.comment-form form textarea#id_comment {
-  display: block;
-  margin: 5px auto;
-  width: 700px;
-  height: 100px;
-}
+  padding: 5px; }
+  section.material-comment div.comment-form form label {
+    display: block; }
+  section.material-comment div.comment-form form textarea#id_comment {
+    display: block;
+    margin: 5px auto;
+    width: 700px;
+    height: 100px; }
