@@ -56,7 +56,7 @@ class Movie(Material):
         f.close()
         thumbnail = tempfile.NamedTemporaryFile()
         thumbnail.close()
-        ffmpeg = """ffmpeg -ss %(sec)s -vframes 1 -i "%(movie)s" -s %(width)sx%(height)s -f image2 "%(output)s" """
+        ffmpeg = """ffmpeg -ss %(sec)s -vframes 1 -i "%(movie)s" -f image2 "%(output)s" """
         kwargs = {
                 "sec" : second,
                 "movie" : tmp.name,
