@@ -2,6 +2,7 @@
   pk: 1
   fields:
     file: fixtures/kawaztan2.png
+    author: 1
 - model: materials.material
   pk: 1
   fields:
@@ -24,6 +25,7 @@
   pk: 2
   fields:
     file: fixtures/tutorial_game.js
+    author: 1
 - model: materials.material
   pk: 2
   fields:
