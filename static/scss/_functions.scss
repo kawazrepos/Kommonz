@@ -1,0 +1,5 @@
+@mixin crossbrowser($attr, $value) {
+  #{$attr}: $value;
+  -moz-#{$attr}: $value;
+  -webkit-#{$attr}: $value;
+}

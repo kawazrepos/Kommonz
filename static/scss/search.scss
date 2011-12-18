@@ -1,3 +1,6 @@
+@import "defines";
+@import "functions";
+
 ul.search-results {
   margin: 16px;
   width: 1058px;
@@ -5,7 +8,6 @@ ul.search-results {
 
 li.search-material {
   margin: 5px 0 5px 13px;
-  border: solid 1px #e5e5e5;
   width: 196px;
   height: 196px;
   display: block;
@@ -14,6 +16,43 @@ li.search-material {
   box-shadow: 1px 1px 3px #666;
   -moz-box-shadow: 1px 1px 3px #666;
   -webkit-box-shadow: 1px 1px 3px #666;
+  header {
+    width: 100%;
+    height: 28px;
+    right: 0px;
+    display: block;
+    menu {
+      li {
+        color: $link;
+        text-align: center;
+        padding-top: 7px;
+        border-left: solid 1px $border;
+        border-bottom: solid 1px $border;
+        width: 40px;
+        height: 22px;
+        right: 0;
+        position: absolute;
+        display: inline-block;
+        cursor: pointer;
+        @include crossbrowser(box-shadow, 0.5px 0.5px 2px #222);
+        &:hover {
+          color: $text-white;
+          background: $link-hover;
+          border-color: $link-hover;
+        }
+      }
+    }
+  }
+  section {
+    text-align: center;
+    figure {
+      width: 144px;
+      height: 144px;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
   footer {
     text-align: center;
     margin: 0;
@@ -22,5 +61,13 @@ li.search-material {
     height: 24px;
     bottom: 0;
     position: absolute;
+    .mtimg {
+      margin: 4px 2px 0;
+    }
+    a {
+      cite {
+        vertical-align: 4px;
+      }
+    }
   }
 }

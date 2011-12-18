@@ -21,10 +21,17 @@
   <ul class="search-results">
   {% for object in object_list %}
     <li class="search-material">
-      <header></header>
+      <header>
+        <menu>
+          <li class="info">info</li>
+        </menu>
+      </header>
       <section>
+        <a href="{{ object.get_absolute_url }}">
+          <figure class="thumbnail large"><img src="{{ MEDIA_URL }}{{ object.thumbnail.large }}" width="144px" height="144px"></figure>
+        </a>
       </section>
-      <footer><a href="{{ object.get_absolute_url }}">{% render_mtimg for object %}<cite>{{ object.label }}</cite></a></footer>
+      <footer>{% render_mtimg for object %}<a href="{{ object.get_absolute_url }}"><cite>{{ object.label }}</cite></a></footer>
     </li>
   {% endfor %}
   </ul>

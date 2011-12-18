@@ -49,20 +49,12 @@
     .serviceicon {
       margin: 3px 5px 0;
     }
-    .dropbox .serviceicon { 
-      background-position: 0 0; 
+    $i: 0;
+    @each $service in dropbox, github, google, hatena, twitter {
+      .#{$service} .serviceicon {
+        background-position: #{$i * -21}px;
+      }
+      $i: $i + 1;
     }
-    .github .serviceicon { 
-      background-position: 0 -21px; 
-    }
-    .google .serviceicon { 
-      background-position: 0 -42px; 
-    } 
-    .hatena .serviceicon { 
-      background-position: 0 -63px; 
-    } 
-    .twitter .serviceicon { 
-      background-position: 0 -84px; 
-    } 
   }
 }
