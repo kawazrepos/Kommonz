@@ -1,0 +1,10 @@
+{% load i18n %}
+<ul class="universaltag"
+    universaltag_api_url="{{ universaltag_api_url }}"
+    {% if is_freezable %}freezable="freezable"{% endif %}>
+    {% for item in tagged_items %}
+    <li class="tag{% if item.frozen %} frozen{% endif %}" pk="{{ item.tag.pk }}">
+        <a href="{{ item.tag.get_absolute_url }}">{{ item.tag }}</a>
+    </li>
+    {% endfor %}
+</ul>

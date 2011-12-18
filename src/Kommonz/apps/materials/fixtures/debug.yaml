@@ -11,7 +11,7 @@
     description: かわずたん！
     author: 1
     ip: 127.0.0.1
-    category: 1
+    category: 110
 - model: materials.image
   pk: 1
   fields:
@@ -20,7 +20,7 @@
     description: かわずたん！
     author: 1
     ip: 127.0.0.1
-    category: 1
+    category: 110
 - model: materials.materialfile
   pk: 2
   fields:
@@ -34,7 +34,7 @@
     description: サンプルゲーム
     author: 1
     ip: 127.0.0.1
-    category: 1
+    category: 321
 - model: materials.code
   pk: 2
   fields:
@@ -43,5 +43,5 @@
     description: サンプルゲーム
     author: 1
     ip: 127.0.0.1
-    category: 1
+    category: 321
     syntax: javascript

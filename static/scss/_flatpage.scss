@@ -1,0 +1,11 @@
+
+#flatpage-wrapper {
+  border: solid 1px $border;
+  background: $background;
+  width: 900px;
+  margin:10px auto;
+  padding:10px;
+  div.content{
+    margin: 0 10px;
+  }
+}
