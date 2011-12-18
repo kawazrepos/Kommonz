@@ -1,0 +1,85 @@
+- model: categories.category
+  pk: 100
+  fields:
+    label: 画像
+- model: categories.category
+  pk: 110
+  fields:
+    label: イラスト
+    parent: 100
+- model: categories.category
+  pk: 120
+  fields:
+    label: 写真
+    parent: 100
+- model: categories.category
+  pk: 130
+  fields:
+    label: ドット絵・チップセット
+    parent: 100
+- model: categories.category
+  pk: 200
+  fields:
+    label: 音楽
+- model: categories.category
+  pk: 210
+  fields:
+    label: 効果音
+    parent: 200
+- model: categories.category
+  pk: 220
+  fields:
+    label: 楽曲
+    parent: 200
+- model: categories.category
+  pk: 300
+  fields:
+    label: コード
+- model: categories.category
+  pk: 310
+  fields:
+    label: プログラミング言語
+    parent: 300
+- model: categories.category
+  pk: 320
+  fields:
+    label: フレームワーク用
+    parent: 300
+- model: categories.category
+  pk: 321
+  fields:
+    label: enchant.js
+    parent: 320
+- model: categories.category
+  pk: 322
+  fields:
+    label: XNA
+    parent: 320
+- model: categories.category
+  pk: 330
+  fields:
+    label: 開発ツール用
+    parent: 300
+- model: categories.category
+  pk: 331
+  fields:
+    label: RPGツクール
+    parent: 330
+- model: categories.category
+  pk: 332
+  fields:
+    label: 吉里吉里
+    parent: 330
+- model: categories.category
+  pk: 400
+  fields:
+    label: 動画
+- model: categories.category
+  pk: 500
+  fields:
+    label: ３Dモデル
+- model: categories.category
+  pk: 900
+  fields:
+    label: その他
+  

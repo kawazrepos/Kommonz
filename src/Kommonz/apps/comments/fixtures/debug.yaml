@@ -1,0 +1,9 @@
+- model: comments.comment
+  pk: 1
+  fields:
+    content_type: 33
+    site: 1
+    user: 1
+    submit_date: 2000-01-01 01:01:01
+    object_pk: 2
+    comment: イイネ！

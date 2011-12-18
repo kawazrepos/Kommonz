@@ -1,0 +1,8 @@
+- model: messages.message
+  pk: 1
+  fields:
+    pub_state: sent
+    label: てすと
+    user_from: 1
+    user_to: 1
+    body: てすとてすと
