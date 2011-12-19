@@ -1,8 +1,16 @@
 {% extends "base.html" %}
+{% load preview %}
 {% block title %}デザイン案1{% endblock %}
 
 {% block head %}
   {{ block.super }}
+  <link rel="stylesheet" href="/css/jPlayer/not.the.skin.css">
+  <link rel="stylesheet" href="/css/jPlayer/circle.player.css">
+  <script type="text/javascript" src="/javascript/jPlayer/jquery.transform.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/jquery.grab.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/jquery.jplayer.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/mod.csstransforms.min.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/circle.player.js"></script>
   {% render_universaltag_head %}
   <script src="/javascript/search.js" type="text/javascript"></script>
   <link media="all" rel="stylesheet" href="/css/search.css" type="text/css" />
@@ -43,9 +51,9 @@
         </article>
       </header>
       <section>
-        <a href="{{ object.get_absolute_url }}">
-          <figure class="thumbnail large"><img src="{{ MEDIA_URL }}{{ object.thumbnail.large }}" width="{{ object.thumbnail.large.width }}px" height="{{ object.thumbnail.large.height }}px"></figure>
-        </a>
+          <figure class="thumbnail large">
+            {% render_material_preview for object %}
+          </figure>
       </section>
       <footer>{% render_mtimg for object %}<a href="{{ object.get_absolute_url }}"><cite>{{ object.label }}</cite></a></footer>
     </li>

@@ -18,14 +18,12 @@ li.search-material {
   display: block;
   float: left;
   position: relative;
-  box-shadow: 1px 1px 3px #666;
-  -moz-box-shadow: 1px 1px 3px #666;
-  -webkit-box-shadow: 1px 1px 3px #666;
+  @include crossbrowser(box-shadow, 1px 1px 3px #666);
   header {
     width: $search-box;
     height: $search-header;
     right: 0px;
-    display: block;
+    // display: block;
     menu {
       li {
         color: $link;
@@ -39,6 +37,7 @@ li.search-material {
         position: absolute;
         display: inline-block;
         cursor: pointer;
+        z-index: 1000;
         @include crossbrowser(box-shadow, 0.5px 0.5px 2px #222);
         &:hover, &.open {
           color: $text-white;
@@ -50,6 +49,7 @@ li.search-material {
   }
   section {
     text-align: center;
+    padding: 0 ($search-box - $search-section) / 2;
     figure {
       width: $search-section;
       height: $search-section;

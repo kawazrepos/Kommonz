@@ -11,14 +11,13 @@ li.search-material {
   display: block;
   float: left;
   position: relative;
-  box-shadow: 1px 1px 3px #666;
-  -moz-box-shadow: 1px 1px 3px #666;
-  -webkit-box-shadow: 1px 1px 3px #666; }
+  box-shadow: 1px 1px 3px #666666;
+  -moz-box-shadow: 1px 1px 3px #666666;
+  -webkit-box-shadow: 1px 1px 3px #666666; }
   li.search-material header {
     width: 196px;
     height: 28px;
-    right: 0px;
-    display: block; }
+    right: 0px; }
     li.search-material header menu li {
       color: #4183c4;
       text-align: center;
@@ -31,6 +30,7 @@ li.search-material {
       position: absolute;
       display: inline-block;
       cursor: pointer;
+      z-index: 1000;
       box-shadow: 0.5px 0.5px 2px #222222;
       -moz-box-shadow: 0.5px 0.5px 2px #222222;
       -webkit-box-shadow: 0.5px 0.5px 2px #222222; }
@@ -39,7 +39,8 @@ li.search-material {
         background: #3388ff;
         border-color: #3388ff; }
   li.search-material section {
-    text-align: center; }
+    text-align: center;
+    padding: 0 26px; }
     li.search-material section figure {
       width: 144px;
       height: 144px;

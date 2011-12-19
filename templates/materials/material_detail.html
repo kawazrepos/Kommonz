@@ -1,6 +1,6 @@
 {% extends "twocolumn.html" %}
 {% load comments %}
-{% load preview %}
+{% load detail %}
 {% block head %}
 {{ block.super }}
 {% render_universaltag_head %}
@@ -15,7 +15,7 @@
   });
 </script>
 <link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
-{% render_material_preview_head for object %}
+{% render_material_detail_head for object %}
 {% endblock %}
 {% block title %}{{ object.label }}{% endblock %}
 {% block breadcrumbs %}Kommonz > Material > User:{{ object.author.username }} > {{ object.label }}{% endblock %}
@@ -84,7 +84,7 @@
     <section class="material-detail">
       {{ object.description }}
     </section>
-    {% render_material_preview for object %}
+    {% render_material_detail for object %}
   </article>
   <ul class="material-subinformation">
     <li> {{ object.created_at|date:"Y/m/d H:i:s" }}</li>
