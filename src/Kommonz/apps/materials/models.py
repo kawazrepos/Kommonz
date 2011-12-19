@@ -6,6 +6,7 @@
 import os
 import mimetypes
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.fields.files import ImageFieldFile
@@ -252,4 +253,5 @@ class ThumbnailFile(ImageFieldFile):
         super(ImageFieldFile, self).__init__(instance, field, self.thumbnail)
         for pattern_name, pattern_size in Material.THUMBNAIL_SIZE_PATTERNS.iteritems():
             path, ext = os.path.splitext(self.thumbnail)
-            setattr(self, pattern_name, ImageFieldFile(instance, field, "%s.%s%s" % (path, pattern_name, ext)))
+            if os.path.exists(os.path.join(settings.MEDIA_ROOT, "%s.%s%s" % (path, pattern_name, ext))):
+                setattr(self, pattern_name, ImageFieldFile(instance, field, "%s.%s%s" % (path, pattern_name, ext)))

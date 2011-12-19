@@ -8,11 +8,11 @@
   $(function(){
       $('.delete').click(function(){
         if(window.confirm("削除します。よろしいですか？")){
-        $(this).find('form').submit();
-        return false;
+          $(this).find('form').submit();
+          return false;
         }
-        });
       });
+  });
 </script>
 <link media="all" rel="stylesheet" href="/css/material_detail.css" type="text/css" />
 {% render_material_preview_head for object %}
