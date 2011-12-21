@@ -84,6 +84,21 @@
     <section class="material-detail">
       {{ object.description }}
     </section>
+    {% if object.packages.count > 0 %}
+    <h2>この素材と同じパッケージの素材</h2>
+    <ul>
+      {% for package in object.packages.all %}
+        <li><h3>{% render_mtimg for package %}<a href="{{ package.get_absolute_url }}">{{ package.label }}</a></h3></li>
+        <ul>
+          {% for submaterial in package.materials.all %}
+          {% if not submaterial.pk == object.pk %}
+          <li>{% render_mtimg for submaterial %}<a href="{{ submaterial.get_absolute_url }}">{{ submaterial.label }}</a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    </ul>
+    {% endif %}
     {% render_material_detail for object %}
   </article>
   <ul class="material-subinformation">
@@ -94,7 +109,7 @@
     <li>{{ object.mimetype }}</li>
   </ul>
   <section class="material-comment">
-    <h1>この素材へのコメント</h1>    
+    <h2>この素材へのコメント</h2>    
     {% get_comment_list for object as comment_list %}
     {% for comment in comment_list %}
       {% if not comment.is_removed %}
@@ -111,7 +126,7 @@
       </article>
       {% endif %}
     {% endfor %}
-    <h1>コメントを書く</h1>
+    <h2>コメントを書く</h2>
     <div class="comment-form">
       {% get_comment_form for object as comment_form %}
       <form action="{% comment_form_target %}" method="post">
