@@ -74,6 +74,7 @@ setup(
         'django-qwert',
         'django-object-permission',
         'django-social-auth',
+        'django-universaltag',
         'django-nose',
         'django-uni-form',
         'django-piston',
