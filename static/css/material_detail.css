@@ -1,80 +1,51 @@
 /* Color Settings */
 /* Size Settings */
 /* -- clearfix -- */
-/* line 18, ../scss/_lib.scss */
 .clear {
-  clear: both;
-}
+  clear: both; }
 
-/* line 21, ../scss/_lib.scss */
 .clearfix {
   min-height: 0;
-  display: block;
-}
+  display: block; }
 
-/* line 25, ../scss/_lib.scss */
 .clearfix:after {
   content: ".";
   display: block;
   height: 0;
   font-size: 0;
   clear: both;
-  visibility: hidden;
-}
+  visibility: hidden; }
 
 /* -- end of clearfix -- */
-/* line 6, ../scss/material_detail.scss */
 #sidebar dd.author .usericon {
-  display: inline-block;
-}
-/* line 9, ../scss/material_detail.scss */
+  display: inline-block; }
 #sidebar dd.author .username {
   margin: 5px 0 3px;
-  display: block;
-}
-/* line 14, ../scss/material_detail.scss */
+  display: block; }
 #sidebar section.material-action menu {
-  margin-left: 10px;
-}
-/* line 16, ../scss/material_detail.scss */
-#sidebar section.material-action menu li {
-  background: 0 3px no-repeat;
-  padding: 5px 0px 8px 22px;
-}
-/* line 21, ../scss/material_detail.scss */
-#sidebar section.material-action menu .edit-material {
-  background-image: url(/image/sprite/material-detail/edit-material.png);
-}
-/* line 21, ../scss/material_detail.scss */
-#sidebar section.material-action menu .delete-material {
-  background-image: url(/image/sprite/material-detail/delete-material.png);
-}
-/* line 21, ../scss/material_detail.scss */
-#sidebar section.material-action menu .add-mylist {
-  background-image: url(/image/sprite/material-detail/add-mylist.png);
-}
-/* line 21, ../scss/material_detail.scss */
-#sidebar section.material-action menu .messageto {
-  background-image: url(/image/sprite/material-detail/messageto.png);
-}
-/* line 21, ../scss/material_detail.scss */
-#sidebar section.material-action menu .report {
-  background-image: url(/image/sprite/material-detail/report.png);
-}
+  margin-left: 10px; }
+  #sidebar section.material-action menu li {
+    background: 0 3px no-repeat;
+    padding: 5px 0px 8px 22px; }
+  #sidebar section.material-action menu .edit-material {
+    background-image: url(/image/sprite/material-detail/edit-material.png); }
+  #sidebar section.material-action menu .delete-material {
+    background-image: url(/image/sprite/material-detail/delete-material.png); }
+  #sidebar section.material-action menu .add-mylist {
+    background-image: url(/image/sprite/material-detail/add-mylist.png); }
+  #sidebar section.material-action menu .messageto {
+    background-image: url(/image/sprite/material-detail/messageto.png); }
+  #sidebar section.material-action menu .report {
+    background-image: url(/image/sprite/material-detail/report.png); }
 
-/* line 29, ../scss/material_detail.scss */
 ul.material-subinformation {
-  margin: 20px auto 5px;
-}
-/* line 31, ../scss/material_detail.scss */
-ul.material-subinformation li {
-  color: #666;
-  font-size: 8px;
-  padding: 5px;
-  display: inline;
-}
+  margin: 20px auto 5px; }
+  ul.material-subinformation li {
+    color: #666;
+    font-size: 8px;
+    padding: 5px;
+    display: inline; }
 
-/* line 39, ../scss/material_detail.scss */
 .download-button {
   vertical-align: middle;
   text-decoration: none;
@@ -83,44 +54,31 @@ ul.material-subinformation li {
   padding-top: 20px;
   width: 200px;
   height: 40px;
-  display: block;
-}
+  display: block; }
 
-/* line 50, ../scss/material_detail.scss */
 section.material-detail {
   background: #fefefe;
   margin: 10px 0px 10px;
   padding: 20px 10px 20px 10px;
-  border: solid 1px #cccccc;
-}
+  border: solid 1px #cccccc; }
 
-/* line 58, ../scss/material_detail.scss */
 section.material-comment article {
   background: #fefefe;
   margin: 5px;
   padding: 5px;
-  border: solid 1px #cccccc;
-}
-/* line 64, ../scss/material_detail.scss */
+  border: solid 1px #cccccc; }
 section.material-comment img.comment-avatar {
   float: left;
-  margin-right: 10px;
-}
-/* line 68, ../scss/material_detail.scss */
+  margin-right: 10px; }
 section.material-comment div.comment-form {
   background: #fefefe;
   border: solid 1px #cccccc;
   margin: 5px;
-  padding: 5px;
-}
-/* line 4, ../scss/_lib.scss */
-section.material-comment div.comment-form form label {
-  display: block;
-}
-/* line 8, ../scss/_lib.scss */
-section.material-comment div.comment-form form textarea#id_comment {
-  display: block;
-  margin: 5px auto;
-  width: 700px;
-  height: 100px;
-}
+  padding: 5px; }
+  section.material-comment div.comment-form form label {
+    display: block; }
+  section.material-comment div.comment-form form textarea#id_comment {
+    display: block;
+    margin: 5px auto;
+    width: 700px;
+    height: 100px; }

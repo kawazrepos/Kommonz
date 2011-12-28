@@ -51,7 +51,6 @@ class SearchResultView(ListView):
             qs = qs.order_by(sort)
         return qs
 
-
     def get_context_data(self, **kwargs):
         """
         Add ExtendSearchForm instance to context.

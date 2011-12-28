@@ -7,6 +7,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
-        context['latest_materials'] = Material.objects.order_by('-created_at')[:5]
+        context['latest_materials'] = Material.objects.order_by('-created_at')[:10]
         context['form'] = SearchForm()
+        context['index'] = True
         return context

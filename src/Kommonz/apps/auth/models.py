@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     AVATAR_SIZE_PATTERNS = {
         'huge':     (288, 288, False),
         'large':    (144, 144, False),
-        'middle':   (96, 96, False),
+        'middle':   (48, 48, False),
         'small':    (27, 27, False),
     }
     
