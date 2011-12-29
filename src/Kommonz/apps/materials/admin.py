@@ -24,9 +24,6 @@ class MaterialAdmin(admin.ModelAdmin):
     search_fields   = ('label', 'description',)
 admin.site.register(Material, MaterialAdmin)
 
-class KeroAdmin(admin.ModelAdmin):
-    list_display    = ('__unicode__',)
-admin.site.register(Kero, KeroAdmin)
 
 # paticular models
 

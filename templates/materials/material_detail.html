@@ -2,6 +2,7 @@
 {% load comments %}
 {% load detail %}
 {% load licenses_tags %}
+{% load keros_tags %}
 {% block head %}
 {{ block.super }}
 {% render_universaltag_head %}
@@ -44,11 +45,7 @@
     <dt>レーティング</dt>
     <dd class="material-">
     <ul>
-      {% for kero in object.keros.all %}
-      <li class="kero-icon">{{ kero }}</li>
-      {% empty %}
-      <li class="kero-icon">なし</li>
-      {% endfor %}
+      {% render_kero for object %}
     </ul>
     </dd>
     <dt>ダウンロード回数</dt>

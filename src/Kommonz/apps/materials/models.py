@@ -17,7 +17,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from qwert.middleware.threadlocals import request as get_request
 from apps.categories.models import Category
 from apps.licenses.models import License, CodeLicense, CCLicense
-
+from apps.keros.models import Kero
 from fields.thumbnailfield.fields import ThumbnailField
 from managers import MaterialManager
 
@@ -89,6 +89,8 @@ class Material(models.Model):
     description = models.TextField(_('Description'), blank=True, null=True)
     category    = models.ForeignKey(Category, verbose_name=_('Category'), related_name='materials', blank=True, null=True)
     license     = models.ForeignKey(License,  verbose_name=_('License'),  related_name='materials', blank=True, null=True)
+    kero        = models.ForeignKey(Kero,     verbose_name=_('KERO'),     related_name='materials', blank=True, null=True)
+
 
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
@@ -238,26 +240,6 @@ class Material(models.Model):
         mediator.viewer(self, None)
         mediator.viewer(self, 'anonymous')
         
-class Kero(models.Model):
-    """
-    Kero is a rating system for Materials.
-    """
-    
-    def _get_file_path(self, filename):
-        return filename
-    
-    label       = models.CharField(_('Label'), max_length=32)
-    description = models.TextField(_('Description'))
-    icon        = models.FileField(_('Icon'), upload_to=_get_file_path)
-    materials   = models.ManyToManyField('Material', related_name='keros', verbose_name=_('materials'))
-    
-    class Meta:
-        app_label           = 'materials'
-        verbose_name        = _('KERO')
-        verbose_name_plural = verbose_name
-        
-    def __unicode__(self):
-        return self.label
 
 @receiver(pre_delete, sender=Material)
 def delete_material_file(sender, instance, **kwargs):

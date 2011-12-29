@@ -1,0 +1,18 @@
+- model: keros.kero
+  pk: 1
+  fields:
+    label: KERO-A
+    description: "KERO-A"
+    render_html: '<a href="">KERO-A</a>'
+- model: keros.kero
+  pk: 2
+  fields:
+    label: KERO-B
+    description: "KERO-B"
+    render_html: '<a href="">KERO-B</a>'
+- model: keros.kero
+  pk: 3
+  fields:
+    label: KERO-C
+    description: "KERO-C"
+    render_html: '<a href="">KERO-C</a>'

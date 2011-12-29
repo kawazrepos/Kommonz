@@ -19,6 +19,8 @@
     _file: 1
     description: かわずたん！
     author: 1
+    license: 100
+    kero: 1
     ip: 127.0.0.1
     category: 110
 - model: materials.materialfile
@@ -33,6 +35,8 @@
     _file: 2
     description: サンプルゲーム
     author: 1
+    kero: 1
+    license: 200
     ip: 127.0.0.1
     category: 321
 - model: materials.code
