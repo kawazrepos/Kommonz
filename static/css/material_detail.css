@@ -132,23 +132,7 @@ section.material-detail {
   padding: 20px 10px 20px 10px;
   border: solid 1px #cccccc; }
 
-section.material-comment article {
-  background: #fefefe;
-  margin: 5px;
-  padding: 5px;
-  border: solid 1px #cccccc; }
-section.material-comment img.comment-avatar {
-  float: left;
-  margin-right: 10px; }
-section.material-comment div.comment-form {
-  background: #fefefe;
-  border: solid 1px #cccccc;
-  margin: 5px;
-  padding: 5px; }
-  section.material-comment div.comment-form form label {
-    display: block; }
-  section.material-comment div.comment-form form textarea#id_comment {
-    display: block;
-    margin: 5px auto;
-    width: 700px;
-    height: 100px; }
+ul.package-list {
+  margin-left: 15px; }
+  ul.package-list li {
+    margin: 5px 0; }

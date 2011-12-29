@@ -1,5 +1,4 @@
 {% extends "twocolumn.html" %}
-{% load comments %}
 {% load detail %}
 {% block head %}
 {{ block.super }}
@@ -80,16 +79,18 @@
 <section id="detail-main">
   <article>
     <h1>{% render_mtimg for object %}{{ object.label }}</h1>
+    {% if object.thumbnail.huge %}
     <img src="{{ MEDIA_URL }}{{ object.thumbnail.huge }}">
+    {% endif %}
     <section class="material-detail">
       {{ object.description }}
     </section>
     {% if object.packages.count > 0 %}
     <h2>この素材と同じパッケージの素材</h2>
-    <ul>
+    <ul class="package-list">
       {% for package in object.packages.all %}
         <li><h3>{% render_mtimg for package %}<a href="{{ package.get_absolute_url }}">{{ package.label }}</a></h3></li>
-        <ul>
+        <ul class="package-list">
           {% for submaterial in package.materials.all %}
           {% if not submaterial.pk == object.pk %}
           <li>{% render_mtimg for submaterial %}<a href="{{ submaterial.get_absolute_url }}">{{ submaterial.label }}</a></li>
@@ -108,37 +109,6 @@
     <li>|</li>
     <li>{{ object.mimetype }}</li>
   </ul>
-  <section class="material-comment">
-    <h2>この素材へのコメント</h2>    
-    {% get_comment_list for object as comment_list %}
-    {% for comment in comment_list %}
-      {% if not comment.is_removed %}
-      <article>
-        <p>
-          <img class="comment-avatar" src="/{{ comment.user.profile.avatar.middle }}">
-          <a href="{{ comment.user.profile.get_absolute_url }}">{{ comment.user.username }}</a>
-        </p>
-        <p>{{ comment.comment }}</p>
-        <p>{{ comment.submit_date }}</p>
-        {% if comment.user = request.user %}
-        <p><a href="{% reverse 'django.contrib.comments.views.moderation.delete' comment.id %}">削除</a></p>
-        {% endif %}
-      </article>
-      {% endif %}
-    {% endfor %}
-    <h2>コメントを書く</h2>
-    <div class="comment-form">
-      {% get_comment_form for object as comment_form %}
-      <form action="{% comment_form_target %}" method="post">
-        {% csrf_token %}
-        {% if comment_form.comments.errors %}
-          {{ comment_form.comments.html_error_list }}
-        {% endif %}
-        {{ comment_form }}
-        <input type="hidden" name="next" value="{{ object.get_absolute_url }}">
-        <input type="submit" name="submit" value="Post">
-      </form>
-    </div>
-  </section>
-</section>
+  <hr />
+  {% include "comments/comments.html" %}
 {% endblock %}

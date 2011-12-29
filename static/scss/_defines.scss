@@ -10,9 +10,9 @@ $border: #ccc;
 $background: #fefefe;
 $header-background: $background;
 $green: #CDEB8E;
-$lightgreen: #A5C956;
+$deepgreen: #A5C956;
+$lightgreen: lighten($green, 15%);
 $maincolumn-background: #f6f6f6;
-
 
 /* Size Settings */
 
