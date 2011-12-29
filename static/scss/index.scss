@@ -1,4 +1,5 @@
 @import "defines";
+@import "buttons";
 
 #content {
   min-height: 600px;
@@ -89,7 +90,8 @@
   }
 }
 
-#search-button {
+.search-button {
+  @include green-button;
   color: #eee;
   margin: 0;
   padding: 0;

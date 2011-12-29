@@ -30,7 +30,6 @@ li.search-material {
       position: absolute;
       display: inline-block;
       cursor: pointer;
-      z-index: 1000;
       box-shadow: 0.5px 0.5px 2px #222222;
       -moz-box-shadow: 0.5px 0.5px 2px #222222;
       -webkit-box-shadow: 0.5px 0.5px 2px #222222; }

@@ -37,7 +37,6 @@ li.search-material {
         position: absolute;
         display: inline-block;
         cursor: pointer;
-        z-index: 1000;
         @include crossbrowser(box-shadow, 0.5px 0.5px 2px #222);
         &:hover, &.open {
           color: $text-white;

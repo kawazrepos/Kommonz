@@ -1,4 +1,5 @@
 @import "defines";
+@import "buttons";
 @import "lib";
 
 #sidebar{
@@ -37,6 +38,7 @@ ul.material-subinformation {
 }
 
 .download-button {
+  @include blue-button;
   vertical-align: middle;
   text-decoration: none;
   margin: 20px auto;
