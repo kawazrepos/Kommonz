@@ -21,12 +21,14 @@
 
 {% block sidebar %}
 <a href="{% reverse 'materials_material_download' object.pk %}" class="download-button">ダウンロード</a>
-<section class="material-info">
+<section>
   <h2>{% render_mtimg for object %}{{ object.label }}</h2>
   <dl class="material-information">
     <dt>投稿者</dt>
     <dd class="author">
-    <img class="avatar middle" src="/{{ object.author.profile.avatar.middle }}">
+    <a href="{{ object.author.profile.get_absolute_url }}">
+      <img class="avatar middle" src="/{{ object.author.profile.avatar.middle }}">
+    </a>
     <span class="username"><a href="{{ object.author.profile.get_absolute_url }}">{{ object.author.username }}</a>さん</span>
     </dd>
     <dt>カテゴリ</dt>

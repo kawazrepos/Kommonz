@@ -2,6 +2,8 @@
 @import "defines";
 section.comment {
   .empty {
+    margin-top: 15px;
+    margin-bottom: 25px;
     color: lighten($text, 30%);
   }
   article {

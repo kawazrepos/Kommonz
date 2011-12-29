@@ -524,6 +524,8 @@ menu {
 /* Color Settings */
 /* Size Settings */
 section.comment .empty {
+  margin-top: 15px;
+  margin-bottom: 25px;
   color: gray; }
 section.comment article {
   margin: 5px;
