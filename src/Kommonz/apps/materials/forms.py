@@ -8,7 +8,7 @@ from models import Material, MaterialFile
 from django.utils.translation import ugettext as _
 
 class MaterialForm(forms.ModelForm):
-    _file = forms.IntegerField(widget=forms.HiddenInput())
+    _file   = forms.IntegerField(widget=forms.HiddenInput())
     
     class Meta:
         model  = Material

@@ -1,4 +1,4 @@
-- model: licenses.licensedefinition
+- model: licenses.license
   pk: 100
   fields:
     label: CC-BY
@@ -7,7 +7,7 @@
 - model: licenses.cclicense
   pk: 100
   fields: {}
-- model: licenses.licensedefinition
+- model: licenses.license
   pk: 101
   fields:
     label: CC-BY-NC
@@ -16,7 +16,7 @@
 - model: licenses.cclicense
   pk: 101
   fields: {}
-- model: licenses.licensedefinition
+- model: licenses.license
   pk: 200
   fields:
     label: BSD
@@ -25,7 +25,7 @@
 - model: licenses.codelicense
   pk: 200
   fields: {}
-- model: licenses.licensedefinition
+- model: licenses.license
   pk: 201
   fields:
     label: GPL

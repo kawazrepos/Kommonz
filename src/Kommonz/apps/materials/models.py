@@ -13,11 +13,14 @@ from django.db.models.fields.files import ImageFieldFile
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext as _
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from qwert.middleware.threadlocals import request as get_request
 from apps.categories.models import Category
+from apps.licenses.models import License, CodeLicense, CCLicense
 
 from fields.thumbnailfield.fields import ThumbnailField
 from managers import MaterialManager
+
 
 MATERIAL_FILE_PATH = os.path.join('storage', 'materials')
 DEFAULT_THUMBNAIL_PATH = os.path.join('image', 'default', 'material', '%s.png')
@@ -85,7 +88,8 @@ class Material(models.Model):
     # not required 
     description = models.TextField(_('Description'), blank=True, null=True)
     category    = models.ForeignKey(Category, verbose_name=_('Category'), related_name='materials', blank=True, null=True)
-    
+    license     = models.ForeignKey(License,  verbose_name=_('License'),  related_name='materials', blank=True, null=True)
+
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at  = models.DateTimeField(_('Updated At'), auto_now=True)
@@ -105,10 +109,29 @@ class Material(models.Model):
         
     def __unicode__(self):
         return '%s(%s)' % (self.label, self.file.name)
-    
+        
+    def get_suitable_license_type(self):
+        from utils.filetypes import get_file_model
+        cls = get_file_model(self.label)
+        
+        from codes.models import Code
+        if cls == Code:
+            return CodeLicense
+        else:
+            return CCLicense
+        
     def clean(self):
         if not self.category:
             self.category = Category.objects.get_filetype_category(self.file.name)
+        
+        if self.license:
+            try:
+                self.get_suitable_license_type().objects.get(pk=self.license.pk)
+            except ObjectDoesNotExist:
+                raise ValidationError(_('''can not set the selected license with this model.'''))
+        else:
+            raise ValidationError(_('''you have to select license.'''))
+            # or set default license
         return super(Material, self).clean()
             
     @models.permalink
@@ -207,6 +230,7 @@ class Material(models.Model):
             self.ip = "0.0.0.0"
         if not self.category:
             self.category = Category.objects.get_filetype_category(self.file.name)
+
         return super(Material, self).save(*args, **kwargs)
     
     def modify_object_permission(self, mediator, created):

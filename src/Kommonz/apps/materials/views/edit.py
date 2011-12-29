@@ -1,19 +1,18 @@
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.views.decorators.csrf import csrf_exempt
+from ..api.mappers import MaterialFileMapper
+from ..forms import MaterialFileForm, MaterialUpdateForm
+from ..models import Material, MaterialFile
+from ..utils.filetypes import guess
+from apps.categories.models import Category
+from apps.licenses.models import CCLicense
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import CreateView, UpdateView, DeleteView
 from object_permission.decorators import permission_required
-
 from utils import lazy_reverse
-from utils.views import JSONResponse
 from utils.decorators import view_class_decorator
+from utils.views import JSONResponse
 
-from apps.categories.models import Category
-
-from ..models import Material, MaterialFile
-from ..forms import MaterialFileForm, MaterialUpdateForm
-from ..api.mappers import MaterialFileMapper
-from ..utils.filetypes import guess
 
 def response_mimetype(request):
     if request.META.has_key('HTTP_ACCEPT') and "application/json" in request.META['HTTP_ACCEPT']:
@@ -56,13 +55,17 @@ class MaterialCreateView(CreateView):
         from django import forms
         filefield = forms.IntegerField(widget=forms.HiddenInput())
         category = Category.objects.get_filetype_category(self.filename)
+        license_type = CCLicense
         modelform_class = type('modelform', (forms.ModelForm,), {
             "Meta": meta, 
             "_file" : filefield, 
-            "label.initial" : self.filename, 
-            "category" : forms.ModelChoiceField(queryset=Category.objects.all(), initial=category)
+            "label.initial" : self.filename,
+            "category" : forms.ModelChoiceField(queryset=Category.objects.all(), initial=category),
+            "license" :  forms.ModelChoiceField(queryset=license_type.objects.all())
         }) # create new class extended MaterialUpdateForm
         return modelform_class
+    
+        
 
 class MaterialValidateView(MaterialCreateView):
     def form_valid(self, form):

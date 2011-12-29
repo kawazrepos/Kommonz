@@ -1,7 +1,6 @@
-
-
 from django import template
-from ..models import LicenseDefinition
+from apps.materials.models import Material
+
 register = template.Library()
 
 
@@ -21,9 +20,8 @@ class RenderLicenseNode(template.Node):
     def render(self, context):
         try:
             material = self.material_to_be_formatted.resolve(context)
-            definition = material.license.definition
-            if isinstance(definition, LicenseDefinition):
-                return definition.render_html
+            if isinstance(material, Material):
+                return material.license.render_html
             else:
                 raise template.TemplateSyntaxError("render_license tag's second argument should be material instance")
         except template.VariableDoesNotExist:
