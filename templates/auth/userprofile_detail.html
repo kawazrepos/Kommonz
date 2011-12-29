@@ -28,7 +28,7 @@
     {% for material in user.materials.all|slice:"10" %}
     <li class="material-list">{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}">{{ material.label }}</a></li>
     {% if forloop.last %}
-    <li>全て見る</li>
+    <li><a href="{% reverse "searches_result" %}?author={{ object.user.username }}">全て見る</a></li>
     {% endif %}
     {% empty %}
     <li class="caption">素材を投稿していません</li>

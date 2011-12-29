@@ -27,9 +27,12 @@ class SearchResultView(ListView):
         params = dict(self.request.GET.copy())
         queries = []
         if 'q' in params:
-            q = params['q'][0]
-            queries.append(Q(label__contains=q))
-            queries.append(Q(description__contains=q))
+            for q in params['q'][0].split(" "): 
+                queries.append(Q(label__contains=q))
+                queries.append(Q(description__contains=q))
+                queries.append(Q(category__label__contains=q))
+        if 'author' in params:
+            qs = qs.filter(author__username=params['author'][0])
         if 'category' in params:
             try:
                 category = Category.objects.get(pk=params['category'][0])
