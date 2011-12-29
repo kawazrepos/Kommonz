@@ -1,0 +1,37 @@
+- model: licenses.licensedefinition
+  pk: 100
+  fields:
+    label: CC-BY
+    description: "BY Creative Commons Licence. You must show author's name if you use this material."
+    render_html: <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a>
+- model: licenses.cclicense
+  pk: 100
+  fields: {}
+- model: licenses.licensedefinition
+  pk: 101
+  fields:
+    label: CC-BY-NC
+    description: "BY-NC Creative Commons Licence. You must show author's name if you use this material.You can't use this material for commercial."
+    render_html: '<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>'
+- model: licenses.cclicense
+  pk: 101
+  fields: {}
+- model: licenses.licensedefinition
+  pk: 200
+  fields:
+    label: BSD
+    description: "BSD License."
+    render_html: 'BSD License'
+- model: licenses.codelicense
+  pk: 200
+  fields: {}
+- model: licenses.licensedefinition
+  pk: 201
+  fields:
+    label: GPL
+    description: "GPL License."
+    render_html: 'GPL License'
+- model: licenses.codelicense
+  pk: 201
+  fields: {}
+  
