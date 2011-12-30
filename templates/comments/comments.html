@@ -1,0 +1,45 @@
+{% load comments %}
+<section class="comment">
+  <h2>コメント</h2>
+    {% get_comment_list for object as comment_list %}
+    {% for comment in comment_list %}
+      {% if not comment.is_removed %}
+      <article>
+        <header>
+          <a href="comment.user.profile.get_absolute_url">
+            <img class="comment-avatar middle" src="/{{ comment.user.profile.avatar.middle }}">
+          </a>
+          <span class="comment-author"><a href="{{ comment.user.profile.get_absolute_url }}">{{ comment.user.username }}</a></span>
+          {% if comment.user == request.user %}
+          <span class="comment-delete"><a href="{% reverse 'django.contrib.comments.views.moderation.delete' comment.id %}">削除</a></span>
+          {% endif %}
+          <p><time>{{ comment.submit_date }}</time></p>
+        </header>
+        <div class="comment-body">
+          {{ comment.comment }}
+        </div>
+      </article>
+      {% endif %}
+      {% empty %}
+      <p class="empty">まだコメントが投稿されていません</p>
+    {% endfor %}
+    <section class="comment-form">
+      <h2>コメントを書く</h2>
+      {% if user.is_authenticated %}
+      {% get_comment_form for object as comment_form %}
+      <form action="{% comment_form_target %}" method="post" class="uniForm">
+        {% csrf_token %}
+        {% if comment_form.comments.errors %}
+          {{ comment_form.comments.html_error_list }}
+        {% endif %}
+        {{ comment_form|as_uni_form }}
+        <input type="hidden" name="next" value="{{ object.get_absolute_url }}">
+        <input type="submit" name="submit" value="コメント">
+      </form>
+      {% else %}
+      <p class="empty">コメントには<a login="" href="{% reverse login %}">ログイン</a>が必要です。</p>
+      {% endif %}
+    </div>
+  </section>
+</section>
+

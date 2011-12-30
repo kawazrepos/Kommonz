@@ -39,11 +39,11 @@
             <li class="dropdown-item logout"><a href="{% reverse 'registration_logout' %}">ログアウト</a></li>
           </menu>
         </li>
-        <li class="header-button-section"><a href="{% reverse 'materials_material_file_create' %}" class="upload-button confirm-button blue-button header-button">アップロード</a></li>
+        <li class="header-button-section"><a href="{% reverse 'materials_material_file_create' %}" class="header-button">アップロード</a></li>
       </menu>
       {% else %}
       <menu id="header-menu">
-        <li class="header-button-section"><a href="{% reverse 'registration_index' %}" class="login-button confirm-button blue-button header-button">ログイン</a></li>
+        <li class="header-button-section"><a href="{% reverse 'registration_index' %}" class="header-button">ログイン</a></li>
       </menu>
       {% endif %}
       <nav id="breadcrumbs">

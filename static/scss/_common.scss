@@ -1,3 +1,4 @@
+@import "buttons";
 
 body, textarea { 
   font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; 
@@ -91,63 +92,8 @@ li {
   height: 288px;
 }
 
-.confirm-button {
-  color: #efefef;
-  font-size: large;
-  text-align: center;
-  font-weight: bold;
-  text-shadow: 0 -2px 2px #333;
-  padding: auto;
-  border: solid 1px #999;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.confirm-button:hover {
-  text-decoration: none;
-}
-
-.blue-button {
-  @extend .confirm-button;
-  background: rgb(73,155,234);
-  background: -moz-linear-gradient(top,  rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(73,155,234,1)), color-stop(100%,rgba(32,124,229,1)));
-  background: -webkit-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-  background: -o-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-  background: -ms-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-  background: linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
-}
-
-.blue-button:hover {
-  color: #dedede;
-}
-
-.blue-button:active {
-  color: #ccc;
-  background: rgb(79,133,187);
-  background: -moz-linear-gradient(top,  rgba(79,133,187,1) 0%, rgba(79,133,187,1) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(79,133,187,1)), color-stop(100%,rgba(79,133,187,1)));
-  background: -webkit-linear-gradient(top,  rgba(79,133,187,1) 0%,rgba(79,133,187,1) 100%);
-  background: -o-linear-gradient(top,  rgba(79,133,187,1) 0%,rgba(79,133,187,1) 100%);
-  background: -ms-linear-gradient(top,  rgba(79,133,187,1) 0%,rgba(79,133,187,1) 100%);
-  background: linear-gradient(top,  rgba(79,133,187,1) 0%,rgba(79,133,187,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 );
-}
-
-.green-button {
-  @extend confirm-button;
-  background: rgb(205,235,142);
-  background: -moz-linear-gradient(top,  rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1)));
-  background: -webkit-linear-gradient(top,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-  background: -o-linear-gradient(top,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-  background: -ms-linear-gradient(top,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-  background: linear-gradient(top,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); 
+.button {
+  @include button;
 }
 
 .lightbox {

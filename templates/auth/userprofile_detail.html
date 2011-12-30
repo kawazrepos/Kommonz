@@ -3,17 +3,38 @@
 {% block title %}{{ object.user.username }}{% endblock %}
 {% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール{% endblock %}
 
+{% block sidebar %}
+<section>
+  <h1>{{ object.nickname }}</h1>
+  <dl class="user-information">
+    <dt>性別</dt>
+    <dd>{{ object.sex|default:"未設定" }}</dd>
+    <dt>誕生日</dt>
+    <dd>{{ object.birthday|default:"未設定" }}</dd>
+    <dt>居住地域</dt>
+    <dd>{{ object.place|default:"未設定" }}</dd>
+    <dt>ウェブサイト</dt>
+    <dd>{{ object.url|default:"未設定" }}</dd>
+  </dl>
+</section>
+
+{% endblock %}
+
 {% block main %}
-<section id="detail_main">
-    <h1>{% if object.nickname %}{{ object.nickname }}{% else %}{{ object.user.username }}{% endif %}</h1>
-    <p><img src="{{ object.avatar.huge }}"></p>
-    <p>UserName：{{ object.user.username }}</p>
-    <p>プロフィール：{{ object.profile }}</p>
-    <p>性別：{{ object.sex }}</p>
-    <p>誕生日：{{ object.birthday }}</p>
-    <p>地域：{{ object.place }}</p>
-    <p>ウェブサイト：{{ object.url }}</p>
-    <p>メール：{{ object.user.email }}</p>
-    <p>最終ログイン：{{ object.user.last_login }}</p>
+<section>
+  <p><img src="/{{ object.avatar.huge }}"></p>
+  <h2>投稿した素材</h2>
+  <ul>
+    {% for material in user.materials.all|slice:"10" %}
+    <li class="material-list">{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}">{{ material.label }}</a></li>
+    {% if forloop.last %}
+    <li><a href="{% reverse "searches_result" %}?author={{ object.user.username }}">全て見る</a></li>
+    {% endif %}
+    {% empty %}
+    <li class="caption">素材を投稿していません</li>
+    {% endfor %}
+  </ul>
+  <hr />
+  {% include "comments/comments.html" %}
 </section>
 {% endblock %}

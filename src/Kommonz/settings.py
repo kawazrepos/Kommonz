@@ -238,6 +238,11 @@ SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 SOCIAL_AUTH_IMPORT_BACKENDS = ('apps.registration.backends', )
 
 #
+# ObjectPermission setting
+#
+OBJECT_PERMISSION_DEPRECATED = True
+
+#
 # ThumbnailField setting
 #
 THUMBNAILFIELD_THUMBNAIL_FILENAME = 'thumbnail'

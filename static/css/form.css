@@ -1,36 +1,8 @@
+/* line 1, ../scss/form.scss */
 input[type="text"] {
   background: #fefefe;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px; 
-}
-
-form {
-  padding: 10px;
-  input[type="submit"] {
-    color: #efefef;
-    font-size: large;
-    text-align: center;
-    font-weight: bold;
-    text-shadow: 0 -2px 2px #333;
-    background: rgb(73,155,234);
-    background: -moz-linear-gradient(top,  rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(73,155,234,1)), color-stop(100%,rgba(32,124,229,1)));
-    background: -webkit-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-    background: -o-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-    background: -ms-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-    background: linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
-    margin: 10px 20px;
-    padding: auto;
-    border: solid 1px #666;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    width: 100px;
-    height: 40px;
-    display: inline-block;
-    cursor: pointer;
-  }
+  -webkit-border-radius: 5px;
 }
