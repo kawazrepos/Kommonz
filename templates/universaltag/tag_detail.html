@@ -1,8 +1,11 @@
+{% extends "base.html" %}
+{% load tags_tags %}
+{% block title %}タグ - {{ object }}{% endblock %}
+
 {% block content %}
-<h1>{{ object }}</h1>
-<ul>
-{% for item in tag.items.iterator %}
-    <li><a href="{{ item.get_absolute_url }}">{{ item.content_object }}</a></li>
-{% endfor %}
-</ul>
+<h1>タグ - {{ object }}</h1>
+{% if object.items %}
+  {% get_tagged_instances for object %}
+  {% include "materials/components/material_list.html" with material_list=tagged_instances %}
+{% endif %}
 {% endblock %}
