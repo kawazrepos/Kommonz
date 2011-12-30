@@ -8,6 +8,10 @@ from models import UserProfile, UserOption
 from social_auth.models import UserSocialAuth
 
 
+class UserMaterialListView(DetailView):
+    model = User
+    template_name = "auth/user_material_list.html"
+
 class UserProfileDetailView(DetailView):
     model = UserProfile
 

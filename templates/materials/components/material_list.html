@@ -1,0 +1,46 @@
+{% load preview %}
+<ul class="material_list">
+
+  <!-- css/js for material list -->
+  <link rel="stylesheet" href="/css/jPlayer/not.the.skin.css">
+  <link rel="stylesheet" href="/css/jPlayer/circle.player.css">
+  {% render_universaltag_head %}
+  
+  <script type="text/javascript" src="/javascript/jPlayer/jquery.transform.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/jquery.grab.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/jquery.jplayer.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/mod.csstransforms.min.js"></script>
+  <script type="text/javascript" src="/javascript/jPlayer/circle.player.js"></script>
+  <script src="/javascript/search.js" type="text/javascript"></script>
+  <!-- end of css/js for material list -->
+  
+{% for material in material_list %}
+  <li class="list-material">
+    <header>
+      <menu>
+        <li class="info">info</li>
+      </menu>
+      <article class="material-info">
+        <dl>
+          <dt>投稿者</dt>
+          <dd>{{ material.author.username }}</dd>
+          <dt>カテゴリ</dt>
+          <dd> {{ material.category }}</dd>
+          <dt>ダウンロード数</dt>
+          <dd> {{ material.download }}</dd>
+          <dt>ライセンス</dt>
+          <dd>{{ material.license }}</dd>
+          <dt>タグ</dt>
+          <dd>{% render_universaltag_tags of material %}</dd>
+        </dl>
+      </article>
+    </header>
+    <section>
+        <figure class="thumbnail large">
+          {% render_material_preview for material %}
+        </figure>
+    </section>
+    <footer>{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}"><cite>{{ material.label }}</cite></a></footer>
+  </li>
+{% endfor %}
+</ul>

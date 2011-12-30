@@ -1,5 +1,6 @@
 /* Color Settings */
 /* Size Settings */
+/* line 3, ../scss/dashboard.scss */
 section.user-info {
   background-color: #fefefe;
   margin: 0 auto 20px;
@@ -12,53 +13,78 @@ section.user-info {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
   transform: rotate(-5deg);
   -moz-transform: rotate(-5deg);
-  -webkit-transform: rotate(-5deg); }
-  section.user-info div.user-pin {
-    background: url(image/pin.png) 0 0 no-repeat;
-    width: 16px;
-    height: 13px;
-    top: 5px;
-    left: 75px;
-    display: block;
-    position: absolute; }
-  section.user-info img {
-    margin: 0 auto;
-    display: block; }
-  section.user-info span {
-    color: #666;
-    font-family: "Marker Felt";
-    font-size: large;
-    text-align: center;
-    margin: 5px auto;
-    padding: 5px 0;
-    display: block; }
+  -webkit-transform: rotate(-5deg);
+}
+/* line 16, ../scss/dashboard.scss */
+section.user-info div.user-pin {
+  background: url(image/pin.png) 0 0 no-repeat;
+  width: 16px;
+  height: 13px;
+  top: 5px;
+  left: 75px;
+  display: block;
+  position: absolute;
+}
+/* line 25, ../scss/dashboard.scss */
+section.user-info img {
+  margin: 0 auto;
+  display: block;
+}
+/* line 29, ../scss/dashboard.scss */
+section.user-info span {
+  color: #666;
+  font-family: "Marker Felt";
+  font-size: large;
+  text-align: center;
+  margin: 5px auto;
+  padding: 5px 0;
+  display: block;
+}
 
+/* line 40, ../scss/dashboard.scss */
 menu#dashboard-action {
   margin: 5px 0px 5px 5px;
-  border-bottom: solid 1px #ccc; }
-  menu#dashboard-action hr {
-    margin: 0; }
-  menu#dashboard-action h1 {
-    font-size: 13px;
-    background-position: 0px 5px;
-    background-repeat: no-repeat;
-    margin: 5px 0 5px 0;
-    padding: 5px 0px 5px 20px; }
-  menu#dashboard-action h1 a, menu#dashboard-action li.menu-list a {
-    color: #222; }
-  menu#dashboard-action li {
-    background-position: 5px 8px;
-    background-repeat: no-repeat;
-    border-top: solid 1px #ccc;
-    border-collapse: collapse; }
-    menu#dashboard-action li .caption {
-      color: #999;
-      font-size: small; }
-  menu#dashboard-action menu.submenu li {
-    background-position: 20px 8px;
-    padding: 10px 0 10px 20px; }
-  menu#dashboard-action menu.submenu li.menu-list {
-    padding-left: 40px; }
-  menu#dashboard-action .active {
-    background-color: #f6f6f6;
-    font-weight: bold; }
+  border-bottom: solid 1px #ccc;
+}
+/* line 43, ../scss/dashboard.scss */
+menu#dashboard-action hr {
+  margin: 0;
+}
+/* line 46, ../scss/dashboard.scss */
+menu#dashboard-action h1 {
+  font-size: 13px;
+  background-position: 0px 5px;
+  background-repeat: no-repeat;
+  margin: 5px 0 5px 0;
+  padding: 5px 0px 5px 20px;
+}
+/* line 53, ../scss/dashboard.scss */
+menu#dashboard-action h1 a, menu#dashboard-action li.menu-list a {
+  color: #222;
+}
+/* line 56, ../scss/dashboard.scss */
+menu#dashboard-action li {
+  background-position: 5px 8px;
+  background-repeat: no-repeat;
+  border-top: solid 1px #ccc;
+  border-collapse: collapse;
+}
+/* line 61, ../scss/dashboard.scss */
+menu#dashboard-action li .caption {
+  color: #999;
+  font-size: small;
+}
+/* line 67, ../scss/dashboard.scss */
+menu#dashboard-action menu.submenu li {
+  background-position: 20px 8px;
+  padding: 10px 0 10px 20px;
+}
+/* line 71, ../scss/dashboard.scss */
+menu#dashboard-action menu.submenu li.menu-list {
+  padding-left: 40px;
+}
+/* line 75, ../scss/dashboard.scss */
+menu#dashboard-action .active {
+  background-color: #f6f6f6;
+  font-weight: bold;
+}

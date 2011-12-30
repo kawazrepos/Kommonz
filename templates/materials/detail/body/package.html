@@ -1,5 +1,5 @@
 <h2>このパッケージに含まれている素材</h2>
-<ul>
+<ul class="package-list">
 {% for submaterial in material.materials.all %}
   <li>{% render_mtimg for submaterial %}<a href="{{ submaterial.get_absolute_url }}">{{ submaterial.label }}</a></li>
 {% empty %}

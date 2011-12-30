@@ -1,0 +1,100 @@
+$search-header: 28px;
+$search-section: 144px;
+$search-footer: 24px;
+$search-box: $search-header + $search-section + $search-footer;
+
+ul.material_list {
+  margin: 16px;
+  width: 1058px;
+  
+  li.list-material {
+    margin: 5px 0 5px 13px;
+    width: $search-box;
+    height: $search-box;
+    display: block;
+    float: left;
+    position: relative;
+    @include crossbrowser(box-shadow, 1px 1px 3px #666);
+    header {
+      width: $search-box;
+      height: $search-header;
+      right: 0px;
+      // display: block;
+      menu {
+        li {
+          color: $link;
+          text-align: center;
+          padding-top: 7px;
+          border-left: solid 1px $border;
+          border-bottom: solid 1px $border;
+          width: 40px;
+          height: 22px;
+          right: 0;
+          position: absolute;
+          display: inline-block;
+          cursor: pointer;
+          z-index: 1000;
+          @include crossbrowser(box-shadow, 0.5px 0.5px 2px #222);
+          &:hover, &.open {
+            color: $text-white;
+            background: $link-hover;
+            border-color: $link-hover;
+          }
+        }
+      }
+    }
+    section {
+      text-align: center;
+      padding: 0 ($search-box - $search-section) / 2;
+      figure {
+        width: $search-section;
+        height: $search-section;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+    footer {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      width: $search-box;
+      height: $search-footer;
+      bottom: 0;
+      position: absolute;
+      .mtimg {
+        margin: 4px 2px 0;
+      }
+      a {
+        cite {
+          vertical-align: 4px;
+        }
+      }
+    }
+  }
+  
+  article.material-info {
+    background: $background;
+    border: solid 0.5px $border;
+    padding: 8px;
+    @include crossbrowser(border-radius, 5px);
+    @include crossbrowser(box-shadow, 2px 2px 5px #666);
+    width: 200px;
+    height: auto;
+    min-height: $search-box;
+    top: $search-header + 2px;
+    left: 10px;
+    position: absolute;
+    display: none;
+    z-index: 999;
+    dt {
+      color: #999;
+      border-bottom: dotted 1px $border;
+      padding: 1px 0 5px 1px;
+    }
+    dd {
+      color: #666;
+      padding: 2px 0 8px 12px;
+    }
+  }
+}

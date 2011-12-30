@@ -1,0 +1,10 @@
+{% extends "dashboards/base.html" %}
+
+{% block title %}投稿素材一覧{% endblock %}
+
+{% block main %}
+<h1>投稿素材一覧</h1>
+{% if user.materials %}
+  {% include "materials/components/material_list.html" with material_list=object.materials.all %}
+{% endif %}
+{% endblock %}

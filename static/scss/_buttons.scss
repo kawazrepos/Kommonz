@@ -1,0 +1,48 @@
+@import "functions";
+
+@mixin button {
+  color: $button;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 -0.5px 1px #333;
+  padding: auto;
+  border: solid 1px #999;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  display: inline-block;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@mixin blue-button {
+  @include button;
+  @include gradation(rgba(73, 155, 234, 1), rgba(32, 124, 229, 1));
+  &:hover {
+    color: $button-hover;
+  }
+  &:active {
+    color: #ccc;
+    @include gradation(rgba(79, 133, 187, 1), rgba(79, 133, 187, 1));
+  }
+}
+
+.blue-button {
+  @include blue-button;
+}
+
+@mixin green-button {
+  @include button;
+  $before: rgba(205, 235, 142, 1);
+  $after: rgba(165, 201, 86, 1);
+  @include gradation($before, $after);
+  &:hover {
+    color: $button-hover;
+  }
+  &:active {
+    @include gradation(darken($before, 20%), darken($after, 20%));
+  }
+}

@@ -1,4 +1,5 @@
 @import "defines";
+@import "buttons";
 @import "lib";
 
 #sidebar{
@@ -37,6 +38,7 @@ ul.material-subinformation {
 }
 
 .download-button {
+  @include blue-button;
   vertical-align: middle;
   text-decoration: none;
   margin: 20px auto;
@@ -54,24 +56,9 @@ section.material-detail {
   border: solid 1px $border;
 }
 
-section.material-comment {
-  article {
-    background: $background;
-    margin: 5px;
-    padding: 5px;
-    border: solid 1px $border;
-  }
-  img.comment-avatar {
-    float: left;
-    margin-right: 10px;
-  }
-  div.comment-form {
-    background: $background;
-    border: solid 1px $border;
-    margin: 5px;
-    padding: 5px;
-    form {
-      @include comment-form-style;
-    }
+ul.package-list {
+  margin-left: 15px;
+  li { 
+    margin: 5px 0;
   }
 }

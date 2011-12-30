@@ -4,8 +4,6 @@
 
 {% block content %}
 {% if object_list %}
-    {% for object in object_list %}
-         <p><a href="{{ object.get_absolute_url }}">{{ object.label }}</a></p>
-    {% endfor %}
+  {% include "materials/components/material_list.html" with material_list=object_list %}
 {% endif %}
 {% endblock %}
