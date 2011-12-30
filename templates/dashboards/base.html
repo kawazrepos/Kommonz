@@ -17,7 +17,7 @@
   <li><h1 class="dashboard">ダッシュボード</h1></li>
   <li><h1 class="activity">アクティビティ</h1></li>
   <li>
-    <h1 class="material"><a href="{% reverse 'auth_user_update' %}">素材の管理</a></h1>
+    <h1 class="material"><a href="{% reverse 'auth_user_materials' %}">素材の管理</a></h1>
     <menu class="submenu">
       {% for material in user.materials.all %}
       <li class="material-list">{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}">{{ material.label }}</a></li>

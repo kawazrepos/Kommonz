@@ -2,9 +2,10 @@ from django.conf.urls.defaults import patterns, url
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from views import UserProfileDetailView, UserUpdateView, UserProfileUpdateView,\
-                  UserOptionUpdateView, UserAccountUpdateView
+                  UserOptionUpdateView, UserAccountUpdateView, UserMaterialsView
 
 urlpatterns = patterns('',
+    url(r'^materials/?$',     login_required(UserMaterialsView.as_view()), name='auth_user_materials'),
     url(r'^config/?$',     login_required(UserUpdateView.as_view()),
         name='auth_user_update'),
     url(r'^config/profile/?$',     login_required(UserProfileUpdateView.as_view()),

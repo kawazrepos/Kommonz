@@ -1,42 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}カテゴリ一覧{% endblock %}
-{% block breadcrumbs %}Kommonz > カテゴリ > {{ object.label }}{% endblock %}
+{% block title %}カテゴリ - {{ object.label }}{% endblock %}
 
 {% block content %}
 <h1>カテゴリ - {{ object.label }}</h1>
 {% if object.materials %}
-  <ul class="material-thumbnail-list">
-  {% for object in object_list %}
-    <li class="material">
-      <header>
-        <menu>
-          <li class="info">info</li>
-        </menu>
-        <article class="material-info">
-          <dl>
-            <dt>投稿者</dt>
-            <dd>{{ object.author.username }}</dd>
-            <dt>カテゴリ</dt>
-            <dd> {{ object.category }}</dd>
-            <dt>ダウンロード数</dt>
-            <dd> {{ object.download }}</dd>
-            <dt>ライセンス</dt>
-            <dd>{{ object.license }}</dd>
-            <dt>タグ</dt>
-            <dd>{% render_universaltag_tags of object %}</dd>
-          </dl>
-        </article>
-      </header>
-      <section>
-          <figure class="thumbnail large">
-            {% render_material_preview for object %}
-          </figure>
-      </section>
-      <footer>{% render_mtimg for object %}<a href="{{ object.get_absolute_url }}"><cite>{{ object.label }}</cite></a></footer>
-    </li>
-  {% endfor %}
-  </ul>
+  {% include "materials/components/material_list.html" with material_list=object.materials.all %}
 {% endif %}
-
 {% endblock %}
