@@ -10,6 +10,8 @@
     _file: 1
     description: かわずたん！
     author: 1
+    license: 100
+    kero: 1
     ip: 127.0.0.1
     category: 110
 - model: materials.image
@@ -19,8 +21,6 @@
     _file: 1
     description: かわずたん！
     author: 1
-    license: 100
-    kero: 1
     ip: 127.0.0.1
     category: 110
 - model: materials.materialfile

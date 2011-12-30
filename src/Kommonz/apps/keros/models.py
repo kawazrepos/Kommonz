@@ -18,5 +18,9 @@ class Kero(models.Model):
         verbose_name        = _('KERO')
         verbose_name_plural = verbose_name
         
+    @models.permalink
+    def get_absolute_url(self):
+        return ('keros_kero_detail', (), { 'pk' : self.pk })
+    
     def __unicode__(self):
         return self.label
