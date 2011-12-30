@@ -1,17 +1,18 @@
-from ..api.mappers import MaterialFileMapper
-from ..forms import MaterialFileForm, MaterialUpdateForm
-from ..models import Material, MaterialFile
-from ..utils.filetypes import guess
-from apps.categories.models import Category
-from apps.licenses.models import CCLicense
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, UpdateView, DeleteView
 from object_permission.decorators import permission_required
+from apps.categories.models import Category
+from apps.licenses.models import CCLicense
+from apps.keros.models import Kero
 from utils import lazy_reverse
 from utils.decorators import view_class_decorator
 from utils.views import JSONResponse
+from ..api.mappers import MaterialFileMapper
+from ..forms import MaterialFileForm, MaterialUpdateForm
+from ..models import Material, MaterialFile
+from ..utils.filetypes import guess
 
 
 def response_mimetype(request):
@@ -61,7 +62,8 @@ class MaterialCreateView(CreateView):
             "_file" : filefield, 
             "label.initial" : self.filename,
             "category" : forms.ModelChoiceField(queryset=Category.objects.all(), initial=category),
-            "license" :  forms.ModelChoiceField(queryset=license_type.objects.all())
+            "license" :  forms.ModelChoiceField(queryset=license_type.objects.all()),
+            "kero" :  forms.ModelChoiceField(queryset=Kero.objects.all())
         }) # create new class extended MaterialUpdateForm
         return modelform_class
     

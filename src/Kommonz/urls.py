@@ -1,6 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
-from django.views.generic import TemplateView
 from apps.index.views import IndexView
 admin.autodiscover()
 
