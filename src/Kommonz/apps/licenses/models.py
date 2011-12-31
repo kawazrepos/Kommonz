@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 class License(models.Model):
-    u"""
+    """
     License
     """
     
@@ -14,23 +14,23 @@ class License(models.Model):
     USE_CHOICES = (
                 ('free',             _('free')),
                 ('non-commercial',   _('non commercial')),
-        )
+    )
     REDESTRIBUTE_CHOICES = (
                 ('free',             _('free')),
                 ('prohibitted',      _('prohibitted')),
-        )
+    )
     REPROCESSING_CHOICES = (
                 ('free',             _('free')),
                 ('prohibitted',      _('prohibitted')),
-        )
+    )
     CONTACT_CHOICES = (
-                ('not required',      _('not required')),
-                ('required',          _('required')),
-        )
+                ('not required',     _('not required')),
+                ('required',         _('required')),
+    )
     CREDIT_CHOICES = (
-                ('not required',      _('not required')),
-                ('required',          _('required')),
-        )
+                ('not required',     _('not required')),
+                ('required',         _('required')),
+    )
     
     label        = models.CharField(_('Label'),        max_length=32)
     
@@ -48,12 +48,9 @@ class License(models.Model):
         
     def __unicode__(self):
         return self.label 
-    
-    
-
 
 class CreativeCommons(models.Model):
-    u"""
+    """
     CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
     """
 

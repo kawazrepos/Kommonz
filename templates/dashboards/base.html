@@ -19,8 +19,11 @@
   <li>
     <h1 class="material"><a href="{% reverse 'auth_user_material_list' pk=request.user.id %}">素材の管理</a></h1>
     <menu class="submenu">
-      {% for material in user.materials.all %}
+      {% for material in user.materials.all|slice:"10" %}
       <li class="material-list">{% render_mtimg for material %}<a href="{{ material.get_absolute_url }}">{{ material.label }}</a></li>
+      {% if forloop.last %}
+        <li><a href="{% reverse "searches_result" %}?author={{ object.user.username }}">全て見る</a></li>
+      {% endif %}
       {% empty %}
       <li class="caption">素材を投稿していません</li>
       {% endfor %}

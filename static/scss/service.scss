@@ -17,13 +17,6 @@
     .a {
       display: inline-block;
     }
-    .serviceicon {
-      background-image: url(image/serviceicon.png);
-      background-repeat: no-repeat;
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-    }
   }
   .services {
     li {
@@ -46,15 +39,24 @@
       text-decoration: none;
       border-color: #38F;
     }
-    .serviceicon {
-      margin: 3px 5px 0;
-    }
-    $i: 0;
-    @each $service in dropbox, github, google, hatena, twitter {
-      .#{$service} .serviceicon {
-        background-position: 0 #{$i * -21}px;
-      }
-      $i: $i + 1;
-    }
   }
 }
+.serviceicon {
+  margin: 3px 5px 0;
+}
+
+.serviceicon {
+  background-image: url(image/serviceicon.png);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+$i: 0;
+@each $service in dropbox, github, google, hatena, twitter {
+  .#{$service} .serviceicon {
+    background-position: 0 #{$i * -21}px;
+  }
+  $i: $i + 1;
+}
+
