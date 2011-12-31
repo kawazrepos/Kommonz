@@ -93,7 +93,6 @@ class MaterialFileCreateView(CreateView):
     def get_form_class(self):
         return MaterialFileForm
 
-@view_class_decorator(permission_required('materials.change_material', Material))
 class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
@@ -119,10 +118,13 @@ class MaterialUpdateView(UpdateView):
         kwargs.update({'material' : self.object})
         return kwargs
 
+    @permission_required('materials.change_material')
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
+
     def get_form_class(self):
         return MaterialUpdateForm
 
-@view_class_decorator(permission_required('materials.delete_material', Material))
 class MaterialDeleteView(DeleteView):
     queryset = Material.objects.all()
     success_url = lazy_reverse('materials_material_list')
@@ -130,3 +132,7 @@ class MaterialDeleteView(DeleteView):
     @csrf_exempt
     def post(self, *args, **kwargs):
         return super(MaterialDeleteView, self).post(*args, **kwargs)
+
+    @permission_required('materials.delete_material')
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialDeleteView, self).dispatch(*args, **kwargs)
