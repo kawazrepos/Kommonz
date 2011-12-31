@@ -13,7 +13,7 @@
         validate_url = $infoForms.attr('validate-url');
         filename = response.files[0].name;
         $infoForm = $('<div>').addClass('material-info-form');
-        $infoForm.load("" + form_url + "?filename=" + filename, function(data) {
+        $infoForm.load("" + form_url + "?filename=" + (encodeURI(filename)), function(data) {
           var $form, $syntax;
           $form = $(this).find('form');
           $form.attr('action', form_url);
