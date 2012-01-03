@@ -10,7 +10,7 @@ $ ->
       validate_url = $infoForms.attr 'validate-url'
       filename = response.files[0].name
       $infoForm = $('<div>').addClass 'material-info-form'
-      $infoForm.load "#{form_url}?filename=#{filename}", (data) ->
+      $infoForm.load "#{form_url}?filename=#{encodeURI(filename)}", (data) ->
         $form = $(@).find('form')
         $form.attr('action', form_url)
         $form.find('#id__file').val(file_id)

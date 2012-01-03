@@ -10,7 +10,11 @@
 </section>
 <hr>
 <section>
+  {% if query %}
   <h1>{{ query }}の検索結果</h1>
+  {% else %}
+  <h1>全ての素材</h1>
+  {% endif %}
   <p>{{ object_list.count }}件</p>
   {% if object_list.count != 0 %}
   {% include "materials/components/material_list.html" with material_list=object_list %}

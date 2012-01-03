@@ -4,8 +4,7 @@ from django.utils.translation import ugettext as _
 
 class License(models.Model):
     u"""
-    License Definition.
-    
+    License Definition.    
     If you want to define new type of License model, you have to create that as subclass of this model.
     All objects from this class or subclass are supposed to be created as a fixture.
     """
@@ -20,7 +19,6 @@ class License(models.Model):
         
     def __unicode__(self):
         return self.label
-            
 
 class CodeLicense(License):
     u"""
@@ -31,7 +29,6 @@ class CodeLicense(License):
         verbose_name        = _('CodeLicense')
         verbose_name_plural = _('CodeLicenses')
 
-
 class CCLicense(License): 
     u"""
     CreativeCommons http://en.wikipedia.org/wiki/Creative_Commons
@@ -40,3 +37,4 @@ class CCLicense(License):
     class Meta:
         verbose_name        = _('CCLicense')
         verbose_name_plural = _('CCLicenses')
+

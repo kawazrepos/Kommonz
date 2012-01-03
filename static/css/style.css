@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 /* 
 html5doctor.com Reset Stylesheet
 v1.6.1
@@ -6,7 +6,6 @@ Last Updated: 2010-09-17
 Author: Richard Clark - http://richclarkdesign.com 
 Twitter: @rich_clark
 */
-/* line 20, ../scss/_reset.scss */
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code,
@@ -25,123 +24,89 @@ time, mark, audio, video {
   outline: 0;
   font-size: 100%;
   vertical-align: baseline;
-  background: transparent;
-}
+  background: transparent; }
 
-/* line 30, ../scss/_reset.scss */
 body {
-  line-height: 1;
-}
+  line-height: 1; }
 
-/* line 35, ../scss/_reset.scss */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block;
-}
+  display: block; }
 
-/* line 39, ../scss/_reset.scss */
 nav ul {
-  list-style: none;
-}
+  list-style: none; }
 
-/* line 43, ../scss/_reset.scss */
 blockquote, q {
-  quotes: none;
-}
+  quotes: none; }
 
-/* line 48, ../scss/_reset.scss */
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
-  content: none;
-}
+  content: none; }
 
-/* line 53, ../scss/_reset.scss */
 a {
   margin: 0;
   padding: 0;
   font-size: 100%;
   vertical-align: baseline;
-  background: transparent;
-}
+  background: transparent; }
 
 /* change colours to suit your needs */
-/* line 62, ../scss/_reset.scss */
 ins {
   background-color: #ff9;
   color: #000;
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 /* change colours to suit your needs */
-/* line 69, ../scss/_reset.scss */
 mark {
   background-color: #ff9;
   color: #000;
   font-style: italic;
-  font-weight: bold;
-}
+  font-weight: bold; }
 
-/* line 76, ../scss/_reset.scss */
 del {
-  text-decoration: line-through;
-}
+  text-decoration: line-through; }
 
-/* line 80, ../scss/_reset.scss */
 abbr[title], dfn[title] {
   border-bottom: 1px dotted;
-  cursor: help;
-}
+  cursor: help; }
 
-/* line 85, ../scss/_reset.scss */
 table {
   border-collapse: collapse;
-  border-spacing: 0;
-}
+  border-spacing: 0; }
 
 /* change border colour to suit your needs */
-/* line 91, ../scss/_reset.scss */
 hr {
   display: block;
   height: 1px;
   border: 0;
   border-top: 1px solid #cccccc;
   margin: 1em 0;
-  padding: 0;
-}
+  padding: 0; }
 
-/* line 100, ../scss/_reset.scss */
 input, select {
-  vertical-align: middle;
-}
+  vertical-align: middle; }
 
 /* Color Settings */
 /* Size Settings */
 /* -- clearfix -- */
-/* line 18, ../scss/_lib.scss */
 .clear {
-  clear: both;
-}
+  clear: both; }
 
-/* line 21, ../scss/_lib.scss */
 .clearfix {
   min-height: 0;
-  display: block;
-}
+  display: block; }
 
-/* line 25, ../scss/_lib.scss */
 .clearfix:after {
   content: ".";
   display: block;
   height: 0;
   font-size: 0;
   clear: both;
-  visibility: hidden;
-}
+  visibility: hidden; }
 
 /* -- end of clearfix -- */
 /* Common StyleSheets */
-/* line 33, ../scss/_buttons.scss */
 .blue-button {
   color: #efefef;
   font-size: large;
@@ -162,134 +127,92 @@ input, select {
   background: -o-linear-gradient(top, #499bea 0%, #207ce5 100%);
   background: -ms-linear-gradient(top, #499bea 0%, #207ce5 100%);
   background: linear-gradient(top, #499bea 0%, #207ce5 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
-}
-/* line 16, ../scss/_buttons.scss */
-.blue-button:hover {
-  text-decoration: none;
-}
-/* line 24, ../scss/_buttons.scss */
-.blue-button:hover {
-  color: #dedede;
-}
-/* line 27, ../scss/_buttons.scss */
-.blue-button:active {
-  color: #ccc;
-  background: #4f85bb;
-  background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
-  background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 );
-}
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 ); }
+  .blue-button:hover {
+    text-decoration: none; }
+  .blue-button:hover {
+    color: #dedede; }
+  .blue-button:active {
+    color: #ccc;
+    background: #4f85bb;
+    background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
+    background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); }
 
-/* line 3, ../scss/_common.scss */
 body, textarea {
-  font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
-}
+  font-family: Verdana, Arial, "メイリオ", "ＭＳ Ｐゴシック", sans-serif; }
 
-/* line 7, ../scss/_common.scss */
 input, select {
-  font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif;
-}
+  font-family: Verdana, Arial, "ＭＳ Ｐゴシック", sans-serif; }
 
-/* line 11, ../scss/_common.scss */
 * {
-  text-height: 150%;
-}
+  text-height: 150%; }
 
-/* line 15, ../scss/_common.scss */
 body {
   color: #333333;
   font-size: 13px;
-  background: #fefefe;
-}
+  background: #fefefe; }
 
-/* line 21, ../scss/_common.scss */
 a {
   color: #4183c4;
-  text-decoration: none;
-}
+  text-decoration: none; }
 
-/* line 26, ../scss/_common.scss */
 a:hover {
   color: #3388ff;
-  text-decoration: underline;
-}
+  text-decoration: underline; }
 
-/* line 31, ../scss/_common.scss */
 a:visited {
-  text-decoration: dotted;
-}
+  text-decoration: dotted; }
 
-/* line 35, ../scss/_common.scss */
 h1 {
   font-size: 24px;
   text-shadow: 0 1px 0 #fff;
   -moz-text-shadow: 0 1px 0 #fff;
   -webkit-text-shadow: 0 1px 0 #fff;
-  margin: 15px auto 25px;
-}
+  margin: 15px auto 25px; }
 
-/* line 43, ../scss/_common.scss */
 h2 {
   font-size: 16px;
   margin: 5px auto;
-  margin-left: 5px;
-}
+  margin-left: 5px; }
 
-/* line 49, ../scss/_common.scss */
 p {
   text-height: 150%;
-  margin: 5px 15px 10px;
-}
+  margin: 5px 15px 10px; }
 
-/* line 55, ../scss/_common.scss */
 hr {
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
 
-/* line 62, ../scss/_common.scss */
 li {
-  list-style-type: none;
-}
+  list-style-type: none; }
 
-/* line 66, ../scss/_common.scss */
 .avatar, .small, .middle, .large, .huge {
   margin: 2px 4px 0px;
-  display: inline-block;
-}
+  display: inline-block; }
 
-/* line 71, ../scss/_common.scss */
 .small {
   width: 24px;
-  height: 24px;
-}
+  height: 24px; }
 
-/* line 77, ../scss/_common.scss */
 .middle {
   width: 48px;
-  height: 48px;
-}
+  height: 48px; }
 
-/* line 83, ../scss/_common.scss */
 .large {
   width: 96px;
-  height: 96px;
-}
+  height: 96px; }
 
-/* line 89, ../scss/_common.scss */
 .huge {
   width: 288px;
-  height: 288px;
-}
+  height: 288px; }
 
-/* line 95, ../scss/_common.scss */
 .button {
   color: #efefef;
   font-size: large;
@@ -302,14 +225,10 @@ li {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   display: inline-block;
-  cursor: pointer;
-}
-/* line 16, ../scss/_buttons.scss */
-.button:hover {
-  text-decoration: none;
-}
+  cursor: pointer; }
+  .button:hover {
+    text-decoration: none; }
 
-/* line 99, ../scss/_common.scss */
 .lightbox {
   background: #fefefe;
   border: solid 2px #ccc;
@@ -320,84 +239,62 @@ li {
   -webkit-box-shadow: 3px 3px 2px #333;
   width: 80%;
   height: 80%;
-  position: relative;
-}
-/* line 110, ../scss/_common.scss */
-.lightbox iframe {
-  width: 100%;
-  height: 100%;
-}
-/* line 114, ../scss/_common.scss */
-.lightbox div.close {
-  background: red;
-  top: 12px;
-  right: 15px;
-  width: 16px;
-  height: 16px;
-  display: block;
-  position: absolute;
-  z-index: 9999;
-  cursor: pointer;
-}
+  position: relative; }
+  .lightbox iframe {
+    width: 100%;
+    height: 100%; }
+  .lightbox div.close {
+    background: red;
+    top: 12px;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    cursor: pointer; }
 
-/* line 3, ../scss/_layout.scss */
 * {
-  margin: 0;
-}
+  margin: 0; }
 
-/* line 7, ../scss/_layout.scss */
 html, body {
   width: 100%;
-  height: 100%;
-}
+  height: 100%; }
 
-/* line 12, ../scss/_layout.scss */
 #content-wrapper {
   background: #fefefe;
   width: 100%;
-  height: 100%;
-}
+  height: 100%; }
 
-/* line 18, ../scss/_layout.scss */
 body > #content-wrapper {
   min-height: 100%;
-  height: auto !important;
-}
+  height: auto !important; }
 
-/* line 23, ../scss/_layout.scss */
 #content {
   margin: -2px auto;
   padding: 91px 0 70px;
-  width: 1080px;
-}
+  width: 1080px; }
 
-/* line 29, ../scss/_layout.scss */
 #footer {
   background: #fefefe;
   margin-top: -50px;
   width: 100%;
   height: 50px;
   position: relative;
-  clear: both;
-}
-/* line 36, ../scss/_layout.scss */
-#footer #footer-copyright {
-  padding: auto auto;
-  width: 100%;
-  height: 50px;
-  display: block;
-  bottom: 0;
-  position: absolute;
-}
-/* line 43, ../scss/_layout.scss */
-#footer #footer-copyright address {
-  color: #ababab;
-  font-size: small;
-  text-align: center;
-  padding-top: 18px;
-}
+  clear: both; }
+  #footer #footer-copyright {
+    padding: auto auto;
+    width: 100%;
+    height: 50px;
+    display: block;
+    bottom: 0;
+    position: absolute; }
+    #footer #footer-copyright address {
+      color: #ababab;
+      font-size: small;
+      text-align: center;
+      padding-top: 18px; }
 
-/* line 33, ../scss/_buttons.scss */
 .blue-button {
   color: #efefef;
   font-size: large;
@@ -418,31 +315,23 @@ body > #content-wrapper {
   background: -o-linear-gradient(top, #499bea 0%, #207ce5 100%);
   background: -ms-linear-gradient(top, #499bea 0%, #207ce5 100%);
   background: linear-gradient(top, #499bea 0%, #207ce5 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
-}
-/* line 16, ../scss/_buttons.scss */
-.blue-button:hover {
-  text-decoration: none;
-}
-/* line 24, ../scss/_buttons.scss */
-.blue-button:hover {
-  color: #dedede;
-}
-/* line 27, ../scss/_buttons.scss */
-.blue-button:active {
-  color: #ccc;
-  background: #4f85bb;
-  background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
-  background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 );
-}
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 ); }
+  .blue-button:hover {
+    text-decoration: none; }
+  .blue-button:hover {
+    color: #dedede; }
+  .blue-button:active {
+    color: #ccc;
+    background: #4f85bb;
+    background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
+    background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); }
 
 /* -- page header -- */
-/* line 5, ../scss/_header.scss */
 #header {
   font-weight: normal;
   background: #fefefe;
@@ -451,28 +340,20 @@ body > #content-wrapper {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
-}
+  height: 70px; }
 
-/* line 16, ../scss/_header.scss */
 #header-logo {
   margin: 17px 40px 17px;
   width: 224px;
   height: 36px;
-  display: inline-block;
-}
+  display: inline-block; }
 
-/* line 23, ../scss/_header.scss */
 #breadcrumbs {
-  margin: 10px 0px 5px 15px;
-}
+  margin: 10px 0px 5px 15px; }
 
-/* line 27, ../scss/_header.scss */
 #breadcrumbs a {
-  color: #efefef;
-}
+  color: #efefef; }
 
-/* line 31, ../scss/_header.scss */
 .header-button {
   color: #efefef;
   font-size: large;
@@ -500,66 +381,46 @@ body > #content-wrapper {
   margin: 16px 15px 0px 3px;
   padding-top: 5px;
   width: 128px;
-  height: 24px;
-}
-/* line 16, ../scss/_buttons.scss */
-.header-button:hover {
-  text-decoration: none;
-}
-/* line 24, ../scss/_buttons.scss */
-.header-button:hover {
-  color: #dedede;
-}
-/* line 27, ../scss/_buttons.scss */
-.header-button:active {
-  color: #ccc;
-  background: #4f85bb;
-  background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
-  background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 );
-}
+  height: 24px; }
+  .header-button:hover {
+    text-decoration: none; }
+  .header-button:hover {
+    color: #dedede; }
+  .header-button:active {
+    color: #ccc;
+    background: #4f85bb;
+    background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
+    background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); }
 
-/* line 42, ../scss/_header.scss */
 .header-button:hover {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
-/* line 46, ../scss/_header.scss */
 #header-menu {
   float: right;
-  position: relative;
-}
-/* line 49, ../scss/_header.scss */
-#header-menu > li {
-  float: left;
-  display: block;
-}
-/* line 53, ../scss/_header.scss */
-#header-menu li.header-dropdown-section {
-  padding-top: 10px;
-  height: 66px;
-  box-shadow: 0px 0px 2px #222222;
-  -moz-box-shadow: 0px 0px 2px #222222;
-  -webkit-box-shadow: 0px 0px 2px #222222;
-}
-/* line 57, ../scss/_header.scss */
-#header-menu li.header-dropdown-section:hover {
-  background: #ccc;
-  box-shadow: 0px 0px 1px #222222;
-  -moz-box-shadow: 0px 0px 1px #222222;
-  -webkit-box-shadow: 0px 0px 1px #222222;
-}
-/* line 62, ../scss/_header.scss */
-#header-menu li.header-button-section {
-  padding: 6px 10px 0 10px;
-  height: 68px;
-}
+  position: relative; }
+  #header-menu > li {
+    float: left;
+    display: block; }
+  #header-menu li.header-dropdown-section {
+    padding-top: 10px;
+    height: 66px;
+    box-shadow: 0px 0px 2px #222222;
+    -moz-box-shadow: 0px 0px 2px #222222;
+    -webkit-box-shadow: 0px 0px 2px #222222; }
+    #header-menu li.header-dropdown-section:hover {
+      background: #ccc;
+      box-shadow: 0px 0px 1px #222222;
+      -moz-box-shadow: 0px 0px 1px #222222;
+      -webkit-box-shadow: 0px 0px 1px #222222; }
+  #header-menu li.header-button-section {
+    padding: 6px 10px 0 10px;
+    height: 68px; }
 
-/* line 68, ../scss/_header.scss */
 menu#dropdown {
   color: #333;
   background: #fefefe;
@@ -573,339 +434,230 @@ menu#dropdown {
   box-shadow: 1px 2px 1px #999;
   -moz-box-shadow: 1px 2px 1px #999;
   -webkit-box-shadow: 1px 2px 1px #999;
-  z-index: 9999;
-}
-/* line 82, ../scss/_header.scss */
-menu#dropdown a {
-  color: #222;
-}
-/* line 85, ../scss/_header.scss */
-menu#dropdown li.dropdown-item {
-  background-position: 0 3px;
-  background-repeat: no-repeat;
-  margin: 3px 0 3px 5px;
-  padding: 5px 0 5px 20px;
-}
-/* line 91, ../scss/_header.scss */
-menu#dropdown li.dropdown-header {
-  background-position: 0 3px;
-  background-repeat: no-repeat;
-  font-weight: bold;
-  padding: 5px 0 8px 18px;
-  border-bottom: dotted 1px #333;
-}
+  z-index: 9999; }
+  menu#dropdown a {
+    color: #222; }
+  menu#dropdown li.dropdown-item {
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    margin: 3px 0 3px 5px;
+    padding: 5px 0 5px 20px; }
+  menu#dropdown li.dropdown-header {
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    font-weight: bold;
+    padding: 5px 0 8px 18px;
+    border-bottom: dotted 1px #333; }
 
-/* line 1, ../scss/_menuicon.scss */
 menu {
-  /* ToDo CSS Sprite */
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .dashboard {
-  background-image: url(/image/sprite/menuicon/dashboard.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .activity {
-  background-image: url(/image/sprite/menuicon/activity.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .material {
-  background-image: url(/image/sprite/menuicon/material.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .mylist {
-  background-image: url(/image/sprite/menuicon/mylist.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .message {
-  background-image: url(/image/sprite/menuicon/message.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .myprofile {
-  background-image: url(/image/sprite/menuicon/myprofile.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .config {
-  background-image: url(/image/sprite/menuicon/config.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .account-config {
-  background-image: url(/image/sprite/menuicon/account-config.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .profile-config {
-  background-image: url(/image/sprite/menuicon/profile-config.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .option-config {
-  background-image: url(/image/sprite/menuicon/option-config.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .service-config {
-  background-image: url(/image/sprite/menuicon/service-config.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .god {
-  background-image: url(/image/sprite/menuicon/god.png);
-}
-/* line 4, ../scss/_menuicon.scss */
-menu .logout {
-  background-image: url(/image/sprite/menuicon/logout.png);
-}
+  /* ToDo CSS Sprite */ }
+  menu .dashboard {
+    background-image: url(/image/sprite/menuicon/dashboard.png); }
+  menu .activity {
+    background-image: url(/image/sprite/menuicon/activity.png); }
+  menu .material {
+    background-image: url(/image/sprite/menuicon/material.png); }
+  menu .mylist {
+    background-image: url(/image/sprite/menuicon/mylist.png); }
+  menu .message {
+    background-image: url(/image/sprite/menuicon/message.png); }
+  menu .myprofile {
+    background-image: url(/image/sprite/menuicon/myprofile.png); }
+  menu .config {
+    background-image: url(/image/sprite/menuicon/config.png); }
+  menu .account-config {
+    background-image: url(/image/sprite/menuicon/account-config.png); }
+  menu .profile-config {
+    background-image: url(/image/sprite/menuicon/profile-config.png); }
+  menu .option-config {
+    background-image: url(/image/sprite/menuicon/option-config.png); }
+  menu .service-config {
+    background-image: url(/image/sprite/menuicon/service-config.png); }
+  menu .god {
+    background-image: url(/image/sprite/menuicon/god.png); }
+  menu .logout {
+    background-image: url(/image/sprite/menuicon/logout.png); }
 
-/* line 1, ../scss/_mtimg.scss */
 .mtimg {
   background: url(image/mtimg.png) 0 0 no-repeat;
   margin: auto 3px;
   width: 16px;
   height: 16px;
-  display: inline-block;
-}
-/* line 7, ../scss/_mtimg.scss */
-.mtimg.mt-application {
-  background-position: 0 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 8, ../scss/_mtimg.scss */
-.mtimg.mt-audio {
-  background-position: -21px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 9, ../scss/_mtimg.scss */
-.mtimg.mt-cgmodel {
-  background-position: -42px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 10, ../scss/_mtimg.scss */
-.mtimg.mt-code {
-  background-position: -63px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 11, ../scss/_mtimg.scss */
-.mtimg.mt-movie {
-  background-position: -84px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 12, ../scss/_mtimg.scss */
-.mtimg.mt-image {
-  background-position: -105px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 13, ../scss/_mtimg.scss */
-.mtimg.mt-material {
-  background-position: -126px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 14, ../scss/_mtimg.scss */
-.mtimg.mt-package {
-  background-position: -147px 0;
-  width: 16px;
-  height: 16px;
-}
-/* line 15, ../scss/_mtimg.scss */
-.mtimg.mt-text {
-  background-position: -168px 0;
-  width: 16px;
-  height: 16px;
-}
+  display: inline-block; }
+  .mtimg.mt-application {
+    background-position: 0 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-audio {
+    background-position: -21px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-cgmodel {
+    background-position: -42px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-code {
+    background-position: -63px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-movie {
+    background-position: -84px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-image {
+    background-position: -105px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-material {
+    background-position: -126px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-package {
+    background-position: -147px 0;
+    width: 16px;
+    height: 16px; }
+  .mtimg.mt-text {
+    background-position: -168px 0;
+    width: 16px;
+    height: 16px; }
 
-/* line 6, ../scss/_material_list.scss */
 ul.material_list {
   margin: 16px;
-  width: 1058px;
-}
-/* line 10, ../scss/_material_list.scss */
-ul.material_list li.list-material {
-  margin: 5px 0 5px 13px;
-  width: 196px;
-  height: 196px;
-  display: block;
-  float: left;
-  position: relative;
-  box-shadow: 1px 1px 3px #666666;
-  -moz-box-shadow: 1px 1px 3px #666666;
-  -webkit-box-shadow: 1px 1px 3px #666666;
-}
-/* line 18, ../scss/_material_list.scss */
-ul.material_list li.list-material header {
-  width: 196px;
-  height: 28px;
-  right: 0px;
-}
-/* line 24, ../scss/_material_list.scss */
-ul.material_list li.list-material header menu li {
-  color: #4183c4;
-  text-align: center;
-  padding-top: 7px;
-  border-left: solid 1px #cccccc;
-  border-bottom: solid 1px #cccccc;
-  width: 40px;
-  height: 22px;
-  right: 0;
-  position: absolute;
-  display: inline-block;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0.5px 0.5px 2px #222222;
-  -moz-box-shadow: 0.5px 0.5px 2px #222222;
-  -webkit-box-shadow: 0.5px 0.5px 2px #222222;
-}
-/* line 38, ../scss/_material_list.scss */
-ul.material_list li.list-material header menu li:hover, ul.material_list li.list-material header menu li.open {
-  color: #dddddd;
-  background: #3388ff;
-  border-color: #3388ff;
-}
-/* line 46, ../scss/_material_list.scss */
-ul.material_list li.list-material section {
-  text-align: center;
-  padding: 0 26px;
-}
-/* line 49, ../scss/_material_list.scss */
-ul.material_list li.list-material section figure {
-  width: 144px;
-  height: 144px;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-/* line 57, ../scss/_material_list.scss */
-ul.material_list li.list-material footer {
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  width: 196px;
-  height: 24px;
-  bottom: 0;
-  position: absolute;
-}
-/* line 65, ../scss/_material_list.scss */
-ul.material_list li.list-material footer .mtimg {
-  margin: 4px 2px 0;
-}
-/* line 69, ../scss/_material_list.scss */
-ul.material_list li.list-material footer a cite {
-  vertical-align: 4px;
-}
-/* line 76, ../scss/_material_list.scss */
-ul.material_list article.material-info {
-  background: #fefefe;
-  border: solid 0.5px #cccccc;
-  padding: 8px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  box-shadow: 2px 2px 5px #666666;
-  -moz-box-shadow: 2px 2px 5px #666666;
-  -webkit-box-shadow: 2px 2px 5px #666666;
-  width: 200px;
-  height: auto;
-  min-height: 196px;
-  top: 30px;
-  left: 10px;
-  position: absolute;
-  display: none;
-  z-index: 999;
-}
-/* line 90, ../scss/_material_list.scss */
-ul.material_list article.material-info dt {
-  color: #999;
-  border-bottom: dotted 1px #cccccc;
-  padding: 1px 0 5px 1px;
-}
-/* line 95, ../scss/_material_list.scss */
-ul.material_list article.material-info dd {
-  color: #666;
-  padding: 2px 0 8px 12px;
-}
+  width: 1058px; }
+  ul.material_list li.list-material {
+    margin: 5px 0 5px 13px;
+    width: 196px;
+    height: 196px;
+    display: block;
+    float: left;
+    position: relative;
+    box-shadow: 1px 1px 3px #666666;
+    -moz-box-shadow: 1px 1px 3px #666666;
+    -webkit-box-shadow: 1px 1px 3px #666666; }
+    ul.material_list li.list-material header {
+      width: 196px;
+      height: 28px;
+      right: 0px; }
+      ul.material_list li.list-material header menu li {
+        color: #4183c4;
+        text-align: center;
+        padding-top: 7px;
+        border-left: solid 1px #cccccc;
+        border-bottom: solid 1px #cccccc;
+        width: 40px;
+        height: 22px;
+        right: 0;
+        position: absolute;
+        display: inline-block;
+        cursor: pointer;
+        box-shadow: 0.5px 0.5px 2px #222222;
+        -moz-box-shadow: 0.5px 0.5px 2px #222222;
+        -webkit-box-shadow: 0.5px 0.5px 2px #222222; }
+        ul.material_list li.list-material header menu li:hover, ul.material_list li.list-material header menu li.open {
+          color: #dddddd;
+          background: #3388ff;
+          border-color: #3388ff; }
+    ul.material_list li.list-material section {
+      text-align: center;
+      padding: 0 26px; }
+      ul.material_list li.list-material section figure {
+        width: 144px;
+        height: 144px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle; }
+    ul.material_list li.list-material footer {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      width: 196px;
+      height: 24px;
+      bottom: 0;
+      position: absolute; }
+      ul.material_list li.list-material footer .mtimg {
+        margin: 4px 2px 0; }
+      ul.material_list li.list-material footer a cite {
+        vertical-align: 4px; }
+  ul.material_list article.material-info {
+    background: #fefefe;
+    border: solid 0.5px #cccccc;
+    padding: 8px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    box-shadow: 2px 2px 5px #666666;
+    -moz-box-shadow: 2px 2px 5px #666666;
+    -webkit-box-shadow: 2px 2px 5px #666666;
+    width: 200px;
+    height: auto;
+    min-height: 196px;
+    top: 30px;
+    left: 10px;
+    position: absolute;
+    display: none;
+    z-index: 999; }
+    ul.material_list article.material-info dt {
+      color: #999;
+      border-bottom: dotted 1px #cccccc;
+      padding: 1px 0 5px 1px; }
+    ul.material_list article.material-info dd {
+      color: #666;
+      padding: 2px 0 8px 12px; }
 
 /* Color Settings */
 /* Size Settings */
-/* line 4, ../scss/_comment.scss */
 section.comment .empty {
   margin-top: 15px;
   margin-bottom: 25px;
-  color: gray;
-}
-/* line 9, ../scss/_comment.scss */
+  color: gray; }
 section.comment article {
   margin: 5px;
-  padding: 5px;
-}
-/* line 12, ../scss/_comment.scss */
-section.comment article header {
-  width: 100%;
-  height: 60px;
-}
-/* line 15, ../scss/_comment.scss */
-section.comment article header span {
-  margin-top: 10px;
-  display: inline-block;
-}
-/* line 19, ../scss/_comment.scss */
-section.comment article header .comment-avatar {
-  float: left;
-  margin: 6px 10px;
-}
-/* line 23, ../scss/_comment.scss */
-section.comment article header time {
-  font-size: small;
-  color: gray;
-}
-/* line 28, ../scss/_comment.scss */
-section.comment article div.comment-body {
-  line-height: 200%;
-  background: #fefefe;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  margin: 3px 15px;
-  padding: 15px;
-}
-/* line 37, ../scss/_comment.scss */
+  padding: 5px; }
+  section.comment article header {
+    width: 100%;
+    height: 60px; }
+    section.comment article header span {
+      margin-top: 10px;
+      display: inline-block; }
+    section.comment article header .comment-avatar {
+      float: left;
+      margin: 6px 10px; }
+    section.comment article header time {
+      font-size: small;
+      color: gray; }
+  section.comment article div.comment-body {
+    line-height: 200%;
+    background: #fefefe;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    margin: 3px 15px;
+    padding: 15px; }
 section.comment .comment-form form {
   background: #fefefe;
   border: solid 1px #cccccc;
   margin: 5px;
-  padding: 5px;
-}
-/* line 4, ../scss/_lib.scss */
-section.comment .comment-form form label {
-  display: block;
-}
-/* line 8, ../scss/_lib.scss */
-section.comment .comment-form form textarea#id_comment {
-  display: block;
-  margin: 5px auto;
-  width: 700px;
-  height: 100px;
-}
-/* line 43, ../scss/_comment.scss */
-section.comment .comment-form form label {
-  display: none;
-}
+  padding: 5px; }
+  section.comment .comment-form form label {
+    display: block; }
+  section.comment .comment-form form textarea#id_comment {
+    display: block;
+    margin: 5px auto;
+    width: 700px;
+    height: 100px; }
+  section.comment .comment-form form label {
+    display: none; }
 
-/* line 3, ../scss/_form.scss */
 textarea, input[type="text"] {
   background: #fefefe;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
+  -webkit-border-radius: 5px; }
 
-/* line 8, ../scss/_form.scss */
 .uniForm {
-  padding: 10px;
-}
+  padding: 10px; }
 
-/* line 12, ../scss/_form.scss */
 .uniForm input[type="submit"] {
   color: #efefef;
   font-size: large;
@@ -931,39 +683,28 @@ textarea, input[type="text"] {
   margin: 10px 20px;
   padding: auto;
   width: 120px;
-  height: 48px;
-}
-/* line 16, ../scss/_buttons.scss */
-.uniForm input[type="submit"]:hover {
-  text-decoration: none;
-}
-/* line 24, ../scss/_buttons.scss */
-.uniForm input[type="submit"]:hover {
-  color: #dedede;
-}
-/* line 27, ../scss/_buttons.scss */
-.uniForm input[type="submit"]:active {
-  color: #ccc;
-  background: #4f85bb;
-  background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
-  background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 );
-}
+  height: 48px; }
+  .uniForm input[type="submit"]:hover {
+    text-decoration: none; }
+  .uniForm input[type="submit"]:hover {
+    color: #dedede; }
+  .uniForm input[type="submit"]:active {
+    color: #ccc;
+    background: #4f85bb;
+    background: -moz-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f85bb), color-stop(100%, #4f85bb));
+    background: -webkit-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -o-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: -ms-linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    background: linear-gradient(top, #4f85bb 0%, #4f85bb 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); }
 
 /* Page StyleSheets */
-/* line 2, ../scss/_flatpage.scss */
 #flatpage-wrapper {
   border: solid 1px #cccccc;
   background: #fefefe;
   width: 900px;
   margin: 10px auto;
-  padding: 10px;
-}
-/* line 8, ../scss/_flatpage.scss */
-#flatpage-wrapper div.content {
-  margin: 0 10px;
-}
+  padding: 10px; }
+  #flatpage-wrapper div.content {
+    margin: 0 10px; }

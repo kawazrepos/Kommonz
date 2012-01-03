@@ -13,12 +13,6 @@
     margin: 5px 15px 5px; }
     .login ul.services .a {
       display: inline-block; }
-    .login ul.services .serviceicon {
-      background-image: url(image/serviceicon.png);
-      background-repeat: no-repeat;
-      width: 16px;
-      height: 16px;
-      display: inline-block; }
   .login .services li {
     width: 200px;
     height: 60px;
@@ -36,15 +30,28 @@
   .login .services a:hover {
     text-decoration: none;
     border-color: #38F; }
-  .login .services .serviceicon {
-    margin: 3px 5px 0; }
-  .login .services .dropbox .serviceicon {
-    background-position: 0 0px; }
-  .login .services .github .serviceicon {
-    background-position: 0 -21px; }
-  .login .services .google .serviceicon {
-    background-position: 0 -42px; }
-  .login .services .hatena .serviceicon {
-    background-position: 0 -63px; }
-  .login .services .twitter .serviceicon {
-    background-position: 0 -84px; }
+
+.serviceicon {
+  margin: 3px 5px 0; }
+
+.serviceicon {
+  background-image: url(image/serviceicon.png);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  display: inline-block; }
+
+.dropbox .serviceicon {
+  background-position: 0 0px; }
+
+.github .serviceicon {
+  background-position: 0 -21px; }
+
+.google .serviceicon {
+  background-position: 0 -42px; }
+
+.hatena .serviceicon {
+  background-position: 0 -63px; }
+
+.twitter .serviceicon {
+  background-position: 0 -84px; }

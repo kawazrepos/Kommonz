@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, UpdateView, DeleteView
 from object_permission.decorators import permission_required
 from apps.categories.models import Category
-from apps.licenses.models import CCLicense
 from apps.keros.models import Kero
 from utils import lazy_reverse
 from utils.decorators import view_class_decorator
@@ -13,7 +13,6 @@ from ..api.mappers import MaterialFileMapper
 from ..forms import MaterialFileForm, MaterialUpdateForm
 from ..models import Material, MaterialFile
 from ..utils.filetypes import guess
-
 
 def response_mimetype(request):
     if request.META.has_key('HTTP_ACCEPT') and "application/json" in request.META['HTTP_ACCEPT']:
@@ -32,6 +31,8 @@ def set_material_model(func):
                 self.filename = file.file.name
             except:
                 pass
+        if not self.filename:
+            raise Http404
         self.material_model = Material.objects.get_file_model(self.filename)
         res = func(self, request, *args, **kwargs)
         return res
@@ -56,7 +57,7 @@ class MaterialCreateView(CreateView):
         from django import forms
         filefield = forms.IntegerField(widget=forms.HiddenInput())
         category = Category.objects.get_filetype_category(self.filename)
-        license_type = CCLicense
+        license_type = self.material_model.license_type
         modelform_class = type('modelform', (forms.ModelForm,), {
             "Meta": meta, 
             "_file" : filefield, 
@@ -98,7 +99,6 @@ class MaterialFileCreateView(CreateView):
     def get_form_class(self):
         return MaterialFileForm
 
-@view_class_decorator(permission_required('materials.change_material', Material))
 class MaterialUpdateView(UpdateView):
     template_name = 'materials/material_update_form.html'
     queryset      = Material.objects.all()
@@ -124,10 +124,13 @@ class MaterialUpdateView(UpdateView):
         kwargs.update({'material' : self.object})
         return kwargs
 
+    @permission_required('materials.change_material')
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialUpdateView, self).dispatch(*args, **kwargs)
+
     def get_form_class(self):
         return MaterialUpdateForm
 
-@view_class_decorator(permission_required('materials.delete_material', Material))
 class MaterialDeleteView(DeleteView):
     queryset = Material.objects.all()
     success_url = lazy_reverse('materials_material_list')
@@ -135,3 +138,7 @@ class MaterialDeleteView(DeleteView):
     @csrf_exempt
     def post(self, *args, **kwargs):
         return super(MaterialDeleteView, self).post(*args, **kwargs)
+
+    @permission_required('materials.delete_material')
+    def dispatch(self, *args, **kwargs):
+        return super(MaterialDeleteView, self).dispatch(*args, **kwargs)

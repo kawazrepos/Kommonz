@@ -3,30 +3,49 @@
 {% block title %}外部サービス設定{% endblock %}
 {% block breadcrumbs %}外部サービス設定{% endblock %}
 
+{% block head %}
+{{ block.super }}
+<link media="all" rel="stylesheet" href="/css/service.css" type="text/css" />
+{% endblock %}
+
 {% block main %}
 <h1>外部サービス設定</h1>
+<p>
+  このアカウントと、他のサービスのアカウントを関連づけることができます。
+  一度、他のアカウントと紐付けると、以後、そのアカウントを利用してKommonzにログインすることができます。
+</p>
 <h2>現在関連付けているアカウント</h2>
 <ul>
+<ul class="services">
 {% for account in associated_accounts %}
-  <li>{{ account.provider }}　<a href="{% reverse 'socialauth_disconnect' account.provider %}">解除</a></li>
+  <li class="{{ account.provider }}">
+    <span class="serviceicon"></span>
+    <a href="{% reverse 'socialauth_disconnect' account.provider %}">関連付けを解除</a>
+  </li>
 {% endfor %}
 </ul>
+</ul>
 <h2>関連付け可能なアカウント</h2>
-<ul>
-  <li>
+<ul class="services">
+  <li class="twitter">
+    <span class="serviceicon"></span>
     <a href="{% reverse 'socialauth_associate_begin' 'twitter' %}">Twitterと関連付ける</a>
   </li>
-  <li>
+  <li class="google">
+    <span class="serviceicon"></span>
     <a href="{% reverse 'socialauth_associate_begin' 'google-oauth2' %}">Googleと関連付ける</a>
   </li>
-  <li>
+  <li class="hatena">
+    <span class="serviceicon"></span>
    <a href="{% reverse 'socialauth_associate_begin' 'hatena' %}">はてなと関連付ける</a>
   </li>
-  <li>
-  <a href="{% reverse 'socialauth_associate_begin' 'dropbox' %}">Dropboxと関連付ける</a>
+  <li class="dropbox">
+    <span class="serviceicon"></span>
+    <a href="{% reverse 'socialauth_associate_begin' 'dropbox' %}">Dropboxと関連付ける</a>
   </li>
-  <li>
-  <a href="{% reverse 'socialauth_associate_begin' 'github' %}">githubと関連付ける</a>
+  <li class="github">
+    <span class="serviceicon"></span>
+    <a href="{% reverse 'socialauth_associate_begin' 'github' %}">githubと関連付ける</a>
   </li>
 </ul>
 {% endblock %}

@@ -19,7 +19,6 @@ ul.material_list {
       width: $search-box;
       height: $search-header;
       right: 0px;
-      // display: block;
       menu {
         li {
           color: $link;
@@ -33,7 +32,6 @@ ul.material_list {
           position: absolute;
           display: inline-block;
           cursor: pointer;
-          z-index: 1000;
           @include crossbrowser(box-shadow, 0.5px 0.5px 2px #222);
           &:hover, &.open {
             color: $text-white;

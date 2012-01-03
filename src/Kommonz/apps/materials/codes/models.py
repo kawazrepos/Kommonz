@@ -14,6 +14,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
+from apps.licenses.models import CodeLicense
 from ..utils.syntaxes import SYNTAXES, guess_syntax
 from ..models import Material
 from ..managers import MaterialManager
@@ -26,6 +27,8 @@ class Code(Material):
     body   = models.TextField(_('Body'), editable=False)
 
     objects = MaterialManager()
+
+    license_type = CodeLicense
     
     class Meta:
         app_label           = 'materials'

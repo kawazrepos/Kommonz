@@ -1,11 +1,15 @@
 {% extends "twocolumn.html" %}
 
-{% block title %}{{ object.user.username }}{% endblock %}
+{% block title %}{{ object.user.username }}のプロフィール{% endblock %}
 {% block breadcrumbs %}Kommonz > {{ object.user.username }}のプロフィール{% endblock %}
 
 {% block sidebar %}
 <section>
+  {% if object.nickname %}
   <h1>{{ object.nickname }}</h1>
+  {% else %}
+  <h1>{{ object.user.username }}</h1>
+  {% endif %}
   <dl class="user-information">
     <dt>性別</dt>
     <dd>{{ object.sex|default:"未設定" }}</dd>

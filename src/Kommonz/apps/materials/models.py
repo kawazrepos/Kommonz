@@ -16,7 +16,7 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from qwert.middleware.threadlocals import request as get_request
 from apps.categories.models import Category
-from apps.licenses.models import License, CodeLicense, CCLicense
+from apps.licenses.models import License, CCLicense
 from apps.keros.models import Kero
 from fields.thumbnailfield.fields import ThumbnailField
 from managers import MaterialManager
@@ -103,6 +103,8 @@ class Material(models.Model):
     
     objects     = MaterialManager()
     
+    license_type = CCLicense
+
     class Meta:
         app_label           = 'materials'
         ordering            = ('-created_at',)
@@ -111,24 +113,14 @@ class Material(models.Model):
         
     def __unicode__(self):
         return '%s(%s)' % (self.label, self.file.name)
-        
-    def get_suitable_license_type(self):
-        from utils.filetypes import get_file_model
-        cls = get_file_model(self.label)
-        
-        from codes.models import Code
-        if cls == Code:
-            return CodeLicense
-        else:
-            return CCLicense
-        
+    
     def clean(self):
         if not self.category:
             self.category = Category.objects.get_filetype_category(self.file.name)
         
         if self.license:
             try:
-                self.get_suitable_license_type().objects.get(pk=self.license.pk)
+                self.license_type.objects.get(pk=self.license.pk)
             except ObjectDoesNotExist:
                 raise ValidationError(_('''can not set the selected license with this model.'''))
         else:
@@ -196,7 +188,7 @@ class Material(models.Model):
         """
         from utils.filetypes import get_file_model
         return get_file_model(self.file.name)
-    
+
     @property
     def extension(self):
         """
