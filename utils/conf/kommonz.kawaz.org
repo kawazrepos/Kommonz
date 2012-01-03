@@ -1,4 +1,4 @@
-WSGIPythonPath "/var/www/Kommonz/env/lib/python2.6/site-packages"
+WSGIPythonPath "/var/www/Kommonz/env/lib/python/site-packages"
 <VirtualHost *:80>
 	ServerName		kommonz.kawaz.org
 	ServerAdmin		webmaster@kawaz.org
@@ -33,7 +33,7 @@ WSGIPythonPath "/var/www/Kommonz/env/lib/python2.6/site-packages"
 	Alias /javascript/		"/var/www/Kommonz/static/javascript/"
 	Alias /storage/			"/var/www/Kommonz/static/storage/"
 	Alias /component/		"/var/www/Kommonz/static/component/"
-	Alias /media/			"/var/www/Kommonz/env/lib/python2.6/site-packages/django/contrib/admin/media/"
+	Alias /media/			"/var/www/Kommonz/env/lib/python/site-packages/django/contrib/admin/media/"
 
 	ErrorLog				"/var/log/apache2/kommonz.kawaz.org.error.log"
 	CustomLog				"/var/log/apache2/kommonz.kawaz.org.access.log" combined
