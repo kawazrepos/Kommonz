@@ -1,6 +1,6 @@
 WSGIPythonPath "/var/www/Kommonz.dev/env/lib/python2.6/site-packages"
 <VirtualHost *:80>
-	ServerName		dev.kommonz.kawaz.org
+	ServerName		kommonzdev.kawaz.org
 	ServerAdmin		webmaster@kawaz.org
 
 	WSGIScriptAlias / "/var/www/Kommonz.dev/src/django.wsgi"
@@ -35,7 +35,7 @@ WSGIPythonPath "/var/www/Kommonz.dev/env/lib/python2.6/site-packages"
 	Alias /component/		"/var/www/Kommonz.dev/static/component/"
 	Alias /media/			"/var/www/Kommonz.dev/env/lib/python2.6/site-packages/django/contrib/admin/media/"
 
-	ErrorLog				"/var/log/apache2/dev.kommonz.kawaz.org.error.log"
-	CustomLog				"/var/log/apache2/dev.kommonz.kawaz.org.access.log" combined
+	ErrorLog				"/var/log/apache2/kommonzdev.kawaz.org.error.log"
+	CustomLog				"/var/log/apache2/kommonzdev.kawaz.org.access.log" combined
 </VirtualHost>
 
