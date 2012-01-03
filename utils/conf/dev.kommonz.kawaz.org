@@ -1,0 +1,41 @@
+WSGIPythonPath "/var/www/Kommonz.dev/env/lib/python2.6/site-packages"
+<VirtualHost *:80>
+	ServerName		dev.kommonz.kawaz.org
+	ServerAdmin		webmaster@kawaz.org
+
+	WSGIScriptAlias / "/var/www/Kommonz.dev/src/django.wsgi"
+
+	<Directory />
+		Order Deny,Allow
+		Deny from All
+	</Directory>
+
+	<Location "/">
+		Order Allow,Deny
+		Allow from All
+	</Location>
+	<Location "/media/">
+		Order Allow,Deny
+		Allow from All
+		SetHandler None
+		Options -Indexes
+	</Location>
+	<Location "/storage/materials/">
+		Order Deny,Allow
+		Deny from All
+	</Location>
+
+	# Alias
+	Alias /favicon.ico		"/var/www/Kommonz.dev/static/favicon.ico"
+	
+	Alias /css/				"/var/www/Kommonz.dev/static/css/"
+	Alias /image/			"/var/www/Kommonz.dev/static/image/"
+	Alias /javascript/		"/var/www/Kommonz.dev/static/javascript/"
+	Alias /storage/			"/var/www/Kommonz.dev/static/storage/"
+	Alias /component/		"/var/www/Kommonz.dev/static/component/"
+	Alias /media/			"/var/www/Kommonz.dev/env/lib/python2.6/site-packages/django/contrib/admin/media/"
+
+	ErrorLog				"/var/log/apache2/dev.kommonz.kawaz.org.error.log"
+	CustomLog				"/var/log/apache2/dev.kommonz.kawaz.org.access.log" combined
+</VirtualHost>
+
