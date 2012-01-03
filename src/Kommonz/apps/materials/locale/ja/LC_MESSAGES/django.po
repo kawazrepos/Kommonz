@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 16:28+0900\n"
+"POT-Creation-Date: 2012-01-03 20:34+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,172 +20,168 @@ msgstr ""
 
 #: forms.py:32 models.py:42
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
-#: models.py:43 models.py:98
-msgid "author"
-msgstr ""
+#: models.py:43
+msgid "Author"
+msgstr "作成者"
 
 #: models.py:48
 msgid "MaterialFile"
-msgstr ""
+msgstr "素材ファイル"
 
 #: models.py:49
 msgid "MaterialFiles"
-msgstr ""
+msgstr "素材ファイル"
 
 #: models.py:85
 msgid "Label"
-msgstr ""
+msgstr "素材名"
 
 #: models.py:89
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: models.py:90
 msgid "Category"
-msgstr ""
+msgstr "カテゴリ"
 
 #: models.py:91
 msgid "License"
-msgstr ""
+msgstr "ライセンス"
 
 #: models.py:92
 msgid "KERO"
-msgstr ""
+msgstr "KERO"
 
 #: models.py:96
 msgid "Created At"
-msgstr ""
+msgstr "作成日時"
 
 #: models.py:97
 msgid "Updated At"
-msgstr ""
+msgstr "更新日時"
 
 #: models.py:99
 msgid "Page View"
-msgstr ""
+msgstr "閲覧数"
 
 #: models.py:100
 msgid "Download Count"
-msgstr ""
+msgstr "ダウンロード回数"
 
 #: models.py:101
 msgid "IP Address"
-msgstr ""
+msgstr "IPアドレス"
 
 #: models.py:102
 msgid "Thumbnail"
-msgstr ""
+msgstr "サムネイル"
 
 #: models.py:111
 msgid "Material"
-msgstr ""
+msgstr "素材"
 
 #: models.py:112
 msgid "Materials"
-msgstr ""
+msgstr "素材"
 
 #: models.py:125
 msgid "can not set the selected license with this model."
-msgstr ""
+msgstr "選択したライセンスはこの素材に付けることができません"
 
 #: models.py:127
 msgid "you have to select license."
-msgstr ""
+msgstr "ライセンスを選択してください"
 
 #: applications/models.py:16
 msgid "Application Version"
-msgstr ""
+msgstr "アプリケーションバージョン"
 
 #: applications/models.py:22 applications/models.py:32
 msgid "Application"
-msgstr ""
+msgstr "アプリケーション"
 
 #: applications/models.py:23
 msgid "Applications"
-msgstr ""
+msgstr "アプリケーション"
 
 #: applications/models.py:30
 msgid "Platform Name"
-msgstr ""
+msgstr "プラットフォーム名"
 
 #: applications/models.py:31
 msgid "Platform Version"
-msgstr ""
+msgstr "プラットフォームバージョン"
 
 #: applications/models.py:37
 msgid "Platform"
-msgstr ""
+msgstr "プラットフォーム"
 
 #: applications/models.py:38
 msgid "Platforms"
-msgstr ""
+msgstr "プラットフォーム"
 
 #: audios/models.py:17 movies/models.py:25
 msgid "Play Time"
-msgstr ""
+msgstr "再生時間"
 
 #: audios/models.py:23
 msgid "Audio"
-msgstr ""
+msgstr "オーディオ"
 
 #: audios/models.py:24
 msgid "Audios"
-msgstr ""
+msgstr "オーディオ"
 
 #: codes/models.py:26
 msgid "Syntax"
-msgstr ""
+msgstr "シンタックス"
 
 #: codes/models.py:27
 msgid "Body"
-msgstr ""
+msgstr "コード内容"
 
 #: codes/models.py:35
 msgid "Code"
-msgstr ""
+msgstr "コード"
 
 #: codes/models.py:36
 msgid "Codes"
-msgstr ""
+msgstr "コード"
 
 #: images/models.py:17 movies/models.py:23
 msgid "Width"
-msgstr ""
+msgstr "幅"
 
 #: images/models.py:18 movies/models.py:24
 msgid "Height"
-msgstr ""
+msgstr "高さ"
 
 #: images/models.py:26
 msgid "Image"
-msgstr ""
+msgstr "画像"
 
 #: images/models.py:27
 msgid "Images"
-msgstr ""
+msgstr "画像"
 
 #: movies/models.py:31
 msgid "Movie"
-msgstr ""
+msgstr "動画"
 
 #: movies/models.py:32
 msgid "Movies"
-msgstr ""
-
-#: packages/models.py:19
-msgid "materials"
-msgstr ""
+msgstr "動画"
 
 #: packages/models.py:25
 msgid "Package"
-msgstr ""
+msgstr "パッケージ"
 
 #: packages/models.py:26
 msgid "Packages"
-msgstr ""
+msgstr "パッケージ"
 
 #: views/edit.py:115
 msgid "Material filetype must be same between old and new file."
-msgstr ""
+msgstr "素材のファイルタイプは変更できません"

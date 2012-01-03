@@ -20,36 +20,36 @@ msgstr ""
 
 #: models.py:11
 msgid "Label"
-msgstr ""
+msgstr "ライセンス名"
 
 #: models.py:12
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: models.py:14
 msgid "Render HTML"
-msgstr ""
+msgstr "HTMLコード"
 
 #: models.py:17
 msgid "License"
-msgstr ""
+msgstr "ライセンス"
 
 #: models.py:18
 msgid "Licenses"
-msgstr ""
+msgstr "ライセンス"
 
 #: models.py:29
 msgid "CodeLicense"
-msgstr ""
+msgstr "コードライセンス"
 
 #: models.py:30
 msgid "CodeLicenses"
-msgstr ""
+msgstr "コードライセンス"
 
 #: models.py:38
 msgid "CCLicense"
-msgstr ""
+msgstr "CCライセンス"
 
 #: models.py:39
 msgid "CCLicenses"
-msgstr ""
+msgstr "CCライセンス"

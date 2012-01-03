@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 16:26+0900\n"
+"POT-Creation-Date: 2012-01-03 20:18+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,56 +20,60 @@ msgstr ""
 
 #: models.py:23
 msgid "Man"
-msgstr ""
+msgstr "男性"
 
 #: models.py:24
 msgid "Woman"
-msgstr ""
+msgstr "女性"
+
+#: models.py:35 models.py:76
+msgid "User"
+msgstr "ユーザ"
 
 #: models.py:36
 msgid "Nickname"
-msgstr ""
+msgstr "ニックネーム"
 
 #: models.py:37
 msgid "Profile Text"
-msgstr ""
+msgstr "プロフィール文"
 
 #: models.py:40
 msgid "Profile Icon"
-msgstr ""
+msgstr "プロフィールアイコン"
 
 #: models.py:41
 msgid "Sex"
-msgstr ""
+msgstr "性別"
 
 #: models.py:42
 msgid "Birthday"
-msgstr ""
+msgstr "生年月日"
 
 #: models.py:43
 msgid "Location"
-msgstr ""
+msgstr "所在地"
 
 #: models.py:44
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: models.py:54
 msgid "User Profile"
-msgstr ""
+msgstr "ユーザプロフィール"
 
 #: models.py:55
 msgid "User Profiles"
-msgstr ""
+msgstr "ユーザプロフィール"
 
 #: models.py:78
 msgid "Email Notification"
-msgstr ""
+msgstr "Eメール通知"
 
 #: models.py:81
 msgid "User Option"
-msgstr ""
+msgstr "ユーザオプション"
 
 #: models.py:82
 msgid "User Options"
-msgstr ""
+msgstr "ユーザオプション"

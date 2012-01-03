@@ -40,7 +40,7 @@ class MaterialFile(models.Model):
         return os.path.join(path, filename)
     
     file   = models.FileField(_('File'), upload_to=_get_file_path)
-    author = models.ForeignKey(User, verbose_name=_('author'), editable=False, related_name="materialfiles")
+    author = models.ForeignKey(User, verbose_name=_('Author'), editable=False, related_name="materialfiles")
     
     class Meta:
         app_label           = 'materials'
@@ -95,7 +95,7 @@ class Material(models.Model):
     # auto add
     created_at  = models.DateTimeField(_('Created At'), auto_now_add=True)
     updated_at  = models.DateTimeField(_('Updated At'), auto_now=True)
-    author      = models.ForeignKey(User, verbose_name=_('author'), editable=False, related_name="materials")
+    author      = models.ForeignKey(User, verbose_name=_('Author'), editable=False, related_name="materials")
     pv          = models.PositiveIntegerField(_('Page View'), default=0, editable=False)
     download    = models.PositiveIntegerField(_('Download Count'), default=0, editable=False)
     ip          = models.IPAddressField(_('IP Address'), editable=False)

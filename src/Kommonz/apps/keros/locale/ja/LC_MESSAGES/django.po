@@ -20,16 +20,16 @@ msgstr ""
 
 #: models.py:12
 msgid "Label"
-msgstr ""
+msgstr "レーティング名"
 
 #: models.py:13
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: models.py:15
 msgid "Render HTML"
-msgstr ""
+msgstr "HTMLコード"
 
 #: models.py:18
 msgid "KERO"
-msgstr ""
+msgstr "KERO"

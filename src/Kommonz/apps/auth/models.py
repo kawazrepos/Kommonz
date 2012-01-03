@@ -32,7 +32,7 @@ class UserProfile(models.Model):
     }
     
     # required
-    user        = models.OneToOneField(User, related_name='profile')
+    user        = models.OneToOneField(User, verbose_name=_('User'), related_name='profile')
     nickname    = models.CharField(_('Nickname'), max_length=32, blank=False, null=True)
     description = models.TextField(_('Profile Text'), blank=False, null=True)
     
@@ -73,7 +73,7 @@ class UserProfile(models.Model):
             shutil.rmtree(avatar_dir)
         
 class UserOption(models.Model):
-    user = models.OneToOneField(User, related_name='option')
+    user = models.OneToOneField(User, verbose_name=_('User'), related_name='option')
     
     email_notification = models.BooleanField(_('Email Notification'), default=True)
     

@@ -16,7 +16,7 @@ class Package(Material):
     Model for material collections.
     """
 
-    materials = models.ManyToManyField('Material', verbose_name=_("materials"), related_name="packages", null=True, blank=True, editable=False)
+    materials = models.ManyToManyField('Material', verbose_name=_("Materials"), related_name="packages", null=True, blank=True, editable=False)
     
     objects = MaterialManager()
     

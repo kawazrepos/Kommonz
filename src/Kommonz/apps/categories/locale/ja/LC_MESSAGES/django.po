@@ -20,16 +20,16 @@ msgstr ""
 
 #: models.py:12
 msgid "Label"
-msgstr ""
+msgstr "カテゴリ名"
 
 #: models.py:13
 msgid "Parent Category"
-msgstr ""
+msgstr "親カテゴリ"
 
 #: models.py:20
 msgid "Category"
-msgstr ""
+msgstr "カテゴリ"
 
 #: models.py:21
 msgid "Categories"
-msgstr ""
+msgstr "カテゴリ"
