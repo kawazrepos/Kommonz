@@ -2,8 +2,11 @@
 __author__ = 'giginet'
 __version__ = '1.0.0'
 __date__ = '2011/10/10'
+try:
+    from PIL import Image as PILImage
+except ImportError:
+    import Image as PILImage
 
-import PIL
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.db.models import signals
@@ -27,7 +30,7 @@ class Image(Material):
         verbose_name_plural = _('Images')
 
     def _get_size(self):
-        img = PIL.Image.open(self.file.path)
+        img = PILImage.open(self.file.path)
         return img.size
     
     def save(self, *args, **kwargs):

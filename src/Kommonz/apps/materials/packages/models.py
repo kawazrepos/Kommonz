@@ -104,4 +104,4 @@ class Package(Material):
                     category=self.category
                 )
                 self.materials.add(material)
-        self.save()
+#        self.save()

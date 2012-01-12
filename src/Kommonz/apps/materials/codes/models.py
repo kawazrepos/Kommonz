@@ -88,7 +88,7 @@ class Code(Material):
         data = highlight(self.body, lexer, formatter)
         try:
             from PIL import Image
-        except:
+        except ImportError:
             import Image
         thumbnail = Image.open(StringIO(data))
         background = Image.new('RGB', (288, 288), style.background_color)

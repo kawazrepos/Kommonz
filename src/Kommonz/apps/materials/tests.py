@@ -27,11 +27,14 @@ def upload_material(file, username='hogehoge', password='password', **kwargs):
     response = c.post(reverse('materials_material_file_create'), {'file' : file})
     file_pk = simplejson.loads(response.content)[0]['id']
 
-    kwargs.update({'_file' : file_pk})
+    kwargs.update({'_file' : file_pk, 
+        'license': 100,
+        'kero': 1})
     if not kwargs.has_key('category'):
         category, created = Category.objects.get_or_create(label='TestCategory')
         kwargs['category'] = category.pk
     response = c.post(reverse('materials_material_create'), kwargs)
+    print response.content
     match = re.search(r'(?P<pk>\d+)/$', response['Location'])
     pk = match.groupdict()['pk']
     return Material.objects.get(pk=pk)
@@ -218,7 +221,7 @@ class TestMaterialPackage(object):
         filename = os.path.basename(self.package.file.name)
         material_path = os.path.dirname(self.package.file.path)
         ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
-        eq_(self.package.materials.count(), 6)
+        eq_(self.package.materials.count(), 12)
 
         for image in self.package.materials.iterator():
             ok_(image.model == Image)
@@ -231,7 +234,7 @@ class TestMaterialPackage(object):
         filename = os.path.basename(self.package.file.name)
         material_path = os.path.dirname(self.package.file.path)
         ok_(os.path.exists(os.path.join(material_path, 'kawazicon', 'icon0.png')))
-        eq_(self.package.materials.count(), 8)
+        eq_(self.package.materials.count(), 14)
 
     def teardown(self):
         self.package.delete()
