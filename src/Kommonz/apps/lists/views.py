@@ -10,7 +10,7 @@ from apps.materials.views.zip import MaterialZipView
 from models import List, ListInfo
 from forms import ListOrderForm
 
-@view_class_decorator(permission_required('lists.view_list', List))
+@permission_required('lists.view_list')
 class ListDetailView(DetailView):
     """
     A View for list detail page.
@@ -51,30 +51,26 @@ class ListCreateView(CreateView):
     """
     model = List
 
-@view_class_decorator(permission_required('lists.change_list', List))
-class ListAddView(CreateView):
+@permission_required('lists.change_list')
+class ListAddMaterialView(UpdateView):
     """
     A View for adding material to list.
     Post :
         material : a pk of adding material.
         comment  : comment.
     """
-    model = ListInfo
-
-    def get(self, request, *args, **kwargs):
-        get_object_or_404(List, pk=kwargs.get('pk'))
-        return super(ListAddView, self).get(request, *args, **kwargs)
+    model = List
 
     def post(self, request, *args, **kwargs):
-        list = get_object_or_404(List, pk=kwargs.get('pk'))
-        post = request.POST.copy()
-        post['list'] = kwargs['pk']
-        request.POST = post
-        print request.POST
-        return super(ListAddView, self).post(request, *args, **kwargs)
+        obj = self.get_object()
+        material_pk = request.POST.get('material')
+        material = Material.objects.get(pk=material_pk)
+        # Link material and list
+        ListInfo.objects.create(material=material, list=obj)
+        return super(ListAddMaterialView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(permission_required('lists.change_list', List))
-class ListRemoveView(UpdateView):
+@permission_required('lists.change_list')
+class ListRemoveMaterialView(UpdateView):
     """
     A View for removing materials from list.
     Post :
@@ -92,16 +88,16 @@ class ListRemoveView(UpdateView):
         for material in materials:
             info = ListInfo.objects.get(material=material, list=self.object)
             info.delete()
-        return super(ListRemoveView, self).post(request, *args, **kwargs)
+        return super(ListRemoveMaterialView, self).post(request, *args, **kwargs)
 
-@view_class_decorator(permission_required('lists.change_list', List))
+@permission_required('lists.change_list')
 class ListUpdateView(UpdateView):
     """
     A View for list updating.
     """
     model = List
 
-@view_class_decorator(permission_required('lists.delete_list', List))
+@permission_required('lists.delete_list')
 class ListDeleteView(DeleteView):
     """
     A View for list deletion.
@@ -111,7 +107,7 @@ class ListDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('lists_list_list')
 
-@view_class_decorator(permission_required('lists.view_list', List))
+@permission_required('lists.view_list')
 class ListZipView(MaterialZipView):
     def get(self, request, *args, **kwargs):
         self.list_pk = kwargs.pop('pk', None)

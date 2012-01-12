@@ -48,9 +48,6 @@ setup(
     url=r"https://github.com/kommonz/kommonz.git",
     download_url = r"https://github.com/kommonz/kommonz/tarball/master",
     packages = find_packages(exclude=['ez_setup']),
-    dependency_links = (
-            r"https://bitbucket.org/lambdalisue/django-piston/get/a40885f1da15.tar.gz#egg=django-piston",
-    ),
     include_package_data = True,
     zip_safe = False,
     test_suite='nose.collector',
@@ -72,7 +69,7 @@ setup(
         'django-pagination',
         'django-mfw',
         'django-qwert',
-        'django-object-permission',
+        'django-object-permission>=0.4rc1',
         'django-social-auth',
         'django-universaltag',
         'django-nose',

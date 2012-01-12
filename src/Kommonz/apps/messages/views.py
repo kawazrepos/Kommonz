@@ -32,11 +32,10 @@ class MessageListView(ListView):
         context['outbox_object_list'] = outbox_object_list
         return context
 
-
+@permission_required('apps.messages.view_message')
 class MessageDetailView(DetailView):
     model = Message
     
-    @method_decorator(permission_required('apps.messages.view_message', Message))
     def dispatch(self, request, *args, **kwargs):
         message = Message.objects.get(pk=kwargs['pk'])
         if request.user == message.user_to and not message.read :

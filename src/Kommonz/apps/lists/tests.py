@@ -106,9 +106,10 @@ class TestListManage(object):
         """
         Tests user can add material from view.
         """
-        self.c.post(reverse('lists_list_add', args=[self.ls.pk]), {
+        response = self.c.post(reverse('lists_list_add', args=[self.ls.pk]), {
             'material' : self.material.pk
         })
+        eq_(response.status_code, 200)
         eq_(self.ls.materials.count(), 1)
 
     def test_remove_material(self):

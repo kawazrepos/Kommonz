@@ -227,12 +227,6 @@ class Material(models.Model):
 
         return super(Material, self).save(*args, **kwargs)
     
-    def modify_object_permission(self, mediator, created):
-        mediator.manager(self, self.author)
-        mediator.viewer(self, None)
-        mediator.viewer(self, 'anonymous')
-        
-
 @receiver(pre_delete, sender=Material)
 def delete_material_file(sender, instance, **kwargs):
     import shutil

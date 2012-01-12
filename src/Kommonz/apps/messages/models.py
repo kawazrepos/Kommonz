@@ -43,33 +43,3 @@ class Message(models.Model):
         else:
             raise ValidationError(_('''can not send message without authenticate'''))
         return super(Message, self).clean()
-
-    def modify_object_permission(self, mediator, created):
-        if self.pub_state == 'sent':
-            mediator.viewer(self, self.user_to)
-            mediator.viewer(self, self.user_from)
-            mediator.reject(self, None)
-            mediator.reject(self, 'anonymous')
-            
-        elif self.pub_state == 'deleted':
-            mediator.reject(self, self.user_to)
-            mediator.reject(self, self.user_from)
-            mediator.reject(self, None)
-            mediator.reject(self, 'anonymous')
-            
-        elif self.pub_state == 'receiver_deleted':
-            mediator.reject(self, self.user_to)
-            mediator.viewer(self, self.user_from)
-            mediator.reject(self, None)
-            mediator.reject(self, 'anonymous')
-            
-        elif self.pub_state == 'sender_deleted':
-            mediator.viewer(self, self.user_to)
-            mediator.reject(self, self.user_from)
-            mediator.reject(self, None)
-            mediator.reject(self, 'anonymous')
-            
-        else:
-            mediator.reject(self, None)
-            mediator.reject(self, 'anonymous')
-            

@@ -240,9 +240,15 @@ SOCIAL_AUTH_ERROR_KEY                    = 'social_errors'
 SOCIAL_AUTH_IMPORT_BACKENDS = ('apps.registration.backends', )
 
 #
+# django-qwert
+#
+AKISMET_COMMENT_PROTECT = False
+AKISMET_API_KEY = None
+
+#
 # ObjectPermission setting
 #
-OBJECT_PERMISSION_DEPRECATED = True
+OBJECT_PERMISSION_DEPRECATED = False
 
 #
 # ThumbnailField setting
