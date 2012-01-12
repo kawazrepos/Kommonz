@@ -8,6 +8,6 @@ class NotificationListView(ListView):
     model = Notification
 
 
-@permission_required('apps.notifications.view_notification')
+@permission_required('notifications.view_notification')
 class NotificationDetailView(DetailView):
     model = Notification

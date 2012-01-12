@@ -32,7 +32,7 @@ class MessageListView(ListView):
         context['outbox_object_list'] = outbox_object_list
         return context
 
-@permission_required('apps.messages.view_message')
+@permission_required('messages.view_message')
 class MessageDetailView(DetailView):
     model = Message
     
